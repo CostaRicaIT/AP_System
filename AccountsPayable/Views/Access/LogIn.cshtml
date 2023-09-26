@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "CR IT Inventory System | Log In";
+    Layout = "~/Views/Shared/LoginLayout.cshtml";
+}
+
+<div class="container">
+    <form class="form" id="frm">
+        <h1 class="form__title">Accounts Payable Templates</h1>
+        <div class="form__input-group">
+            <input type="text" class="form__input" autofocus placeholder="Username" name="username">
+        </div>
+        <div class="form__input-group">
+            <input type="password" class="form__input" id="password" autofocus placeholder="Password" name="password">
+            <div class="message errormessage"></div>
+        </div>
+        <label id="errormessage" class="errormessage"></label>
+        <br />
+        <button class="form__button" type="submit">Log In</button>
+        <p class="form__text">
+            @*<a href="#" class="bottom-right">Forgot your password?</a>*@
+        </p>
+        @*<p class="form__version">v2.0</p>*@
+    </form>
+
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/LoginAccess.js"></script>
+}
