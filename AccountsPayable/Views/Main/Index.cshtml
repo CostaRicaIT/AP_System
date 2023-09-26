@@ -1,0 +1,297 @@
+﻿@{
+    ViewBag.Title = "Template";
+}
+
+<h2>ID Template</h2>
+<br>
+<link href="~/Content/Style.css" rel="stylesheet" />
+
+<div id="form-container">
+    <form id="form-crud">
+
+        <!-- Supplier Information Section -->
+        <div class="form-section">
+            <div class="section-title">Supplier Information</div>
+            <!-- Tax ID -->
+            <div class="form-row">
+                <label for="form-TaxID">Tax Id:</label>
+                <div class="TaxId-checkbox-wrapper">
+                    <input type="text" class="form-control" id="form-TaxID" placeholder="12-34567">
+                    <label for="BoxNoTaxId" class="checkbox-label">
+                        <span>No Tax Id information</span>
+                        <input type="checkbox" id="BoxNoTaxId" value="1">
+                    </label>
+                </div>
+            </div>
+            <!-- Remit To -->
+            <div class="form-row">
+                <label for="form-RemitTo">Remit to:</label>
+                <div class="RemitTo-checkbox-wrapper">
+                    <input type="text" class="form-control" id="form-RemitTo" placeholder="Address here ...">
+                    <label for="BoxNoRemitInfo" class="checkbox-label">
+                        <span>There is no Remit information</span>
+                        <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                    </label>
+                </div>
+            </div>
+            <!-- Supplier Name -->
+            <div class="form-row">
+                <label for="form-SupName">Supplier Name:</label>
+                <div class="SupplierName-checkbox-wrapper">
+                    <input type="text" class="form-control" id="form-SupName" placeholder="Supplier Name here ...">
+                    <label for="BoxSupName" class="checkbox-label">
+                        <span>There is no Supplier Name</span>
+                        <input type="checkbox" id="BoxSupName" value="1">
+                    </label>
+                </div>
+            </div>
+            <!-- Historic Remit To -->
+            <div class="form-row">
+                <label for="form-HistRemitTo">Historic Remit To:</label>
+                <div class="HistRemitTo-checkbox-wrapper">
+                    <textarea id="form-HistRemitTo" class="General-textarea" rows="6" cols="100"></textarea>
+                </div>
+            </div>
+            <!-- Our Vendor # / Account # -->
+            <div class="form-row">
+                <label id="label-OurVendorA">OUR VENDOR # </br>/ ACCOUNT #:</label>
+                <div class="HistRemitTo-checkbox-wrapper">
+                    <textarea id="form-OurVendorA" rows="6" cols="100"></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <!-- Alias Section -->
+        <div class="form-section">
+            <div class="section-title">Alias</div>
+            <!-- Alias Input and Button -->
+            <div class="form-row">
+                <label for="form-AddAlias">Alias:</label>
+                <div class="AddAlias-button-wrapper">
+                    <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name here...">
+                    <button id="ButtonAlias" class="styled-button align-right">Add alias</button>
+                </div>
+            </div>
+            <!-- Select Alias Dropdown -->
+            <div class="form-row">
+                <select id="form-SlectAlias" class="extended-select" size="4">
+                    <option>Example 1</option>
+                    <option>Example 2</option>
+                    <option>Example 3</option>
+                </select>
+            </div>
+        </div>
+        <br />
+
+        <!-- Oracle and Apps Section -->
+        <div class="form-section">
+            <div class="section-title">Oracle and Apps</div>
+            <!-- Supplier Site -->
+            <div class="form-row">
+                <label for="form-SupSite">Supplier Site:</label>
+                <div class="General General-Width">
+                    <input type="text" class="form-control" id="form-SupSite" placeholder="Text here ...">
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="form-row">
+                <label for="form-Address">Address:</label>
+                <div class="General">
+                    <textarea id="form-Address" class="Address-textarea" placeholder="PO BOX 123456 Street AV 123 State here..."></textarea>
+                </div>
+            </div>
+            <!-- Legal Entity -->
+            <div class="form-row">
+                <label for="form-LegalE">Legal Entity:</label>
+                <div class="General">
+                    <select id="form-LegalE" class="extended-select">
+                        <option>Aya Healthcare, Inc</option>
+                        <!-- Add more options here if needed -->
+                    </select>
+                </div>
+            </div>
+            <!-- First-Party Taxpayer ID -->
+            <div class="form-row">
+                <label for="form-FirstParty">First-Party Taxpayer ID:</label>
+                <div class="General">
+                    <input type="text" class="form-control" id="form-FirstParty" placeholder="123 ...">
+                </div>
+            </div>
+            <!-- Type -->
+            <div class="form-row">
+                <label for="form-Type">Type:</label>
+                <div class="General">
+                    <select id="form-Type" class="extended-select">
+                        <option>Standard</option>
+                        <!-- Add more options here if needed -->
+                    </select>
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="form-row">
+                <label for="form-Description">Description:</label>
+                <div class="General">
+                    <textarea id="form-Description" class="Description-textarea" placeholder="Description here..."></textarea>
+                </div>
+            </div>
+            <!-- Pay Terms -->
+            <div class="form-row">
+                <label for="form-PayTerms">Pay Terms:</label>
+                <div class="General">
+                    <select id="form-PayTerms" class="extended-select">
+                        <option>Net 30</option>
+                        <!-- Add more options here if needed -->
+                    </select>
+                </div>
+            </div>
+            <!-- Account Coding -->
+            <div class="form-row">
+                <label for="form-AccountC">Account Coding:</label>
+                <div class="General">
+                    <input type="text" class="form-control" id="form-AccountC" placeholder="123 ...">
+                </div>
+            </div>
+            <!-- Source -->
+            <div class="form-row">
+                <label for="form-Source">Source:</label>
+                <div class="General">
+                    <select id="form-Source" class="extended-select">
+                        <option>Queue</option>
+                        <!-- Add more options here if needed -->
+                    </select>
+                    <label id="Label-Oracle" class="checkbox-label">
+                        <span>Oracle Instructions:</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Oracle Notes -->
+            <div class="form-row">
+                <label for="form-OracleN">Oracle Notes:</label>
+                <div class="General">
+                    <textarea id="form-OracleN" class="OracleN-textarea" placeholder="Oracle Notes here..."></textarea>
+                </div>
+                <!-- Additional Oracle Notes -->
+                <textarea id="form-OracleI" class="OracleI-textarea" placeholder="Oracle Notes here..."></textarea>
+            </div>
+        </div>
+        <br />
+
+        <!-- Notes & Instructions Section -->
+        <div class="form-section">
+            <div class="section-title">Notes & Instructions</div>
+            <!-- Highlights -->
+            <div class="form-row">
+                <label for="form-Higlights">Highlights</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-Higlights" class="General-textarea" rows="6" cols="120"></textarea>
+                    <div class="button-wrapper">
+                        <button id="ButtonAddHistory" class="styled-button align-right">View History</button>
+                        <button id="ButtonViewHistory" class="styled-button align-right">Add History</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Highlights Comments -->
+            <div class="form-row">
+                <label for="form-HiglightsC">Highlights Comments:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-HiglightsC" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+            <!-- Instructions -->
+            <div class="form-row">
+                <label for="form-Instructions">Instructions:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-Instructions" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+            <!-- Exceptions -->
+            <div class="form-row">
+                <label for="form-Exceptions">Exceptions:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-Exceptions" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+            <!-- Most Common Issues -->
+            <div class="form-row">
+                <label for="form-MostCI">Most Common </br> Issues:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-MostCI" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+            <!-- Supplier Agency -->
+            <div class="form-row">
+                <label for="form-SupplierA">Supplier Agency:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-SupplierA" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+            <!-- Template Comments -->
+            <div class="form-row">
+                <label for="form-TemplateC">Template Comments:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-TemplateC" class="General-textarea" rows="6" cols="108"></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <!-- Emails Section -->
+        <div class="form-section">
+            <div class="section-title">Emails</div>
+            <!-- Back-Up Emails -->
+            <div class="form-row">
+                <label for="form-BackUpEmails">Back Up Emails:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-BackUpEmails" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
+                    <div class="button-wrapper">
+                        <button id="ButtonAddEmail" class="styled-button align-right">Add Email</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Select Mails Dropdown -->
+            <div class="form-row">
+                <select id="form-SelectMails" class="extended-select" size="4">
+                    <option>8/22/2023 - Email</option>
+                    <option>7/22/2023 - Email</option>
+                    <option>5/22/2019 - Email</option>
+                    <!-- Add more options here if needed -->
+                </select>
+            </div>
+        </div>
+        <br />
+
+        <!-- Approver Section -->
+        <div class="form-section">
+            <div class="section-title">Approver</div>
+            <div class="form-row">
+                <label for="form-FirstParty">First-Party Taxpayer ID:</label>
+                <div class="General">
+                    <input type="text" class="form-control" id="form-FirstParty" placeholder="123 ...">
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="form-BackUpEmails">Back Up Emails:</label>
+                <div class="General-checkbox-wrapper">
+                    <textarea id="form-BackUpEmails" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
+                    <div class="button-wrapper">
+                        <button id="ButtonAddEmail" class="styled-button align-right">Add Email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <!-- Invoice Number Format Section -->
+        <div class="form-section">
+            <div class="section-title">Invoice Number Format</div>
+
+        </div>
+        <br />
+
+        <!-- Cancel and Save Buttons -->
+        <button class="btn form_btntbWC" id="form-cancel">Cancel</button>
+        <button class="btn form_btntbWC" id="form-submit">Save</button>
+
+    </form>
+</div>

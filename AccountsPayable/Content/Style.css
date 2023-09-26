@@ -1,0 +1,321 @@
+﻿
+.form-section {
+    min-width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    /* box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);  Shadow */
+    position: relative;
+}
+/* The titles of each section*/
+.section-title {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background-color: #f9f9f9;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.General {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 2%;
+}
+
+
+
+/* Styles for the checkbox container and its label */
+.TaxId-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 84px;
+}
+
+    /* Style for the checkbox label */
+    .TaxId-checkbox-wrapper label {
+        margin-left: 242px;
+    }
+
+.General-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 10px;
+}
+
+
+    .General-checkbox-wrapper label {
+        margin-left: 209px;
+    }
+
+
+.RemitTo-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 67px;
+}
+
+
+    .RemitTo-checkbox-wrapper label {
+        margin-left: 197px;
+    }
+
+.SupplierName-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 25px;
+}
+
+
+    .SupplierName-checkbox-wrapper label {
+        margin-left: 209px;
+    }
+
+.HistRemitTo-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 10px;
+}
+
+
+
+.General-textarea {
+    width: 300px; /* width*/
+    height: 150px; /* height*/
+}
+
+.Historic-textarea {
+    width: 300px; /* width*/
+    height: 150px; /* height*/
+}
+
+.Address-textarea {
+    width: 300px; /* width*/
+    height: 150px; /* height*/
+}
+
+.Vendor-textarea {
+    width: 300px; /* width*/
+    height: 150px; /* height*/
+    margin-left: 13px;
+}
+
+.Description-textarea {
+    width: 300px; /* width*/
+    height: 150px; /* height*/
+    margin-left: 75px;
+}
+
+.OracleN-textarea {
+    width: 300px; /* width*/
+    height: 100px; /* height*/
+    margin-left: 66px;
+}
+
+.OracleI-textarea {
+    width: 300px; /* width*/
+    height: 100px; /* height*/
+    margin-left: 66px;
+}
+
+.styled-button {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px 20px;
+    margin-top: 10px;
+}
+
+    /* Change style when hovering over the button */
+    .styled-button:hover {
+        background-color: #ddd;
+        border: 1px solid #999;
+    }
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column; /* Apila los botones verticalmente */
+    padding: 5px 20px;
+    white-space: nowrap;
+    display: flex;
+    margin-top: -80px;
+}
+
+    .button-wrapper button {
+        margin-top: 10px;
+    }
+
+.AddAlias-button-wrapper {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+    /* Style for button */
+    .AddAlias-button-wrapper button {
+        margin-left: 40px;
+    }
+
+.extended-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 58px;
+}
+
+#form-SupName {
+    width: 300px;
+}
+
+#form-HistRemitTo {
+    width: 100%;
+    resize: none;
+}
+
+#form-OurVendorA {
+    width: 100%;
+    margin-left: 12px;
+    resize: none;
+}
+
+#form-Higlights {
+    width: 100%;
+    resize: none;
+    margin-left: 80px;
+}
+
+#form-HiglightsC {
+    width: 100%;
+    resize: none;
+}
+
+#form-Instructions {
+    width: 100%;
+    resize: none;
+    margin-left: 60px;
+}
+
+#form-Exceptions {
+    width: 100%;
+    resize: none;
+    margin-left: 66px;
+}
+
+#form-MostCI {
+    width: 100%;
+    resize: none;
+    margin-left: 43px;
+}
+
+#form-SupplierA {
+    width: 100%;
+    resize: none;
+    margin-left: 31px;
+}
+
+#form-TemplateC {
+    width: 100%;
+    resize: none;
+}
+
+#form-BackUpEmails {
+    width: 810px;
+    resize: none;
+}
+
+#form-RemitTo {
+    width: 300px;
+}
+
+#form-TaxID {
+    width: 300px;
+}
+
+#form-FirstParty {
+    width: 300px;
+}
+
+#form-SupSite {
+    width: 300px;
+}
+
+#form-AccountC {
+    width: 300px;
+}
+
+#form-SupllierSite {
+    margin-left: 73px;
+}
+
+#form-Address {
+    margin-left: 96px;
+}
+
+#form-SupSite {
+    margin-left: 66px;
+}
+
+#form-Type {
+    margin-left: 120px;
+    width: 300px;
+}
+
+#form-LegalE {
+    margin-left: 72px;
+    width: 300px;
+}
+
+#form-PayTerms {
+    margin-left: 83px;
+    width: 300px;
+}
+
+#form-AccountC {
+    margin-left: 44px;
+}
+
+#form-Source {
+    margin-left: 104px;
+}
+
+#Label-Oracle {
+    margin-left: 67px;
+}
+
+#form-AddAlias {
+    width: 300px;
+    margin-left: 20px;
+}
+
+#form-cancel {
+    margin-left: 88%;
+}
+
+
+#form-SlectAlias {
+    width: 464px;
+}
+
+#form-SelectMails {
+    width: 810px;
+    margin-left: 118px;
+}
+
+#ButtonAddEmail {
+    margin-top: 195px;
+}
