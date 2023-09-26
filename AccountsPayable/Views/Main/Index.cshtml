@@ -5,6 +5,7 @@
 <h2>ID Template</h2>
 <br>
 <link href="~/Content/Style.css" rel="stylesheet" />
+<link href="~/Content/TemplateModal.css" rel="stylesheet" />
 
 <div id="form-container">
     <form id="form-crud">
@@ -51,10 +52,47 @@
                 <div class="HistRemitTo-checkbox-wrapper">
                     <textarea id="form-HistRemitTo" class="General-textarea" rows="6" cols="100"></textarea>
                 </div>
+                <div class="button-wrapper">
+                    <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right openModalBtn" data-modal="AddHistoricRemitModal">Add Historic Remit to</button>
+                    <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
+                </div>
+                <!--Modal to add historic remit-->
+                <div id="AddHistoricRemitModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <label for="historicRemitDate">Date</label><br>
+                        <input type="date" id="historicRemitDate" />
+                        <p><label for="historicRemitInfoAdd">Historic Remit To:</label></p>
+                        <textarea id="historicRemitInfoAdd" class="General-textarea" rows="6" cols="100"></textarea>
+                        <div>
+                            <button class="btn form_btntbWC" type="button" id="cancelHistoricRemit">Cancel</button>
+                            <button class="btn form_btntbWC" type="button" id="submitHistoric remit">Save</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal to see historic remit-->
+                <div id="ShowHistoricRemitModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p><label for="historicRemitInfoView">Historic Remit to:</label></p>
+                        <textarea id="historicRemitInfoView" class="General-textarea" rows="6" cols="112" placeholder="..."></textarea>
+                        <br />
+                        <!-- Select Historic Remit to -->
+                        <div class="form-row">
+                            <select id="form-SelectAlias" size="4">
+                                <option>8/22/2023</option>
+                                <option>7/22/2023</option>
+                                <option>5/22/2019</option>
+                                <!-- Add more options here if needed -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Our Vendor # / Account # -->
             <div class="form-row">
-                <label id="label-OurVendorA">OUR VENDOR # </br>/ ACCOUNT #:</label>
+                <label id="label-OurVendorA">OUR VENDOR # <br>/ ACCOUNT #:</label>
                 <div class="HistRemitTo-checkbox-wrapper">
                     <textarea id="form-OurVendorA" rows="6" cols="100"></textarea>
                 </div>
@@ -70,20 +108,32 @@
                 <label for="form-AddAlias">Alias:</label>
                 <div class="AddAlias-button-wrapper">
                     <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name here...">
-                    <button id="ButtonAlias" class="styled-button align-right">Add alias</button>
+                    <button id="ButtonAddAlias" type="button" class="styled-button align-right openModalBtn" data-modal="AddAliasModal">Add alias</button>
+                </div>
+                <!-- Select Alias Dropdown -->
+                <div class="form-row">
+                    <select id="form-SlectAlias" class="extended-select" size="4">
+                        <option>Example 1</option>
+                        <option>Example 2</option>
+                        <option>Example 3</option>
+                    </select>
                 </div>
             </div>
-            <!-- Select Alias Dropdown -->
-            <div class="form-row">
-                <select id="form-SlectAlias" class="extended-select" size="4">
-                    <option>Example 1</option>
-                    <option>Example 2</option>
-                    <option>Example 3</option>
-                </select>
+            <!--Add Alias modal-->
+            <div id="AddAliasModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p><label for="alias">Alias:</label></p>
+                    <input type="text" id="alias" />
+                    <div>
+                        <br />
+                        <button class="btn form_btntbWC" type="button" id="cancelAlias">Cancel</button>
+                        <button class="btn form_btntbWC" type="button" id="submitAlias remit">Save</button>
+                    </div>
+                </div>
             </div>
         </div>
         <br />
-
         <!-- Oracle and Apps Section -->
         <div class="form-section">
             <div class="section-title">Oracle and Apps</div>
@@ -186,8 +236,8 @@
                 <div class="General-checkbox-wrapper">
                     <textarea id="form-Higlights" class="General-textarea" rows="6" cols="120"></textarea>
                     <div class="button-wrapper">
-                        <button id="ButtonAddHistory" class="styled-button align-right">View History</button>
-                        <button id="ButtonViewHistory" class="styled-button align-right">Add History</button>
+                        <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights">Add History</button>
+                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
                     </div>
                 </div>
             </div>
@@ -214,7 +264,7 @@
             </div>
             <!-- Most Common Issues -->
             <div class="form-row">
-                <label for="form-MostCI">Most Common </br> Issues:</label>
+                <label for="form-MostCI">Most Common <br> Issues:</label>
                 <div class="General-checkbox-wrapper">
                     <textarea id="form-MostCI" class="General-textarea" rows="6" cols="108"></textarea>
                 </div>
@@ -234,6 +284,82 @@
                 </div>
             </div>
         </div>
+        <!--Add Highlights modal-->
+        <div id="AddAHighlights" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <label for="historicRemitDate">Date</label><br>
+                <input type="date" id="historicRemitDate" />
+                <!-- Highlights -->
+
+                <p><label for="HighlightsHistoryAdd">Highlights</label></p>
+                <textarea id="HighlightsHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Highlights Comments -->
+                <p><label for="HighlightsCHistoryAdd">Highlights Comments:</label></p>
+                <textarea id="HighlightsCHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Instructions -->
+                <p><label for="InstructionsHistoryAdd">Instructions:</label></p>
+                <textarea id="InstructionsHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Exceptions -->
+                <p><label for="ExceptionsHistoryAdd">Exceptions:</label></p>
+                <textarea id="ExceptionsHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Most Common Issues -->
+                <p><label for="MostCIHistoryAdd">Most Common Issues:</label></p>
+                <textarea id="MostCIHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Supplier Agency -->
+                <p><label for="SupplierAHistoryAdd">Supplier Agency:</label></p>
+                <textarea id="SupplierAHistoryAdd" rows="4" cols="80"></textarea>
+
+                <!-- Template Comments -->
+                <p><label for="TemplateCHistoryAdd">Template Comments:</label></p>
+                <textarea id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
+                <div>
+                    <button class="btn form_btntbWC" type="button" id="cancelHiglihts">Cancel</button>
+                    <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Show Highlights modal-->
+        <div id="ShowHighlights" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <!-- Highlights -->
+
+                <p><label for="HighlightsHistoryView">Highlights</label></p>
+                <textarea id="HighlightsHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Highlights Comments -->
+                <p><label for="HighlightsCHistoryView">Highlights Comments:</label></p>
+                <textarea id="HighlightsCHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Instructions -->
+                <p><label for="InstructionsHistoryView">Instructions:</label></p>
+                <textarea id="InstructionsHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Exceptions -->
+                <p><label for="ExceptionsHistoryView">Exceptions:</label></p>
+                <textarea id="ExceptionsHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Most Common Issues -->
+                <p><label for="MostCIHistoryView">Most Common Issues:</label></p>
+                <textarea id="MostCIHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Supplier Agency -->
+                <p><label for="SupplierAHistoryView">Supplier Agency:</label></p>
+                <textarea id="SupplierAHistoryView" rows="4" cols="80"></textarea>
+
+                <!-- Template Comments -->
+                <p><label for="TemplateCHistoryView">Template Comments:</label></p>
+                <textarea id="TemplateCHistoryView" rows="4" cols="80"></textarea>
+            </div>
+        </div>
+
         <br />
 
         <!-- Emails Section -->
@@ -245,7 +371,20 @@
                 <div class="General-checkbox-wrapper">
                     <textarea id="form-BackUpEmails" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
                     <div class="button-wrapper">
-                        <button id="ButtonAddEmail" class="styled-button align-right">Add Email</button>
+                        <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
+                    </div>
+                </div>
+            </div>
+            <div id="AddEmailModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <label for="emaildate">Date</label><br>
+                    <input type="date" id="emaildate" />
+                    <p><label for="emailinfo">Email:</label></p>
+                    <textarea id="emailinfo" class="General-textarea" rows="6" cols="100"></textarea>
+                    <div>
+                        <button class="btn form_btntbWC" type="button" id="cancelEmail">Cancel</button>
+                        <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
                     </div>
                 </div>
             </div>
@@ -265,18 +404,18 @@
         <div class="form-section">
             <div class="section-title">Approver</div>
             <div class="form-row">
-                <label for="form-FirstParty">First-Party Taxpayer ID:</label>
+                <label for="form-Approver-info">Approver info:</label>
                 <div class="General">
-                    <input type="text" class="form-control" id="form-FirstParty" placeholder="123 ...">
+                    <select id="form-Approver-info" class="extended-select">
+                        <option>Approver</option>
+                        <!-- Add more options here if needed -->
+                    </select>
                 </div>
             </div>
             <div class="form-row">
-                <label for="form-BackUpEmails">Back Up Emails:</label>
+                <label for="form-ApproverComents">Aprover Comments:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-BackUpEmails" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
-                    <div class="button-wrapper">
-                        <button id="ButtonAddEmail" class="styled-button align-right">Add Email</button>
-                    </div>
+                    <textarea id="form-ApproverComents" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
                 </div>
             </div>
         </div>
@@ -290,8 +429,13 @@
         <br />
 
         <!-- Cancel and Save Buttons -->
-        <button class="btn form_btntbWC" id="form-cancel">Cancel</button>
-        <button class="btn form_btntbWC" id="form-submit">Save</button>
+        <button class="btn form_btntbWC" type="button" id="form-cancel">Cancel</button>
+        <button class="btn form_btntbWC" type="button" id="form-submit">Save</button>
 
     </form>
 </div>
+@section scripts
+    {
+
+    <script src="~/Scripts/templateModal.js"></script>
+}
