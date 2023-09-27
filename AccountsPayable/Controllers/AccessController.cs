@@ -55,15 +55,15 @@ namespace AccountsPayable.Controllers
                                               where p.FK_TB_LOGIN_ROLE_ID == userRole.LOGIN_ROLE_ID
                                               select p).FirstOrDefault();
 
-                        //if (userPermission != null)
-                        //{
-                        //    Session["User"] = user;
-                        //    Session["CurrentUserName"] = username;
+                        if (userPermission != null)
+                        {
+                            Session["User"] = user;
+                            Session["CurrentUserName"] = username;
 
-                            // Set the user's permission in the session
+                            //Set the user's permission in the session
                             Session["Permission"] = userPermission;
                             return Content("1");
-                        //}
+                        }
                     }
                 }
 
