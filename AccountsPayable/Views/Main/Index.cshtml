@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Template";
 }
 
@@ -20,7 +22,7 @@
                     <input type="text" class="form-control" id="form-TaxID" placeholder="12-34567">
                     <label for="BoxNoTaxId" class="checkbox-label">
                         <span>No Tax Id information</span>
-                        <input type="checkbox" id="BoxNoTaxId" value="1">
+                        <input type="checkbox" id="BoxNoTaxId" name="NoTaxId">
                     </label>
                 </div>
             </div>
@@ -54,7 +56,7 @@
                 </div>
                 <div class="button-wrapper">
                     <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right openModalBtn" data-modal="AddHistoricRemitModal">Add Historic Remit to</button>
-                    <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
+                    <button id="ButtonViewHisticRemit"  type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
                 </div>
                 <!--Modal to add historic remit-->
                 <div id="AddHistoricRemitModal" class="modal">
@@ -66,7 +68,7 @@
                         <textarea id="historicRemitInfoAdd" class="General-textarea" rows="6" cols="100"></textarea>
                         <div>
                             <button class="btn form_btntbWC" type="button" id="cancelHistoricRemit">Cancel</button>
-                            <button class="btn form_btntbWC" type="button" id="submitHistoric remit">Save</button>
+                            <button class="btn form_btntbWC btn-submit" id=".btn-submit">Save</button>
                         </div>
                     </div>
                 </div>
@@ -81,10 +83,7 @@
                         <!-- Select Historic Remit to -->
                         <div class="form-row">
                             <select id="form-SelectAlias" size="4">
-                                <option>8/22/2023</option>
-                                <option>7/22/2023</option>
-                                <option>5/22/2019</option>
-                                <!-- Add more options here if needed -->
+                            
                             </select>
                         </div>
                     </div>
@@ -434,8 +433,13 @@
 
     </form>
 </div>
-@section scripts
-    {
+@section scripts {
 
+    <script src="~/Scripts/CRUDHistoric.js"></script>
     <script src="~/Scripts/templateModal.js"></script>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+
+
 }

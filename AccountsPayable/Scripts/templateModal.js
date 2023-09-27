@@ -7,8 +7,38 @@ openModalBtns.forEach(function (button) {
         const modalId = this.getAttribute("data-modal");
         const modal = document.getElementById(modalId);
         modal.style.display = "block";
+
+        // Si se abre el modal "ShowHistoricRemitModal", llena el select
+        if (modalId === "ShowHistoricRemitModal") {
+            fillSelectHistoric();
+        }
+
     });
 });
+function fillSelectHistoric() {
+    $.ajax({
+        
+        url: '/Main/GetHistoryInfo',
+        type: 'GET',
+        success: function (data) {
+            if (data.success) {
+                const select = document.getElementById("form-SelectAlias");
+                select.innerHTML = ""; // Clean the select
+
+                // Fill the select
+                data.selectItems.forEach(function (item) {
+                    const option = document.createElement("option");
+                    option.value = item.Value;
+                    option.text = item.Text;
+                    select.appendChild(option);
+                });
+            }
+        },
+        error: function () {
+            alert("An error occurred while loading Historic Remits.");
+        }
+    });
+}
 
 modals.forEach(function (modal) {
     const closeModalBtn = modal.querySelector(".close");
