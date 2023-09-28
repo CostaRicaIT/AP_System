@@ -122,17 +122,7 @@
     margin-left: 75px;
 }
 
-.OracleN-textarea {
-    width: 300px; /* width*/
-    height: 100px; /* height*/
-    margin-left: 66px;
-}
 
-.OracleI-textarea {
-    width: 300px; /* width*/
-    height: 100px; /* height*/
-    margin-left: 66px;
-}
 
 .styled-button {
     background-color: #f9f9f9;
@@ -220,18 +210,19 @@
 #form-MostCI {
     width: 100%;
     resize: none;
-    margin-left: 6.5%;
+    margin-left: 6.1%;
 }
 
 #form-SupplierA {
     width: 100%;
     resize: none;
-    margin-left: 31px;
+    margin-left: 4.2%;
 }
 
 #form-TemplateC {
     width: 100%;
     resize: none;
+    margin-left: 1%;
 }
 
 #form-BackUpEmails {
@@ -295,6 +286,7 @@
 
 #form-Source {
     margin-left: 104px;
+    width: 303px;
 }
 
 #Label-Oracle {
@@ -336,4 +328,11 @@
 #ButtonAddEmail {
     margin-top: 195px;
 }
-
+#form-OracleI {
+    margin-left: 6.1%;
+    resize: none;
+}
+#form-OracleN {
+    resize: none;
+    margin-left: 17.5%;
+}
