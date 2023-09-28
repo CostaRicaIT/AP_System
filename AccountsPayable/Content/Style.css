@@ -90,6 +90,7 @@
     align-items: center;
     justify-content: flex-end;
     margin-left: 10px;
+    
 }
 
 
@@ -194,7 +195,7 @@
 }
 
 #form-Higlights {
-    width: 100%;
+  
     resize: none;
     margin-left: 80px;
 }
@@ -207,19 +208,19 @@
 #form-Instructions {
     width: 100%;
     resize: none;
-    margin-left: 60px;
+    margin-left: 65px;
 }
 
 #form-Exceptions {
     width: 100%;
     resize: none;
-    margin-left: 66px;
+    margin-left: 69px;
 }
 
 #form-MostCI {
     width: 100%;
     resize: none;
-    margin-left: 43px;
+    margin-left: 6.5%;
 }
 
 #form-SupplierA {
@@ -288,6 +289,9 @@
 #form-AccountC {
     margin-left: 44px;
 }
+#form-Alias {
+    margin-left: 20px;
+}
 
 #form-Source {
     margin-left: 104px;
@@ -296,18 +300,31 @@
 #Label-Oracle {
     margin-left: 67px;
 }
+#form-SelectInfoAlias {
+    width: 31%;
+}
 
 #form-AddAlias {
     width: 300px;
     margin-left: 20px;
 }
+#form-ApproverComents {
+    width:100%;
+}
+#form-InvoiceF {
+    width: 320px;
+}
 
+#form-INFType {
+    width: 320px;
+    margin-left: 67px;
+}
 #form-cancel {
     margin-left: 88%;
 }
 
 
-#form-SlectAlias {
+#form-SelectAlias {
     width: 464px;
 }
 
@@ -319,3 +336,4 @@
 #ButtonAddEmail {
     margin-top: 195px;
 }
+

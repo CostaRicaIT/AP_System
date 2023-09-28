@@ -33,8 +33,7 @@ namespace AccountsPayable.Controllers
     public ActionResult CreateHistoric([Bind(Include = "HISTORIC_REMIT_DATE,HISTORIC_REMIT_INFO")] TB_HISTORIC_REMIT tB_HISTORIC_REMIT)
     {
         
-            // Your code...
-            // Could also be before try if you know the exception occurs in SaveChanges
+         
 
             if (ModelState.IsValid)
             {
@@ -44,7 +43,7 @@ namespace AccountsPayable.Controllers
                 return Json(new { success = true });
             }
             return Json(new { success = false, message = "There was an error saving the record " });
-        }
+    }
         [HttpGet]
         public ActionResult GetHistoryInfo()
         {
@@ -81,11 +80,85 @@ namespace AccountsPayable.Controllers
             }
             else
             {
-                return Json(new { success = false, message = "Texto histórico no encontrado." });
+                return Json(new { success = false, message = "." });
+            }
+        }
+
+        public ActionResult CreateAlias([Bind(Include = "ALIAS_NAME")] TB_ALIAS tB_ALIAS)
+        {
+
+           
+
+            if (ModelState.IsValid)
+            {
+
+                db.TB_ALIAS.Add(tB_ALIAS);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "There was an error saving the record " });
+        }
+        
+        public ActionResult GetAliasInfo()
+        {
+            var AliasList = db.TB_ALIAS.ToList();
+
+            if (AliasList != null)
+            {
+                var selectItems = AliasList.Select(item => new SelectListItem
+                {
+                    Text = item.ALIAS_NAME.ToString(), // bring the Alias name
+                    Value = item.ALIAS_ID.ToString() // Bring the Alias ID
+                }).ToList();
+
+                return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error in obtaining historical information." });
+            }
+
+
+
+
+        }
+
+        public ActionResult GetAliasText(int AliasId)
+        {
+            // Get the text based on the ID
+            var AliasText = db.TB_ALIAS
+                .Where(item => item.ALIAS_ID == AliasId)
+                .Select(item => item.ALIAS_NAME)
+                .FirstOrDefault();
+
+            if (AliasText != null)
+            {
+                return Json(new { success = true, AliasText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Alias name not found." });
+            }
+        }
+
+        public ActionResult GetHistoricRecentData()
+        {
+            var mostRecentData = db.TB_HISTORIC_REMIT.OrderByDescending(h => h.HISTORIC_REMIT_DATE).FirstOrDefault();
+
+            if(mostRecentData != null){
+
+                string mostRecentInfo = mostRecentData.HISTORIC_REMIT_INFO;
+
+                return Json(new { success = true, mostRecentData = mostRecentInfo }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(new { success = false, Message = "An error ocurred while fetching recent data" }, JsonRequestBehavior.AllowGet);
+
             }
         }
 
     }
 
-    
 }

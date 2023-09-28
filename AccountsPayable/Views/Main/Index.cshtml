@@ -55,11 +55,12 @@
                     <textarea id="form-HistRemitTo" class="General-textarea" rows="6" cols="100"></textarea>
                 </div>
                 <div class="button-wrapper">
-                    <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right openModalBtn" data-modal="AddHistoricRemitModal">Add Historic Remit to</button>
+                    <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit">Add Historic Remit to</button>
                     <button id="ButtonViewHisticRemit"  type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
                 </div>
                 <!--Modal to add historic remit-->
-                <div id="AddHistoricRemitModal" class="modal">
+
+                @*<div id="AddHistoricRemitModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <label for="historicRemitDate">Date</label><br>
@@ -68,17 +69,17 @@
                         <textarea id="historicRemitInfoAdd" class="General-textarea" rows="6" cols="100"></textarea>
                         <div>
                             <button class="btn form_btntbWC" type="button" id="cancelHistoricRemit">Cancel</button>
-                            <button class="btn form_btntbWC btn-submit" id=".btn-submit">Save</button>
+                            <button class="btn form_btntbWC btn-submit" id="btn-submit">Save</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <!--Modal to see historic remit-->
                 <div id="ShowHistoricRemitModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <p><label for="historicRemitInfoView">Historic Remit to:</label></p>
-                        <textarea id="historicRemitInfoView" class="General-textarea" rows="6" cols="112" placeholder="..."></textarea>
+                        <textarea id="historicRemitInfoView" rows="6" cols="60" placeholder="..."></textarea>
                         <br />
                         <!-- Select Historic Remit to -->
                         <div class="form-row">
@@ -106,28 +107,25 @@
             <div class="form-row">
                 <label for="form-AddAlias">Alias:</label>
                 <div class="AddAlias-button-wrapper">
-                    <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name here...">
+                    <input type="text" class="form-control" id="form-Alias" placeholder="Alias name here...">
                     <button id="ButtonAddAlias" type="button" class="styled-button align-right openModalBtn" data-modal="AddAliasModal">Add alias</button>
                 </div>
                 <!-- Select Alias Dropdown -->
-                <div class="form-row">
-                    <select id="form-SlectAlias" class="extended-select" size="4">
-                        <option>Example 1</option>
-                        <option>Example 2</option>
-                        <option>Example 3</option>
-                    </select>
-                </div>
+            </div>
+            <div class="form-row">
+                <select id="form-SelectInfoAlias" class="extended-select" size="4">
+                </select>
             </div>
             <!--Add Alias modal-->
             <div id="AddAliasModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <p><label for="alias">Alias:</label></p>
-                    <input type="text" id="alias" />
+                    <input type="text" id="form-AddAlias" />
                     <div>
                         <br />
                         <button class="btn form_btntbWC" type="button" id="cancelAlias">Cancel</button>
-                        <button class="btn form_btntbWC" type="button" id="submitAlias remit">Save</button>
+                        <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
                     </div>
                 </div>
             </div>
@@ -233,7 +231,7 @@
             <div class="form-row">
                 <label for="form-Higlights">Highlights</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-Higlights" class="General-textarea" rows="6" cols="120"></textarea>
+                    <textarea id="form-Higlights"  rows="7" cols="107"></textarea>
                     <div class="button-wrapper">
                         <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights">Add History</button>
                         <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
@@ -244,42 +242,42 @@
             <div class="form-row">
                 <label for="form-HiglightsC">Highlights Comments:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-HiglightsC" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-HiglightsC"  rows="7" cols="107"></textarea>
                 </div>
             </div>
             <!-- Instructions -->
             <div class="form-row">
                 <label for="form-Instructions">Instructions:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-Instructions" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-Instructions"  rows="7" cols="107"></textarea>
                 </div>
             </div>
             <!-- Exceptions -->
             <div class="form-row">
                 <label for="form-Exceptions">Exceptions:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-Exceptions" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-Exceptions"  rows="7" cols="107"></textarea>
                 </div>
             </div>
             <!-- Most Common Issues -->
             <div class="form-row">
                 <label for="form-MostCI">Most Common <br> Issues:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-MostCI" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-MostCI"  rows="7" cols="115"></textarea>
                 </div>
             </div>
             <!-- Supplier Agency -->
             <div class="form-row">
                 <label for="form-SupplierA">Supplier Agency:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-SupplierA" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-SupplierA"  rows="7" cols="107"></textarea>
                 </div>
             </div>
             <!-- Template Comments -->
             <div class="form-row">
                 <label for="form-TemplateC">Template Comments:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-TemplateC" class="General-textarea" rows="6" cols="108"></textarea>
+                    <textarea id="form-TemplateC"  rows="7" cols="107"></textarea>
                 </div>
             </div>
         </div>
@@ -316,7 +314,7 @@
 
                 <!-- Template Comments -->
                 <p><label for="TemplateCHistoryAdd">Template Comments:</label></p>
-                <textarea id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
+                <textarea id="TemplateComments" rows="4" cols="80"></textarea>
                 <div>
                     <button class="btn form_btntbWC" type="button" id="cancelHiglihts">Cancel</button>
                     <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
@@ -368,7 +366,8 @@
             <div class="form-row">
                 <label for="form-BackUpEmails">Back Up Emails:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-BackUpEmails" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
+                    <textarea id="form-BackUpEmails"  rows="6" cols="112" placeholder="Backup email here..."></textarea>
+                    
                     <div class="button-wrapper">
                         <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
                     </div>
@@ -414,7 +413,7 @@
             <div class="form-row">
                 <label for="form-ApproverComents">Aprover Comments:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-ApproverComents" class="General-textarea" rows="6" cols="112" placeholder="Backup email here..."></textarea>
+                    <textarea id="form-ApproverComents"  rows="6" cols="120" placeholder="Backup email here..."></textarea>
                 </div>
             </div>
         </div>
@@ -423,7 +422,20 @@
         <!-- Invoice Number Format Section -->
         <div class="form-section">
             <div class="section-title">Invoice Number Format</div>
-
+            <!-- Approver info -->
+            <div class="form-row">
+                <label for="form-InvoiceF">Invoice Format:</label>
+                <div class="General General-Width">
+                    <input type="text" class="form-control" id="form-InvoiceF" placeholder="Nomenclature">
+                </div>
+            </div>
+            <!-- Type -->
+            <div class="form-row">
+                <label for="form-INFType">Type:</label>
+                <div class="General General-Width">
+                    <input type="text" class="form-control" id="form-INFType" placeholder="Actual invoice / Statement invoice / Itemize Doc">
+                </div>
+            </div>
         </div>
         <br />
 
