@@ -20,33 +20,34 @@
                 <label for="form-TaxID">Tax Id:</label>
                 <div class="TaxId-checkbox-wrapper">
                     <input type="text" class="form-control" id="form-TaxID" placeholder="12-34567">
-                    <label for="BoxNoTaxId" class="checkbox-label">
-                        <span>No Tax Id information</span>
-                        <input type="checkbox" id="BoxNoTaxId" name="NoTaxId">
-                    </label>
                 </div>
+                <label id="LabelNotaxId">
+                    <span>No Tax Id information</span>
+                    <input type="checkbox" id="BoxNoTaxId" name="NoTaxId">
+                </label>
             </div>
             <!-- Remit To -->
             <div class="form-row">
                 <label for="form-RemitTo">Remit to:</label>
                 <div class="RemitTo-checkbox-wrapper">
                     <input type="text" class="form-control" id="form-RemitTo" placeholder="Address here ...">
-                    <label for="BoxNoRemitInfo" class="checkbox-label">
-                        <span>There is no Remit information</span>
-                        <input type="checkbox" id="BoxNoRemitInfo" value="1">
-                    </label>
+
                 </div>
+                <label id="LabelHistoric">
+                    <span >There is no Remit information</span>
+                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                </label>
             </div>
             <!-- Supplier Name -->
             <div class="form-row">
                 <label for="form-SupName">Supplier Name:</label>
                 <div class="SupplierName-checkbox-wrapper">
                     <input type="text" class="form-control" id="form-SupName" placeholder="Supplier Name here ...">
-                    <label for="BoxSupName" class="checkbox-label">
-                        <span>There is no Supplier Name</span>
-                        <input type="checkbox" id="BoxSupName" value="1">
-                    </label>
                 </div>
+                <label id="LabelSupName">
+                    <span>There is no Supplier Name</span>
+                    <input type="checkbox" id="BoxSupName" value="1">
+                </label>
             </div>
             <!-- Historic Remit To -->
             <div class="form-row">
@@ -79,7 +80,7 @@
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <p><label for="historicRemitInfoView">Historic Remit to:</label></p>
-                        <textarea id="historicRemitInfoView" rows="6" cols="60" placeholder="..."></textarea>
+                        <textarea id="historicRemitInfoView" readonly rows="6" cols="62" placeholder="..."></textarea>
                         <br />
                         <!-- Select Historic Remit to -->
                         <div class="form-row">
@@ -402,18 +403,15 @@
         <div class="form-section">
             <div class="section-title">Approver</div>
             <div class="form-row">
-                <label for="form-Approver-info">Approver info:</label>
-                <div class="General">
-                    <select id="form-Approver-info" class="extended-select">
-                        <option>Approver</option>
-                        <!-- Add more options here if needed -->
-                    </select>
-                </div>
+                <label for="form-Approver">Approver info:</label>
+                <select id="form-SelectApprover" class="extended-select" style="margin-left:47px;"  >
+                    <option>Approver</option>
+                </select>
             </div>
             <div class="form-row">
                 <label for="form-ApproverComents">Aprover Comments:</label>
                 <div class="General-checkbox-wrapper">
-                    <textarea id="form-ApproverComents"  rows="6" cols="120" placeholder="Backup email here..."></textarea>
+                    <textarea style="resize: none;" id="form-ApproverComents" rows="6" cols="120" placeholder="Backup email here..."></textarea>
                 </div>
             </div>
         </div>

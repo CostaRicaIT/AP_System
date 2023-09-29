@@ -4,17 +4,27 @@ const modals = document.querySelectorAll(".modal");
 
 openModalBtns.forEach(function (button) {
     button.addEventListener("click", function () {
-        const modalId = this.getAttribute("data-modal");
-        const modal = document.getElementById(modalId);
+        var modalId = this.getAttribute("data-modal");
+        var modal = document.getElementById(modalId);
         modal.style.display = "block";
-
-        // Si se abre el modal "ShowHistoricRemitModal", llena el select
+       /* If the "ShowHistoricRemitModal" modal is opened, fill in the select*/
         if (modalId === "ShowHistoricRemitModal") {
             fillSelectHistoric();
         }
+        /* Get the cancel button inside the modal */
+        var cancelButton = modal.querySelector("#cancelAlias");
 
+        /* Close the modal when the user clicks on the cancel button */
+        cancelButton.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
     });
 });
+
+
+
+
+
 function fillSelectHistoric() {
     $.ajax({
         

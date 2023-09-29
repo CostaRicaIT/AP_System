@@ -1,6 +1,4 @@
-﻿
-
-const selectAlias = document.getElementById("form-SelectAlias");// get a reference of the select 
+﻿const selectAlias = document.getElementById("form-SelectAlias");// get a reference of the select 
 const textareaInfoView = document.getElementById("historicRemitInfoView");// Add an event listener to the select
 selectAlias.addEventListener("change", function () {
     // Get the selected value (ID)
@@ -111,34 +109,43 @@ $(document).ready(function () {
         // Get the current date
         var currentDate = new Date();
 
-        
         var formattedDate = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
 
-       
+        // Get Hours, Minutes, Seconds
+
+
+
+        var hours = currentDate.getHours().toString().padStart(2, '0');
+        var minutes = currentDate.getMinutes().toString().padStart(2, '0');
+        var seconds = currentDate.getSeconds().toString().padStart(2, '0');
+        
+                // Concats the parts of the hours
+        formattedDate += ' ' + hours + ':' + minutes + ':' + seconds;
         var historic = $("#form-HistRemitTo").val();
-        $.ajax({
-            //Controller Name
-            url: '/Main/CreateHistoric',
-            type: 'POST',
-            data: {
-                //Send data to the server variables should match with DB
-                HISTORIC_REMIT_DATE: formattedDate,
-                HISTORIC_REMIT_INFO: historic
-            },
-            success: function (data) {
-                if (data.success) {
-                    /*Close the modal*/
-                    const modalId = $(".submitHistoricRemit").attr("data-modal");
-                    const modal = document.getElementById(modalId);
-                    modal.style.display = "none";
-                    location.reload();
+        var confirmDelete = confirm("Are you sure you want to create this historic remit ?");
+
+        if (confirmDelete) {
+            $.ajax({
+                //Controller Name
+                url: '/Main/CreateHistoric',
+                type: 'POST',
+                data: {
+                    //Send data to the server variables should match with DB
+                    HISTORIC_REMIT_DATE: formattedDate,
+                    HISTORIC_REMIT_INFO: historic
+                },
+                success: function (data) {
+                    if (data.success) {
+                        alert("Historic created successfully!");
+                       
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while saving the record.");
                 }
-            },
-            error: function () {
-                alert("An error occurred while saving the record.");
-            }
-        }); 
- 
+            });
+        }
        
     });
     

@@ -47,7 +47,7 @@ namespace AccountsPayable.Controllers
         [HttpGet]
         public ActionResult GetHistoryInfo()
         {
-            var historicRemit = db.TB_HISTORIC_REMIT.ToList();
+            var historicRemit = db.TB_HISTORIC_REMIT.OrderByDescending(item=> item.HISTORIC_REMIT_DATE).ToList(); /*Bring the historic creations info in descending mode */
 
             if (historicRemit != null)
             {

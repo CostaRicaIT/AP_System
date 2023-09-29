@@ -147,6 +147,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Accounts_Payable.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>

@@ -336,3 +336,20 @@
     resize: none;
     margin-left: 17.5%;
 }
+#historicRemitInfoView {
+    resize: none;
+    width: 464px;
+}
+#LabelHistoric {
+    margin-left: 17.5%;
+}
+#LabelNotaxId {
+    margin-left: 22.5%;
+}
+
+#LabelSupName {
+    margin-left: 19.5%;
+}
+#form-SelectApprover {
+    width: 888px;
+}
