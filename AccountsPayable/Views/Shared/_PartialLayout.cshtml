@@ -1,0 +1,9 @@
+﻿<ul class="navbar-right" style="color: #ffff;">
+    @Session["CurrentUserName"]
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("Log Out", "EndSession", "SignOut")
+    </li>
+</ul>
