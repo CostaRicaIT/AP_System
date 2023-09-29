@@ -122,9 +122,9 @@ $(document).ready(function () {
                 // Concats the parts of the hours
         formattedDate += ' ' + hours + ':' + minutes + ':' + seconds;
         var historic = $("#form-HistRemitTo").val();
-        var confirmDelete = confirm("Are you sure you want to create this historic remit ?");
+        var confirmCreate = confirm("Are you sure you want to create this historic remit ?");
 
-        if (confirmDelete) {
+        if (confirmCreate) {
             $.ajax({
                 //Controller Name
                 url: '/Main/CreateHistoric',
@@ -137,7 +137,6 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.success) {
                         alert("Historic created successfully!");
-                       
                         location.reload();
                     }
                 },
@@ -152,29 +151,31 @@ $(document).ready(function () {
     $(".btn-submitAlias").click(function () {
 
         var Alias = $("#form-AddAlias").val();
-
-        $.ajax({
-            //Controller Name
-            url: '/Main/CreateAlias',
-            type: 'POST',
-            data: {
-                //Send data to the server variables should match with DB
-                ALIAS_NAME: Alias
-            },
-            success: function (data) {
-                if (data.success) {
-                    /*Close the modal*/
-                    const modalId = "AddAliasModal";
-                    const modal = document.getElementById(modalId);
-                    modal.style.display = "none";
-                    location.reload();
+        var confirmCreate = confirm("Are you sure you want to create this Alias ?");
+        if (confirmCreate) {
+            $.ajax({
+                //Controller Name
+                url: '/Main/CreateAlias',
+                type: 'POST',
+                data: {
+                    //Send data to the server variables should match with DB
+                    ALIAS_NAME: Alias
+                },
+                success: function (data) {
+                    if (data.success) {
+                        /*Close the modal*/
+                        alert("Alias created successfully!");
+                        const modalId = "AddAliasModal";
+                        const modal = document.getElementById(modalId);
+                        modal.style.display = "none";
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while saving the record.");
                 }
-            },
-            error: function () {
-                alert("An error occurred while saving the record.");
-            }
-        });
-
+            });
+        }
 
     });    
 
