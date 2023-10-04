@@ -17,13 +17,13 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_ALIAS()
         {
-            this.TB_TEMPLATE_ALIAS = new HashSet<TB_TEMPLATE_ALIAS>();
+            this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
         }
     
         public int ALIAS_ID { get; set; }
         public string ALIAS_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_TEMPLATE_ALIAS> TB_TEMPLATE_ALIAS { get; set; }
+        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
     }
 }

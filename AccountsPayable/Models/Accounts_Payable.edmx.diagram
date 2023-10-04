@@ -4,36 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="917bc840482c4e77a63e8da53c9824b3" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Accounts_Payable_Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ALIAS" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_APPROVER" Width="1.5" PointX="3" PointY="18.5" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_EMAIL_BACKUP" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_HIGLIGHTS" Width="1.5" PointX="3" PointY="12.375" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_HISTORIC_REMIT" Width="1.5" PointX="0.75" PointY="25.625" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_LOG_IN" Width="1.5" PointX="10" PointY="1.125" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_LOGIN_ROLES" Width="1.5" PointX="7.75" PointY="3" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_LEGAL_ENTITIES" Width="1.5" PointX="3" PointY="16.125" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_PAY_TERMS" Width="1.5" PointX="3" PointY="10" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_SOURCE" Width="1.5" PointX="3" PointY="20.75" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_TYPE" Width="1.5" PointX="3" PointY="23.125" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_TEMPLATE" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_TEMPLATE_HISTORIC_REMIT" Width="1.5" PointX="3" PointY="25.5" />
-        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_VIEW_PERMISSIONS" Width="1.5" PointX="10" PointY="4.25" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__442B18F2" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4DB4832C" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4CC05EF3" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4BCC3ABA" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4242D080" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_LOG_IN__FK_TB__37C5420D" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_VIEW_P__FK_TB__35DCF99B" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__47FBA9D6" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__49E3F248" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4AD81681" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__48EFCE0F" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__46136164" />
-        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4707859D" />
+      <Diagram DiagramId="e9eed0a46a0f49b48333b62a5b207c73" Name="Diagram1">
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ALIAS" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_APPROVER" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_EMAIL_BACKUP" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_HIGLIGHTS" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_HISTORIC_REMIT" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_LOG_IN" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_LOGIN_ROLES" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_LEGAL_ENTITIES" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_PAY_TERMS" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_SOURCE" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_ORACLE_TYPE" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_TEMPLATE" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.TB_VIEW_PERMISSIONS" Width="1.5" PointX="10" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4DB4832C" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4CC05EF3" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4BCC3ABA" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_LOG_IN__FK_TB__37C5420D" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_VIEW_P__FK_TB__35DCF99B" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__47FBA9D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__49E3F248" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__4AD81681" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__48EFCE0F" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounts_Payable_Model.TB_TEMPLATE_HISTORIC_REMIT" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
