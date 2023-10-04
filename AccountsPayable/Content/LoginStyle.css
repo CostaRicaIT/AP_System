@@ -1,5 +1,5 @@
 ﻿html {
-    background-color: #035772;
+    background-color: #3B1E08;
 }
 
 body {
@@ -8,6 +8,7 @@ body {
     --color-secondary: #252c6a;
     --color-error: #cc3333;
     --color-success: #4bb544;
+    --color-Log: #3B1E08;
     --border-radius: 4px;
     margin: 0;
     padding: 0;
@@ -74,7 +75,7 @@ body {
 
     .form__input:focus {
         text-align: center;
-        border-color: var(--color-primary);
+        border-color: var(--color-Log);
         background: #ffffff;
     }
 
@@ -88,11 +89,12 @@ body {
     border-radius: var(--border-radius);
     outline: none;
     cursor: pointer;
-    background-color: #EE7A06;
+    background-color: #3B1E08;
 }
 
     .form__button:hover {
-        color: #252c6a;
+        /*color: #C5C6D0;*/
+        background-color: #65350F;
     }
 
     .form__button:active {
