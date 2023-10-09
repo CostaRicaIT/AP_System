@@ -262,17 +262,17 @@
     margin-left: 66px;
 }
 
-#form-Type {
+#form-OracleType {
     margin-left: 120px;
     width: 300px;
 }
 
-#form-LegalE {
+#form-OracleLegalE {
     margin-left: 72px;
     width: 300px;
 }
 
-#form-PayTerms {
+#form-OraclePayTerms {
     margin-left: 83px;
     width: 300px;
 }
@@ -284,7 +284,7 @@
     margin-left: 20px;
 }
 
-#form-Source {
+#form-OracleSource {
     margin-left: 104px;
     width: 303px;
 }

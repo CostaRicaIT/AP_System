@@ -18,7 +18,7 @@ using System.Web.WebPages;
 namespace AccountsPayable.Controllers
 {
 
-  
+
     public class MainController : Controller
     {
         private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
@@ -27,27 +27,27 @@ namespace AccountsPayable.Controllers
         {
             return View();
         }
-    
 
-    [HttpPost]
-    public ActionResult CreateHistoric([Bind(Include = "HISTORIC_REMIT_DATE,HISTORIC_REMIT_INFO")] TB_HISTORIC_REMIT tB_HISTORIC_REMIT)
-    {
-        
-         
+
+        [HttpPost]
+        public ActionResult CreateHistoric([Bind(Include = "HISTORIC_REMIT_DATE,HISTORIC_REMIT_INFO")] TB_HISTORIC_REMIT tB_HISTORIC_REMIT)
+        {
+
+
 
             if (ModelState.IsValid)
             {
-                
+
                 db.TB_HISTORIC_REMIT.Add(tB_HISTORIC_REMIT);
                 db.SaveChanges();
                 return Json(new { success = true });
             }
             return Json(new { success = false, message = "There was an error saving the record " });
-    }
+        }
         [HttpGet]
         public ActionResult GetHistoryInfo()
         {
-            var historicRemit = db.TB_HISTORIC_REMIT.OrderByDescending(item=> item.HISTORIC_REMIT_DATE).ToList(); /*Bring the historic creations info in descending mode */
+            var historicRemit = db.TB_HISTORIC_REMIT.OrderByDescending(item => item.HISTORIC_REMIT_DATE).ToList(); /*Bring the historic creations info in descending mode */
 
             if (historicRemit != null)
             {
@@ -87,7 +87,7 @@ namespace AccountsPayable.Controllers
         public ActionResult CreateAlias([Bind(Include = "ALIAS_NAME")] TB_ALIAS tB_ALIAS)
         {
 
-           
+
 
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace AccountsPayable.Controllers
             }
             return Json(new { success = false, message = "There was an error saving the record " });
         }
-        
+
         public ActionResult GetAliasInfo()
         {
             var AliasList = db.TB_ALIAS.ToList();
@@ -123,6 +123,7 @@ namespace AccountsPayable.Controllers
 
         }
 
+
         public ActionResult GetAliasText(int AliasId)
         {
             // Get the text based on the ID
@@ -145,7 +146,8 @@ namespace AccountsPayable.Controllers
         {
             var mostRecentData = db.TB_HISTORIC_REMIT.OrderByDescending(h => h.HISTORIC_REMIT_DATE).FirstOrDefault();
 
-            if(mostRecentData != null){
+            if (mostRecentData != null)
+            {
 
                 string mostRecentInfo = mostRecentData.HISTORIC_REMIT_INFO;
 
@@ -158,7 +160,96 @@ namespace AccountsPayable.Controllers
 
             }
         }
+        public ActionResult GetOracleLegalEntity()
+        {
+            var OracleLegalEntityList = db.TB_ORACLE_LEGAL_ENTITIES.ToList();
+            if (OracleLegalEntityList != null)
+            {
+                var selectItems = OracleLegalEntityList.Select(item => new SelectListItem
+                {
+                    Value = item.LEGAL_ENTITY_ID.ToString(),
+                    Text = item.LEGAL_ENTITY_NAME
+                }).ToList();
 
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
+        public ActionResult GetOracleType()
+        {
+            var OracleTypeList = db.TB_ORACLE_TYPE.ToList();
+            if (OracleTypeList != null)
+            {
+                var selectItems = OracleTypeList.Select(item => new SelectListItem
+                {
+                    Value = item.ORACLE_TYPE_ID.ToString(),
+                    Text = item.ORACLE_TYPE_NAME
+                }).ToList();
+
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
+        public ActionResult GetOraclePayTerms()
+        {
+            var OraclePayTermsList = db.TB_ORACLE_PAY_TERMS.ToList();
+            if (OraclePayTermsList != null)
+            {
+                var selectItems = OraclePayTermsList.Select(item => new SelectListItem
+                {
+                    Value = item.PAY_TERMS_ID.ToString(),
+                    Text = item.PAY_TERMS_DESCRIPTION
+                }).ToList();
+
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
+        public ActionResult GetOracleSource()
+        {
+            var OracleSourceList = db.TB_ORACLE_SOURCE.ToList();
+            if (OracleSourceList != null)
+            {
+                var selectItems = OracleSourceList.Select(item => new SelectListItem
+                {
+                    Value = item.ORACLE_SOURCE_ID.ToString(),
+                    Text = item.ORACLE_SOURCE_DESCRIPTION
+                }).ToList();
+
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
+
+        public ActionResult GetApprover()
+        {
+            var ApproverList = db.TB_APPROVER.ToList();
+            if (ApproverList != null)
+            {
+                var selectItems = ApproverList.Select(item => new SelectListItem
+                {
+                    Value = item.APPROVER_ID.ToString(),
+                    Text = item.APPROVER_NAME
+                }).ToList();
+
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
     }
-
 }
