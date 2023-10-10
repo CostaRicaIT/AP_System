@@ -28,7 +28,6 @@ namespace AccountsPayable.Controllers
             return View();
         }
 
-
         [HttpPost]
         public ActionResult CreateHistoric([Bind(Include = "HISTORIC_REMIT_DATE,HISTORIC_REMIT_INFO")] TB_HISTORIC_REMIT tB_HISTORIC_REMIT)
         {
@@ -55,6 +54,27 @@ namespace AccountsPayable.Controllers
                 {
                     Text = item.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy"), // bring the Date
                     Value = item.HISTORIC_REMIT_ID.ToString() // Bring the ID
+                }).ToList();
+
+                return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error in obtaining historical information." });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetHighlightsInfo()
+        {
+            var HighlightsHistoric = db.TB_HIGLIGHTS.OrderByDescending(item => item.HIGHLIGTS_DATE).ToList(); /*Bring the historic creations info in descending mode */
+
+            if (HighlightsHistoric != null)
+            {
+                var selectItems = HighlightsHistoric.Select(item => new SelectListItem
+                {
+                    Text = item.HIGHLIGTS_DATE.ToString("MM/dd/yyyy"), // bring the Date
+                    Value = item.HIGLIGHTS_ID.ToString() // Bring the ID
                 }).ToList();
 
                 return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
@@ -135,6 +155,20 @@ namespace AccountsPayable.Controllers
             if (AliasText != null)
             {
                 return Json(new { success = true, AliasText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Alias name not found." });
+            }
+        }
+        public ActionResult GetHighLightsText(int HighlightsID)
+        {
+            // Get the text based on the ID
+            var HighLightsText = db.TB_HIGLIGHTS.FirstOrDefault(h => h.HIGLIGHTS_ID == HighlightsID);
+
+            if (HighLightsText != null)
+            {
+                return Json(new { success = true, HighLightsText.HIGLIGTHS, HighLightsText.HIGLIGTHS_COMMENTS, HighLightsText.HIGLIGTHS_INSTRUCTIONS, HighLightsText.HIGLIGTHS_EXCEPTIONS, HighLightsText.HIGLIGTHS_COMMON_ISSUES, HighLightsText.HIGLIGTHS_SUPPLIER_AGENCY, HighLightsText.HIGLIGTHS_TEMPLATE_COMMENTS }, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -242,6 +276,25 @@ namespace AccountsPayable.Controllers
                 {
                     Value = item.APPROVER_ID.ToString(),
                     Text = item.APPROVER_NAME
+                }).ToList();
+
+                return Json(selectItems, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
+            }
+        }
+
+        public ActionResult GetBackUpEmails()
+        {
+            var ApproverList = db.TB_EMAIL_BACKUP.ToList();
+            if (ApproverList != null)
+            {
+                var selectItems = ApproverList.Select(item => new SelectListItem
+                {
+                    Value = item.EMAIL_BACKUP_ID.ToString(),
+                    Text = item.EMAIL_BACKUP_DATE.ToString()
                 }).ToList();
 
                 return Json(selectItems, JsonRequestBehavior.AllowGet);

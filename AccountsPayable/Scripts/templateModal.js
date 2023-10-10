@@ -11,6 +11,9 @@ openModalBtns.forEach(function (button) {
         if (modalId === "ShowHistoricRemitModal") {
             fillSelectHistoric();
         }
+        if (modalId === "ShowHighlights") {
+            fillSelectHighligtsHistoric();
+        }
         /* Get the cancel button inside the modal */
         var cancelButton = modal.querySelector("#cancelAlias");
 
@@ -32,7 +35,32 @@ function fillSelectHistoric() {
         type: 'GET',
         success: function (data) {
             if (data.success) {
-                const select = document.getElementById("form-SelectAlias");
+                const select = document.getElementById("form-SelectHistoricRemit");
+                select.innerHTML = ""; // Clean the select
+
+                // Fill the select
+                data.selectItems.forEach(function (item) {
+                    const option = document.createElement("option");
+                    option.value = item.Value;
+                    option.text = item.Text;
+                    select.appendChild(option);
+                });
+            }
+        },
+        error: function () {
+            alert("An error occurred while loading Historic Remits.");
+        }
+    });
+}
+
+function fillSelectHighligtsHistoric() {
+    $.ajax({
+
+        url: '/Main/GetHighlightsInfo',
+        type: 'GET',
+        success: function (data) {
+            if (data.success) {
+                const select = document.getElementById("form-SelectHighlightsHistoric");
                 select.innerHTML = ""; // Clean the select
 
                 // Fill the select

@@ -93,7 +93,9 @@
     
 }
 
-
+textarea {
+    resize: none
+}
 
 .General-textarea {
     width: 300px; /* width*/

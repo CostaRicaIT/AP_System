@@ -1,4 +1,4 @@
-﻿const selectAlias = document.getElementById("form-SelectAlias");// get a reference of the select 
+﻿const selectAlias = document.getElementById("form-SelectHistoricRemit");// get a reference of the select 
 const textareaInfoView = document.getElementById("historicRemitInfoView");// Add an event listener to the select
 selectAlias.addEventListener("change", function () {
     // Get the selected value (ID)
@@ -66,6 +66,35 @@ function fillSelectInfoAlias() {
         }
     });
 }
+
+/*Listenner to get the info of the Highlights*/
+
+const selectHighlightsHistoric = document.getElementById("form-SelectHighlightsHistoric");// get a reference of the select 
+selectHighlightsHistoric.addEventListener("change", function () {
+    // Get the selected value (ID)
+    var selectedValue = selectHighlightsHistoric.value;
+    $.ajax({
+        url: '/Main/GetHighLightsText',
+        type: 'GET',
+        data: { HighlightsID: selectedValue }, // Sends the selected ID to the controller
+        success: function (data) {
+            // Updates the content of the textarea with the historic
+            var highlight = data;
+            document.getElementById("HighlightsHistoryView").value = highlight.HIGLIGTHS;
+            document.getElementById("HighlightsCHistoryView").value = highlight.HIGLIGTHS_COMMENTS;
+            document.getElementById("InstructionsHistoryView").value = highlight.HIGLIGTHS_INSTRUCTIONS;
+            document.getElementById("ExceptionsHistoryView").value = highlight.HIGLIGTHS_EXCEPTIONS;
+            document.getElementById("MostCIHistoryView").value = highlight.HIGLIGTHS_COMMON_ISSUES;
+            document.getElementById("SupplierAHistoryView").value = highlight.HIGLIGTHS_SUPPLIER_AGENCY;
+            document.getElementById("TemplateCHistoryView").value = highlight.HIGLIGTHS_TEMPLATE_COMMENTS;
+
+        },
+        error: function () {
+            // Handles any errors that may occur during the AJAX request
+            alert("Error al obtener el texto¿.");
+        }
+    });
+});
 
 function recentDataHistoric() {
     $.ajax({
@@ -193,6 +222,29 @@ function GetApprover() {
         }
     });
 }
+
+function GetBackUpEmails() {
+    // Use AJAX to fetch data and populate the dropdown
+    $.ajax({
+        url: '/Main/GetBackUpEmails', // Replace with the actual URL to fetch data
+        method: 'GET',
+        success: function (data) {
+            // Assuming data is an array of items with 'Text' and 'Value' properties
+            var dropdown = $('#form-SelectMails');
+
+            // Iterate through the data and append options to the dropdown
+            $.each(data, function (index, item) {
+                dropdown.append($('<option>', {
+                    value: item.Value,
+                    text: item.Text
+                }));
+            });
+        },
+        error: function (error) {
+            console.log("Error fetching data: " + error);
+        }
+    });
+}
 $(document).ready(function () {
     // Function to disable or enable the input field according to the status of the checkbox.
     function toggleInputState(checkbox, input) {
@@ -293,4 +345,5 @@ $(document).ready(function () {
     GetOraclePayTerms();
     GetOracleSource();
     GetApprover();
+    GetBackUpEmails();
 });
