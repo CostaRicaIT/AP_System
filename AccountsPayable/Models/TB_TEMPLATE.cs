@@ -31,25 +31,25 @@ namespace AccountsPayable.Models
         public Nullable<int> FK_TB_TEMPLATE_ALIAS_ID { get; set; }
         public string TEMP_SUPPLIER_SITE { get; set; }
         public string TEMP_ADDRESS { get; set; }
-        public int FK_TB_LEGAL_ENTITY_ID { get; set; }
+        public Nullable<int> FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string TEMP_TAXPAYER_ID { get; set; }
-        public int FK_TB_ORACLE_TYPE_ID { get; set; }
+        public Nullable<int> FK_TB_ORACLE_TYPE_ID { get; set; }
         public string TEMP_ORACLE_DESCRIPTION { get; set; }
-        public int FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
+        public Nullable<int> FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
         public string TEMP_ACCOUNT_CODING { get; set; }
-        public int FK_TB_ORACLE_SOURCE_ID { get; set; }
+        public Nullable<int> FK_TB_ORACLE_SOURCE_ID { get; set; }
         public string TEMP_ORACLE_NOTES { get; set; }
         public string TEMP_ORACLE_INSTRUCTIONS { get; set; }
-        public Nullable<int> FK_TB_HIGLIGTHS_ID { get; set; }
+        public Nullable<int> FK_TB_HIGHLIGHTS_ID { get; set; }
         public Nullable<int> FK_TB_EMAIL_BACKUP_ID { get; set; }
-        public int FK_TB_APPROVER_ID { get; set; }
+        public Nullable<int> FK_TB_APPROVER_ID { get; set; }
         public string TEMP_APPROVER_COMMENTS { get; set; }
         public string TEMP_INVOICE_FORMAT { get; set; }
         public string TEMP_INVOICE_TYPE { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         public virtual TB_EMAIL_BACKUP TB_EMAIL_BACKUP { get; set; }
-        public virtual TB_HIGLIGHTS TB_HIGLIGHTS { get; set; }
+        public virtual TB_HIGHLIGHTS TB_HIGHLIGHTS { get; set; }
         public virtual TB_ORACLE_LEGAL_ENTITIES TB_ORACLE_LEGAL_ENTITIES { get; set; }
         public virtual TB_ORACLE_PAY_TERMS TB_ORACLE_PAY_TERMS { get; set; }
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }

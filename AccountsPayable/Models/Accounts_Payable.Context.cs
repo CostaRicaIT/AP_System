@@ -28,7 +28,7 @@ namespace AccountsPayable.Models
         public virtual DbSet<TB_ALIAS> TB_ALIAS { get; set; }
         public virtual DbSet<TB_APPROVER> TB_APPROVER { get; set; }
         public virtual DbSet<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
-        public virtual DbSet<TB_HIGLIGHTS> TB_HIGLIGHTS { get; set; }
+        public virtual DbSet<TB_HIGHLIGHTS> TB_HIGHLIGHTS { get; set; }
         public virtual DbSet<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
         public virtual DbSet<TB_LOG_IN> TB_LOG_IN { get; set; }
         public virtual DbSet<TB_LOGIN_ROLES> TB_LOGIN_ROLES { get; set; }

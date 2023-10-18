@@ -45,7 +45,7 @@ namespace AccountsPayable.Controllers
 
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
             ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.FK_TB_HIGLIGTHS_ID = new SelectList(db.TB_HIGLIGHTS, "HIGLIGHTS_ID", "HIGLIGTHS");
+            ViewBag.FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGLHIGTHS");
             ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
             ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
             ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
@@ -58,7 +58,7 @@ namespace AccountsPayable.Controllers
         {
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
             ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(db.TB_EMAIL_BACKUP, "EMAIL_BACKUP_ID", "EMAIL_BACKUP");
-            ViewBag.FK_TB_HIGLIGTHS_ID = new SelectList(db.TB_HIGLIGHTS, "HIGLIGHTS_ID", "HIGLIGTHS");
+            ViewBag.FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGLIGHTS_ID", "HIGHLIGHTS");
             ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
             ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
             ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
@@ -67,15 +67,15 @@ namespace AccountsPayable.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "TEMP_ID,TEMP_TAX_ID,TEMP_REMIT_TO,TEMP_SUPPLIER_NAME,TEMP_SUPPLIER_NUMBER,FK_TB_TEMPLATE_HISTORIC_REMIT_ID,TEMP_VENDOR_ACCOUNT,FK_TB_TEMPLATE_ALIAS_ID,TEMP_SUPPLIER_SITE,TEMP_ADDRESS,FK_TB_LEGAL_ENTITY_ID,TEMP_TAXPAYER_ID,FK_TB_ORACLE_TYPE_ID,TEMP_ORACLE_DESCRIPTION,FK_TB_ORACLE_PAY_TERMS_ID,TEMP_ACCOUNT_CODING,FK_TB_ORACLE_SOURCE_ID,TEMP_ORACLE_NOTES,TEMP_ORACLE_INSTRUCTIONS,FK_TB_HIGLIGTHS_ID,FK_TB_EMAIL_BACKUP_ID,FK_TB_APPROVER_ID,TEMP_APPROVER_COMMENTS,TEMP_INVOICE_FORMAT,TEMP_INVOICE_TYPE")] TB_TEMPLATE tB_TEMPLATE)
+        public ActionResult Create([Bind(Include = "TEMP_ID,TEMP_TAX_ID,TEMP_REMIT_TO,TEMP_SUPPLIER_NAME,TEMP_SUPPLIER_NUMBER,FK_TB_TEMPLATE_HISTORIC_REMIT_ID,TEMP_VENDOR_ACCOUNT,FK_TB_TEMPLATE_ALIAS_ID,TEMP_SUPPLIER_SITE,TEMP_ADDRESS,FK_TB_LEGAL_ENTITY_ID,TEMP_TAXPAYER_ID,FK_TB_ORACLE_TYPE_ID,TEMP_ORACLE_DESCRIPTION,FK_TB_ORACLE_PAY_TERMS_ID,TEMP_ACCOUNT_CODING,FK_TB_ORACLE_SOURCE_ID,TEMP_ORACLE_NOTES,TEMP_ORACLE_INSTRUCTIONS,FK_TB_HIGHLIGHTS_ID,FK_TB_EMAIL_BACKUP_ID,FK_TB_APPROVER_ID,TEMP_APPROVER_COMMENTS,TEMP_INVOICE_FORMAT,TEMP_INVOICE_TYPE")] TB_TEMPLATE tB_TEMPLATE)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 db.TB_TEMPLATE.Add(tB_TEMPLATE);
                 db.SaveChanges();
                 return Json(new { success = true });
-            //}
-            //return Json(new { success = false, message = "There was an error saving the record " });
+            }
+            return Json(new { success = false, message = "There was an error saving the record " });
         }
         [HttpGet]
         public ActionResult GetHistoryInfo()
@@ -101,14 +101,14 @@ namespace AccountsPayable.Controllers
         [HttpGet]
         public ActionResult GetHighlightsInfo()
         {
-            var HighlightsHistoric = db.TB_HIGLIGHTS.OrderByDescending(item => item.HIGHLIGTS_DATE).ToList(); /*Bring the historic creations info in descending mode */
+            var HighlightsHistoric = db.TB_HIGHLIGHTS.OrderByDescending(item => item.HIGHLIGHTS_DATE).ToList(); /*Bring the historic creations info in descending mode */
 
             if (HighlightsHistoric != null)
             {
                 var selectItems = HighlightsHistoric.Select(item => new SelectListItem
                 {
-                    Text = item.HIGHLIGTS_DATE.ToString("MM/dd/yyyy"), // bring the Date
-                    Value = item.HIGLIGHTS_ID.ToString() // Bring the ID
+                    Text = item.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy"), // bring the Date
+                    Value = item.HIGHLIGHTS_ID.ToString() // Bring the ID
                 }).ToList();
 
                 return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
@@ -198,11 +198,11 @@ namespace AccountsPayable.Controllers
         public ActionResult GetHighLightsText(int HighlightsID)
         {
             // Get the text based on the ID
-            var HighLightsText = db.TB_HIGLIGHTS.FirstOrDefault(h => h.HIGLIGHTS_ID == HighlightsID);
+            var HighLightsText = db.TB_HIGHLIGHTS.FirstOrDefault(h => h.HIGHLIGHTS_ID == HighlightsID);
 
             if (HighLightsText != null)
             {
-                return Json(new { success = true, HighLightsText.HIGLIGTHS, HighLightsText.HIGLIGTHS_COMMENTS, HighLightsText.HIGLIGTHS_INSTRUCTIONS, HighLightsText.HIGLIGTHS_EXCEPTIONS, HighLightsText.HIGLIGTHS_COMMON_ISSUES, HighLightsText.HIGLIGTHS_SUPPLIER_AGENCY, HighLightsText.HIGLIGTHS_TEMPLATE_COMMENTS }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, HighLightsText.HIGHLIGHTS, HighLightsText.HIGHLIGHTS_COMMENTS, HighLightsText.HIGHLIGHTS_INSTRUCTIONS, HighLightsText.HIGHLIGHTS_EXCEPTIONS, HighLightsText.HIGHLIGHTS_COMMON_ISSUES, HighLightsText.HIGHLIGHTS_SUPPLIER_AGENCY, HighLightsText.HIGHLIGHTS_TEMPLATE_COMMENTS }, JsonRequestBehavior.AllowGet);
             }
             else
             {

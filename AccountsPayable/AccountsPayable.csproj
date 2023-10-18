@@ -160,7 +160,7 @@
     <Compile Include="Models\TB_EMAIL_BACKUP.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TB_HIGLIGHTS.cs">
+    <Compile Include="Models\TB_HIGHLIGHTS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_HISTORIC_REMIT.cs">

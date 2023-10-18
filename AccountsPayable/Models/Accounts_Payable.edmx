@@ -27,19 +27,19 @@
           <Property Name="EMAIL_BACKUP_DATE" Type="date" Nullable="false" />
           <Property Name="EMAIL_BACKUP" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_HIGLIGHTS">
+        <EntityType Name="TB_HIGHLIGHTS">
           <Key>
-            <PropertyRef Name="HIGLIGHTS_ID" />
+            <PropertyRef Name="HIGHLIGHTS_ID" />
           </Key>
-          <Property Name="HIGLIGHTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HIGHLIGTS_DATE" Type="date" Nullable="false" />
-          <Property Name="HIGLIGTHS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_COMMENTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_EXCEPTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_COMMON_ISSUES" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_SUPPLIER_AGENCY" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGLIGTHS_TEMPLATE_COMMENTS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HIGHLIGHTS_DATE" Type="datetime" Nullable="false" />
+          <Property Name="HIGHLIGHTS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_COMMENTS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="TB_HISTORIC_REMIT">
           <Key>
@@ -109,18 +109,18 @@
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TEMP_ADDRESS" Type="varchar" MaxLength="260" Nullable="false" />
-          <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" />
           <Property Name="TEMP_TAXPAYER_ID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_TYPE_ID" Type="int" />
           <Property Name="TEMP_ORACLE_DESCRIPTION" Type="varchar" MaxLength="230" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="int" />
           <Property Name="TEMP_ACCOUNT_CODING" Type="varchar" MaxLength="120" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="int" />
           <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" Nullable="false" />
           <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="FK_TB_HIGLIGTHS_ID" Type="int" />
+          <Property Name="FK_TB_HIGHLIGHTS_ID" Type="int" />
           <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" />
-          <Property Name="FK_TB_APPROVER_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_APPROVER_ID" Type="int" />
           <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" Nullable="false" />
           <Property Name="TEMP_INVOICE_FORMAT" Type="varchar" MaxLength="600" Nullable="false" />
           <Property Name="TEMP_INVOICE_TYPE" Type="varchar" MaxLength="30" Nullable="false" />
@@ -165,8 +165,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__47FBA9D6">
-          <End Role="TB_ORACLE_LEGAL_ENTITIES" Type="Self.TB_ORACLE_LEGAL_ENTITIES" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0BB1B5A5">
+          <End Role="TB_ORACLE_LEGAL_ENTITIES" Type="Self.TB_ORACLE_LEGAL_ENTITIES" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_LEGAL_ENTITIES">
@@ -177,8 +177,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__48EFCE0F">
-          <End Role="TB_ORACLE_TYPE" Type="Self.TB_ORACLE_TYPE" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0CA5D9DE">
+          <End Role="TB_ORACLE_TYPE" Type="Self.TB_ORACLE_TYPE" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_TYPE">
@@ -189,8 +189,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__49E3F248">
-          <End Role="TB_ORACLE_PAY_TERMS" Type="Self.TB_ORACLE_PAY_TERMS" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0D99FE17">
+          <End Role="TB_ORACLE_PAY_TERMS" Type="Self.TB_ORACLE_PAY_TERMS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_PAY_TERMS">
@@ -201,8 +201,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4AD81681">
-          <End Role="TB_ORACLE_SOURCE" Type="Self.TB_ORACLE_SOURCE" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0E8E2250">
+          <End Role="TB_ORACLE_SOURCE" Type="Self.TB_ORACLE_SOURCE" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_SOURCE">
@@ -213,19 +213,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="0..1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0F824689">
+          <End Role="TB_HIGHLIGHTS" Type="Self.TB_HIGHLIGHTS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_HIGLIGHTS">
-              <PropertyRef Name="HIGLIGHTS_ID" />
+            <Principal Role="TB_HIGHLIGHTS">
+              <PropertyRef Name="HIGHLIGHTS_ID" />
             </Principal>
             <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_HIGLIGTHS_ID" />
+              <PropertyRef Name="FK_TB_HIGHLIGHTS_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4CC05EF3">
+        <Association Name="FK__TB_TEMPLA__FK_TB__10766AC2">
           <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -237,8 +237,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4DB4832C">
-          <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__116A8EFB">
+          <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_APPROVER">
@@ -249,7 +249,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__7993056A">
+        <Association Name="FK__TB_TEMPLA__FK_TB__1352D76D">
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="1" />
           <End Role="TB_TEMPLATE_HISTORIC_REMIT" Type="Self.TB_TEMPLATE_HISTORIC_REMIT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -261,7 +261,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__7A8729A3">
+        <Association Name="FK__TB_TEMPLA__FK_TB__1446FBA6">
           <End Role="TB_HISTORIC_REMIT" Type="Self.TB_HISTORIC_REMIT" Multiplicity="1" />
           <End Role="TB_TEMPLATE_HISTORIC_REMIT" Type="Self.TB_TEMPLATE_HISTORIC_REMIT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -273,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__7C6F7215">
+        <Association Name="FK__TB_TEMPLA__FK_TB__162F4418">
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="1" />
           <End Role="TB_TEMPLATE_ALIAS" Type="Self.TB_TEMPLATE_ALIAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,7 +285,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__7D63964E">
+        <Association Name="FK__TB_TEMPLA__FK_TB__17236851">
           <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="1" />
           <End Role="TB_TEMPLATE_ALIAS" Type="Self.TB_TEMPLATE_ALIAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +313,7 @@
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_APPROVER" EntityType="Self.TB_APPROVER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_EMAIL_BACKUP" EntityType="Self.TB_EMAIL_BACKUP" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_HIGLIGHTS" EntityType="Self.TB_HIGLIGHTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_HIGHLIGHTS" EntityType="Self.TB_HIGHLIGHTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_HISTORIC_REMIT" EntityType="Self.TB_HISTORIC_REMIT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_LOG_IN" EntityType="Self.TB_LOG_IN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_LOGIN_ROLES" EntityType="Self.TB_LOGIN_ROLES" Schema="dbo" store:Type="Tables" />
@@ -329,47 +329,47 @@
             <End Role="TB_LOGIN_ROLES" EntitySet="TB_LOGIN_ROLES" />
             <End Role="TB_LOG_IN" EntitySet="TB_LOG_IN" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__47FBA9D6" Association="Self.FK__TB_TEMPLA__FK_TB__47FBA9D6">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0BB1B5A5" Association="Self.FK__TB_TEMPLA__FK_TB__0BB1B5A5">
             <End Role="TB_ORACLE_LEGAL_ENTITIES" EntitySet="TB_ORACLE_LEGAL_ENTITIES" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__48EFCE0F" Association="Self.FK__TB_TEMPLA__FK_TB__48EFCE0F">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0CA5D9DE" Association="Self.FK__TB_TEMPLA__FK_TB__0CA5D9DE">
             <End Role="TB_ORACLE_TYPE" EntitySet="TB_ORACLE_TYPE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__49E3F248" Association="Self.FK__TB_TEMPLA__FK_TB__49E3F248">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0D99FE17" Association="Self.FK__TB_TEMPLA__FK_TB__0D99FE17">
             <End Role="TB_ORACLE_PAY_TERMS" EntitySet="TB_ORACLE_PAY_TERMS" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4AD81681" Association="Self.FK__TB_TEMPLA__FK_TB__4AD81681">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0E8E2250" Association="Self.FK__TB_TEMPLA__FK_TB__0E8E2250">
             <End Role="TB_ORACLE_SOURCE" EntitySet="TB_ORACLE_SOURCE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA" Association="Self.FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-            <End Role="TB_HIGLIGHTS" EntitySet="TB_HIGLIGHTS" />
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0F824689" Association="Self.FK__TB_TEMPLA__FK_TB__0F824689">
+            <End Role="TB_HIGHLIGHTS" EntitySet="TB_HIGHLIGHTS" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4CC05EF3" Association="Self.FK__TB_TEMPLA__FK_TB__4CC05EF3">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__10766AC2" Association="Self.FK__TB_TEMPLA__FK_TB__10766AC2">
             <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4DB4832C" Association="Self.FK__TB_TEMPLA__FK_TB__4DB4832C">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__116A8EFB" Association="Self.FK__TB_TEMPLA__FK_TB__116A8EFB">
             <End Role="TB_APPROVER" EntitySet="TB_APPROVER" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__7993056A" Association="Self.FK__TB_TEMPLA__FK_TB__7993056A">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__1352D76D" Association="Self.FK__TB_TEMPLA__FK_TB__1352D76D">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
             <End Role="TB_TEMPLATE_HISTORIC_REMIT" EntitySet="TB_TEMPLATE_HISTORIC_REMIT" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__7A8729A3" Association="Self.FK__TB_TEMPLA__FK_TB__7A8729A3">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__1446FBA6" Association="Self.FK__TB_TEMPLA__FK_TB__1446FBA6">
             <End Role="TB_HISTORIC_REMIT" EntitySet="TB_HISTORIC_REMIT" />
             <End Role="TB_TEMPLATE_HISTORIC_REMIT" EntitySet="TB_TEMPLATE_HISTORIC_REMIT" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__7C6F7215" Association="Self.FK__TB_TEMPLA__FK_TB__7C6F7215">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__162F4418" Association="Self.FK__TB_TEMPLA__FK_TB__162F4418">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
             <End Role="TB_TEMPLATE_ALIAS" EntitySet="TB_TEMPLATE_ALIAS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__7D63964E" Association="Self.FK__TB_TEMPLA__FK_TB__7D63964E">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__17236851" Association="Self.FK__TB_TEMPLA__FK_TB__17236851">
             <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
             <End Role="TB_TEMPLATE_ALIAS" EntitySet="TB_TEMPLATE_ALIAS" />
           </AssociationSet>
@@ -397,7 +397,7 @@
           </Key>
           <Property Name="APPROVER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="APPROVER_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__4DB4832C" FromRole="TB_APPROVER" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__116A8EFB" FromRole="TB_APPROVER" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_EMAIL_BACKUP">
           <Key>
@@ -406,22 +406,22 @@
           <Property Name="EMAIL_BACKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EMAIL_BACKUP_DATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMAIL_BACKUP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__4CC05EF3" FromRole="TB_EMAIL_BACKUP" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__10766AC2" FromRole="TB_EMAIL_BACKUP" ToRole="TB_TEMPLATE" />
         </EntityType>
-        <EntityType Name="TB_HIGLIGHTS">
+        <EntityType Name="TB_HIGHLIGHTS">
           <Key>
-            <PropertyRef Name="HIGLIGHTS_ID" />
+            <PropertyRef Name="HIGHLIGHTS_ID" />
           </Key>
-          <Property Name="HIGLIGHTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HIGHLIGTS_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="HIGLIGTHS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_EXCEPTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_COMMON_ISSUES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_SUPPLIER_AGENCY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIGLIGTHS_TEMPLATE_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__4BCC3ABA" FromRole="TB_HIGLIGHTS" ToRole="TB_TEMPLATE" />
+          <Property Name="HIGHLIGHTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HIGHLIGHTS_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HIGHLIGHTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0F824689" FromRole="TB_HIGHLIGHTS" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_HISTORIC_REMIT">
           <Key>
@@ -459,7 +459,7 @@
           </Key>
           <Property Name="LEGAL_ENTITY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LEGAL_ENTITY_NAME" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__47FBA9D6" FromRole="TB_ORACLE_LEGAL_ENTITIES" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0BB1B5A5" FromRole="TB_ORACLE_LEGAL_ENTITIES" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_ORACLE_PAY_TERMS">
           <Key>
@@ -467,7 +467,7 @@
           </Key>
           <Property Name="PAY_TERMS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PAY_TERMS_DESCRIPTION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__49E3F248" FromRole="TB_ORACLE_PAY_TERMS" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0D99FE17" FromRole="TB_ORACLE_PAY_TERMS" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_ORACLE_SOURCE">
           <Key>
@@ -475,7 +475,7 @@
           </Key>
           <Property Name="ORACLE_SOURCE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ORACLE_SOURCE_DESCRIPTION" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__4AD81681" FromRole="TB_ORACLE_SOURCE" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0E8E2250" FromRole="TB_ORACLE_SOURCE" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_ORACLE_TYPE">
           <Key>
@@ -483,7 +483,7 @@
           </Key>
           <Property Name="ORACLE_TYPE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ORACLE_TYPE_NAME" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__48EFCE0F" FromRole="TB_ORACLE_TYPE" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0CA5D9DE" FromRole="TB_ORACLE_TYPE" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_TEMPLATE">
           <Key>
@@ -499,28 +499,28 @@
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_ADDRESS" Type="String" MaxLength="260" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="Int32" />
           <Property Name="TEMP_TAXPAYER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_TYPE_ID" Type="Int32" />
           <Property Name="TEMP_ORACLE_DESCRIPTION" Type="String" MaxLength="230" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="Int32" />
           <Property Name="TEMP_ACCOUNT_CODING" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="Int32" />
           <Property Name="TEMP_ORACLE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_HIGLIGTHS_ID" Type="Int32" />
+          <Property Name="FK_TB_HIGHLIGHTS_ID" Type="Int32" />
           <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="Int32" />
-          <Property Name="FK_TB_APPROVER_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_APPROVER_ID" Type="Int32" />
           <Property Name="TEMP_APPROVER_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_INVOICE_FORMAT" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_INVOICE_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_APPROVER" Relationship="Self.FK__TB_TEMPLA__FK_TB__4DB4832C" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
-          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Self.FK__TB_TEMPLA__FK_TB__4CC05EF3" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
-          <NavigationProperty Name="TB_HIGLIGHTS" Relationship="Self.FK__TB_TEMPLA__FK_TB__4BCC3ABA" FromRole="TB_TEMPLATE" ToRole="TB_HIGLIGHTS" />
-          <NavigationProperty Name="TB_ORACLE_LEGAL_ENTITIES" Relationship="Self.FK__TB_TEMPLA__FK_TB__47FBA9D6" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_LEGAL_ENTITIES" />
-          <NavigationProperty Name="TB_ORACLE_PAY_TERMS" Relationship="Self.FK__TB_TEMPLA__FK_TB__49E3F248" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_PAY_TERMS" />
-          <NavigationProperty Name="TB_ORACLE_SOURCE" Relationship="Self.FK__TB_TEMPLA__FK_TB__4AD81681" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_SOURCE" />
-          <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="Self.FK__TB_TEMPLA__FK_TB__48EFCE0F" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
+          <NavigationProperty Name="TB_APPROVER" Relationship="Self.FK__TB_TEMPLA__FK_TB__116A8EFB" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
+          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Self.FK__TB_TEMPLA__FK_TB__10766AC2" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
+          <NavigationProperty Name="TB_HIGHLIGHTS" Relationship="Self.FK__TB_TEMPLA__FK_TB__0F824689" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
+          <NavigationProperty Name="TB_ORACLE_LEGAL_ENTITIES" Relationship="Self.FK__TB_TEMPLA__FK_TB__0BB1B5A5" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_LEGAL_ENTITIES" />
+          <NavigationProperty Name="TB_ORACLE_PAY_TERMS" Relationship="Self.FK__TB_TEMPLA__FK_TB__0D99FE17" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_PAY_TERMS" />
+          <NavigationProperty Name="TB_ORACLE_SOURCE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0E8E2250" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_SOURCE" />
+          <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0CA5D9DE" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
           <NavigationProperty Name="TB_ALIAS" Relationship="Self.TB_TEMPLATE_ALIAS" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
           <NavigationProperty Name="TB_HISTORIC_REMIT" Relationship="Self.TB_TEMPLATE_HISTORIC_REMIT" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
         </EntityType>
@@ -537,8 +537,8 @@
           <Property Name="CAN_DELETE" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TB_LOGIN_ROLES" Relationship="Self.FK__TB_VIEW_P__FK_TB__35DCF99B" FromRole="TB_VIEW_PERMISSIONS" ToRole="TB_LOGIN_ROLES" />
         </EntityType>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4DB4832C">
-          <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__116A8EFB">
+          <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_APPROVER">
@@ -549,7 +549,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4CC05EF3">
+        <Association Name="FK__TB_TEMPLA__FK_TB__10766AC2">
           <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -561,15 +561,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="0..1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0F824689">
+          <End Role="TB_HIGHLIGHTS" Type="Self.TB_HIGHLIGHTS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_HIGLIGHTS">
-              <PropertyRef Name="HIGLIGHTS_ID" />
+            <Principal Role="TB_HIGHLIGHTS">
+              <PropertyRef Name="HIGHLIGHTS_ID" />
             </Principal>
             <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_HIGLIGTHS_ID" />
+              <PropertyRef Name="FK_TB_HIGHLIGHTS_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -597,8 +597,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__47FBA9D6">
-          <End Role="TB_ORACLE_LEGAL_ENTITIES" Type="Self.TB_ORACLE_LEGAL_ENTITIES" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0BB1B5A5">
+          <End Role="TB_ORACLE_LEGAL_ENTITIES" Type="Self.TB_ORACLE_LEGAL_ENTITIES" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_LEGAL_ENTITIES">
@@ -609,8 +609,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__49E3F248">
-          <End Role="TB_ORACLE_PAY_TERMS" Type="Self.TB_ORACLE_PAY_TERMS" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0D99FE17">
+          <End Role="TB_ORACLE_PAY_TERMS" Type="Self.TB_ORACLE_PAY_TERMS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_PAY_TERMS">
@@ -621,8 +621,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__4AD81681">
-          <End Role="TB_ORACLE_SOURCE" Type="Self.TB_ORACLE_SOURCE" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0E8E2250">
+          <End Role="TB_ORACLE_SOURCE" Type="Self.TB_ORACLE_SOURCE" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_SOURCE">
@@ -633,8 +633,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__48EFCE0F">
-          <End Role="TB_ORACLE_TYPE" Type="Self.TB_ORACLE_TYPE" Multiplicity="1" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__0CA5D9DE">
+          <End Role="TB_ORACLE_TYPE" Type="Self.TB_ORACLE_TYPE" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ORACLE_TYPE">
@@ -657,7 +657,7 @@
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" />
           <EntitySet Name="TB_APPROVER" EntityType="Self.TB_APPROVER" />
           <EntitySet Name="TB_EMAIL_BACKUP" EntityType="Self.TB_EMAIL_BACKUP" />
-          <EntitySet Name="TB_HIGLIGHTS" EntityType="Self.TB_HIGLIGHTS" />
+          <EntitySet Name="TB_HIGHLIGHTS" EntityType="Self.TB_HIGHLIGHTS" />
           <EntitySet Name="TB_HISTORIC_REMIT" EntityType="Self.TB_HISTORIC_REMIT" />
           <EntitySet Name="TB_LOG_IN" EntityType="Self.TB_LOG_IN" />
           <EntitySet Name="TB_LOGIN_ROLES" EntityType="Self.TB_LOGIN_ROLES" />
@@ -667,16 +667,16 @@
           <EntitySet Name="TB_ORACLE_TYPE" EntityType="Self.TB_ORACLE_TYPE" />
           <EntitySet Name="TB_TEMPLATE" EntityType="Self.TB_TEMPLATE" />
           <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Self.TB_VIEW_PERMISSIONS" />
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4DB4832C" Association="Self.FK__TB_TEMPLA__FK_TB__4DB4832C">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__116A8EFB" Association="Self.FK__TB_TEMPLA__FK_TB__116A8EFB">
             <End Role="TB_APPROVER" EntitySet="TB_APPROVER" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4CC05EF3" Association="Self.FK__TB_TEMPLA__FK_TB__4CC05EF3">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__10766AC2" Association="Self.FK__TB_TEMPLA__FK_TB__10766AC2">
             <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA" Association="Self.FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-            <End Role="TB_HIGLIGHTS" EntitySet="TB_HIGLIGHTS" />
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0F824689" Association="Self.FK__TB_TEMPLA__FK_TB__0F824689">
+            <End Role="TB_HIGHLIGHTS" EntitySet="TB_HIGHLIGHTS" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
           <AssociationSet Name="FK__TB_LOG_IN__FK_TB__37C5420D" Association="Self.FK__TB_LOG_IN__FK_TB__37C5420D">
@@ -687,19 +687,19 @@
             <End Role="TB_LOGIN_ROLES" EntitySet="TB_LOGIN_ROLES" />
             <End Role="TB_VIEW_PERMISSIONS" EntitySet="TB_VIEW_PERMISSIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__47FBA9D6" Association="Self.FK__TB_TEMPLA__FK_TB__47FBA9D6">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0BB1B5A5" Association="Self.FK__TB_TEMPLA__FK_TB__0BB1B5A5">
             <End Role="TB_ORACLE_LEGAL_ENTITIES" EntitySet="TB_ORACLE_LEGAL_ENTITIES" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__49E3F248" Association="Self.FK__TB_TEMPLA__FK_TB__49E3F248">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0D99FE17" Association="Self.FK__TB_TEMPLA__FK_TB__0D99FE17">
             <End Role="TB_ORACLE_PAY_TERMS" EntitySet="TB_ORACLE_PAY_TERMS" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4AD81681" Association="Self.FK__TB_TEMPLA__FK_TB__4AD81681">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0E8E2250" Association="Self.FK__TB_TEMPLA__FK_TB__0E8E2250">
             <End Role="TB_ORACLE_SOURCE" EntitySet="TB_ORACLE_SOURCE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__48EFCE0F" Association="Self.FK__TB_TEMPLA__FK_TB__48EFCE0F">
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__0CA5D9DE" Association="Self.FK__TB_TEMPLA__FK_TB__0CA5D9DE">
             <End Role="TB_ORACLE_TYPE" EntitySet="TB_ORACLE_TYPE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
@@ -743,18 +743,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_HIGLIGHTS">
-            <EntityTypeMapping TypeName="Accounts_Payable_Model.TB_HIGLIGHTS">
-              <MappingFragment StoreEntitySet="TB_HIGLIGHTS">
-                <ScalarProperty Name="HIGLIGHTS_ID" ColumnName="HIGLIGHTS_ID" />
-                <ScalarProperty Name="HIGHLIGTS_DATE" ColumnName="HIGHLIGTS_DATE" />
-                <ScalarProperty Name="HIGLIGTHS" ColumnName="HIGLIGTHS" />
-                <ScalarProperty Name="HIGLIGTHS_COMMENTS" ColumnName="HIGLIGTHS_COMMENTS" />
-                <ScalarProperty Name="HIGLIGTHS_INSTRUCTIONS" ColumnName="HIGLIGTHS_INSTRUCTIONS" />
-                <ScalarProperty Name="HIGLIGTHS_EXCEPTIONS" ColumnName="HIGLIGTHS_EXCEPTIONS" />
-                <ScalarProperty Name="HIGLIGTHS_COMMON_ISSUES" ColumnName="HIGLIGTHS_COMMON_ISSUES" />
-                <ScalarProperty Name="HIGLIGTHS_SUPPLIER_AGENCY" ColumnName="HIGLIGTHS_SUPPLIER_AGENCY" />
-                <ScalarProperty Name="HIGLIGTHS_TEMPLATE_COMMENTS" ColumnName="HIGLIGTHS_TEMPLATE_COMMENTS" />
+          <EntitySetMapping Name="TB_HIGHLIGHTS">
+            <EntityTypeMapping TypeName="Accounts_Payable_Model.TB_HIGHLIGHTS">
+              <MappingFragment StoreEntitySet="TB_HIGHLIGHTS">
+                <ScalarProperty Name="HIGHLIGHTS_ID" ColumnName="HIGHLIGHTS_ID" />
+                <ScalarProperty Name="HIGHLIGHTS_DATE" ColumnName="HIGHLIGHTS_DATE" />
+                <ScalarProperty Name="HIGHLIGHTS" ColumnName="HIGHLIGHTS" />
+                <ScalarProperty Name="HIGHLIGHTS_COMMENTS" ColumnName="HIGHLIGHTS_COMMENTS" />
+                <ScalarProperty Name="HIGHLIGHTS_INSTRUCTIONS" ColumnName="HIGHLIGHTS_INSTRUCTIONS" />
+                <ScalarProperty Name="HIGHLIGHTS_EXCEPTIONS" ColumnName="HIGHLIGHTS_EXCEPTIONS" />
+                <ScalarProperty Name="HIGHLIGHTS_COMMON_ISSUES" ColumnName="HIGHLIGHTS_COMMON_ISSUES" />
+                <ScalarProperty Name="HIGHLIGHTS_SUPPLIER_AGENCY" ColumnName="HIGHLIGHTS_SUPPLIER_AGENCY" />
+                <ScalarProperty Name="HIGHLIGHTS_TEMPLATE_COMMENTS" ColumnName="HIGHLIGHTS_TEMPLATE_COMMENTS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -841,7 +841,7 @@
                 <ScalarProperty Name="FK_TB_ORACLE_SOURCE_ID" ColumnName="FK_TB_ORACLE_SOURCE_ID" />
                 <ScalarProperty Name="TEMP_ORACLE_NOTES" ColumnName="TEMP_ORACLE_NOTES" />
                 <ScalarProperty Name="TEMP_ORACLE_INSTRUCTIONS" ColumnName="TEMP_ORACLE_INSTRUCTIONS" />
-                <ScalarProperty Name="FK_TB_HIGLIGTHS_ID" ColumnName="FK_TB_HIGLIGTHS_ID" />
+                <ScalarProperty Name="FK_TB_HIGHLIGHTS_ID" ColumnName="FK_TB_HIGHLIGHTS_ID" />
                 <ScalarProperty Name="FK_TB_EMAIL_BACKUP_ID" ColumnName="FK_TB_EMAIL_BACKUP_ID" />
                 <ScalarProperty Name="FK_TB_APPROVER_ID" ColumnName="FK_TB_APPROVER_ID" />
                 <ScalarProperty Name="TEMP_APPROVER_COMMENTS" ColumnName="TEMP_APPROVER_COMMENTS" />
