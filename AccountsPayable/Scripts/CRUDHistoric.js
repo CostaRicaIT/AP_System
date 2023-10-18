@@ -1,4 +1,4 @@
-﻿const selectAlias = document.getElementById("form-SelectHistoricRemit");// get a reference of the select 
+﻿const selectAlias = document.getElementById("FK_TB_TEMPLATE_HISTORIC_REMIT_ID");// get a reference of the select 
 const textareaInfoView = document.getElementById("historicRemitInfoView");// Add an event listener to the select
 selectAlias.addEventListener("change", function () {
     // Get the selected value (ID)
@@ -20,7 +20,7 @@ selectAlias.addEventListener("change", function () {
 
 /*Listenner to get the info of the Alias*/
 
-const selectAddAlias = document.getElementById("form-SelectInfoAlias");// get a reference of the select 
+const selectAddAlias = document.getElementById("FK_TB_TEMPLATE_ALIAS_ID");// get a reference of the select 
 const InputInfo = document.getElementById("form-Alias");// Add an event listener to the select
 selectAddAlias.addEventListener("change", function () {
     // Get the selected value (ID)
@@ -39,33 +39,9 @@ selectAddAlias.addEventListener("change", function () {
         }
     });
 });
-fillSelectInfoAlias();
 recentDataHistoric();
 
-function fillSelectInfoAlias() {
-    $.ajax({
 
-        url: '/Main/GetAliasInfo',
-        type: 'GET',
-        success: function (data) {
-            if (data.success) {
-                const select = document.getElementById("form-SelectInfoAlias");
-                select.innerHTML = ""; // Clean the select
-
-                // Fill the select
-                data.selectItems.forEach(function (item) {
-                    const option = document.createElement("option");
-                    option.value = item.Value;
-                    option.text = item.Text;
-                    select.appendChild(option);
-                });
-            }
-        },
-        error: function () {
-            alert("An error occurred while loading Alias info.");
-        }
-    });
-}
 
 /*Listenner to get the info of the Highlights*/
 
@@ -91,7 +67,7 @@ selectHighlightsHistoric.addEventListener("change", function () {
         },
         error: function () {
             // Handles any errors that may occur during the AJAX request
-            alert("Error al obtener el texto¿.");
+            alert("Error getting highlights data.");
         }
     });
 });
@@ -112,116 +88,7 @@ function recentDataHistoric() {
     });
 }
 
-function GetOracleLegalEntity() {
-    // Use AJAX to fetch data and populate the dropdown
-    $.ajax({
-        url: '/Main/GetOracleLegalEntity', // Replace with the actual URL to fetch data
-        method: 'GET',
-        success: function (data) {
-            // Assuming data is an array of items with 'Text' and 'Value' properties
-            var dropdown = $('#form-OracleLegalE');
 
-            // Iterate through the data and append options to the dropdown
-            $.each(data, function (index, item) {
-                dropdown.append($('<option>', {
-                    value: item.Value,
-                    text: item.Text
-                }));
-            });
-        },
-        error: function (error) {
-            console.log("Error fetching data: " + error);
-        }
-    });
-}
-function GetOracleType() {
-    // Use AJAX to fetch data and populate the dropdown
-    $.ajax({
-        url: '/Main/GetOracleType', // Replace with the actual URL to fetch data
-        method: 'GET',
-        success: function (data) {
-            // Assuming data is an array of items with 'Text' and 'Value' properties
-            var dropdown = $('#form-OracleType');
-
-            // Iterate through the data and append options to the dropdown
-            $.each(data, function (index, item) {
-                dropdown.append($('<option>', {
-                    value: item.Value,
-                    text: item.Text
-                }));
-            });
-        },
-        error: function (error) {
-            console.log("Error fetching data: " + error);
-        }
-    });
-}
-function GetOraclePayTerms() {
-    // Use AJAX to fetch data and populate the dropdown
-    $.ajax({
-        url: '/Main/GetOraclePayTerms', // Replace with the actual URL to fetch data
-        method: 'GET',
-        success: function (data) {
-            // Assuming data is an array of items with 'Text' and 'Value' properties
-            var dropdown = $('#form-OraclePayTerms');
-
-            // Iterate through the data and append options to the dropdown
-            $.each(data, function (index, item) {
-                dropdown.append($('<option>', {
-                    value: item.Value,
-                    text: item.Text
-                }));
-            });
-        },
-        error: function (error) {
-            console.log("Error fetching data: " + error);
-        }
-    });
-}
-function GetOracleSource() {
-    // Use AJAX to fetch data and populate the dropdown
-    $.ajax({
-        url: '/Main/GetOracleSource', // Replace with the actual URL to fetch data
-        method: 'GET',
-        success: function (data) {
-            // Assuming data is an array of items with 'Text' and 'Value' properties
-            var dropdown = $('#form-OracleSource');
-
-            // Iterate through the data and append options to the dropdown
-            $.each(data, function (index, item) {
-                dropdown.append($('<option>', {
-                    value: item.Value,
-                    text: item.Text
-                }));
-            });
-        },
-        error: function (error) {
-            console.log("Error fetching data: " + error);
-        }
-    });
-}
-function GetApprover() {
-    // Use AJAX to fetch data and populate the dropdown
-    $.ajax({
-        url: '/Main/GetApprover', // Replace with the actual URL to fetch data
-        method: 'GET',
-        success: function (data) {
-            // Assuming data is an array of items with 'Text' and 'Value' properties
-            var dropdown = $('#form-SelectApprover');
-
-            // Iterate through the data and append options to the dropdown
-            $.each(data, function (index, item) {
-                dropdown.append($('<option>', {
-                    value: item.Value,
-                    text: item.Text
-                }));
-            });
-        },
-        error: function (error) {
-            console.log("Error fetching data: " + error);
-        }
-    });
-}
 
 function GetBackUpEmails() {
     // Use AJAX to fetch data and populate the dropdown
@@ -340,10 +207,4 @@ $(document).ready(function () {
         }
 
     });
-    GetOracleLegalEntity();
-    GetOracleType();
-    GetOraclePayTerms();
-    GetOracleSource();
-    GetApprover();
-    GetBackUpEmails();
 });

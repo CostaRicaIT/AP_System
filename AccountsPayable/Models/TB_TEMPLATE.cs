@@ -28,7 +28,7 @@ namespace AccountsPayable.Models
         public string TEMP_SUPPLIER_NUMBER { get; set; }
         public Nullable<int> FK_TB_TEMPLATE_HISTORIC_REMIT_ID { get; set; }
         public string TEMP_VENDOR_ACCOUNT { get; set; }
-        public int FK_TB_TEMPLATE_ALIAS_ID { get; set; }
+        public Nullable<int> FK_TB_TEMPLATE_ALIAS_ID { get; set; }
         public string TEMP_SUPPLIER_SITE { get; set; }
         public string TEMP_ADDRESS { get; set; }
         public int FK_TB_LEGAL_ENTITY_ID { get; set; }
@@ -40,8 +40,8 @@ namespace AccountsPayable.Models
         public int FK_TB_ORACLE_SOURCE_ID { get; set; }
         public string TEMP_ORACLE_NOTES { get; set; }
         public string TEMP_ORACLE_INSTRUCTIONS { get; set; }
-        public int FK_TB_HIGLIGTHS_ID { get; set; }
-        public int FK_TB_EMAIL_BACKUP_ID { get; set; }
+        public Nullable<int> FK_TB_HIGLIGTHS_ID { get; set; }
+        public Nullable<int> FK_TB_EMAIL_BACKUP_ID { get; set; }
         public int FK_TB_APPROVER_ID { get; set; }
         public string TEMP_APPROVER_COMMENTS { get; set; }
         public string TEMP_INVOICE_FORMAT { get; set; }

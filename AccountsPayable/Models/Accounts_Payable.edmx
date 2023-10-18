@@ -106,7 +106,7 @@
           <Property Name="TEMP_SUPPLIER_NUMBER" Type="varchar" MaxLength="140" Nullable="false" />
           <Property Name="FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="int" />
           <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TEMP_ADDRESS" Type="varchar" MaxLength="260" Nullable="false" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" Nullable="false" />
@@ -118,8 +118,8 @@
           <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="int" Nullable="false" />
           <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" Nullable="false" />
           <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="FK_TB_HIGLIGTHS_ID" Type="int" Nullable="false" />
-          <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_HIGLIGTHS_ID" Type="int" />
+          <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" />
           <Property Name="FK_TB_APPROVER_ID" Type="int" Nullable="false" />
           <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" Nullable="false" />
           <Property Name="TEMP_INVOICE_FORMAT" Type="varchar" MaxLength="600" Nullable="false" />
@@ -214,7 +214,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="1" />
+          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_HIGLIGHTS">
@@ -226,7 +226,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__4CC05EF3">
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="1" />
+          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_EMAIL_BACKUP">
@@ -496,7 +496,7 @@
           <Property Name="TEMP_SUPPLIER_NUMBER" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="Int32" />
           <Property Name="TEMP_VENDOR_ACCOUNT" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_ADDRESS" Type="String" MaxLength="260" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="Int32" Nullable="false" />
@@ -508,8 +508,8 @@
           <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="Int32" Nullable="false" />
           <Property Name="TEMP_ORACLE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FK_TB_HIGLIGTHS_ID" Type="Int32" Nullable="false" />
-          <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_TB_HIGLIGTHS_ID" Type="Int32" />
+          <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="Int32" />
           <Property Name="FK_TB_APPROVER_ID" Type="Int32" Nullable="false" />
           <Property Name="TEMP_APPROVER_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_INVOICE_FORMAT" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
@@ -550,7 +550,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__4CC05EF3">
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="1" />
+          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_EMAIL_BACKUP">
@@ -562,7 +562,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__4BCC3ABA">
-          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="1" />
+          <End Role="TB_HIGLIGHTS" Type="Self.TB_HIGLIGHTS" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_HIGLIGHTS">

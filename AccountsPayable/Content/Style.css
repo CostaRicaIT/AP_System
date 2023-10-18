@@ -36,15 +36,15 @@
 
 
 /* Styles for the checkbox container and its label */
-.TaxId-checkbox-wrapper {
+/*.TaxId-checkbox-wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-left: 84px;
-}
+}*/
 
     /* Style for the checkbox label */
-    .TaxId-checkbox-wrapper label {
+    /*.TaxId-checkbox-wrapper label {
         margin-left: 242px;
     }
 
@@ -91,38 +91,38 @@
     justify-content: flex-end;
     margin-left: 10px;
     
-}
+}*/
 
 textarea {
-    resize: none
+    resize: none;
 }
 
-.General-textarea {
-    width: 300px; /* width*/
-    height: 150px; /* height*/
-}
+/*.General-textarea {
+    width: 300px;*/ /* width*/
+    /*height: 150px;*/ /* height*/
+/*}
 
 .Historic-textarea {
-    width: 300px; /* width*/
-    height: 150px; /* height*/
-}
+    width: 300px;*/ /* width*/
+    /*height: 150px;*/ /* height*/
+/*}
 
 .Address-textarea {
-    width: 300px; /* width*/
-    height: 150px; /* height*/
-}
+    width: 300px;*/ /* width*/
+    /*height: 150px;*/ /* height*/
+/*}
 
 .Vendor-textarea {
-    width: 300px; /* width*/
-    height: 150px; /* height*/
-    margin-left: 13px;
+    width: 300px;*/ /* width*/
+    /*height: 150px;*/ /* height*/
+    /*margin-left: 13px;
 }
 
 .Description-textarea {
-    width: 300px; /* width*/
-    height: 150px; /* height*/
-    margin-left: 75px;
-}
+    width: 300px;*/ /* width*/
+    /*height: 150px;*/ /* height*/
+    /*margin-left: 75px;
+}*/
 
 
 
@@ -131,19 +131,18 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 5px 20px;
-    margin-top: 10px;
 }
 
-    /* Change style when hovering over the button */
+     Change style when hovering over the button 
     .styled-button:hover {
         background-color: #ddd;
         border: 1px solid #999;
     }
 
-.button-wrapper {
+/*.button-wrapper {
     display: flex;
-    flex-direction: column; /* Apila los botones verticalmente */
-    padding: 5px 20px;
+    flex-direction: column;*/ /* Apila los botones verticalmente */
+    /*padding: 5px 20px;
     white-space: nowrap;
     display: flex;
     margin-top: -80px;
@@ -157,9 +156,9 @@ textarea {
     white-space: nowrap;
     display: flex;
     align-items: center;
-}
+}*/
     /* Style for button */
-    .AddAlias-button-wrapper button {
+    /*.AddAlias-button-wrapper button {
         margin-left: 40px;
     }
 
@@ -346,4 +345,4 @@ textarea {
 
 #form-SelectApprover {
     width: 888px;
-}
+}*/

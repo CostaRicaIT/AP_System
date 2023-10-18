@@ -237,6 +237,7 @@
     <Content Include="Scripts\LoginAccess.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\TemplateCrud.js" />
     <Content Include="Scripts\templateModal.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
