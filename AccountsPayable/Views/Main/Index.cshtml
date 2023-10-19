@@ -1,574 +1,171 @@
-﻿@model AccountsPayable.Models.TB_TEMPLATE
+﻿@model IEnumerable<AccountsPayable.Models.TB_TEMPLATE>
 
 @{
-    ViewBag.Title = "Template";
+    ViewBag.Title = "Index";
 }
 
-<h2>ID Template</h2>
-<br>
-<link href="~/Content/Style.css" rel="stylesheet" />
-<link href="~/Content/TemplateModal.css" rel="stylesheet" />
+<h2>Index</h2>
 
-@using (Html.BeginForm())
-{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_TAX_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_REMIT_TO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_NUMBER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_VENDOR_ACCOUNT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FK_TB_TEMPLATE_ALIAS_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_SITE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_TAXPAYER_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_ORACLE_DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_ACCOUNT_CODING)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_ORACLE_NOTES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_ORACLE_INSTRUCTIONS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_APPROVER_COMMENTS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_INVOICE_FORMAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TEMP_INVOICE_TYPE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_APPROVER.APPROVER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_EMAIL_BACKUP.EMAIL_BACKUP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
+        </th>
+        <th></th>
+    </tr>
 
-    <!-- Supplier Information Section -->
-    <div class="form-section">
-        <div class="section-title">Supplier Information</div>
-        <!-- Tax ID -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-TaxID" class="control-label col-md-2">Tax Id:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-TaxID" placeholder="12-34567">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label class="control-label col-md-6" for="BoxNoTaxId">No Tax Id information</label>
-                    <input type="checkbox" id="BoxNoTaxId" name="NoTaxId" />
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Remit To -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-RemitTo">Remit to:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-RemitTo" placeholder="Address here ...">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
-                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
-                </div>
-            </div>
-        </div>
-
-        <!-- Supplier Name -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-SupName">Supplier Name:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-SupName" placeholder="Supplier Name here ...">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="BoxSupName" class="control-label col-md-6">There is no Supplier Name</label>
-                    <input type="checkbox" id="BoxSupName" value="1">
-                </div>
-            </div>
-        </div>
-        <!-- Historic Remit To -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-HistRemitTo">Historic Remit To:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-HistRemitTo" rows="6" cols="50"></textarea>
-                        <br />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit">Add Historic Remit to</button>
-                    <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
-                </div>
-            </div>
-            <!--Modal to see historic remit-->
-            <div id="ShowHistoricRemitModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="row">
-                        <div class="control-label col-md-12">
-                            <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" id="historicRemitInfoView" readonly rows="6" cols="75" placeholder="..."></textarea>
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Select Historic Remit to -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                @Html.DropDownList("FK_TB_TEMPLATE_HISTORIC_REMIT_ID", null, htmlAttributes: new { @size = "5" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Our Vendor # / Account # -->
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="control-label col-md-2" for="form-OurVendorA" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" id="form-OurVendorA" rows="6" cols="50"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Alias Section -->
-    <div class="form-section">
-        <div class="section-title">Alias</div>
-        <!-- Alias Input and Button -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Alias" placeholder="Alias name here..." disabled>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="ButtonAddAlias" type="button" class="styled-button align-right openModalBtn" data-modal="AddAliasModal">Add alias</button>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID"></label>
-                    <div class="col-md-7">
-                        @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </div>
-            </div>
-            <!-- Select Alias Dropdown -->
-        </div>
-
-
-    </div>
-    <!--Add Alias modal-->
-    <div id="AddAliasModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-            <div>
-                <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
-            </div>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-            </div>
-        </div>
-    </div>
-    <br />
-    <!-- Oracle and Apps Section -->
-    <div class="form-section">
-        <div class="section-title">Oracle and Apps</div>
-        <!-- Supplier Site -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-SupSite">Supplier Site:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-SupSite" placeholder="Text here ...">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Address -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Address">Address:</label>
-                    <div class="col-md-10">
-                        <textarea id="form-Address" class="form-control" placeholder="PO BOX 123456 Street AV 123 State here..." rows="6" cols="50"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Legal Entity -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- First-Party Taxpayer ID -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-FirstParty">Taxpayer ID:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-FirstParty" placeholder="123 ...">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Description -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Description">Description:</label>
-                    <div class="col-md-10">
-                        <textarea id="form-Description" class="form-control" placeholder="Description here..." rows="6" cols="50"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Pay Terms -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Pay Terms:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Account Coding -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-AccountC">Account Coding:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AccountC" placeholder="123 ...">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Source -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_SOURCE_ID, "Source:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_SOURCE_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Oracle Notes -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-OracleN">Oracle Notes:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleN" rows="6" cols="50" placeholder="Oracle Notes here..."></textarea>
-                    </div>
-                </div>
-                <!-- Oracle Instructions -->
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 checkbox-label" for="form-OracleI" id="Label-Oracle">Oracle Instructions:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleI" rows="6" cols="50" placeholder="Oracle instructions here..."></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <!-- Notes & Instructions Section -->
-    <div class="form-section">
-        <div class="section-title">Notes & Instructions</div>
-        <!-- Highlights -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-Higlights">Highlights</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="col-md-10">
-                        <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights">Add History</button>
-                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Highlights Comments -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-HiglightsC">Highlights Comments:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Instructions -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-Instructions">Instructions:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Exceptions -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-Exceptions">Exceptions:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Most Common Issues -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-MostCI">Most Common <br> Issues:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Supplier Agency -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-SupplierA">Supplier Agency:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Template Comments -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-TemplateC">Template Comments:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Add Highlights modal-->
-    <div id="AddAHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <!-- Highlights -->
-
-            <p><label class="control-label col-md-6" for="HighlightsHistoryAdd">Highlights</label></p>
-            <textarea class="form-control" id="HighlightsHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Highlights Comments -->
-            <p><label class="control-label col-md-6" for="HighlightsCHistoryAdd">Highlights Comments:</label></p>
-            <textarea class="form-control" id="HighlightsCHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Instructions -->
-            <p><label class="control-label col-md-6" for="InstructionsHistoryAdd">Instructions:</label></p>
-            <textarea class="form-control" id="InstructionsHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Exceptions -->
-            <p><label class="control-label col-md-6" for="ExceptionsHistoryAdd">Exceptions:</label></p>
-            <textarea class="form-control" id="ExceptionsHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Most Common Issues -->
-            <p><label class="control-label col-md-6" for="MostCIHistoryAdd">Most Common Issues:</label></p>
-            <textarea class="form-control" id="MostCIHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Supplier Agency -->
-            <p><label class="control-label col-md-6" for="SupplierAHistoryAdd">Supplier Agency:</label></p>
-            <textarea class="form-control" id="SupplierAHistoryAdd" rows="4" cols="80"></textarea>
-
-            <!-- Template Comments -->
-            <p><label class="control-label col-md-6" for="TemplateCHistoryAdd">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!--Show Highlights modal-->
-    <div id="ShowHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <!-- Highlights -->
-
-            <p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-            <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Highlights Comments -->
-            <p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-            <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Instructions -->
-            <p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-            <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Exceptions -->
-            <p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-            <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Most Common Issues -->
-            <p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-            <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Supplier Agency -->
-            <p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-            <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80"></textarea>
-
-            <!-- Template Comments -->
-            <p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryView" rows="4" cols="80"></textarea>
-
-            <div class="form-row">
-                <select id="form-SelectHighlightsHistoric" size="4">
-                    <option>Select an option</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <br />
-
-    <!-- Emails Section -->
-    <div class="form-section">
-        <div class="section-title">Emails</div>
-        <!-- Back-Up Emails -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-BackUpEmails">Back Up Emails:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-BackUpEmails" rows="6" cols="150" placeholder="Backup email here..."></textarea>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Select Mails Dropdown -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="AddEmailModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="emailinfo">Email:</label></p>
-                <textarea id="emailinfo" class="class=" form-control"" rows="6" cols="100"></textarea>
-                <div>
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <!-- Approver Section -->
-    <div class="form-section">
-        <div class="section-title">Approver</div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-ApproverComents">Aprover Comments:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-ApproverComents" rows="6" cols="120" placeholder="Backup email here..."></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <!-- Invoice Number Format Section -->
-    <div class="form-section">
-        <div class="section-title">Invoice Number Format</div>
-        <!-- Approver info -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-InvoiceF">Invoice Format:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-InvoiceF" placeholder="Nomenclature">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-INFType">Type:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-INFType" placeholder="Actual invoice / Statement invoice / Itemize Doc">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <!-- Cancel and Save Buttons -->
-    <button class="btn form_btntbWC" type="button" id="form-cancel">Cancel</button>
-    <button class="btn form_btntbWC" type="button" id="form-submit">Save</button>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_TAX_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_REMIT_TO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_NUMBER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_VENDOR_ACCOUNT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FK_TB_TEMPLATE_ALIAS_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_SITE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_TAXPAYER_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_ACCOUNT_CODING)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_NOTES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_INSTRUCTIONS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_APPROVER_COMMENTS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_INVOICE_FORMAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEMP_INVOICE_TYPE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_APPROVER.APPROVER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_EMAIL_BACKUP.EMAIL_BACKUP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_HIGHLIGHTS.HIGHLIGHTS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TEMP_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TEMP_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TEMP_ID })
+        </td>
+    </tr>
 }
-@section scripts {
 
-    <script src="~/Scripts/CRUDHistoric.js"></script>
-    <script src="~/Scripts/templateModal.js"></script>
-    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
-
-
-
-}
+</table>

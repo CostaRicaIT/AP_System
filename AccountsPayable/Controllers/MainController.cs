@@ -25,34 +25,9 @@ namespace AccountsPayable.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            var emailBackupList = db.TB_EMAIL_BACKUP
-                .OrderByDescending(e => e.EMAIL_BACKUP_DATE) // Sort in descending order
-                .AsEnumerable() // Switch to LINQ to Objects
-                .Select(e => new
-                {
-                    EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
-                    EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
+            var tB_TEMPLATE = db.TB_TEMPLATE.Include(t => t.TB_APPROVER).Include(t => t.TB_EMAIL_BACKUP).Include(t => t.TB_HIGHLIGHTS).Include(t => t.TB_ORACLE_LEGAL_ENTITIES).Include(t => t.TB_ORACLE_PAY_TERMS).Include(t => t.TB_ORACLE_SOURCE).Include(t => t.TB_ORACLE_TYPE);
+            return View(tB_TEMPLATE.ToList());
 
-            var historicRemitToList = db.TB_HISTORIC_REMIT
-                .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
-                    HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-
-            ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
-            ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGLHIGTHS");
-            ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
-            ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
-            ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
-            ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
-            ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(db.TB_ALIAS, "ALIAS_ID", "ALIAS_NAME");
-            ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
-            return View();
         }
         public ActionResult Create()
         {
@@ -77,6 +52,68 @@ namespace AccountsPayable.Controllers
             }
             return Json(new { success = false, message = "There was an error saving the record " });
         }
+
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.Find(id);
+        //    if (tB_TEMPLATE == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    var emailBackupList = db.TB_EMAIL_BACKUP
+        //                    .OrderByDescending(e => e.EMAIL_BACKUP_DATE) // Sort in descending order
+        //                    .AsEnumerable() // Switch to LINQ to Objects
+        //                    .Select(e => new
+        //                    {
+        //                        EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
+        //                        EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
+        //                    }).ToList();
+
+        //    var historicRemitToList = db.TB_HISTORIC_REMIT
+        //        .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
+        //        .AsEnumerable()
+        //        .Select(e => new
+        //        {
+        //            HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
+        //            HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
+        //        }).ToList();
+
+        //    ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
+        //    ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
+        //    ViewBag.FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGLHIGTHS");
+        //    ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
+        //    ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
+        //    ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
+        //    ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+        //    ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(db.TB_ALIAS, "ALIAS_ID", "ALIAS_NAME");
+        //    ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
+        //    return View(tB_TEMPLATE);
+        //}
+
+        //[HttpPost]
+        //public ActionResult Edit([Bind(Include = "TEMP_ID,TEMP_TAX_ID,TEMP_REMIT_TO,TEMP_SUPPLIER_NAME,TEMP_SUPPLIER_NUMBER,FK_TB_TEMPLATE_HISTORIC_REMIT_ID,TEMP_VENDOR_ACCOUNT,FK_TB_TEMPLATE_ALIAS_ID,TEMP_SUPPLIER_SITE,TEMP_ADDRESS,FK_TB_LEGAL_ENTITY_ID,TEMP_TAXPAYER_ID,FK_TB_ORACLE_TYPE_ID,TEMP_ORACLE_DESCRIPTION,FK_TB_ORACLE_PAY_TERMS_ID,TEMP_ACCOUNT_CODING,FK_TB_ORACLE_SOURCE_ID,TEMP_ORACLE_NOTES,TEMP_ORACLE_INSTRUCTIONS,FK_TB_HIGHLIGHTS_ID,FK_TB_EMAIL_BACKUP_ID,FK_TB_APPROVER_ID,TEMP_APPROVER_COMMENTS,TEMP_INVOICE_FORMAT,TEMP_INVOICE_TYPE")] TB_TEMPLATE tB_TEMPLATE)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(tB_TEMPLATE).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
+        //    ViewBag.FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGLHIGTHS");
+        //    ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
+        //    ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
+        //    ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
+        //    ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+        //    ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(db.TB_ALIAS, "ALIAS_ID", "ALIAS_NAME");
+        //    return View(tB_TEMPLATE);
+        //}
+
         [HttpGet]
         public ActionResult GetHistoryInfo()
         {
