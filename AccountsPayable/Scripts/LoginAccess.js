@@ -13,7 +13,7 @@
                 checkNotifications();
 
                 // Redirect to the main page
-                document.location.href = window.location.origin + '/Main/Index';
+                document.location.href = window.location.origin + '/Main/Create';
             } else {
                 // Send error message to label
                 document.getElementById('errormessage').innerHTML = (data);

@@ -251,6 +251,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Main\Create.cshtml" />
     <Content Include="Views\Access\LogIn.cshtml" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Shared\_PartialLayout.cshtml" />
