@@ -18,6 +18,7 @@ namespace AccountsPayable.Models
         public TB_TEMPLATE()
         {
             this.TB_ALIAS = new HashSet<TB_ALIAS>();
+            this.TB_HIGHLIGHTS1 = new HashSet<TB_HIGHLIGHTS>();
             this.TB_HISTORIC_REMIT = new HashSet<TB_HISTORIC_REMIT>();
         }
     
@@ -56,6 +57,8 @@ namespace AccountsPayable.Models
         public virtual TB_ORACLE_TYPE TB_ORACLE_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ALIAS> TB_ALIAS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_HIGHLIGHTS> TB_HIGHLIGHTS1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
     }
