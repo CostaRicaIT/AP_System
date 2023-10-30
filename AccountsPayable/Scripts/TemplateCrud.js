@@ -3,6 +3,7 @@
     function toggleInputState(checkbox, input) {
         if (checkbox.is(':checked')) {
             input.prop('disabled', true);
+            input.val(null)
         } else {
             input.prop('disabled', false);
         }
@@ -18,6 +19,7 @@
 
     $('#BoxSupName').change(function () {
         toggleInputState($(this), $('#form-SupName'));
+        
     });
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
