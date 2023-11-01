@@ -4,168 +4,126 @@
     ViewBag.Title = "Index";
 }
 
+
 <h2>Index</h2>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/table.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/staterestore/1.3.0/css/stateRestore.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_TAX_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_REMIT_TO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_NUMBER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_VENDOR_ACCOUNT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FK_TB_TEMPLATE_ALIAS_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_SUPPLIER_SITE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_ADDRESS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_TAXPAYER_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_ORACLE_DESCRIPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_ACCOUNT_CODING)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_ORACLE_NOTES)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_ORACLE_INSTRUCTIONS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_APPROVER_COMMENTS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_INVOICE_FORMAT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TEMP_INVOICE_TYPE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_APPROVER.APPROVER_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_EMAIL_BACKUP.EMAIL_BACKUP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <table id="dataTable" class="table cell-border stripe">
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Remit to</th>
+                <th>Supplier Name</th>
+                <th>Supplier Number</th>
+                <th>Supplier Agency</th>
+                <th>Tax ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FK_TB_TEMPLATE_ALIAS_ID</td>
+                    <td>@item.TEMP_REMIT_TO</td>
+                    <td>@item.TEMP_SUPPLIER_NAME</td>
+                    <td>@item.TEMP_SUPPLIER_NUMBER</td>
+                    <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
+                    <td>@item.TEMP_TAX_ID</td>
+                    <td></td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_TAX_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_REMIT_TO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_NUMBER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_VENDOR_ACCOUNT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FK_TB_TEMPLATE_ALIAS_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_SUPPLIER_SITE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_ADDRESS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_TAXPAYER_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_DESCRIPTION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_ACCOUNT_CODING)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_NOTES)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_ORACLE_INSTRUCTIONS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_APPROVER_COMMENTS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_INVOICE_FORMAT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEMP_INVOICE_TYPE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_APPROVER.APPROVER_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_EMAIL_BACKUP.EMAIL_BACKUP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_HIGHLIGHTS.HIGHLIGHTS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TEMP_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TEMP_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TEMP_ID })
-        </td>
-    </tr>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Button to open the modal -->
+<!-- Modal -->
+<div class="modal" id="filtersModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="columnModalLabel">Column Visibility</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add your icons and checkboxes here -->
+                <button id="showColumnsButton" class="btn btn-link">
+                    <i class="fa fa-eye"></i> Show Columns
+                </button><br />
+                <button id="saveColumnsButton" class="btn btn-link">
+                    <i class="fa fa-save"></i> Save Columns
+                </button><br />
+                <button id="resetColumnsButton" class="btn btn-link">
+                    <i class="fa fa-undo"></i> Reset Columns
+                </button><br />
+
+                <!-- Add checkboxes for all columns -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- toggle Columns Modal -->
+<div class="modal" id="toggleColumnsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="0"> Alias
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="1"> Remit to
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="2"> Supplier Name
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="3"> Supplier Number
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="4"> Supplier Agency
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="5"> TaxID
+                </label><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveColumnVisibility">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/staterestore/1.3.0/js/dataTables.stateRestore.min.js"></script>
+
+    <script src="~/Scripts/dashboard.js"></script>
 }
-
-</table>
