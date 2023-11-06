@@ -29,6 +29,7 @@ namespace AccountsPayable.Controllers
             return View(tB_TEMPLATE.ToList());
 
         }
+        
         public ActionResult Create()
         {
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
@@ -38,6 +39,7 @@ namespace AccountsPayable.Controllers
             ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
             ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
             ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+            ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(db.TB_ALIAS, "ALIAS_ID", "ALIAS_NAME");
             return View();
         }
 

@@ -4,7 +4,6 @@ function initializeDataTable() {
     table = $('#dataTable').DataTable({
         autoWidth: true,
         stateSave: true,
-        responsive: true,
         dom: 'lBfrtip',
         buttons: [
             {
@@ -14,7 +13,21 @@ function initializeDataTable() {
                     $('#filtersModal').modal('show');
                 }
             }
-        ]
+        ],
+        columnDefs: [
+            {
+                targets: 6, // Sixt column (0-based index)
+                render: function (data, type, full, meta) {
+                    // Define the custom buttons in the Actions column
+                    return '<button class="dt-button filterButton"><i class="fa-solid fa-eye"></i></button>' +
+                        '<button class="dt-button filterButton"><i class="fas fa-edit"></i></button>' +
+                        '<button class="dt-button filterButton"><i class="fa-solid fa-eraser"></button>';
+                }
+            }
+        ],
+        dom: '<"top"lBf>rt<"bottom"ip>'
+
+
     });
 
     $('a.toggle-vis').on('click', function (e) {
@@ -29,7 +42,7 @@ function initializeDataTable() {
         $('#filtersModal').modal('hide');
         showFilterModal();
     });
-    $('#resetColumnsButton').click(function (){
+    $('#resetColumnsButton').click(function () {
         resetFilters();
     });
 }
