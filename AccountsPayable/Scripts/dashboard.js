@@ -1,9 +1,12 @@
 ﻿var table; // Declare the 'table' variable in a global scope
+var defaultColumns = [6, 2, 3, 4, 9, 1, 22]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
+
     table = $('#dataTable').DataTable({
         autoWidth: true,
         stateSave: true,
+        responsive: true,
         dom: 'lBfrtip',
         buttons: [
             {
@@ -16,14 +19,20 @@ function initializeDataTable() {
         ],
         columnDefs: [
             {
-                targets: 6, // Sixt column (0-based index)
+                targets: 22, // Sixt column (0-based index)
                 render: function (data, type, full, meta) {
+                    var rowId = full[0]; // Change 0 to the appropriate column index
                     // Define the custom buttons in the Actions column
-                    return '<button class="dt-button filterButton"><i class="fa-solid fa-eye"></i></button>' +
-                        '<button class="dt-button filterButton"><i class="fas fa-edit"></i></button>' +
-                        '<button class="dt-button filterButton"><i class="fa-solid fa-eraser"></button>';
+                    return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
+                        '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
+                        '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
                 }
+            },
+            {
+                targets: '_all',
+                visible: false
             }
+            
         ],
         dom: '<"top"lBf>rt<"bottom"ip>'
 
@@ -44,6 +53,30 @@ function initializeDataTable() {
     });
     $('#resetColumnsButton').click(function () {
         resetFilters();
+    });
+    $('.view-button').click(function () {
+        // Extract the ID from the clicked button
+        var rowId = $(this).data('id');
+
+        // Construct the redirect URL based on the ID
+        var redirectUrl = 'Create/' + rowId; // Modify the URL structure as needed
+
+        // Redirect to the constructed URL
+        window.location.href = redirectUrl;
+    });
+
+    // Click event handler for the "Edit" button
+    $('.edit-button').click(function () {
+        var rowId = $(this).data('id');
+        var redirectUrl = 'Edit/' + rowId;
+        window.location.href = redirectUrl;
+    });
+
+    // Click event handler for the "Erase" button
+    $('.erase-button').click(function () {
+        var rowId = $(this).data('id');
+        var redirectUrl = 'Delete/' + rowId;
+        window.location.href = redirectUrl;
     });
 }
 function showFilterModal() {
@@ -72,10 +105,10 @@ function showFilterModal() {
 }
 
 function resetFilters() {
-    table.columns().visible(true);
+    table.columns().visible(false);
     table.state.clear();
     $('#filtersModal').modal('hide');
-
+    table.columns(defaultColumns).visible(true);
 }
 
 // Call the function to initialize the DataTable when the document is ready

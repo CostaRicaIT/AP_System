@@ -15,16 +15,32 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="container-fluid">
-    <table id="dataTable" class="table cell-border stripe">
+<div class="container">
+    <table id="dataTable" class="table cell-border stripe display responsive nowrap" width="100%">
         <thead>
             <tr>
-                <th>Alias</th>
-                <th>Remit to</th>
+                <th>ID</th>
+                <th>Tax ID</th>
+                <th>Remit To</th>
                 <th>Supplier Name</th>
                 <th>Supplier Number</th>
-                <th>Supplier Agency</th>
-                <th>Tax ID</th>
+                <th>Vendor Account</th>
+                <th>Alias</th>
+                <th>Supplier Site</th>
+                <th>Address</th>
+                <th>Legal Entity</th>
+                <th>Tax Payer ID</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Pay Terms</th>
+                <th>Account coding</th>
+                <th>Source</th>
+                <th>Oracle Notes</th>
+                <th>Oracle Instructions</th>
+                <th>Approver</th>
+                <th>Approver Comments</th>
+                <th>Invoice Format</th>
+                <th>Invoice Type</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -32,12 +48,28 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.FK_TB_TEMPLATE_ALIAS_ID</td>
+                    <td>@item.TEMP_ID</td>
+                    <td>@item.TEMP_TAX_ID</td>
                     <td>@item.TEMP_REMIT_TO</td>
                     <td>@item.TEMP_SUPPLIER_NAME</td>
                     <td>@item.TEMP_SUPPLIER_NUMBER</td>
+                    <td>@item.TEMP_VENDOR_ACCOUNT</td>
+                    <td>@item.FK_TB_TEMPLATE_ALIAS_ID</td>
+                    <td>@item.TEMP_SUPPLIER_SITE</td>
+                    <td>@item.TEMP_ADDRESS</td>
                     <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
-                    <td>@item.TEMP_TAX_ID</td>
+                    <td>@item.TEMP_TAXPAYER_ID</td>
+                    <td>@item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME</td>
+                    <td>@item.TEMP_ORACLE_DESCRIPTION</td>
+                    <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
+                    <td>@item.TEMP_ACCOUNT_CODING</td>
+                    <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
+                    <td>@item.TEMP_ORACLE_NOTES</td>
+                    <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
+                    <td>@item.TB_APPROVER.APPROVER_NAME</td>
+                    <td>@item.TEMP_APPROVER_COMMENTS</td>
+                    <td>@item.TEMP_INVOICE_FORMAT</td>
+                    <td>@item.TEMP_INVOICE_TYPE</td>
                     <td></td>
 
                 </tr>
@@ -89,28 +121,94 @@
             <div class="modal-body">
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="0"> Alias
+                    <input type="checkbox" class="toggle-column" data-column="0"> ID
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="1"> Remit to
+                    <input type="checkbox" class="toggle-column" data-column="1"> Tax ID
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="2"> Supplier Name
+                    <input type="checkbox" class="toggle-column" data-column="2"> Remit To
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="3"> Supplier Number
+                    <input type="checkbox" class="toggle-column" data-column="3"> Supplier Name
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="4"> Supplier Agency
+                    <input type="checkbox" class="toggle-column" data-column="4"> Vendor Account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="5"> TaxID
+                    <input type="checkbox" class="toggle-column" data-column="5"> Alias
                 </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="6"> Supplier Site
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="7"> Address
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="8"> Legal Entity
+                </label><br>
+
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="9"> Tex Payer ID
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="10"> Type
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="11"> Description
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="12"> Pay Terms
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="13"> Account Coding
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="14"> Source
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="15"> Oracle Notes
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="16"> Oracle Instructions
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="17"> Approver
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="18"> Approver Coments
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="19"> Invoice Format
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="20"> Invoice Type
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="21"> Invoice Format
+                </label><br>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

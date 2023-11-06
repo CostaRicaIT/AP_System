@@ -22,6 +22,7 @@ namespace AccountsPayable.Models
     
         public int ALIAS_ID { get; set; }
         public string ALIAS_NAME { get; set; }
+        public Nullable<int> ALIAS_ISDISABLED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
