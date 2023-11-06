@@ -59,7 +59,7 @@ function initializeDataTable() {
         var rowId = $(this).data('id');
 
         // Construct the redirect URL based on the ID
-        var redirectUrl = 'Create/' + rowId; // Modify the URL structure as needed
+        var redirectUrl = 'View/' + rowId; // Modify the URL structure as needed
 
         // Redirect to the constructed URL
         window.location.href = redirectUrl;
