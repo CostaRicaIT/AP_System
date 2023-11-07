@@ -172,7 +172,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-SupNumber">Supplier Number:</label>
+                    <label class="control-label col-md-2 OracleText" for="form-SupNumber">Supplier Number:</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" id="form-SupNumber" placeholder="Supplier Number">
                     </div>
@@ -183,7 +183,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-SupSite">Supplier Site:</label>
+                    <label class="control-label col-md-2 OracleText" for="form-SupSite">Supplier Site:</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" id="form-SupSite" placeholder="Supplier Site">
                     </div>
@@ -194,7 +194,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Address">Address:</label>
+                    <label class="control-label col-md-2 OracleText" for="form-Address">Address:</label>
                     <div class="col-md-10">
                         <textarea id="form-Address" class="form-control" placeholder="Address" rows="6" cols="50"></textarea>
                     </div>
@@ -205,7 +205,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
                     <div class="col-md-10">
                         @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
@@ -217,7 +217,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-FirstParty">Taxpayer ID:</label>
+                    <label class="control-label col-md-2 OracleText" for="form-FirstParty">Taxpayer ID:</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" id="form-FirstParty" placeholder="Taxpayer ID">
                     </div>
@@ -228,7 +228,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
                     <div class="col-md-10">
                         @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
@@ -240,7 +240,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Description">Description:</label>
+                    <label class="control-label col-md-2 OracleText" for="form-Description">Description:</label>
                     <div class="col-md-10">
                         <textarea id="form-Description" class="form-control" placeholder="Description" rows="6" cols="50"></textarea>
                     </div>
@@ -251,7 +251,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Pay Terms:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Pay Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
                     <div class="col-md-10">
                         @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
@@ -312,15 +312,15 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Higlights">Highlights</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
-                <div class="col-md-4">
+                @*<div class="col-md-4">
                     <div class="col-md-10">
-                        <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" disabled>Add History</button>
-                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights" disabled>View History</button>
+                        <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>
+                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights" >View History</button>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <!-- Highlights Comments -->
@@ -329,7 +329,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-HiglightsC">Highlights Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -340,7 +340,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Instructions">Instructions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
             </div>
@@ -351,7 +351,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Exceptions">Exceptions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
             </div>
@@ -362,7 +362,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-MostCI">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
             </div>
@@ -373,7 +373,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-SupplierA">Supplier Agency:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
             </div>
@@ -384,7 +384,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-TemplateC">Template Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150" disabled></textarea>
+                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150" ></textarea>
                     </div>
                 </div>
             </div>
@@ -574,14 +574,14 @@
 
     <!-- Cancel and Save Buttons -->
     <button class="btn form_btntbWC btn-cancel" type="button" id="form-cancel">Cancel</button>
-    <button class="btn form_btntbWC  btn-submit" type="button" id="form-submit">Save</button>
+    <button class="btn form_btntbWC openModalBtn" data-modal="ShowSaveModal" type="button" id="form-submit">Save</button>
 
     <!--Save Changes modal-->
     <div id="ShowSaveModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Save Changes</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -598,7 +598,6 @@
                                 <button class="btn form_btntbWC" type="button" id="AddAlias_Emailbtn">Yes</button>
                                 <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
                             </div>
-
                     </div>
                 </div>
             </div>

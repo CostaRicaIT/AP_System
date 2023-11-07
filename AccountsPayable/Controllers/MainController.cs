@@ -44,15 +44,39 @@ namespace AccountsPayable.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "TEMP_ID,TEMP_TAX_ID,TEMP_REMIT_TO,TEMP_SUPPLIER_NAME,TEMP_SUPPLIER_NUMBER,FK_TB_TEMPLATE_HISTORIC_REMIT_ID,TEMP_VENDOR_ACCOUNT,FK_TB_TEMPLATE_ALIAS_ID,TEMP_SUPPLIER_SITE,TEMP_ADDRESS,FK_TB_LEGAL_ENTITY_ID,TEMP_TAXPAYER_ID,FK_TB_ORACLE_TYPE_ID,TEMP_ORACLE_DESCRIPTION,FK_TB_ORACLE_PAY_TERMS_ID,TEMP_ACCOUNT_CODING,FK_TB_ORACLE_SOURCE_ID,TEMP_ORACLE_NOTES,TEMP_ORACLE_INSTRUCTIONS,FK_TB_HIGHLIGHTS_ID,FK_TB_EMAIL_BACKUP_ID,FK_TB_APPROVER_ID,TEMP_APPROVER_COMMENTS,TEMP_INVOICE_FORMAT,TEMP_INVOICE_TYPE")] TB_TEMPLATE tB_TEMPLATE)
+        public ActionResult Create(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TB_TEMPLATE.Add(tB_TEMPLATE);
-                db.SaveChanges();
-                return Json(new { success = true });
+                if (ModelState.IsValid)
+                {
+                    HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                    db.SaveChanges();
+                    int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
+
+                    HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                    db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                    db.SaveChanges();
+                    int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
+
+                    templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
+                    templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                    db.TB_TEMPLATE.Add(templateData);
+                    db.SaveChanges();
+
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Model validation failed" });
+                }
             }
-            return Json(new { success = false, message = "There was an error saving the record " });
+            catch (Exception ex)
+            {
+                // Handle the exception, log it, and return an error response.
+                return Json(new { success = false, message = "An error occurred while saving the record: " + ex.Message });
+            }
         }
 
         //public ActionResult Edit(int? id)
