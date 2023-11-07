@@ -146,7 +146,7 @@
                         </div>
                     </div>
 
-                 Select Alias Dropdown
+                 //Select Alias Dropdown
             </div>
         </div>
         //Add Alias modal
@@ -312,15 +312,15 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Higlights">Highlights</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150"></textarea>
                     </div>
                 </div>
                 @*<div class="col-md-4">
-                    <div class="col-md-10">
-                        <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>
-                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights" >View History</button>
-                    </div>
-                </div>*@
+                        <div class="col-md-10">
+                            <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>
+                            <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights" >View History</button>
+                        </div>
+                    </div>*@
             </div>
         </div>
         <!-- Highlights Comments -->
@@ -340,7 +340,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Instructions">Instructions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -351,7 +351,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Exceptions">Exceptions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -362,7 +362,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-MostCI">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -373,7 +373,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-SupplierA">Supplier Agency:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -384,7 +384,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-TemplateC">Template Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150" ></textarea>
+                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -493,29 +493,28 @@
 
     <!--Select Mails Dropdown -->
     @*<div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
-                        <div class="col-md-10">
-                            @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="AddEmailModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p><label class="control-label col-md-2" for="emailinfo">Email:</label></p>
-                    <textarea id="emailinfo" class="class=" form-control"" rows="6" cols="100"></textarea>
-                    <div>
-                        <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                        <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
-            <br />
+        <div id="AddEmailModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><label class="control-label col-md-2" for="emailinfo">Email:</label></p>
+                <textarea id="emailinfo" class="class=" form-control"" rows="6" cols="100"></textarea>
+                <div>
+                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
+                    <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
+                </div>
+            </div>
+        </div>
+        <br />
     *@
     <!-- Approver Section -->
     <div class="form-section">
@@ -588,16 +587,16 @@
             <div class="modal-body">
                 <div class="form-group">
                     <div class="row">
-                        
-                            <h4 class="text-center">
-                                Would you like to add additional information to the template: <br />
-                                Alias / Backup Emails?
-                            </h4>
+
+                        <h4 class="text-center">
+                            Would you like to add additional information to the template: <br />
+                            Alias / Backup Emails?
+                        </h4>
                         <br />
-                            <div>
-                                <button class="btn form_btntbWC" type="button" id="AddAlias_Emailbtn">Yes</button>
-                                <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
-                            </div>
+                        <div>
+                            <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
+                            <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -617,69 +616,70 @@
                 <!--Alias section-->
                 <div class="form-group">
                     <div class=" row">
-                        <div class="col-md-8">
-                            <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
+                        <div class="col-md-12">
+                            <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <button id="ButtonAddAlias" type="button" class="styled-button align-right openModalBtn" data-modal="AddAliasModal" disabled>Add alias</button>
-                        </div>
+                        @*<div class="col-md-4">
+                                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Add Alias</button>
+                                </div>*@
+                            </div>
+                            <br />
+                            @*<div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
+                                    </div>
+                                </div>
+                            </div>*@
                     </div>
                     <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <!--Email section-->
-                <div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-8">
-                            <label class="control-label col-md-2" for="form-BackUpEmails">Back Up Emails:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
-                            </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal" disabled>Add Email</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
-                                @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
+                    <!--Email section-->
+                    <div class="form-group">
+                        <div class=" row">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-6" for="form-BackUpEmails">Back Up Emails:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
+                                </div>
                             </div>
+
+                            @*<div class="col-md-4">
+                                <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
+                            </div>*@
                         </div>
+                        <br />
+                        @*<div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-10">
+                                    @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
+                                    @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
                     </div>
                 </div>
-            </div>
-            <div>
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
+                <div>
+                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
+                    <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
+                </div>
             </div>
         </div>
-    </div>
 
-}
+        }
 
-@section scripts {
+        @section scripts {
 
-    <script src="~/Scripts/TemplateCrud.js"></script>
-    @*<script src="~/Scripts/FillDropdowsTemplate.js"></script>*@
-    <script src="~/Scripts/templateModal.js"></script>
-    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
-
+            <script src="~/Scripts/TemplateCrud.js"></script>
+            @*<script src="~/Scripts/FillDropdowsTemplate.js"></script>*@
+            <script src="~/Scripts/templateModal.js"></script>
+            <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
 
-}
+
+        }

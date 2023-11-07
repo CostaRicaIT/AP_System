@@ -44,7 +44,7 @@ namespace AccountsPayable.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData)
+        public ActionResult CreateNoEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData) //Create when Alias and email backup are not filled
         {
             try
             {
@@ -62,6 +62,54 @@ namespace AccountsPayable.Controllers
 
                     templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
                     templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                    db.TB_TEMPLATE.Add(templateData);
+                    db.SaveChanges();
+
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Model validation failed" });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log it, and return an error response.
+                return Json(new { success = false, message = "An error occurred while saving the record: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateWithEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, TB_ALIAS aliasData, TB_EMAIL_BACKUP emailData) //Create when Alias and email backup are  filled
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                    db.SaveChanges();
+                    int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
+
+                    HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                    db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                    db.SaveChanges();
+                    int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
+
+                    emailData.EMAIL_BACKUP_DATE = DateTime.Now;
+                    db.TB_EMAIL_BACKUP.Add(emailData);
+                    db.SaveChanges();
+                    int newEmailBackUpId = emailData.EMAIL_BACKUP_ID;
+
+                    db.TB_ALIAS.Add(aliasData); 
+                    db.SaveChanges();
+                    int newAliasId = aliasData.ALIAS_ID;
+
+
+                    templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
+                    templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                    templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
+                    templateData.FK_TB_TEMPLATE_ALIAS_ID = newAliasId;
                     db.TB_TEMPLATE.Add(templateData);
                     db.SaveChanges();
 
