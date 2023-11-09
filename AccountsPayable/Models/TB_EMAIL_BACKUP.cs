@@ -17,15 +17,17 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_EMAIL_BACKUP()
         {
-            this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
+            this.TB_TEMPLATE1 = new HashSet<TB_TEMPLATE>();
         }
     
         public int EMAIL_BACKUP_ID { get; set; }
         public System.DateTime EMAIL_BACKUP_DATE { get; set; }
         public string EMAIL_BACKUP { get; set; }
         public Nullable<int> EMAIL_BACKUP_ISDISABLED { get; set; }
+        public Nullable<int> FK_TB_TEMPLATE_ID { get; set; }
     
+        public virtual TB_TEMPLATE TB_TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
+        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE1 { get; set; }
     }
 }

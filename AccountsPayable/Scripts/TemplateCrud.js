@@ -25,11 +25,11 @@
         document.location.href = window.location.origin + '/Main/Index';
     });
     $("#NoAddAlias_Emailbtn").click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         saveNoAliasEmail();
     });
     $("#btn_AddAlias_Email").click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         SaveWithAliasEmail();
     });
     $(".btn-cancel").click(function () {

@@ -19,7 +19,7 @@ function initializeDataTable() {
         ],
         columnDefs: [
             {
-                targets: 22, // Sixt column (0-based index)
+                targets: 22, // 22 column (0-based index)
                 render: function (data, type, full, meta) {
                     var rowId = full[0]; // Change 0 to the appropriate column index
                     // Define the custom buttons in the Actions column
@@ -31,6 +31,10 @@ function initializeDataTable() {
             {
                 targets: '_all',
                 visible: false
+            },
+            {
+                targets: defaultColumns,
+                visible: true
             }
             
         ],

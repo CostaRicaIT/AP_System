@@ -54,26 +54,38 @@
                     <td>@item.TEMP_SUPPLIER_NAME</td>
                     <td>@item.TEMP_SUPPLIER_NUMBER</td>
                     <td>@item.TEMP_VENDOR_ACCOUNT</td>
-                    <td>@item.FK_TB_TEMPLATE_ALIAS_ID</td>
-                    <td>@item.TEMP_SUPPLIER_SITE</td>
-                    <td>@item.TEMP_ADDRESS</td>
-                    <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
-                    <td>@item.TEMP_TAXPAYER_ID</td>
-                    <td>@item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME</td>
-                    <td>@item.TEMP_ORACLE_DESCRIPTION</td>
-                    <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
-                    <td>@item.TEMP_ACCOUNT_CODING</td>
-                    <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
-                    <td>@item.TEMP_ORACLE_NOTES</td>
-                    <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
-                    <td>@item.TB_APPROVER.APPROVER_NAME</td>
-                    <td>@item.TEMP_APPROVER_COMMENTS</td>
-                    <td>@item.TEMP_INVOICE_FORMAT</td>
-                    <td>@item.TEMP_INVOICE_TYPE</td>
-                    <td></td>
+                    @*<td>@item.TB_ALIAS.ALIAS_ID</td>*@
+                    <td> @*If ALIAS ID on template is null show empty space, else show the template Name*@
+                        @if (item.FK_TB_TEMPLATE_ALIAS_ID != null)
+                        {
+                            @item.TB_ALIAS1.ALIAS_NAME
+                        }
+                        else
+                        {
+                            
+                        }
+                </td>
 
-                </tr>
-            }
+
+                <td>@item.TEMP_SUPPLIER_SITE</td>
+                <td>@item.TEMP_ADDRESS</td>
+                <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
+                <td>@item.TEMP_TAXPAYER_ID</td>
+                <td>@item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME</td>
+                <td>@item.TEMP_ORACLE_DESCRIPTION</td>
+                <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
+                <td>@item.TEMP_ACCOUNT_CODING</td>
+                <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
+                <td>@item.TEMP_ORACLE_NOTES</td>
+                <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
+                <td>@item.TB_APPROVER.APPROVER_NAME</td>
+                <td>@item.TEMP_APPROVER_COMMENTS</td>
+                <td>@item.TEMP_INVOICE_FORMAT</td>
+                <td>@item.TEMP_INVOICE_TYPE</td>
+                <td></td>
+
+            </tr>
+        }
         </tbody>
     </table>
 </div>
