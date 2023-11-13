@@ -616,70 +616,73 @@
                 <!--Alias section-->
                 <div class="form-group">
                     <div class=" row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
+                                
                             </div>
                         </div>
-
-                        @*<div class="col-md-4">
-                                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Add Alias</button>
-                                </div>*@
-                            </div>
+                        <div class="col-md-4">
                             <br />
-                            @*<div class="row">
-                                <div class="col-md-12">
-                                    <div class="col-md-10">
-                                        @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
-                                    </div>
-                                </div>
-                            </div>*@
+                            <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
+                        </div>
                     </div>
                     <br />
-
-                    <!--Email section-->
-                    <div class="form-group">
-                        <div class=" row">
-                            <div class="col-md-12">
-                                <label class="control-label col-md-6" for="form-BackUpEmails">Back Up Emails:</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-10">
+                                <select name="Alias" id="AliasToAdd" class="form-control" size="5">
+                                </select>
                             </div>
-
-                            @*<div class="col-md-4">
-                                <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
-                            </div>*@
                         </div>
-                        <br />
-                        @*<div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-10">
-                                    @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control", @size = "3" })
-                                    @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>*@
                     </div>
                 </div>
-                <div>
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
+                <br />
+
+                <!--Email section-->
+                <div class="form-group">
+                    <div class=" row">
+                        <div class="col-md-6">
+                            <label class="control-label col-md-8" for="form-BackUpEmails">Back Up Emails:</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <br />
+                            <button id="btn-addEmail" type="button" class="btn form_btntbWC">Add Email</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-10">
+                                <select name="Alias" id="EmailsToAdd" class="form-control" size="5">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div>
+                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
+                <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
+            </div>
         </div>
+    </div>
 
-        }
+}
 
-        @section scripts {
+@section scripts {
 
-            <script src="~/Scripts/TemplateCrud.js"></script>
-            @*<script src="~/Scripts/FillDropdowsTemplate.js"></script>*@
-            <script src="~/Scripts/templateModal.js"></script>
-            <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="~/Scripts/TemplateCrud.js"></script>
+    @*<script src="~/Scripts/FillDropdowsTemplate.js"></script>*@
+    <script src="~/Scripts/templateModal.js"></script>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
 
 
-        }
+}
