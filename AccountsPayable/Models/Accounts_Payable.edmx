@@ -12,7 +12,6 @@
           <Property Name="ALIAS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ALIAS_NAME" Type="varchar(max)" Nullable="false" />
           <Property Name="ALIAS_ISDISABLED" Type="int" />
-          <Property Name="FK_TB_TEMPLATE_ID" Type="int" />
         </EntityType>
         <EntityType Name="TB_APPROVER">
           <Key>
@@ -29,7 +28,6 @@
           <Property Name="EMAIL_BACKUP_DATE" Type="date" Nullable="false" />
           <Property Name="EMAIL_BACKUP" Type="varchar(max)" Nullable="false" />
           <Property Name="EMAIL_BACKUP_ISDISABLED" Type="int" />
-          <Property Name="FK_TB_TEMPLATE_ID" Type="int" />
         </EntityType>
         <EntityType Name="TB_HIGHLIGHTS">
           <Key>
@@ -132,6 +130,22 @@
           <Property Name="TEMP_INVOICE_TYPE" Type="varchar(max)" Nullable="false" />
           <Property Name="TEMP_ISDISABLED" Type="int" />
         </EntityType>
+        <EntityType Name="TB_TEMPLATE_ALIAS">
+          <Key>
+            <PropertyRef Name="FK_TB_TEMP_ID" />
+            <PropertyRef Name="FK_TB_ALIAS_ID" />
+          </Key>
+          <Property Name="FK_TB_TEMP_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_ALIAS_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_TEMPLATE_EMAIL_BACKUP">
+          <Key>
+            <PropertyRef Name="FK_TB_TEMP_ID" />
+            <PropertyRef Name="FK_TB_EMAIL_BACKUP_ID" />
+          </Key>
+          <Property Name="FK_TB_TEMP_ID" Type="int" Nullable="false" />
+          <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TB_VIEW_PERMISSIONS">
           <Key>
             <PropertyRef Name="VIEW_PERMISSION_ID" />
@@ -144,30 +158,6 @@
           <Property Name="CAN_EDIT" Type="bit" Nullable="false" />
           <Property Name="CAN_DELETE" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__TB_ALIAS__FK_TB___369C13AA">
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="0..1" />
-          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_TEMPLATE">
-              <PropertyRef Name="TEMP_ID" />
-            </Principal>
-            <Dependent Role="TB_ALIAS">
-              <PropertyRef Name="FK_TB_TEMPLATE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_EMAIL___FK_TB__39788055">
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="0..1" />
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_TEMPLATE">
-              <PropertyRef Name="TEMP_ID" />
-            </Principal>
-            <Dependent Role="TB_EMAIL_BACKUP">
-              <PropertyRef Name="FK_TB_TEMPLATE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TB_HIGHLI__FK_TB__38845C1C">
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="0..1" />
           <End Role="TB_HIGHLIGHTS" Type="Self.TB_HIGHLIGHTS" Multiplicity="*" />
@@ -264,18 +254,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__10766AC2">
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_EMAIL_BACKUP">
-              <PropertyRef Name="EMAIL_BACKUP_ID" />
-            </Principal>
-            <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_EMAIL_BACKUP_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__116A8EFB">
           <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
@@ -300,15 +278,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__35A7EF71">
-          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="0..1" />
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
+        <Association Name="FK__TB_TEMPLA__FK_TB__3E3D3572">
+          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="1" />
+          <End Role="TB_TEMPLATE_ALIAS" Type="Self.TB_TEMPLATE_ALIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TEMPLATE">
+              <PropertyRef Name="TEMP_ID" />
+            </Principal>
+            <Dependent Role="TB_TEMPLATE_ALIAS">
+              <PropertyRef Name="FK_TB_TEMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_TEMPLA__FK_TB__3F3159AB">
+          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="1" />
+          <End Role="TB_TEMPLATE_ALIAS" Type="Self.TB_TEMPLATE_ALIAS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ALIAS">
               <PropertyRef Name="ALIAS_ID" />
             </Principal>
-            <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_TEMPLATE_ALIAS_ID" />
+            <Dependent Role="TB_TEMPLATE_ALIAS">
+              <PropertyRef Name="FK_TB_ALIAS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_TEMPLA__FK_TB__420DC656">
+          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="1" />
+          <End Role="TB_TEMPLATE_EMAIL_BACKUP" Type="Self.TB_TEMPLATE_EMAIL_BACKUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TEMPLATE">
+              <PropertyRef Name="TEMP_ID" />
+            </Principal>
+            <Dependent Role="TB_TEMPLATE_EMAIL_BACKUP">
+              <PropertyRef Name="FK_TB_TEMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_TEMPLA__FK_TB__4301EA8F">
+          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="1" />
+          <End Role="TB_TEMPLATE_EMAIL_BACKUP" Type="Self.TB_TEMPLATE_EMAIL_BACKUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_EMAIL_BACKUP">
+              <PropertyRef Name="EMAIL_BACKUP_ID" />
+            </Principal>
+            <Dependent Role="TB_TEMPLATE_EMAIL_BACKUP">
+              <PropertyRef Name="FK_TB_EMAIL_BACKUP_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -337,15 +351,9 @@
           <EntitySet Name="TB_ORACLE_SOURCE" EntityType="Self.TB_ORACLE_SOURCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ORACLE_TYPE" EntityType="Self.TB_ORACLE_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_TEMPLATE" EntityType="Self.TB_TEMPLATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_TEMPLATE_ALIAS" EntityType="Self.TB_TEMPLATE_ALIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_TEMPLATE_EMAIL_BACKUP" EntityType="Self.TB_TEMPLATE_EMAIL_BACKUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Self.TB_VIEW_PERMISSIONS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TB_ALIAS__FK_TB___369C13AA" Association="Self.FK__TB_ALIAS__FK_TB___369C13AA">
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_EMAIL___FK_TB__39788055" Association="Self.FK__TB_EMAIL___FK_TB__39788055">
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
-          </AssociationSet>
           <AssociationSet Name="FK__TB_HIGHLI__FK_TB__38845C1C" Association="Self.FK__TB_HIGHLI__FK_TB__38845C1C">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
             <End Role="TB_HIGHLIGHTS" EntitySet="TB_HIGHLIGHTS" />
@@ -378,10 +386,6 @@
             <End Role="TB_HIGHLIGHTS" EntitySet="TB_HIGHLIGHTS" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__10766AC2" Association="Self.FK__TB_TEMPLA__FK_TB__10766AC2">
-            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-          </AssociationSet>
           <AssociationSet Name="FK__TB_TEMPLA__FK_TB__116A8EFB" Association="Self.FK__TB_TEMPLA__FK_TB__116A8EFB">
             <End Role="TB_APPROVER" EntitySet="TB_APPROVER" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
@@ -390,9 +394,21 @@
             <End Role="TB_HISTORIC_REMIT" EntitySet="TB_HISTORIC_REMIT" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__35A7EF71" Association="Self.FK__TB_TEMPLA__FK_TB__35A7EF71">
-            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__3E3D3572" Association="Self.FK__TB_TEMPLA__FK_TB__3E3D3572">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
+            <End Role="TB_TEMPLATE_ALIAS" EntitySet="TB_TEMPLATE_ALIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__3F3159AB" Association="Self.FK__TB_TEMPLA__FK_TB__3F3159AB">
+            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
+            <End Role="TB_TEMPLATE_ALIAS" EntitySet="TB_TEMPLATE_ALIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__420DC656" Association="Self.FK__TB_TEMPLA__FK_TB__420DC656">
+            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
+            <End Role="TB_TEMPLATE_EMAIL_BACKUP" EntitySet="TB_TEMPLATE_EMAIL_BACKUP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__4301EA8F" Association="Self.FK__TB_TEMPLA__FK_TB__4301EA8F">
+            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
+            <End Role="TB_TEMPLATE_EMAIL_BACKUP" EntitySet="TB_TEMPLATE_EMAIL_BACKUP" />
           </AssociationSet>
           <AssociationSet Name="FK__TB_VIEW_P__FK_TB__35DCF99B" Association="Self.FK__TB_VIEW_P__FK_TB__35DCF99B">
             <End Role="TB_LOGIN_ROLES" EntitySet="TB_LOGIN_ROLES" />
@@ -411,9 +427,7 @@
           <Property Name="ALIAS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ALIAS_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ALIAS_ISDISABLED" Type="Int32" />
-          <Property Name="FK_TB_TEMPLATE_ID" Type="Int32" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_ALIAS__FK_TB___369C13AA" FromRole="TB_ALIAS" ToRole="TB_TEMPLATE" />
-          <NavigationProperty Name="TB_TEMPLATE1" Relationship="Self.FK__TB_TEMPLA__FK_TB__35A7EF71" FromRole="TB_ALIAS" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.TB_TEMPLATE_ALIAS" FromRole="TB_ALIAS" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_APPROVER">
           <Key>
@@ -431,9 +445,7 @@
           <Property Name="EMAIL_BACKUP_DATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMAIL_BACKUP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMAIL_BACKUP_ISDISABLED" Type="Int32" />
-          <Property Name="FK_TB_TEMPLATE_ID" Type="Int32" />
-          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.FK__TB_EMAIL___FK_TB__39788055" FromRole="TB_EMAIL_BACKUP" ToRole="TB_TEMPLATE" />
-          <NavigationProperty Name="TB_TEMPLATE1" Relationship="Self.FK__TB_TEMPLA__FK_TB__10766AC2" FromRole="TB_EMAIL_BACKUP" ToRole="TB_TEMPLATE" />
+          <NavigationProperty Name="TB_TEMPLATE" Relationship="Self.TB_TEMPLATE_EMAIL_BACKUP" FromRole="TB_EMAIL_BACKUP" ToRole="TB_TEMPLATE" />
         </EntityType>
         <EntityType Name="TB_HIGHLIGHTS">
           <Key>
@@ -546,11 +558,7 @@
           <Property Name="TEMP_INVOICE_FORMAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_INVOICE_TYPE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TEMP_ISDISABLED" Type="Int32" />
-          <NavigationProperty Name="TB_ALIAS" Relationship="Self.FK__TB_ALIAS__FK_TB___369C13AA" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
-          <NavigationProperty Name="TB_ALIAS1" Relationship="Self.FK__TB_TEMPLA__FK_TB__35A7EF71" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
           <NavigationProperty Name="TB_APPROVER" Relationship="Self.FK__TB_TEMPLA__FK_TB__116A8EFB" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
-          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Self.FK__TB_EMAIL___FK_TB__39788055" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
-          <NavigationProperty Name="TB_EMAIL_BACKUP1" Relationship="Self.FK__TB_TEMPLA__FK_TB__10766AC2" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
           <NavigationProperty Name="TB_HIGHLIGHTS" Relationship="Self.FK__TB_HIGHLI__FK_TB__38845C1C" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
           <NavigationProperty Name="TB_HIGHLIGHTS1" Relationship="Self.FK__TB_TEMPLA__FK_TB__0F824689" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
           <NavigationProperty Name="TB_HISTORIC_REMIT" Relationship="Self.FK__TB_HISTOR__FK_TB__379037E3" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
@@ -559,6 +567,8 @@
           <NavigationProperty Name="TB_ORACLE_PAY_TERMS" Relationship="Self.FK__TB_TEMPLA__FK_TB__0D99FE17" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_PAY_TERMS" />
           <NavigationProperty Name="TB_ORACLE_SOURCE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0E8E2250" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_SOURCE" />
           <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="Self.FK__TB_TEMPLA__FK_TB__0CA5D9DE" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
+          <NavigationProperty Name="TB_ALIAS" Relationship="Self.TB_TEMPLATE_ALIAS" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
+          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Self.TB_TEMPLATE_EMAIL_BACKUP" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
         </EntityType>
         <EntityType Name="TB_VIEW_PERMISSIONS">
           <Key>
@@ -573,30 +583,6 @@
           <Property Name="CAN_DELETE" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TB_LOGIN_ROLES" Relationship="Self.FK__TB_VIEW_P__FK_TB__35DCF99B" FromRole="TB_VIEW_PERMISSIONS" ToRole="TB_LOGIN_ROLES" />
         </EntityType>
-        <Association Name="FK__TB_ALIAS__FK_TB___369C13AA">
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="0..1" />
-          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_TEMPLATE">
-              <PropertyRef Name="TEMP_ID" />
-            </Principal>
-            <Dependent Role="TB_ALIAS">
-              <PropertyRef Name="FK_TB_TEMPLATE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__35A7EF71">
-          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="0..1" />
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ALIAS">
-              <PropertyRef Name="ALIAS_ID" />
-            </Principal>
-            <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_TEMPLATE_ALIAS_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TB_TEMPLA__FK_TB__116A8EFB">
           <End Role="TB_APPROVER" Type="Self.TB_APPROVER" Multiplicity="0..1" />
           <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
@@ -606,30 +592,6 @@
             </Principal>
             <Dependent Role="TB_TEMPLATE">
               <PropertyRef Name="FK_TB_APPROVER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_EMAIL___FK_TB__39788055">
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="0..1" />
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_TEMPLATE">
-              <PropertyRef Name="TEMP_ID" />
-            </Principal>
-            <Dependent Role="TB_EMAIL_BACKUP">
-              <PropertyRef Name="FK_TB_TEMPLATE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_TEMPLA__FK_TB__10766AC2">
-          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="0..1" />
-          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_EMAIL_BACKUP">
-              <PropertyRef Name="EMAIL_BACKUP_ID" />
-            </Principal>
-            <Dependent Role="TB_TEMPLATE">
-              <PropertyRef Name="FK_TB_EMAIL_BACKUP_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -753,6 +715,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TB_TEMPLATE_ALIAS">
+          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
+          <End Role="TB_ALIAS" Type="Self.TB_ALIAS" Multiplicity="*" />
+        </Association>
+        <Association Name="TB_TEMPLATE_EMAIL_BACKUP">
+          <End Role="TB_TEMPLATE" Type="Self.TB_TEMPLATE" Multiplicity="*" />
+          <End Role="TB_EMAIL_BACKUP" Type="Self.TB_EMAIL_BACKUP" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="Accounts_Payable_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" />
           <EntitySet Name="TB_APPROVER" EntityType="Self.TB_APPROVER" />
@@ -767,24 +737,8 @@
           <EntitySet Name="TB_ORACLE_TYPE" EntityType="Self.TB_ORACLE_TYPE" />
           <EntitySet Name="TB_TEMPLATE" EntityType="Self.TB_TEMPLATE" />
           <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Self.TB_VIEW_PERMISSIONS" />
-          <AssociationSet Name="FK__TB_ALIAS__FK_TB___369C13AA" Association="Self.FK__TB_ALIAS__FK_TB___369C13AA">
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__35A7EF71" Association="Self.FK__TB_TEMPLA__FK_TB__35A7EF71">
-            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-          </AssociationSet>
           <AssociationSet Name="FK__TB_TEMPLA__FK_TB__116A8EFB" Association="Self.FK__TB_TEMPLA__FK_TB__116A8EFB">
             <End Role="TB_APPROVER" EntitySet="TB_APPROVER" />
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_EMAIL___FK_TB__39788055" Association="Self.FK__TB_EMAIL___FK_TB__39788055">
-            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
-            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__10766AC2" Association="Self.FK__TB_TEMPLA__FK_TB__10766AC2">
-            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
           <AssociationSet Name="FK__TB_HIGHLI__FK_TB__38845C1C" Association="Self.FK__TB_HIGHLI__FK_TB__38845C1C">
@@ -827,6 +781,14 @@
             <End Role="TB_ORACLE_TYPE" EntitySet="TB_ORACLE_TYPE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
+          <AssociationSet Name="TB_TEMPLATE_ALIAS" Association="Self.TB_TEMPLATE_ALIAS">
+            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
+            <End Role="TB_ALIAS" EntitySet="TB_ALIAS" />
+          </AssociationSet>
+          <AssociationSet Name="TB_TEMPLATE_EMAIL_BACKUP" Association="Self.TB_TEMPLATE_EMAIL_BACKUP">
+            <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
+            <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -840,7 +802,6 @@
                 <ScalarProperty Name="ALIAS_ID" ColumnName="ALIAS_ID" />
                 <ScalarProperty Name="ALIAS_NAME" ColumnName="ALIAS_NAME" />
                 <ScalarProperty Name="ALIAS_ISDISABLED" ColumnName="ALIAS_ISDISABLED" />
-                <ScalarProperty Name="FK_TB_TEMPLATE_ID" ColumnName="FK_TB_TEMPLATE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -859,7 +820,6 @@
                 <ScalarProperty Name="EMAIL_BACKUP_DATE" ColumnName="EMAIL_BACKUP_DATE" />
                 <ScalarProperty Name="EMAIL_BACKUP" ColumnName="EMAIL_BACKUP" />
                 <ScalarProperty Name="EMAIL_BACKUP_ISDISABLED" ColumnName="EMAIL_BACKUP_ISDISABLED" />
-                <ScalarProperty Name="FK_TB_TEMPLATE_ID" ColumnName="FK_TB_TEMPLATE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,6 +946,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="TB_TEMPLATE_ALIAS" TypeName="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" StoreEntitySet="TB_TEMPLATE_ALIAS">
+            <EndProperty Name="TB_TEMPLATE">
+              <ScalarProperty Name="TEMP_ID" ColumnName="FK_TB_TEMP_ID" />
+            </EndProperty>
+            <EndProperty Name="TB_ALIAS">
+              <ScalarProperty Name="ALIAS_ID" ColumnName="FK_TB_ALIAS_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TB_TEMPLATE_EMAIL_BACKUP" TypeName="Accounts_Payable_Model.TB_TEMPLATE_EMAIL_BACKUP" StoreEntitySet="TB_TEMPLATE_EMAIL_BACKUP">
+            <EndProperty Name="TB_TEMPLATE">
+              <ScalarProperty Name="TEMP_ID" ColumnName="FK_TB_TEMP_ID" />
+            </EndProperty>
+            <EndProperty Name="TB_EMAIL_BACKUP">
+              <ScalarProperty Name="EMAIL_BACKUP_ID" ColumnName="FK_TB_EMAIL_BACKUP_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

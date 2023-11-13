@@ -55,24 +55,25 @@ namespace AccountsPayable.Controllers
                         // Add date, save to Highlights Table and get ID created
                         HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
                         db.TB_HIGHLIGHTS.Add(HighLightsData);
-                        int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
 
                         // Add date, save to Historic remit Table and get ID created
                         HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
                         db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
-                        int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
 
-                        // Save to template getting id´s from highlights, historicRemit, email, and alias and get saved template ID
+                        // Save to template
+                        templateData.TEMP_ISDISABLED = 0; //setting isdisabled to 0
+                        db.TB_TEMPLATE.Add(templateData);
+                        db.SaveChanges(); // Save changes for external tables
+
+
+                        // Get external tables ID, adding it to template and saving
+                        int newTemplateId = templateData.TEMP_ID;
+                        int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
+                        int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
                         templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
                         templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
-                        db.TB_TEMPLATE.Add(templateData);
-                        db.SaveChanges(); // Save changes for the entire transaction
-                        int newTemplateId = templateData.TEMP_ID;
-
-                        // Update highlights, historicRemit, email, and alias to add template ID
                         HighLightsData.FK_TB_TEMPLATE_ID = newTemplateId;
                         HistoricRemitToData.FK_TB_TEMPLATE_ID = newTemplateId;
-
                         // Save changes once at the end
                         db.SaveChanges();
 
@@ -104,39 +105,50 @@ namespace AccountsPayable.Controllers
                         // Add date, save to Highlights Table and get ID created
                         HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
                         db.TB_HIGHLIGHTS.Add(HighLightsData);
-                        int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
+
 
                         // Add date, save to Historic remit Table and get ID created
                         HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
                         db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
-                        int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
+
 
                         // Add date, save to Email Table and get ID created
                         emailData.EMAIL_BACKUP_DATE = DateTime.Now;
                         emailData.EMAIL_BACKUP_ISDISABLED = 0;//setting isdisabled to 0
                         db.TB_EMAIL_BACKUP.Add(emailData);
-                        int newEmailBackUpId = emailData.EMAIL_BACKUP_ID;
+
 
                         // Save to Alias Table and get ID created
                         aliasData.ALIAS_ISDISABLED = 0;//setting isdisabled to 0
                         db.TB_ALIAS.Add(aliasData);
-                        int newAliasId = aliasData.ALIAS_ID;
+
 
                         // Save to template getting id´s from highlights, historicRemit, email, and alias and get saved template ID
+                        templateData.TEMP_ISDISABLED = 0; //setting isdisabled to 0
+                        db.TB_TEMPLATE.Add(templateData);
+                        db.SaveChanges(); // Save changes for external tables
+
+
+                        // Update highlights, historicRemit, email, and alias to add template ID
+                        int newTemplateId = templateData.TEMP_ID;
+                        int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
+                        int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
+                        int newEmailBackUpId = emailData.EMAIL_BACKUP_ID;
+                        int newAliasId = aliasData.ALIAS_ID;
                         templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
                         templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
                         templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
                         templateData.FK_TB_TEMPLATE_ALIAS_ID = newAliasId;
-                        templateData.TEMP_ISDISABLED = 0; //setting isdisabled to 0
-                        db.TB_TEMPLATE.Add(templateData);
-                        db.SaveChanges(); // Save changes for the entire transaction
-                        int newTemplateId = templateData.TEMP_ID;
-
-                        // Update highlights, historicRemit, email, and alias to add template ID
                         HighLightsData.FK_TB_TEMPLATE_ID = newTemplateId;
                         HistoricRemitToData.FK_TB_TEMPLATE_ID = newTemplateId;
-                        emailData.FK_TB_TEMPLATE_ID = newTemplateId;
-                        aliasData.FK_TB_TEMPLATE_ID = newTemplateId;
+                        
+                        //Saving to alias id and template id to TEMPLATE_ALIAS table
+                        var template = db.TB_TEMPLATE.Find(newTemplateId);
+                        var alias = db.TB_ALIAS.Find(newAliasId);
+                        template.TB_ALIAS.Add(alias);
+                        //Saving Email backup id template id to TEMPLATE_EMAIL_BACKUP table
+                        var email_backup = db.TB_EMAIL_BACKUP.Find(newEmailBackUpId);
+                        template.TB_EMAIL_BACKUP.Add(email_backup);
 
                         // Save changes once at the end
                         db.SaveChanges();
