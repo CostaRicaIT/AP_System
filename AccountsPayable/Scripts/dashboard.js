@@ -19,6 +19,10 @@ function initializeDataTable() {
         ],
         columnDefs: [
             {
+                targets: '_all',
+                visible: false
+            },
+            {
                 targets: 22, // 22 column (0-based index)
                 render: function (data, type, full, meta) {
                     var rowId = full[0]; // Change 0 to the appropriate column index
@@ -27,22 +31,13 @@ function initializeDataTable() {
                         '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
                         '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
                 }
-            },
-            {
-                targets: '_all',
-                visible: false
-            },
-            {
-                targets: defaultColumns,
-                visible: true
-            }
-            
+            }            
         ],
         dom: '<"top"lBf>rt<"bottom"ip>'
 
 
     });
-
+    table.columns(defaultColumns).visible(true);
     $('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
 
@@ -58,7 +53,7 @@ function initializeDataTable() {
     $('#resetColumnsButton').click(function () {
         resetFilters();
     });
-    $('.view-button').click(function () {
+    $('#dataTable').on('click', '.view-button', function () {
         // Extract the ID from the clicked button
         var rowId = $(this).data('id');
 
@@ -70,14 +65,14 @@ function initializeDataTable() {
     });
 
     // Click event handler for the "Edit" button
-    $('.edit-button').click(function () {
+    $('#dataTable').on('click', '.edit-button', function () {
         var rowId = $(this).data('id');
         var redirectUrl = 'Edit/' + rowId;
         window.location.href = redirectUrl;
     });
 
     // Click event handler for the "Erase" button
-    $('.erase-button').click(function () {
+    $('#dataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');
         var redirectUrl = 'Delete/' + rowId;
         window.location.href = redirectUrl;

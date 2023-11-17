@@ -23,6 +23,36 @@ $(document).ready(function () {
         toggleInputState($(this), $('#form-SupName'));
 
     });
+    function updateEmailBackupText(selectedEmail, templateId) {
+        $.ajax({
+            url: '/Main/GetEmailText',
+            type: 'GET',
+            data: { emailId: selectedEmail, id: templateId },
+            success: function (data) {
+                // Check if the data is retrieved successfully
+                if (data.success) {
+                    // Updates the content of the textarea with the historic email text
+                    var emailBackup = data.historicEmailText;
+                    $('#form-BackUpEmail').val(emailBackup);
+                } else {
+                    alert("Failed to get email text. " + data.message);
+                }
+            },
+            error: function () {
+                // Handles any errors that may occur during the AJAX request
+                alert("Error getting email text.");
+            }
+        });
+    }
+
+    // Call the function on dropdown change and page load
+    $('#FK_TB_EMAIL_BACKUP_ID').on('change', function (e) {
+        var selectedEmail = $(this).val();
+        var templateId = $('#templateId').text();
+        if (selectedEmail !== null && templateId !== null){
+            updateEmailBackupText(selectedEmail, templateId);
+        }
+    }).change(); // Trigger the change event on page load
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
@@ -37,7 +67,7 @@ $(document).ready(function () {
     $("#btn-addAlias").click(function (e) {
         var alias = $('#form-AddAlias').val();
         aliasDataList.push({ ALIAS_NAME: alias });
-        $('#AliasToAdd').append($("<option></option>").text(alias));
+        $('#FK_TB_TEMPLATE_ALIAS_ID').append($("<option></option>").text(alias));
         $('#form-AddAlias').val("");
     });
     $("#btn-addEmail").click(function (e) {
@@ -49,67 +79,12 @@ $(document).ready(function () {
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
-    $(".btn-update").click(function (e) {
-        e.preventDefault();
-        var TaxId = $("#form-TaxID").val();
-        var RemitTo = $("#form-RemitTo").val();
-        var SupplierName = $("#form-SupName").val();
-        var SupplierNumber = $("#form-SupNumber").val();
-        var OurVendor = $("#form-OurVendorA").val();
-        var OracleSupplierSite = $("#form-SupSite").val();
-        var OracleAddress = $("#form-Address").val();
-        var OracleLegalEntity = $("#FK_TB_LEGAL_ENTITY_ID").val();
-        var OracleTaxPayerID = $("#form-FirstParty").val();
-        var OracleType = $("#FK_TB_ORACLE_TYPE_ID").val();
-        var OracleDescrption = $("#form-Description").val();
-        var OraclePayTerms = $("#FK_TB_ORACLE_PAY_TERMS_ID").val();
-        var OracleAccountCoding = $("#form-AccountC").val();
-        var OracleSource = $("#FK_TB_ORACLE_SOURCE_ID").val();
-        var OracleNotes = $("#form-OracleN").val();
-        var OracleInstructions = $("#form-OracleI").val();
-        var Approver = $("#FK_TB_APPROVER_ID").val();
-        var ApproverComments = $("#form-ApproverComents").val();
-        var InvoiceFormat = $("#form-InvoiceF").val();
-        var InvoiceType = $("#form-INFType").val();
-        $.ajax({
-            url: '/Main/Update',
-            type: 'POST',
-            data: {
-                TEMP_TAX_ID: TaxId,
-                TEMP_REMIT_TO: RemitTo,
-                TEMP_SUPPLIER_NAME: SupplierName,
-                TEMP_SUPPLIER_NUMBER: SupplierNumber,
-                TEMP_VENDOR_ACCOUNT: OurVendor,
-                TEMP_SUPPLIER_SITE: OracleSupplierSite,
-                TEMP_ADDRESS: OracleAddress,
-                FK_TB_LEGAL_ENTITY_ID: OracleLegalEntity,
-                TEMP_TAXPAYER_ID: OracleTaxPayerID,
-                FK_TB_ORACLE_TYPE_ID: OracleType,
-                TEMP_ORACLE_DESCRIPTION: OracleDescrption,
-                FK_TB_ORACLE_PAY_TERMS_ID: OraclePayTerms,
-                TEMP_ACCOUNT_CODING: OracleAccountCoding,
-                FK_TB_ORACLE_SOURCE_ID: OracleSource,
-                TEMP_ORACLE_NOTES: OracleNotes,
-                TEMP_ORACLE_INSTRUCTIONS: OracleInstructions,
-                FK_TB_APPROVER_ID: Approver,
-                TEMP_APPROVER_COMMENTS: ApproverComments,
-                TEMP_INVOICE_FORMAT: InvoiceFormat,
-                TEMP_INVOICE_TYPE: InvoiceType
-            },
-            success: function (data) {
-                if (data.success) {
-                    document.location.href = window.location.origin + '/Main/Index';
-                }
-            },
-            error: function () {
-                alert("An error occurred while saving the record.");
-            }
-        });
+    $("#btn-update").click(function (e) {
+        update();
     });
 });
 function saveNoAliasEmail() {
     var templateData = {
-        TEMP_TAX_ID: $("#form-TaxID").val(),
         TEMP_REMIT_TO: $("#form-RemitTo").val(),
         TEMP_SUPPLIER_NAME: $("#form-SupName").val(),
         TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val(),
@@ -207,6 +182,67 @@ function SaveWithAliasEmail() {
         type: 'POST',
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList,emailDataList
+        },
+        success: function (data) {
+            if (data.success) {
+                document.location.href = window.location.origin + '/Main/Index';
+            }
+        },
+        error: function () {
+            alert("An error occurred while saving the record.");
+        }
+    });
+
+
+
+}
+
+
+function update() {
+    var templateData = {
+        TEMP_ID: $("#templateId").text(),
+        TEMP_TAX_ID: $("#TEMP_TAX_ID").val(),
+        TEMP_REMIT_TO: $("#TEMP_REMIT_TO").val(),
+        TEMP_SUPPLIER_NAME: $("#TEMP_SUPPLIER_NAME").val(),
+        TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val(),
+        TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val(),
+        TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val(),
+        TEMP_ADDRESS: $("#TEMP_ADDRESS").val(),
+        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val(),
+        TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val(),
+        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val(),
+        TEMP_ORACLE_DESCRIPTION: $("#TEMP_ORACLE_DESCRIPTION").val(),
+        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val(),
+        TEMP_ACCOUNT_CODING: $("#TEMP_ACCOUNT_CODING").val(),
+        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val(),
+        TEMP_ORACLE_NOTES: $("#TEMP_ORACLE_NOTES").val(),
+        TEMP_ORACLE_INSTRUCTIONS: $("#TEMP_ORACLE_INSTRUCTIONS").val(),
+        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val(),
+        TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val(),
+        TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val(),
+        TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val()
+    };
+
+    var HistoricRemitToData = { //data to TB_HISTORIC REMIT
+        HISTORIC_REMIT_INFO: $("#TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO").val()
+    };
+
+    var HighLightsData = { //data to TB_HIGHLIGHTS
+        HIGHLIGHTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS").val(),
+        HIGHLIGHTS_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS").val(),
+        HIGHLIGHTS_INSTRUCTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS").val(),
+        HIGHLIGHTS_EXCEPTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS").val(),
+        HIGHLIGHTS_COMMON_ISSUES: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES").val(),
+        HIGHLIGHTS_SUPPLIER_AGENCY: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY").val(),
+        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS").val(),
+
+    };
+
+    $.ajax({
+        url: '/Main/Edit',
+        type: 'POST',
+        data: {
+            templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
         },
         success: function (data) {
             if (data.success) {
