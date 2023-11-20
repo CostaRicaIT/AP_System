@@ -258,6 +258,7 @@
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Shared\_PartialLayout.cshtml" />
     <Content Include="Views\Main\Edit.cshtml" />
+    <Content Include="Views\Main\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
