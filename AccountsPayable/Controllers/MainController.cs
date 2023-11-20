@@ -212,6 +212,7 @@ namespace AccountsPayable.Controllers
                 ).ToList();
 
             var historicRemitToList = db.TB_HISTORIC_REMIT
+                .Where(x => x.FK_TB_TEMPLATE_ID == id)
                 .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
                 .AsEnumerable()
                 .Select(e => new
@@ -220,29 +221,22 @@ namespace AccountsPayable.Controllers
                     HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }).ToList();
 
-            //var HighLightsToList = db.TB_HIGHLIGHTS
-            //    .Where(e => e.FK_TB_TEMPLATE_ID == id)
-            //    .OrderByDescending(e => e.HIGHLIGHTS_DATE)
-            //    .AsEnumerable()
-            //    .Select(e => new
-            //    {
-            //        FK_TB_TEMPLATE_ID = e.FK_TB_TEMPLATE_ID,
-            //        HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE,
-            //        HIGHLIGHTS = e.HIGHLIGHTS,
-            //        HIGHLIGHTS_COMMENTS = e.HIGHLIGHTS_COMMENTS,
-            //        HIGHLIGHTS_INSTRUCTIONS = e.HIGHLIGHTS_INSTRUCTIONS,
-            //        HIGHLIGHTS_EXCEPTIONS = e.HIGHLIGHTS_EXCEPTIONS,
-            //        HIGHLIGHTS_COMMON_ISSUES = e.HIGHLIGHTS_COMMON_ISSUES,
-            //        HIGHLIGHTS_SUPPLIER_AGENCY = e.HIGHLIGHTS_SUPPLIER_AGENCY,
-            //        HIGHLIGHTS_TEMPLATE_COMMENTS = e.HIGHLIGHTS_COMMENTS
-            //    })
-            //    .ToList();
+            var HighLightsToList = db.TB_HIGHLIGHTS
+                .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                .OrderByDescending(e => e.HIGHLIGHTS_DATE)
+                .AsEnumerable()
+                .Select(e => new
+                {                    
+                    HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
+                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
+                })
+                .ToList();
 
             var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
 
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
             ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGLHIGTHS");
+            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
             ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_TEMPLATE.FK_TB_LEGAL_ENTITY_ID);
             ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_PAY_TERMS_ID);
             ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_SOURCE_ID);
@@ -430,8 +424,55 @@ namespace AccountsPayable.Controllers
 
             }
         }
+        [HttpGet]
+        public ActionResult GetHistoricRemitText(int historicId, int id)
+        {
+            // Get the text based on the ID
+            var historicText = db.TB_HISTORIC_REMIT
+                    .Where(a => a.HISTORIC_REMIT_ID == historicId)
+                    .Select(item => item.HISTORIC_REMIT_INFO)
+                    .FirstOrDefault();
+
+            if (historicText != null)
+            {
+                return Json(new { success = true, historicText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
 
+        [HttpGet]
+        public ActionResult GetHighlights(int highlightsId, int id)
+        {
+            // Get the text based on the ID
+            var historicText = db.TB_HIGHLIGHTS
+                    .Where(a => a.HIGHLIGHTS_ID == highlightsId)
+                    .Select(item =>new
+                    {
+                        HIGHLIGHTS = item.HIGHLIGHTS,
+                        HIGHLIGHTS_COMMENTS = item.HIGHLIGHTS_COMMENTS,
+                        HIGHLIGHTS_INSTRUCTIONS = item.HIGHLIGHTS_INSTRUCTIONS,
+                        HIGHLIGHTS_EXCEPTIONS = item.HIGHLIGHTS_EXCEPTIONS,
+                        HIGHLIGHTS_COMMON_ISSUES = item.HIGHLIGHTS_COMMON_ISSUES,
+                        HIGHLIGHTS_SUPPLIER_AGENCY = item.HIGHLIGHTS_SUPPLIER_AGENCY,
+                        HIGHLIGHTS_TEMPLATE_COMMENTS = item.HIGHLIGHTS_TEMPLATE_COMMENTS,
+                    })
+                    .FirstOrDefault();
+
+            if (historicText != null)
+            {
+                return Json(new { success = true, historicText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
         //public ActionResult CreateAlias([Bind(Include = "ALIAS_NAME")] TB_ALIAS tB_ALIAS)
         //{

@@ -45,6 +45,56 @@ $(document).ready(function () {
         });
     }
 
+    function updateHistoricRemit(selectedHistoric, templateId) {
+        $.ajax({
+            url: '/Main/GetHistoricRemitText',
+            type: 'GET',
+            data: { historicId: selectedHistoric, id: templateId },
+            success: function (data) {
+                // Check if the data is retrieved successfully
+                if (data.success) {
+                    // Updates the content of the textarea with the historic email text
+                    var historicRemit = data.historicText;
+                    $('#historicRemitInfoView').val(historicRemit);
+                } else {
+                    alert("Failed to get historic Remit text. " + data.message);
+                }
+            },
+            error: function () {
+                // Handles any errors that may occur during the AJAX request
+                alert("Error get historic Remit text.");
+            }
+        });
+    }
+
+    function updateHighLigthsText(selectedHighLight, templateId) {
+        $.ajax({
+            url: '/Main/GetHighlights',
+            type: 'GET',
+            data: { highlightsId: selectedHighLight, id: templateId },
+            success: function (data) {
+                // Check if the data is retrieved successfully
+                if (data.success) {
+
+                    // Updates the content of the textarea with the highlights text
+                    $('#HighlightsHistoryView').val(data.historicText.HIGHLIGHTS);
+                    $('#HighlightsCHistoryView').val(data.historicText.HIGHLIGHTS_COMMENTS);
+                    $('#InstructionsHistoryView').val(data.historicText.HIGHLIGHTS_INSTRUCTIONS);
+                    $('#ExceptionsHistoryView').val(data.historicText.HIGHLIGHTS_EXCEPTIONS);
+                    $('#MostCIHistoryView').val(data.historicText.HIGHLIGHTS_COMMON_ISSUES);
+                    $('#SupplierAHistoryView').val(data.historicText.HIGHLIGHTS_SUPPLIER_AGENCY);
+                    $('#TemplateCHistoryView').val(data.historicText.HIGHLIGHTS_COMMENTS);
+                } else {
+                    alert("Failed to get highlights text. " + data.message);
+                }
+            },
+            error: function () {
+                // Handles any errors that may occur during the AJAX request
+                alert("Error get historic Remit text.");
+            }
+        });
+    }
+
     // Call the function on dropdown change and page load
     $('#FK_TB_EMAIL_BACKUP_ID').on('change', function (e) {
         var selectedEmail = $(this).val();
@@ -53,9 +103,29 @@ $(document).ready(function () {
             updateEmailBackupText(selectedEmail, templateId);
         }
     }).change(); // Trigger the change event on page load
+
+    $('#FK_TB_HIGHLIGHTS').on('change', function (e) {
+        var selectedHighLight = $(this).val();
+        var templateId = $('#templateId').text();
+        if (selectedHighLight !== null && templateId !== null) {
+            updateHighLigthsText(selectedHighLight, templateId);
+        }
+    }).change(); // Trigger the change event on page load
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
+
+    $('#FK_TB_TEMPLATE_HISTORIC_REMIT_ID').on('change', function (e) {
+        var selectedHistoric = $(this).val();
+        var templateId = $('#templateId').text();
+        if (selectedHistoric !== null && templateId !== null) {
+            updateHistoricRemit(selectedHistoric, templateId);
+        }
+    }).change(); // Trigger the change event on page load
+    $(".btn-cancel").click(function () {
+        document.location.href = window.location.origin + '/Main/Index';
+    });
+
     $("#NoAddAlias_Emailbtn").click(function (e) {
         e.preventDefault();
         saveNoAliasEmail();

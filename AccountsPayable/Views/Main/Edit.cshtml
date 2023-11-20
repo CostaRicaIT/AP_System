@@ -82,15 +82,15 @@
                     </div>
                 </div>
 
-                @*<div class="col-md-4">
-                        <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit" disabled>Add Historic Remit to</button>
-                        <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal" disabled>View Historic Remit to</button>
-                    </div>*@
+                <div class="col-md-4">
+                    @*<button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit" disabled>Add Historic Remit to</button>*@
+                    <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
+                </div>
             </div>
             <!--Modal to see historic remit -->
-            @* <div id="ShowHistoricRemitModal" class="modal">
+            <div id="ShowHistoricRemitModal" class="modal">
                 <div class="modal-content">
-                    <span class="close">&times;</span>
+                    <span id="cancelButton" class="close">&times;</span>
                     <div class="row">
                         <div class="control-label col-md-12">
                             <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
@@ -100,16 +100,16 @@
                             </div>
                         </div>
                     </div>
-                         <!--Select Historic Remit to -->
-                       <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                       @Html.DropDownList("FK_TB_TEMPLATE_HISTORIC_REMIT_ID", null, htmlAttributes: new { @size = "5" })
+                    <!--Select Historic Remit to -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                @Html.DropDownList("FK_TB_TEMPLATE_HISTORIC_REMIT_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
+                            </div>
                         </div>
                     </div>
                 </div>
-                    </div>
-                    </div>*@
+            </div>
 
             <!-- Our Vendor # / Account # -->
             <div class="form-group">
@@ -148,7 +148,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID"></label>
                     <div class="col-md-7">
-                        @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size="5"})
+                        @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
                     </div>
                 </div>
             </div>
@@ -158,19 +158,19 @@
     </div>
     <!--Add Alias modal-->
     @*<div id="AddAliasModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-            <div>
-                <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
+                <div>
+                    <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
+                </div>
+                <div>
+                    <br />
+                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
+                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
+                </div>
             </div>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-            </div>
-        </div>
-    </div>*@
+        </div>*@
     <br />
     <!-- Oracle and Apps Section -->
     <div class="form-section">
@@ -331,12 +331,12 @@
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                @*<div class="col-md-4">
-                        <div class="col-md-10">
-                            <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>
-                            <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights" >View History</button>
-                        </div>
-                    </div>*@
+                <div class="col-md-4">
+                    <div class="col-md-10">
+                        @*<button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>*@
+                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Highlights Comments -->
@@ -453,45 +453,43 @@
     </div>-->
 
     <!--Show Highlights modal-->
-    <!--<div id="ShowHighlights" class="modal">
+    <div id="ShowHighlights" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>-->
-    <!-- Highlights -->
+            <span id="cancelButton "class="close">&times;</span>
+            @*Highlights*@
 
-    <!--<p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-    <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80"></textarea>-->
+            <p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
+            <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Highlights Comments -->
-    <!--<p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-    <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80"></textarea>-->
+            @*Highlights Comments*@
+            <p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
+            <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Instructions -->
-    <!--<p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-    <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80"></textarea>-->
+            @*Instructions*@
+            <p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
+            <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Exceptions -->
-    <!--<p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-    <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80"></textarea>-->
+            @*Exceptions*@
+            <p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
+            <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Most Common Issues -->
-    <!--<p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-    <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80"></textarea>-->
+            @*Most Common Issues*@
+            <p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
+            <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Supplier Agency -->
-    <!--<p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-    <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80"></textarea>-->
+            @*Supplier Agency*@
+            <p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
+            <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80"></textarea>
 
-    <!-- Template Comments -->
-    <!--<p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
+            @*Template Comments*@
+            <p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
             <textarea class="form-control" id="TemplateCHistoryView" rows="4" cols="80"></textarea>
-
+            <br />
             <div class="form-row">
-                <select id="form-SelectHighlightsHistoric" size="4">
-                    <option>Select an option</option>
-                </select>
+                @Html.DropDownList("FK_TB_HIGHLIGHTS", null, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
-    </div>-->
+    </div>
 
     <br />
 
@@ -512,8 +510,8 @@
             </div>
         </div>
 
-    <!--Select Mails Dropdown -->
-    <div class="form-group">
+        <!--Select Mails Dropdown -->
+        <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
                     <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
@@ -545,9 +543,9 @@
                 </div>
             </div>
         </div>
-        </div>
-        <br />
-    
+    </div>
+    <br />
+
     <!-- Approver Section -->
     <div class="form-section">
         <div class="section-title">Approver</div>
@@ -612,31 +610,31 @@
 
     <!--Save Changes modal-->
     @*<div id="ShowSaveModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Save Changes</h4>
-                <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="row">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Save Changes</h4>
+                    <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
 
-                        <h4 class="text-center">
-                            Would you like to add additional information to the template: <br />
-                            Alias / Backup Emails?
-                        </h4>
-                        <br />
-                        <div>
-                            <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
-                            <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
+                            <h4 class="text-center">
+                                Would you like to add additional information to the template: <br />
+                                Alias / Backup Emails?
+                            </h4>
+                            <br />
+                            <div>
+                                <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
+                                <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <!--Add alias / Backup emails modal-->
     <!--<div id="ShowAddAlias_EmailModal" class="modal" tabindex="-1" role="dialog">
@@ -648,35 +646,35 @@
                 </button>
             </div>
             <div class="modal-body">-->
-                <!--Alias section-->
-                <!--<div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
+    <!--Alias section-->
+    <!--<div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
 
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <br />
-                            <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                <select name="Alias" id="AliasToAdd" class="form-control" size="5">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <br />-->
+            </div>
+            <div class="col-md-4">
+                <br />
+                <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <select name="Alias" id="AliasToAdd" class="form-control" size="5">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />-->
 
-                <!--Email section-->
-                <!--<div class="form-group">
+    <!--Email section-->
+    <!--<div class="form-group">
                     <div class=" row">
                         <div class="col-md-6">
                             <label class="control-label col-md-8" for="form-BackUpEmails">Back Up Emails:</label>
