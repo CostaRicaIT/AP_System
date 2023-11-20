@@ -99,7 +99,7 @@ $(document).ready(function () {
     $('#FK_TB_EMAIL_BACKUP_ID').on('change', function (e) {
         var selectedEmail = $(this).val();
         var templateId = $('#templateId').text();
-        if (selectedEmail !== null && templateId !== null){
+        if (selectedEmail !== null && templateId !== null) {
             updateEmailBackupText(selectedEmail, templateId);
         }
     }).change(); // Trigger the change event on page load
@@ -136,15 +136,23 @@ $(document).ready(function () {
     });
     $("#btn-addAlias").click(function (e) {
         var alias = $('#form-AddAlias').val();
-        aliasDataList.push({ ALIAS_NAME: alias });
-        $('#FK_TB_TEMPLATE_ALIAS_ID').append($("<option></option>").text(alias));
-        $('#form-AddAlias').val("");
+        if (alias != "") {
+            aliasDataList.push({ ALIAS_NAME: alias });
+            $('#FK_TB_TEMPLATE_ALIAS_ID').append($("<option></option>").text(alias));
+            $('#form-AddAlias').val("");
+        } else {
+            alert("Alias cant be empty");
+        }
     });
     $("#btn-addEmail").click(function (e) {
         var email = $('#form-BackUpEmails').val();
-        emailDataList.push({ EMAIL_BACKUP: email });
-        $('#EmailsToAdd').append($("<option></option>").text(email));
-        $('#form-BackUpEmails').val("");
+        if (email !="") {
+            emailDataList.push({ EMAIL_BACKUP: email });
+            $('#EmailsToAdd').append($("<option></option>").text(email));
+            $('#form-BackUpEmails').val("");
+        } else {
+            alert("Backup email cant be empty");
+        }
     });
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
@@ -153,6 +161,10 @@ $(document).ready(function () {
         update();
     });
 });
+
+function validateForm() {
+
+}
 function saveNoAliasEmail() {
     var templateData = {
         TEMP_REMIT_TO: $("#form-RemitTo").val(),
@@ -245,13 +257,13 @@ function SaveWithAliasEmail() {
         HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val(),
         HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val(),
 
-    }; 
+    };
 
     $.ajax({
         url: '/Main/CreateWithEmail_Alias',
         type: 'POST',
         data: {
-            templateData, HistoricRemitToData, HighLightsData, aliasDataList,emailDataList
+            templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
         },
         success: function (data) {
             if (data.success) {

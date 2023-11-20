@@ -226,7 +226,7 @@ namespace AccountsPayable.Controllers
                 .OrderByDescending(e => e.HIGHLIGHTS_DATE)
                 .AsEnumerable()
                 .Select(e => new
-                {                    
+                {
                     HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
                     HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
                 })
@@ -262,20 +262,32 @@ namespace AccountsPayable.Controllers
                         {
                             // Update template properties
 
+                            // Update highlights data if there are changes
+                            if (HighLightsData.HIGHLIGHTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS
+                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
+                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                            {
+                                HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                                db.TB_HIGHLIGHTS.Add(HighLightsData);
+                            }
 
-                            // Update highlights data
-                            HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                            HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
-                            db.TB_HIGHLIGHTS.Add(HighLightsData);
+                            // Update historic remit data if there are changes
+                            if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
+                            {
+                                HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                                db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                            }
 
-
-                            // Update historic remit data
-                            HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                            HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
-                            db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
 
                             // Update email data
-                            if (emailDataList != null)
+                            if (emailDataList != null && emailDataList.Any())
                             {
                                 foreach (var emailData in emailDataList)
                                 {
@@ -301,7 +313,7 @@ namespace AccountsPayable.Controllers
                             }
 
                             // Update alias data
-                            if (aliasDataList != null)
+                            if (aliasDataList != null && aliasDataList.Any())
                             {
                                 foreach (var aliasData in aliasDataList)
                                 {
@@ -329,10 +341,46 @@ namespace AccountsPayable.Controllers
                             db.SaveChanges();
 
                             // Set foreign key properties for templateData after saving changes
-                            templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = HistoricRemitToData.HISTORIC_REMIT_ID;
-                            templateData.FK_TB_HIGHLIGHTS_ID = HighLightsData.HIGHLIGHTS_ID;
-                            templateData.FK_TB_EMAIL_BACKUP_ID = emailDataList.LastOrDefault()?.EMAIL_BACKUP_ID; // Adjust this according to your needs
-                            templateData.FK_TB_TEMPLATE_ALIAS_ID = aliasDataList.LastOrDefault()?.ALIAS_ID;
+                            int newHistoricRemit = (int)(HistoricRemitToData?.HISTORIC_REMIT_ID);
+                            int newHighlightsId = (int)(HighLightsData?.HIGHLIGHTS_ID);
+                            if (newHistoricRemit != 0)
+                            {
+                                templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = HistoricRemitToData?.HISTORIC_REMIT_ID;
+                            }
+                            else
+                            {
+                                templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = existingTemplate.FK_TB_TEMPLATE_HISTORIC_REMIT_ID;
+                            }
+                            if (newHighlightsId != 0)
+                            {
+                                templateData.FK_TB_HIGHLIGHTS_ID = HighLightsData?.HIGHLIGHTS_ID;
+                            }
+                            else
+                            {
+                                templateData.FK_TB_HIGHLIGHTS_ID = existingTemplate.FK_TB_HIGHLIGHTS_ID;
+                            }
+
+
+
+                            if (emailDataList != null && emailDataList.Any())
+                            {
+                                templateData.FK_TB_EMAIL_BACKUP_ID = emailDataList.LastOrDefault()?.EMAIL_BACKUP_ID;
+                            }
+                            else
+                            {
+
+                                templateData.FK_TB_EMAIL_BACKUP_ID = existingTemplate.FK_TB_EMAIL_BACKUP_ID;
+                            }
+
+                            if (aliasDataList != null && aliasDataList.Any())
+                            {
+                                templateData.FK_TB_TEMPLATE_ALIAS_ID = aliasDataList.LastOrDefault()?.ALIAS_ID;
+                            }
+                            else
+                            {
+
+                                templateData.FK_TB_TEMPLATE_ALIAS_ID = existingTemplate.FK_TB_TEMPLATE_ALIAS_ID;
+                            }
                             templateData.TEMP_ISDISABLED = 0;
                             db.Entry(existingTemplate).CurrentValues.SetValues(templateData);
                             db.SaveChanges();
@@ -507,7 +555,7 @@ namespace AccountsPayable.Controllers
             // Get the text based on the ID
             var historicText = db.TB_HIGHLIGHTS
                     .Where(a => a.HIGHLIGHTS_ID == highlightsId)
-                    .Select(item =>new
+                    .Select(item => new
                     {
                         HIGHLIGHTS = item.HIGHLIGHTS,
                         HIGHLIGHTS_COMMENTS = item.HIGHLIGHTS_COMMENTS,
