@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [6, 2, 3, 4, 9, 1, 22]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 3, 4, 5, 9, 2, 22]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
 
@@ -8,7 +8,7 @@ function initializeDataTable() {
         stateSave: false,
         responsive: true,
         dom: 'lBfrtip',
-        order: [[0,'desc']],
+        order: [[0, 'desc']],
         buttons: [
             {
                 text: '<i class="fas fa-filter"></i>',
@@ -32,7 +32,7 @@ function initializeDataTable() {
                         '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
                         '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
                 }
-            }            
+            }
         ],
         dom: '<"top"lBf>rt<"bottom"ip>'
 
