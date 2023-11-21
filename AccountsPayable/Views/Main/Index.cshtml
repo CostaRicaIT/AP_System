@@ -5,7 +5,9 @@
 }
 
 
-<h2>Index</h2>
+<h2> </h2>
+<br />
+<br />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
 <link rel="stylesheet" href="~/Content/table.css" />
@@ -41,6 +43,7 @@
                 <th>Approver Comments</th>
                 <th>Invoice Format</th>
                 <th>Invoice Type</th>
+                <th>Email Backup</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -71,10 +74,11 @@
                     <td>@item.TEMP_APPROVER_COMMENTS</td>
                     <td>@item.TEMP_INVOICE_FORMAT</td>
                     <td>@item.TEMP_INVOICE_TYPE</td>
+                    <td>@item.EMAIL_BACKUP</td>
                     <td></td>
 
                 </tr>
-        }
+            }
         </tbody>
     </table>
 </div>
@@ -96,8 +100,8 @@
                     <i class="fa fa-eye"></i> Show Columns
                 </button><br />
                 @*<button id="saveColumnsButton" class="btn btn-link">
-                    <i class="fa fa-save"></i> Save Columns
-                </button><br />*@
+                        <i class="fa fa-save"></i> Save Columns
+                    </button><br />*@
                 <button id="resetColumnsButton" class="btn btn-link">
                     <i class="fa fa-undo"></i> Reset Columns
                 </button><br />
@@ -208,6 +212,10 @@
 
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="21"> Invoice Type
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="22"> Email backup
                 </label><br>
 
             </div>

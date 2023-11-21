@@ -44,6 +44,13 @@ namespace AccountsPayable.Controllers
                 item.ALIAS_NAME = aliasItem != null ? aliasItem.ALIAS_NAME : null;
             }
 
+            foreach (var item in templates)
+            {
+                var emailBackupItem = item.TB_EMAIL_BACKUP.FirstOrDefault(a => a.EMAIL_BACKUP_ID == item.FK_TB_EMAIL_BACKUP_ID);
+                item.EMAIL_BACKUP = emailBackupItem != null ? emailBackupItem.EMAIL_BACKUP : null;
+            }
+
+
             return View(templates);
         }
 

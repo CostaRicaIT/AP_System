@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 3, 4, 5, 9, 2, 22]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 3, 4, 5, 9, 2, 23]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
 
@@ -24,7 +24,7 @@ function initializeDataTable() {
                 visible: false
             },
             {
-                targets: 22, // 22 column (0-based index)
+                targets: 23, // 23 column (0-based index)
                 render: function (data, type, full, meta) {
                     var rowId = full[0]; // Change 0 to the appropriate column index
                     // Define the custom buttons in the Actions column
