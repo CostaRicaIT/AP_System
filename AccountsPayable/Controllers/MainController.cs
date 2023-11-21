@@ -111,21 +111,25 @@ namespace AccountsPayable.Controllers
 
 
                         // Add date, save to Email Table
-                        foreach (var emailData in emailDataList)
+                        if (emailDataList != null && emailDataList.Any())
                         {
-                            emailData.EMAIL_BACKUP_ISDISABLED = 0;
-                            emailData.EMAIL_BACKUP_DATE = DateTime.Now;
-                            db.TB_EMAIL_BACKUP.Add(emailData);
+                            foreach (var emailData in emailDataList)
+                            {
+                                emailData.EMAIL_BACKUP_ISDISABLED = 0;
+                                emailData.EMAIL_BACKUP_DATE = DateTime.Now;
+                                db.TB_EMAIL_BACKUP.Add(emailData);
+                            }
                         }
 
                         // Save to Alias Table 
-
-                        foreach (var aliasData in aliasDataList)
+                        if (aliasDataList != null && aliasDataList.Any())
                         {
-                            aliasData.ALIAS_ISDISABLED = 0;
-                            db.TB_ALIAS.Add(aliasData);
+                            foreach (var aliasData in aliasDataList)
+                            {
+                                aliasData.ALIAS_ISDISABLED = 0;
+                                db.TB_ALIAS.Add(aliasData);
+                            }
                         }
-
 
 
                         // Save to template getting id´s from highlights, historicRemit, email, and alias and get saved template ID
@@ -135,38 +139,45 @@ namespace AccountsPayable.Controllers
 
 
                         // Update highlights, historicRemit, email, and alias to add template ID
+                        int newAliasId = 0;
+                        int newEmailBackUpId = 0;
                         int newTemplateId = templateData.TEMP_ID;
                         int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
                         int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
-                        int newAliasId = 0; //Initializing newAliasId and newEmailBackUpId
-                        int newEmailBackUpId = 0;
                         HighLightsData.FK_TB_TEMPLATE_ID = newTemplateId;
                         HistoricRemitToData.FK_TB_TEMPLATE_ID = newTemplateId;
 
                         //Saving to alias id and template id to TEMPLATE_ALIAS table
-                        List<int> savedAliasIds = aliasDataList.Select(x => x.ALIAS_ID).ToList();
-                        var template = db.TB_TEMPLATE.Find(newTemplateId);
-                        foreach (int aliasId in savedAliasIds)
-                        {
-                            var alias = db.TB_ALIAS.Find(aliasId);
-                            template.TB_ALIAS.Add(alias);
-                        }
 
+                        var template = db.TB_TEMPLATE.Find(newTemplateId);
+                        if (aliasDataList != null && aliasDataList.Any())
+                        {
+                            List<int> savedAliasIds = aliasDataList.Select(x => x.ALIAS_ID).ToList();
+                            foreach (int aliasId in savedAliasIds)
+                            {
+                                var alias = db.TB_ALIAS.Find(aliasId);
+                                template.TB_ALIAS.Add(alias);
+                            }
+                            newAliasId = savedAliasIds.LastOrDefault(); //getting the last Alias and Email backup saved
+                            templateData.FK_TB_TEMPLATE_ALIAS_ID = newAliasId;
+                        }
 
                         //Saving Email backup id template id to TEMPLATE_EMAIL_BACKUP table
-                        List<int> savedEmailsIds = emailDataList.Select(x => x.EMAIL_BACKUP_ID).ToList();
-                        foreach (int emailId in savedEmailsIds)
-                        {
-                            var email = db.TB_EMAIL_BACKUP.Find(emailId);
-                            template.TB_EMAIL_BACKUP.Add(email);
-                        }
 
-                        newAliasId = savedAliasIds.LastOrDefault(); //getting the last Alias and Email backup saved
-                        newEmailBackUpId = savedEmailsIds.LastOrDefault();
-                        templateData.FK_TB_TEMPLATE_ALIAS_ID = newAliasId;
+                        if (emailDataList != null && emailDataList.Any())
+                        {
+                            List<int> savedEmailsIds = emailDataList.Select(x => x.EMAIL_BACKUP_ID).ToList();
+                            foreach (int emailId in savedEmailsIds)
+                            {
+                                var email = db.TB_EMAIL_BACKUP.Find(emailId);
+                                template.TB_EMAIL_BACKUP.Add(email);
+
+                            }
+                            templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
+                        }
                         templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
                         templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
-                        templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
+
                         // Save changes once at the end
                         db.SaveChanges();
 

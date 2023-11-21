@@ -9,11 +9,8 @@ openModalBtns.forEach(function (button) {
         var form = document.getElementById('form');
 
         if (modalId == 'ShowSaveModal') {
-            if (form.checkValidity()) {
+            if (checkFormValidity()) {
                 modal.style.display = "block";
-            } else {
-                alert("Please fill all the required fields")
-
             }
         } else {
             modal.style.display = "block";

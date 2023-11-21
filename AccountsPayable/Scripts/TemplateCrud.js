@@ -13,17 +13,20 @@ $(document).ready(function () {
     // Listen for the change in the checkboxes and adjust the status of the corresponding input field
     $('#BoxNoTaxId').change(function () {
         toggleInputState($(this), $('#form-TaxID'));
+        toggleInputState($(this), $('#TEMP_TAX_ID'));
     });
 
     $('#BoxNoRemitInfo').change(function () {
         toggleInputState($(this), $('#form-RemitTo'));
+        toggleInputState($(this), $('#TEMP_REMIT_TO'));
     });
 
     $('#BoxSupName').change(function () {
         toggleInputState($(this), $('#form-SupName'));
+        toggleInputState($(this), $('#TEMP_SUPPLIER_NAME'));
 
     });
-    function updateEmailBackupText(selectedEmail, templateId) {
+    function getEmailBackupText(selectedEmail, templateId) {
         $.ajax({
             url: '/Main/GetEmailText',
             type: 'GET',
@@ -45,7 +48,7 @@ $(document).ready(function () {
         });
     }
 
-    function updateHistoricRemit(selectedHistoric, templateId) {
+    function getHistoricRemitText(selectedHistoric, templateId) {
         $.ajax({
             url: '/Main/GetHistoricRemitText',
             type: 'GET',
@@ -67,7 +70,7 @@ $(document).ready(function () {
         });
     }
 
-    function updateHighLigthsText(selectedHighLight, templateId) {
+    function getHighLigthsText(selectedHighLight, templateId) {
         $.ajax({
             url: '/Main/GetHighlights',
             type: 'GET',
@@ -100,7 +103,7 @@ $(document).ready(function () {
         var selectedEmail = $(this).val();
         var templateId = $('#templateId').text();
         if (selectedEmail !== null && templateId !== null) {
-            updateEmailBackupText(selectedEmail, templateId);
+            getEmailBackupText(selectedEmail, templateId);
         }
     }).change(); // Trigger the change event on page load
 
@@ -108,7 +111,7 @@ $(document).ready(function () {
         var selectedHighLight = $(this).val();
         var templateId = $('#templateId').text();
         if (selectedHighLight !== null && templateId !== null) {
-            updateHighLigthsText(selectedHighLight, templateId);
+            getHighLigthsText(selectedHighLight, templateId);
         }
     }).change(); // Trigger the change event on page load
     $(".btn-cancel").click(function () {
@@ -119,7 +122,7 @@ $(document).ready(function () {
         var selectedHistoric = $(this).val();
         var templateId = $('#templateId').text();
         if (selectedHistoric !== null && templateId !== null) {
-            updateHistoricRemit(selectedHistoric, templateId);
+            getHistoricRemitText(selectedHistoric, templateId);
         }
     }).change(); // Trigger the change event on page load
     $(".btn-cancel").click(function () {
@@ -146,7 +149,7 @@ $(document).ready(function () {
     });
     $("#btn-addEmail").click(function (e) {
         var email = $('#form-BackUpEmails').val();
-        if (email !="") {
+        if (email != "") {
             emailDataList.push({ EMAIL_BACKUP: email });
             $('#EmailsToAdd').append($("<option></option>").text(email));
             $('#form-BackUpEmails').val("");
@@ -158,13 +161,51 @@ $(document).ready(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
     $("#btn-update").click(function (e) {
-        update();
+        if (checkFormValidity()) {
+            update();
+        }
     });
 });
+function checkFormValidity() {
+    var form = $("#form")[0];
 
-function validateForm() {
+    // Reset previous error messages and remove focus
+    $(".validation-message").remove();
+    $(":input").removeClass("invalid-field");
 
+    var firstInvalidField = null;
+
+    // Check each input field for validity
+    $(form).find(":input").each(function () {
+        // Check if the field is required and not empty
+        if (this.required && !$(this).val()) {
+            // Display a message in a label associated with the field
+            $(this).closest('div').append('<label class="validation-message text-danger">' + 'This field is required</label>');
+
+            // Add a class to highlight the invalid field
+            $(this).addClass("invalid-field");
+
+            // Set focus to the first invalid field
+            if (!firstInvalidField) {
+                firstInvalidField = this;
+            }
+        }
+    });
+
+    if (firstInvalidField) {
+        firstInvalidField.focus();
+    }
+
+    if (form.checkValidity()) {
+        // The form is valid, you can proceed with your logic
+        return true;
+    } else {
+        // The form is invalid, you can display an overall error message or handle it accordingly
+        alert("Please fill all the required fields");
+        return false;
+    }
 }
+
 function saveNoAliasEmail() {
     var templateData = {
         TEMP_REMIT_TO: $("#form-RemitTo").val(),
