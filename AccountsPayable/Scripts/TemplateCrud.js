@@ -27,25 +27,27 @@ $(document).ready(function () {
 
     });
     function getEmailBackupText(selectedEmail, templateId) {
-        $.ajax({
-            url: '/Main/GetEmailText',
-            type: 'GET',
-            data: { emailId: selectedEmail, id: templateId },
-            success: function (data) {
-                // Check if the data is retrieved successfully
-                if (data.success) {
-                    // Updates the content of the textarea with the historic email text
-                    var emailBackup = data.historicEmailText;
-                    $('#form-BackUpEmail').val(emailBackup);
-                } else {
-                    alert("Failed to get email text. " + data.message);
+        if (selectedEmail != 0) {
+            $.ajax({
+                url: '/Main/GetEmailText',
+                type: 'GET',
+                data: { emailId: selectedEmail, id: templateId },
+                success: function (data) {
+                    // Check if the data is retrieved successfully
+                    if (data.success) {
+                        // Updates the content of the textarea with the historic email text
+                        var emailBackup = data.historicEmailText;
+                        $('#form-BackUpEmail').val(emailBackup);
+                    } else {
+                        alert("Failed to get email text." + data.message);
+                    }
+                },
+                error: function () {
+                    // Handles any errors that may occur during the AJAX request
+                    alert("Error getting email text.");
                 }
-            },
-            error: function () {
-                // Handles any errors that may occur during the AJAX request
-                alert("Error getting email text.");
-            }
-        });
+            });
+        }
     }
 
     function getHistoricRemitText(selectedHistoric, templateId) {
@@ -147,12 +149,13 @@ $(document).ready(function () {
             alert("Alias cant be empty");
         }
     });
-    $("#btn-addEmail").click(function (e) {
-        var email = $('#form-BackUpEmails').val();
+    $("#ButtonAddEmail").click(function (e) {
+        var email = $('#form-BackUpEmail').val();
+        var date = new Date();
+        var formattedDate = date.toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
         if (email != "") {
             emailDataList.push({ EMAIL_BACKUP: email });
-            $('#EmailsToAdd').append($("<option></option>").text(email));
-            $('#form-BackUpEmails').val("");
+            $('#FK_TB_EMAIL_BACKUP_ID').append($("<option></option>").text(formattedDate).attr('value', '0'));
         } else {
             alert("Backup email cant be empty");
         }

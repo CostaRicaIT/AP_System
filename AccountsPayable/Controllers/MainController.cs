@@ -26,10 +26,27 @@ namespace AccountsPayable.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            var tB_TEMPLATE = db.TB_TEMPLATE.Include(t => t.TB_APPROVER).Include(t => t.TB_EMAIL_BACKUP).Include(t => t.TB_HIGHLIGHTS).Include(t => t.TB_ORACLE_LEGAL_ENTITIES).Include(t => t.TB_ORACLE_PAY_TERMS).Include(t => t.TB_ORACLE_SOURCE).Include(t => t.TB_ORACLE_TYPE);
-            return View(tB_TEMPLATE.ToList());
+            var tB_TEMPLATE = db.TB_TEMPLATE
+                .Include(t => t.TB_APPROVER)
+                .Include(t => t.TB_EMAIL_BACKUP)
+                .Include(t => t.TB_HIGHLIGHTS)
+                .Include(t => t.TB_ORACLE_LEGAL_ENTITIES)
+                .Include(t => t.TB_ORACLE_PAY_TERMS)
+                .Include(t => t.TB_ORACLE_SOURCE)
+                .Include(t => t.TB_ORACLE_TYPE)
+                .Include(t => t.TB_ALIAS); // Include the TB_ALIAS
 
+            var templates = tB_TEMPLATE.ToList();
+
+            foreach (var item in templates)
+            {
+                var aliasItem = item.TB_ALIAS.FirstOrDefault(a => a.ALIAS_ID == item.FK_TB_TEMPLATE_ALIAS_ID);
+                item.ALIAS_NAME = aliasItem != null ? aliasItem.ALIAS_NAME : null;
+            }
+
+            return View(templates);
         }
+
 
         public ActionResult Create()
         {

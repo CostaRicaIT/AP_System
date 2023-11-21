@@ -5,9 +5,10 @@ function initializeDataTable() {
 
     table = $('#dataTable').DataTable({
         autoWidth: true,
-        stateSave: true,
+        stateSave: false,
         responsive: true,
         dom: 'lBfrtip',
+        order: [[0,'desc']],
         buttons: [
             {
                 text: '<i class="fas fa-filter"></i>',

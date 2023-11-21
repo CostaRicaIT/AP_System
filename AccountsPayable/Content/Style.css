@@ -56,3 +56,12 @@ Change style when hovering over the button
 .error-message{
     color:red;
 }
+input.form-control:disabled{
+    background-color:#fff !important;
+}
+textarea.form-control:disabled {
+    background-color: #fff !important;
+}
+select.form-control:disabled {
+    background-color: #fff !important;
+}
