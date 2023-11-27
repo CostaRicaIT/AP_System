@@ -68,6 +68,10 @@ namespace AccountsPayable.Controllers
         [HttpPost]
         public ActionResult CreateNoEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData) //Create when Alias and email backup are not filled
         {
+            var dateTimeUTC = DateTime.UtcNow;
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
@@ -75,11 +79,11 @@ namespace AccountsPayable.Controllers
                     if (ModelState.IsValid)
                     {
                         // Add date, save to Highlights Table and get ID created
-                        HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                        HighLightsData.HIGHLIGHTS_DATE = targetTime;
                         db.TB_HIGHLIGHTS.Add(HighLightsData);
 
                         // Add date, save to Historic remit Table and get ID created
-                        HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                        HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                         db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
 
                         // Save to template
@@ -118,6 +122,9 @@ namespace AccountsPayable.Controllers
         [HttpPost]
         public ActionResult CreateWithEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
         {
+            var dateTimeUTC = DateTime.UtcNow;
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
@@ -125,12 +132,12 @@ namespace AccountsPayable.Controllers
                     if (ModelState.IsValid)
                     {
                         // Add date, save to Highlights Table and get ID created
-                        HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                        HighLightsData.HIGHLIGHTS_DATE = targetTime;
                         db.TB_HIGHLIGHTS.Add(HighLightsData);
 
 
                         // Add date, save to Historic remit Table and get ID created
-                        HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                        HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                         db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
 
 
@@ -140,7 +147,7 @@ namespace AccountsPayable.Controllers
                             foreach (var emailData in emailDataList)
                             {
                                 emailData.EMAIL_BACKUP_ISDISABLED = 0;
-                                emailData.EMAIL_BACKUP_DATE = DateTime.Now;
+                                emailData.EMAIL_BACKUP_DATE = targetTime;
                                 db.TB_EMAIL_BACKUP.Add(emailData);
                             }
                         }
@@ -284,6 +291,9 @@ namespace AccountsPayable.Controllers
         [HttpPost]
         public ActionResult Edit(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
         {
+            var dateTimeUTC = DateTime.UtcNow;
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
@@ -308,7 +318,7 @@ namespace AccountsPayable.Controllers
                                 || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
                             {
                                 HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                                HighLightsData.HIGHLIGHTS_DATE = DateTime.Now;
+                                HighLightsData.HIGHLIGHTS_DATE = targetTime;
                                 db.TB_HIGHLIGHTS.Add(HighLightsData);
                             }
 
@@ -316,7 +326,7 @@ namespace AccountsPayable.Controllers
                             if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
                             {
                                 HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                                HistoricRemitToData.HISTORIC_REMIT_DATE = DateTime.Now;
+                                HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                                 db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                             }
 
@@ -327,7 +337,7 @@ namespace AccountsPayable.Controllers
                                 foreach (var emailData in emailDataList)
                                 {
                                     emailData.EMAIL_BACKUP_ISDISABLED = 0;
-                                    emailData.EMAIL_BACKUP_DATE = DateTime.Now;
+                                    emailData.EMAIL_BACKUP_DATE = targetTime;
 
                                     // Check if emailData already exists
                                     var existingEmail = db.TB_EMAIL_BACKUP.Find(emailData.EMAIL_BACKUP_ID);
