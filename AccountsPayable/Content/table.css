@@ -6,3 +6,11 @@
     font-size: 14px !important;
     display: inline-table !important
 }
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+.dataTables_filter input {
+    width: 400px
+}

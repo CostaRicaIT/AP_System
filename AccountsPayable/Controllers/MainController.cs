@@ -34,7 +34,8 @@ namespace AccountsPayable.Controllers
                 .Include(t => t.TB_ORACLE_PAY_TERMS)
                 .Include(t => t.TB_ORACLE_SOURCE)
                 .Include(t => t.TB_ORACLE_TYPE)
-                .Include(t => t.TB_ALIAS); // Include the TB_ALIAS
+                .Include(t => t.TB_ALIAS)
+                .Where(t => t.TEMP_ISDISABLED == 0);
 
             var templates = tB_TEMPLATE.ToList();
 
@@ -511,6 +512,7 @@ namespace AccountsPayable.Controllers
             ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
             return View(tB_TEMPLATE);
         }
+
 
         //[HttpGet]
         //public ActionResult GetHistoryInfo()
