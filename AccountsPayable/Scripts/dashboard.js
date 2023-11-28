@@ -6,6 +6,8 @@ function initializeDataTable() {
         autoWidth: true,
         stateSave: false,
         responsive: true,
+        scrollCollapse: true,
+        scrollY: '60vh',
         dom: 'lBfrtip',
         order: [[0, 'desc']],
         buttons: [
