@@ -18,13 +18,18 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select/*,
+select /*,
 textarea*/ {
     max-width: 280px;
 }
 
+body {
+    padding-top: 80px;
+}
+
+
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
     background-color: #777;
-    border-color: #fff
+    border-color: #fff;
 }
