@@ -75,8 +75,22 @@ function initializeDataTable() {
     // Click event handler for the "Erase" button
     $('#dataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');
-        var redirectUrl = 'Delete/' + rowId;
-        window.location.href = redirectUrl;
+        var confirmDelete = confirm("Are you sure you want to delete this Template?");
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '/Main/Delete/' + rowId,
+                headers: {
+                    'X-HTTP-Method-Override': 'DELETE'
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $('#row_' + rowId).remove();
+                        document.location.reload();
+                    }
+                }
+            });
+        }
     });
 }
 function showFilterModal() {
@@ -115,3 +129,23 @@ function resetFilters() {
 $(document).ready(function () {
     initializeDataTable();
 });
+
+    window.onscroll = function() {
+        scrollFunction();
+        };
+
+    function scrollFunction() {
+            var scrollToTopButton = document.getElementById("scrollToTop");
+
+            // Show or hide the button based on scroll position
+            if (document.body.scrollTop > document.body.scrollHeight / 2 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 2) {
+        scrollToTopButton.style.display = "block";
+            } else {
+        scrollToTopButton.style.display = "none";
+            }
+        }
+
+    function scrollToTop() {
+        document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+        }

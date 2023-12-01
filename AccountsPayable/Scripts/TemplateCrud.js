@@ -1,5 +1,24 @@
 ﻿var aliasDataList = [];
 var emailDataList = [];
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    var scrollToTopButton = document.getElementById("scrollToTop");
+
+    // Show or hide the button based on scroll position
+    if (document.body.scrollTop > document.body.scrollHeight / 3 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 3) {
+        scrollToTopButton.style.display = "block";
+    } else {
+        scrollToTopButton.style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 $(document).ready(function () {
     // Function to disable or enable the input field according to the status of the checkbox.
     function toggleInputState(checkbox, input) {
