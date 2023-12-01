@@ -2,12 +2,15 @@
 var defaultColumns = [1, 3, 4, 5, 9, 2, 23]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
-
     table = $('#dataTable').DataTable({
+        orderCellsTop: true,
         autoWidth: true,
         stateSave: false,
         responsive: true,
-        dom: 'lBfrtip',
+        scrollCollapse: true,
+        scrollY: '60vh',
+        scrollX: '50vh',
+        dom: '<"top"lBf>rt<"bottom"ip>',
         order: [[0, 'desc']],
         buttons: [
             {
@@ -24,17 +27,40 @@ function initializeDataTable() {
                 visible: false
             },
             {
-                targets: 23, // 23 column (0-based index)
+                targets: 23,
                 render: function (data, type, full, meta) {
-                    var rowId = full[0]; // Change 0 to the appropriate column index
-                    // Define the custom buttons in the Actions column
+                    var rowId = full[0];
                     return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
                         '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
                         '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
                 }
             }
         ],
-        dom: '<"top"lBf>rt<"bottom"ip>'
+        language: {
+            searchPlaceholder: "Search..."
+        },
+        //initComplete: function () {
+        //    this.api().columns().every(function () {
+        //        var column = this;
+        //        var title = column.footer().textContent;
+
+        //        // Create input element and add event listener
+        //        var inputElement = $('<input type="text" placeholder="Search ' + title + '" />')
+        //            .appendTo($(column.footer()).empty())
+        //            .on('keyup change clear', function () {
+        //                if (column.search() !== this.value) {
+        //                    column.search(this.value).draw();
+        //                }
+        //            });
+
+        //        // Hide search input for actions column (index 23)
+        //        if (column.index() === 23) {
+        //            inputElement.hide();
+        //        }
+        //    });
+
+        //},
+
 
 
     });

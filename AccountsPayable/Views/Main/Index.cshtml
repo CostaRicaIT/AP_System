@@ -4,10 +4,6 @@
     ViewBag.Title = "AP Templates | Dashboard";
 }
 
-
-<h2> </h2>
-<br />
-<br />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
 <link rel="stylesheet" href="~/Content/table.css" />
@@ -48,6 +44,34 @@
                 <th>Action</th>
             </tr>
         </thead>
+        @*<tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Alias</th>
+                <th>Tax ID</th>
+                <th>Remit To</th>
+                <th>Supplier Name</th>
+                <th>Supplier Number</th>
+                <th>Vendor Account</th>
+                <th>Supplier Site</th>
+                <th>Address</th>
+                <th>Legal Entity</th>
+                <th>Tax Payer ID</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Pay Terms</th>
+                <th>Account coding</th>
+                <th>Source</th>
+                <th>Oracle Notes</th>
+                <th>Oracle Instructions</th>
+                <th>Approver</th>
+                <th>Approver Comments</th>
+                <th>Invoice Format</th>
+                <th>Invoice Type</th>
+                <th>Email Backup</th>
+                <th></th>
+            </tr>
+        </tfoot>*@
         <tbody>
             @foreach (var item in Model)
             {
@@ -126,9 +150,9 @@
             </div>
             <div class="modal-body">
 
-                <label>
+                @*<label>
                     <input type="checkbox" class="toggle-column" data-column="0"> ID
-                </label><br>
+                </label><br>*@
 
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="1"> Alias
@@ -168,7 +192,7 @@
 
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="10"> Tex Payer ID
+                    <input type="checkbox" class="toggle-column" data-column="10"> Tax Payer ID
                 </label><br>
 
                 <label>
