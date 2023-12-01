@@ -1,15 +1,8 @@
 ﻿var table; // Declare the 'table' variable in a global scope
 var defaultColumns = [1, 3, 4, 5, 9, 2, 23]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
-$(document).ready(function () {
-    // Setup - add a text input to each footer cell
-    $('#dataTable thead tr:eq(1) th').each(function () {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search ' + title + '" class="column_search" />');
-    });
-    
 
-    // DataTable
-    var table = $('#dataTable').DataTable({
+function initializeDataTable() {
+    table = $('#dataTable').DataTable({
         orderCellsTop: true,
         autoWidth: true,
         stateSave: false,
@@ -17,7 +10,7 @@ $(document).ready(function () {
         scrollCollapse: true,
         scrollY: '60vh',
         scrollX: '50vh',
-        dom: 'lBfrtip',
+        dom: '<"top"lBf>rt<"bottom"ip>',
         order: [[0, 'desc']],
         buttons: [
             {
@@ -46,18 +39,30 @@ $(document).ready(function () {
         language: {
             searchPlaceholder: "Search..."
         },
-        dom: '<"top"lBf>rt<"bottom"ip>'
-    });
-    table.on('draw.dt', function () {
-        table.columns(23).header().to$().find('input').hide();
-    });
-    // Apply the search
-    $('#dataTable thead').on('keyup', ".column_search", function () {
+        //initComplete: function () {
+        //    this.api().columns().every(function () {
+        //        var column = this;
+        //        var title = column.footer().textContent;
 
-        table
-            .column($(this).parent().index())
-            .search(this.value)
-            .draw();
+        //        // Create input element and add event listener
+        //        var inputElement = $('<input type="text" placeholder="Search ' + title + '" />')
+        //            .appendTo($(column.footer()).empty())
+        //            .on('keyup change clear', function () {
+        //                if (column.search() !== this.value) {
+        //                    column.search(this.value).draw();
+        //                }
+        //            });
+
+        //        // Hide search input for actions column (index 23)
+        //        if (column.index() === 23) {
+        //            inputElement.hide();
+        //        }
+        //    });
+
+        //},
+
+
+
     });
     table.columns(defaultColumns).visible(true);
     $('a.toggle-vis').on('click', function (e) {
@@ -99,37 +104,40 @@ $(document).ready(function () {
         var redirectUrl = 'Delete/' + rowId;
         window.location.href = redirectUrl;
     });
-    function showFilterModal() {
-        // Open the modal
-        $('#toggleColumnsModal').modal('show');
+}
+function showFilterModal() {
+    // Open the modal
+    $('#toggleColumnsModal').modal('show');
 
-        // Initialize the checkboxes in the modal based on current visibility
+    // Initialize the checkboxes in the modal based on current visibility
+    $('.toggle-column').each(function () {
+        var columnIdx = $(this).data('column');
+        var isVisible = table.column(columnIdx).visible();
+        $(this).prop('checked', isVisible);
+    });
+
+    // Save button click event
+    $('#saveColumnVisibility').on('click', function () {
+        // Iterate through checkboxes and update column visibility
         $('.toggle-column').each(function () {
             var columnIdx = $(this).data('column');
-            var isVisible = table.column(columnIdx).visible();
-            $(this).prop('checked', isVisible);
+            var isVisible = $(this).is(':checked');
+            table.column(columnIdx).visible(isVisible);
         });
 
-        // Save button click event
-        $('#saveColumnVisibility').on('click', function () {
-            // Iterate through checkboxes and update column visibility
-            $('.toggle-column').each(function () {
-                var columnIdx = $(this).data('column');
-                var isVisible = $(this).is(':checked');
-                table.column(columnIdx).visible(isVisible);
-            });
+        // Close the modal
+        $('#toggleColumnsModal').modal('hide');
+    });
+}
 
-            // Close the modal
-            $('#toggleColumnsModal').modal('hide');
-        });
-    }
+function resetFilters() {
+    table.columns().visible(false);
+    table.state.clear();
+    $('#filtersModal').modal('hide');
+    table.columns(defaultColumns).visible(true);
+}
 
-    function resetFilters() {
-        table.columns().visible(false);
-        table.state.clear();
-        $('#filtersModal').modal('hide');
-        table.columns(defaultColumns).visible(true);
-    }
-
-
+// Call the function to initialize the DataTable when the document is ready
+$(document).ready(function () {
+    initializeDataTable();
 });
