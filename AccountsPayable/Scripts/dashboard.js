@@ -156,22 +156,22 @@ $(document).ready(function () {
     initializeDataTable();
 });
 
-    window.onscroll = function() {
-        scrollFunction();
-        };
+    //window.onscroll = function() {
+    //    scrollFunction();
+    //    };
 
-    function scrollFunction() {
-            var scrollToTopButton = document.getElementById("scrollToTop");
+    //function scrollFunction() {
+    //        var scrollToTopButton = document.getElementById("scrollToTop");
 
-            // Show or hide the button based on scroll position
-            if (document.body.scrollTop > document.body.scrollHeight / 2 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 2) {
-        scrollToTopButton.style.display = "block";
-            } else {
-        scrollToTopButton.style.display = "none";
-            }
-        }
+    //        // Show or hide the button based on scroll position
+    //        if (document.body.scrollTop > document.body.scrollHeight / 2 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 2) {
+    //    scrollToTopButton.style.display = "block";
+    //        } else {
+    //    scrollToTopButton.style.display = "none";
+    //        }
+    //    }
 
-    function scrollToTop() {
-        document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-        }
+    //function scrollToTop() {
+    //    document.body.scrollTop = 0;
+    //document.documentElement.scrollTop = 0;
+    //    }

@@ -6834,12 +6834,11 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 .footer_c {
+    bottom: 0;
+    width: 100%;
     color: #EAF2F8;
     text-align: center;
-    margin-left: auto;
-    margin-top: 40px;
-    padding-top: 10px;
+    padding: 10px;
     height: 40px;
-    width: auto;
     background-color: #3B1E08;
 }
