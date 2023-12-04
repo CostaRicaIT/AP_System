@@ -12,5 +12,5 @@ tfoot input {
     box-sizing: border-box;
 }
 .dataTables_filter input {
-    width: 800px
+    width: 300px;
 }

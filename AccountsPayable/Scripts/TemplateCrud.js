@@ -159,7 +159,7 @@ $(document).ready(function () {
         SaveWithAliasEmail();
     });
     $("#btn-addAlias").click(function (e) {
-        var alias = $('#form-AddAlias').val();
+        var alias = $('#form-AddAlias').val().replace(/[<>]/g, '');
         if (alias != "") {
             aliasDataList.push({ ALIAS_NAME: alias });
             $('#FK_TB_TEMPLATE_ALIAS_ID').append($("<option></option>").text(alias));
@@ -169,7 +169,7 @@ $(document).ready(function () {
         }
     });
     $("#ButtonAddEmail").click(function (e) {
-        var email = $('#form-BackUpEmail').val();
+        var email = $('#form-BackUpEmail').val().replace(/[<>]/g, '');
         var date = new Date();
         var formattedDate = date.toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
         if (email != "") {
@@ -230,39 +230,39 @@ function checkFormValidity() {
 
 function saveNoAliasEmail() {
     var templateData = {
-        TEMP_REMIT_TO: $("#form-RemitTo").val(),
-        TEMP_SUPPLIER_NAME: $("#form-SupName").val(),
-        TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val(),
-        TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val(),
-        TEMP_SUPPLIER_SITE: $("#form-SupSite").val(),
-        TEMP_ADDRESS: $("#form-Address").val(),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val(),
-        TEMP_TAXPAYER_ID: $("#form-FirstParty").val(),
-        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val(),
-        TEMP_ORACLE_DESCRIPTION: $("#form-Description").val(),
-        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val(),
-        TEMP_ACCOUNT_CODING: $("#form-AccountC").val(),
-        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val(),
-        TEMP_ORACLE_NOTES: $("#form-OracleN").val(),
-        TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val(),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val(),
-        TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val(),
-        TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val(),
-        TEMP_INVOICE_TYPE: $("#form-INFType").val()
+        TEMP_REMIT_TO: $("#form-RemitTo").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NAME: $("#form-SupName").val().replace(/[<>]/g, ''),
+        TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_SITE: $("#form-SupSite").val().replace(/[<>]/g, ''),
+        TEMP_ADDRESS: $("#form-Address").val().replace(/[<>]/g, ''),
+        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        TEMP_TAXPAYER_ID: $("#form-FirstParty").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_DESCRIPTION: $("#form-Description").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
+        TEMP_ACCOUNT_CODING: $("#form-AccountC").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_NOTES: $("#form-OracleN").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val().replace(/[<>]/g, ''),
+        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
+        TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
-        HISTORIC_REMIT_INFO: $("#form-HistRemitTo").val()
+        HISTORIC_REMIT_INFO: $("#form-HistRemitTo").val().replace(/[<>]/g, '')
     };
 
     var HighLightsData = { //data to TB_HIGHLIGHTS
-        HIGHLIGHTS: $("#form-Higlights").val(),
-        HIGHLIGHTS_COMMENTS: $("#form-HiglightsC").val(),
-        HIGHLIGHTS_INSTRUCTIONS: $("#form-Instructions").val(),
-        HIGHLIGHTS_EXCEPTIONS: $("#form-Exceptions").val(),
-        HIGHLIGHTS_COMMON_ISSUES: $("#form-MostCI").val(),
-        HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val(),
-        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val(),
+        HIGHLIGHTS: $("#form-Higlights").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMENTS: $("#form-HiglightsC").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_INSTRUCTIONS: $("#form-Instructions").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_EXCEPTIONS: $("#form-Exceptions").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMON_ISSUES: $("#form-MostCI").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val().replace(/[<>]/g, ''),
 
     };
 
@@ -286,39 +286,39 @@ function saveNoAliasEmail() {
 function SaveWithAliasEmail() {
     var templateData = {
         TEMP_TAX_ID: $("#form-TaxID").val(),
-        TEMP_REMIT_TO: $("#form-RemitTo").val(),
-        TEMP_SUPPLIER_NAME: $("#form-SupName").val(),
-        TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val(),
-        TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val(),
-        TEMP_SUPPLIER_SITE: $("#form-SupSite").val(),
-        TEMP_ADDRESS: $("#form-Address").val(),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val(),
-        TEMP_TAXPAYER_ID: $("#form-FirstParty").val(),
-        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val(),
-        TEMP_ORACLE_DESCRIPTION: $("#form-Description").val(),
-        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val(),
-        TEMP_ACCOUNT_CODING: $("#form-AccountC").val(),
-        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val(),
-        TEMP_ORACLE_NOTES: $("#form-OracleN").val(),
-        TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val(),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val(),
-        TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val(),
-        TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val(),
-        TEMP_INVOICE_TYPE: $("#form-INFType").val()
+        TEMP_REMIT_TO: $("#form-RemitTo").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NAME: $("#form-SupName").val().replace(/[<>]/g, ''),
+        TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_SITE: $("#form-SupSite").val().replace(/[<>]/g, ''),
+        TEMP_ADDRESS: $("#form-Address").val().replace(/[<>]/g, ''),
+        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        TEMP_TAXPAYER_ID: $("#form-FirstParty").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_DESCRIPTION: $("#form-Description").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
+        TEMP_ACCOUNT_CODING: $("#form-AccountC").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_NOTES: $("#form-OracleN").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val().replace(/[<>]/g, ''),
+        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
+        TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
-        HISTORIC_REMIT_INFO: $("#form-HistRemitTo").val()
+        HISTORIC_REMIT_INFO: $("#form-HistRemitTo").val().replace(/[<>]/g, '')
     };
 
     var HighLightsData = { //data to TB_HIGHLIGHTS
-        HIGHLIGHTS: $("#form-Higlights").val(),
-        HIGHLIGHTS_COMMENTS: $("#form-HiglightsC").val(),
-        HIGHLIGHTS_INSTRUCTIONS: $("#form-Instructions").val(),
-        HIGHLIGHTS_EXCEPTIONS: $("#form-Exceptions").val(),
-        HIGHLIGHTS_COMMON_ISSUES: $("#form-MostCI").val(),
-        HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val(),
-        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val(),
+        HIGHLIGHTS: $("#form-Higlights").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMENTS: $("#form-HiglightsC").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_INSTRUCTIONS: $("#form-Instructions").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_EXCEPTIONS: $("#form-Exceptions").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMON_ISSUES: $("#form-MostCI").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val().replace(/[<>]/g, ''),
 
     };
 
@@ -341,51 +341,55 @@ function SaveWithAliasEmail() {
 
 
 }
-
+function sanitizeData(inputText) {
+    inputText = inputText.replace(/[<>]/g, '');
+    return inputText
+}
 
 function update() {
     var templateData = {
-        TEMP_ID: $("#templateId").text(),
-        TEMP_TAX_ID: $("#TEMP_TAX_ID").val(),
-        TEMP_REMIT_TO: $("#TEMP_REMIT_TO").val(),
-        TEMP_SUPPLIER_NAME: $("#TEMP_SUPPLIER_NAME").val(),
-        TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val(),
-        TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val(),
-        TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val(),
-        TEMP_ADDRESS: $("#TEMP_ADDRESS").val(),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val(),
-        TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val(),
-        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val(),
-        TEMP_ORACLE_DESCRIPTION: $("#TEMP_ORACLE_DESCRIPTION").val(),
-        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val(),
-        TEMP_ACCOUNT_CODING: $("#TEMP_ACCOUNT_CODING").val(),
-        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val(),
-        TEMP_ORACLE_NOTES: $("#TEMP_ORACLE_NOTES").val(),
-        TEMP_ORACLE_INSTRUCTIONS: $("#TEMP_ORACLE_INSTRUCTIONS").val(),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val(),
-        TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val(),
-        TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val(),
-        TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val()
+        TEMP_ID: $("#templateId").text().replace(/[<>]/g, ''),
+        TEMP_TAX_ID: $("#TEMP_TAX_ID").val().replace(/[<>]/g, ''),
+        TEMP_REMIT_TO: $("#TEMP_REMIT_TO").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NAME: $("#TEMP_SUPPLIER_NAME").val().replace(/[<>]/g, ''),
+        TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val().replace(/[<>]/g, ''),
+        TEMP_ADDRESS: $("#TEMP_ADDRESS").val().replace(/[<>]/g, ''),
+        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_DESCRIPTION: $("#TEMP_ORACLE_DESCRIPTION").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
+        TEMP_ACCOUNT_CODING: $("#TEMP_ACCOUNT_CODING").val().replace(/[<>]/g, ''),
+        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_NOTES: $("#TEMP_ORACLE_NOTES").val().replace(/[<>]/g, ''),
+        TEMP_ORACLE_INSTRUCTIONS: $("#TEMP_ORACLE_INSTRUCTIONS").val().replace(/[<>]/g, ''),
+        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
+        TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
-        HISTORIC_REMIT_INFO: $("#TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO").val()
+        HISTORIC_REMIT_INFO: $("#TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO").val().replace(/[<>]/g, '')
     };
 
     var HighLightsData = { //data to TB_HIGHLIGHTS
-        HIGHLIGHTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS").val(),
-        HIGHLIGHTS_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS").val(),
-        HIGHLIGHTS_INSTRUCTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS").val(),
-        HIGHLIGHTS_EXCEPTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS").val(),
-        HIGHLIGHTS_COMMON_ISSUES: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES").val(),
-        HIGHLIGHTS_SUPPLIER_AGENCY: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY").val(),
-        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS").val(),
+        HIGHLIGHTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_INSTRUCTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_EXCEPTIONS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_COMMON_ISSUES: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_SUPPLIER_AGENCY: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY").val().replace(/[<>]/g, ''),
+        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS").val().replace(/[<>]/g, ''),
 
     };
 
     $.ajax({
         url: '/Main/Edit',
         type: 'POST',
+        
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
         },

@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="~/Content/table.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/staterestore/1.3.0/css/stateRestore.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<p>
-    <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
 <div class="container">
-    <table id="dataTable" class="table cell-border stripe display responsive">
+    <p>
+        <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+
+    <table id="dataTable" class="table cell-border stripe display" width="100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -45,33 +45,33 @@
             </tr>
         </thead>
         @*<tfoot>
-            <tr>
-                <th>ID</th>
-                <th>Alias</th>
-                <th>Tax ID</th>
-                <th>Remit To</th>
-                <th>Supplier Name</th>
-                <th>Supplier Number</th>
-                <th>Vendor Account</th>
-                <th>Supplier Site</th>
-                <th>Address</th>
-                <th>Legal Entity</th>
-                <th>Tax Payer ID</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Pay Terms</th>
-                <th>Account coding</th>
-                <th>Source</th>
-                <th>Oracle Notes</th>
-                <th>Oracle Instructions</th>
-                <th>Approver</th>
-                <th>Approver Comments</th>
-                <th>Invoice Format</th>
-                <th>Invoice Type</th>
-                <th>Email Backup</th>
-                <th></th>
-            </tr>
-        </tfoot>*@
+                <tr>
+                    <th>ID</th>
+                    <th>Alias</th>
+                    <th>Tax ID</th>
+                    <th>Remit To</th>
+                    <th>Supplier Name</th>
+                    <th>Supplier Number</th>
+                    <th>Vendor Account</th>
+                    <th>Supplier Site</th>
+                    <th>Address</th>
+                    <th>Legal Entity</th>
+                    <th>Tax Payer ID</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Pay Terms</th>
+                    <th>Account coding</th>
+                    <th>Source</th>
+                    <th>Oracle Notes</th>
+                    <th>Oracle Instructions</th>
+                    <th>Approver</th>
+                    <th>Approver Comments</th>
+                    <th>Invoice Format</th>
+                    <th>Invoice Type</th>
+                    <th>Email Backup</th>
+                    <th></th>
+                </tr>
+            </tfoot>*@
         <tbody>
             @foreach (var item in Model)
             {

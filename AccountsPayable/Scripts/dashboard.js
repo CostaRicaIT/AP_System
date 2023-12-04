@@ -9,7 +9,7 @@ function initializeDataTable() {
         responsive: true,
         scrollCollapse: true,
         scrollY: '60vh',
-        scrollX: '50vh',
+        scrollX: '80vh',
         dom: '<"top"lBf>rt<"bottom"ip>',
         order: [[0, 'desc']],
         buttons: [
@@ -37,7 +37,8 @@ function initializeDataTable() {
             }
         ],
         language: {
-            searchPlaceholder: "Search..."
+            search:"",
+            searchPlaceholder: "Search... "
         },
         //initComplete: function () {
         //    this.api().columns().every(function () {
