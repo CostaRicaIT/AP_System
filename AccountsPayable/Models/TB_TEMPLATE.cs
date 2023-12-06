@@ -48,7 +48,7 @@ namespace AccountsPayable.Models
         public string TEMP_APPROVER_COMMENTS { get; set; }
         public string TEMP_INVOICE_FORMAT { get; set; }
         public string TEMP_INVOICE_TYPE { get; set; }
-        public Nullable<int> TEMP_ISDISABLED { get; set; }
+        public int TEMP_ISDISABLED { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -65,7 +65,5 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_ALIAS> TB_ALIAS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
-        public string ALIAS_NAME { get; internal set; }
-        public string EMAIL_BACKUP { get; internal set; }
     }
 }

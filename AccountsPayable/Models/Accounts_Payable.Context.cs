@@ -38,5 +38,6 @@ namespace AccountsPayable.Models
         public virtual DbSet<TB_ORACLE_TYPE> TB_ORACLE_TYPE { get; set; }
         public virtual DbSet<TB_TEMPLATE> TB_TEMPLATE { get; set; }
         public virtual DbSet<TB_VIEW_PERMISSIONS> TB_VIEW_PERMISSIONS { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

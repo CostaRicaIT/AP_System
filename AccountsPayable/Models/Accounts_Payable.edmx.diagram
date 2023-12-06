@@ -31,6 +31,7 @@
         <AssociationConnector Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0CA5D9DE" ManuallyRouted="false" />
         <AssociationConnector Association="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" ManuallyRouted="false" />
         <AssociationConnector Association="Accounts_Payable_Model.TB_TEMPLATE_EMAIL_BACKUP" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Accounts_Payable_Model.sysdiagram" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
