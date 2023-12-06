@@ -136,63 +136,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accounts_Payable.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Accounts_Payable.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Accounts_Payable.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_ALIAS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_APPROVER.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_EMAIL_BACKUP.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_HIGHLIGHTS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_HISTORIC_REMIT.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_LOGIN_ROLES.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_LOG_IN.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_ORACLE_LEGAL_ENTITIES.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_ORACLE_PAY_TERMS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_ORACLE_SOURCE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_ORACLE_TYPE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_TEMPLATE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TB_VIEW_PERMISSIONS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,25 +151,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Accounts_Payable.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-      <LastGenOutput>Accounts_Payable.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Accounts_Payable.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-      <LastGenOutput>Accounts_Payable.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Accounts_Payable.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Accounts_Payable.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Accounts_Payable.edmx.diagram">
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CRUDHistoric.js" />
     <Content Include="Scripts\dashboard.js" />
@@ -265,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\SignOut\" />
   </ItemGroup>
   <ItemGroup>
