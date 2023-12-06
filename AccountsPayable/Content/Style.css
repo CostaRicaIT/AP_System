@@ -65,3 +65,19 @@ textarea.form-control:disabled {
 select.form-control:disabled {
     background-color: #fff !important;
 }
+
+#scrollToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3B1E08;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+    #scrollToTop:hover {
+        background-color: #65350F;
+    }

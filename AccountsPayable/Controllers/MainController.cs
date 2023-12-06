@@ -36,7 +36,12 @@ namespace AccountsPayable.Controllers
                 .Include(t => t.TB_ORACLE_TYPE)
                 .Include(t => t.TB_ALIAS); // Include the TB_ALIAS
 
-            var templates = tB_TEMPLATE.ToList();
+            
+            var templates = from t in db.TB_TEMPLATE
+                            where t.TEMP_ISDISABLED != 1
+                            select t; 
+            tB_TEMPLATE.ToList();
+
 
             foreach (var item in templates)
             {
@@ -87,7 +92,7 @@ namespace AccountsPayable.Controllers
                         db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
 
                         // Save to template
-                        templateData.TEMP_ISDISABLED = 0; //setting isdisabled to 0
+                        /*templateData.TEMP_ISDISABLED = 0;*/ //setting isdisabled to 0
                         db.TB_TEMPLATE.Add(templateData);
                         db.SaveChanges(); // Save changes for external tables
 
@@ -164,7 +169,7 @@ namespace AccountsPayable.Controllers
 
 
                         // Save to template getting id´s from highlights, historicRemit, email, and alias and get saved template ID
-                        templateData.TEMP_ISDISABLED = 0; //setting isdisabled to 0
+                        /*templateData.TEMP_ISDISABLED = 0;*/ //setting isdisabled to 0
                         db.TB_TEMPLATE.Add(templateData);
                         db.SaveChanges(); // Save changes for external tables
 
@@ -426,7 +431,7 @@ namespace AccountsPayable.Controllers
 
                                 templateData.FK_TB_TEMPLATE_ALIAS_ID = existingTemplate.FK_TB_TEMPLATE_ALIAS_ID;
                             }
-                            templateData.TEMP_ISDISABLED = 0;
+                            //templateData.TEMP_ISDISABLED = 0;
                             db.Entry(existingTemplate).CurrentValues.SetValues(templateData);
                             db.SaveChanges();
 
@@ -510,6 +515,23 @@ namespace AccountsPayable.Controllers
             ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
             ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
             return View(tB_TEMPLATE);
+        }
+
+
+        [HttpDelete]
+        public ActionResult DELETE(int? id, int disabled = 1)
+        {
+            TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.Find(id);
+            if (tB_TEMPLATE.TEMP_ISDISABLED != 1)
+            {
+                tB_TEMPLATE.TEMP_ISDISABLED = disabled;
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
         }
 
         //[HttpGet]

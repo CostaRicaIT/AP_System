@@ -2,12 +2,15 @@
 var defaultColumns = [1, 3, 4, 5, 9, 2, 23]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
-
     table = $('#dataTable').DataTable({
+        orderCellsTop: true,
         autoWidth: true,
         stateSave: false,
         responsive: true,
-        dom: 'lBfrtip',
+        scrollCollapse: true,
+        scrollY: '60vh',
+        scrollX: '80vh',
+        dom: '<"top"lBf>rt<"bottom"ip>',
         order: [[0, 'desc']],
         buttons: [
             {
@@ -24,17 +27,41 @@ function initializeDataTable() {
                 visible: false
             },
             {
-                targets: 23, // 23 column (0-based index)
+                targets: 23,
                 render: function (data, type, full, meta) {
-                    var rowId = full[0]; // Change 0 to the appropriate column index
-                    // Define the custom buttons in the Actions column
+                    var rowId = full[0];
                     return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
                         '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
                         '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
                 }
             }
         ],
-        dom: '<"top"lBf>rt<"bottom"ip>'
+        language: {
+            search:"",
+            searchPlaceholder: "Search... "
+        },
+        //initComplete: function () {
+        //    this.api().columns().every(function () {
+        //        var column = this;
+        //        var title = column.footer().textContent;
+
+        //        // Create input element and add event listener
+        //        var inputElement = $('<input type="text" placeholder="Search ' + title + '" />')
+        //            .appendTo($(column.footer()).empty())
+        //            .on('keyup change clear', function () {
+        //                if (column.search() !== this.value) {
+        //                    column.search(this.value).draw();
+        //                }
+        //            });
+
+        //        // Hide search input for actions column (index 23)
+        //        if (column.index() === 23) {
+        //            inputElement.hide();
+        //        }
+        //    });
+
+        //},
+
 
 
     });
@@ -75,8 +102,22 @@ function initializeDataTable() {
     // Click event handler for the "Erase" button
     $('#dataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');
-        var redirectUrl = 'Delete/' + rowId;
-        window.location.href = redirectUrl;
+        var confirmDelete = confirm("Are you sure you want to delete this Template?");
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '/Main/Delete/' + rowId,
+                headers: {
+                    'X-HTTP-Method-Override': 'DELETE'
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $('#row_' + rowId).remove();
+                        document.location.reload();
+                    }
+                }
+            });
+        }
     });
 }
 function showFilterModal() {
@@ -115,3 +156,23 @@ function resetFilters() {
 $(document).ready(function () {
     initializeDataTable();
 });
+
+    //window.onscroll = function() {
+    //    scrollFunction();
+    //    };
+
+    //function scrollFunction() {
+    //        var scrollToTopButton = document.getElementById("scrollToTop");
+
+    //        // Show or hide the button based on scroll position
+    //        if (document.body.scrollTop > document.body.scrollHeight / 2 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 2) {
+    //    scrollToTopButton.style.display = "block";
+    //        } else {
+    //    scrollToTopButton.style.display = "none";
+    //        }
+    //    }
+
+    //function scrollToTop() {
+    //    document.body.scrollTop = 0;
+    //document.documentElement.scrollTop = 0;
+    //    }
