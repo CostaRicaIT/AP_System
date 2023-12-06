@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a7879e084bc14da5bbc7ade76ad7c675" Name="Diagram1">
+        <EntityTypeShape EntityType="AP.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_ALIAS" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_APPROVER" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_EMAIL_BACKUP" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_HIGHLIGHTS" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_HISTORIC_REMIT" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_LOG_IN" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_LOGIN_ROLES" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_ORACLE_LEGAL_ENTITIES" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_ORACLE_PAY_TERMS" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_ORACLE_SOURCE" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_ORACLE_TYPE" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_TEMPLATE" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AP.TB_VIEW_PERMISSIONS" Width="1.5" PointX="10" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_HIGHLI__FK_TB__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_HISTOR__FK_TB__4A8310C6" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_LOG_IN__FK_TB__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_VIEW_P__FK_TB__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__4D5F7D71" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.FK__TB_TEMPLA__FK_TB__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.TB_TEMPLATE_ALIAS" ManuallyRouted="false" />
+        <AssociationConnector Association="AP.TB_TEMPLATE_EMAIL_BACKUP" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
