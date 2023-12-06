@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using System.Web.UI;
+using System.Web.UI.WebControls.Expressions;
 using System.Web.WebPages;
 
 namespace AccountsPayable.Controllers
@@ -22,6 +23,8 @@ namespace AccountsPayable.Controllers
 
     public class MainController : Controller
     {
+
+        //In case of merge from DevEnv you must change the entity to AccountsPayableTestProdEntities //
         private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
         // GET: Main
         public ActionResult Index()

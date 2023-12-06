@@ -14,6 +14,7 @@ namespace AccountsPayable.Controllers
 {
     public class AccessController : Controller
     {
+        //In case of merge from DevEnv you must change the entity to AccountsPayableTestProdEntities //
         private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         [HttpGet]
