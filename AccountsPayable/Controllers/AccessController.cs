@@ -14,7 +14,7 @@ namespace AccountsPayable.Controllers
 {
     public class AccessController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         [HttpGet]
         public ActionResult LogIn()
@@ -26,7 +26,7 @@ namespace AccountsPayable.Controllers
         [HttpPost]
         public ActionResult LoginAuthorize(string username, string password)
         {
-            using (Accounts_Payable_Entities db = new Accounts_Payable_Entities())
+            using (AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities())
             {
                 // Hash the password using SHA256 algorithm
                 byte[] passwordBytes = Encoding.UTF8.GetBytes(password);

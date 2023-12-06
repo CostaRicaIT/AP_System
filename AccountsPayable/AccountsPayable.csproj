@@ -136,6 +136,63 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\APTemplatesModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTemplatesModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APTemplatesModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APTemplatesModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ALIAS.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_APPROVER.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_EMAIL_BACKUP.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_HIGHLIGHTS.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_HISTORIC_REMIT.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_LOGIN_ROLES.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_LOG_IN.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ORACLE_LEGAL_ENTITIES.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ORACLE_PAY_TERMS.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ORACLE_SOURCE.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ORACLE_TYPE.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_TEMPLATE.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_VIEW_PERMISSIONS.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +208,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\APTemplatesModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+      <LastGenOutput>APTemplatesModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\APTemplatesModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+      <LastGenOutput>APTemplatesModels.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\APTemplatesModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>APTemplatesModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\APTemplatesModels.edmx.diagram">
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CRUDHistoric.js" />
     <Content Include="Scripts\dashboard.js" />
@@ -191,7 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\SignOut\" />
   </ItemGroup>
   <ItemGroup>

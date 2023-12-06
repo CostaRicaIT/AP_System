@@ -22,7 +22,7 @@ namespace AccountsPayable.Controllers
 
     public class MainController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
         // GET: Main
         public ActionResult Index()
         {
