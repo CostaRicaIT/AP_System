@@ -17,9 +17,10 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_TEMPLATE()
         {
-            this.TB_ALIAS = new HashSet<TB_ALIAS>();
-            this.TB_HIGHLIGHTS1 = new HashSet<TB_HIGHLIGHTS>();
+            this.TB_HIGHLIGHTS = new HashSet<TB_HIGHLIGHTS>();
             this.TB_HISTORIC_REMIT = new HashSet<TB_HISTORIC_REMIT>();
+            this.TB_ALIAS = new HashSet<TB_ALIAS>();
+            this.TB_EMAIL_BACKUP = new HashSet<TB_EMAIL_BACKUP>();
         }
     
         public int TEMP_ID { get; set; }
@@ -47,10 +48,15 @@ namespace AccountsPayable.Models
         public string TEMP_APPROVER_COMMENTS { get; set; }
         public string TEMP_INVOICE_FORMAT { get; set; }
         public string TEMP_INVOICE_TYPE { get; set; }
+        public int TEMP_ISDISABLED { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
-        public virtual TB_EMAIL_BACKUP TB_EMAIL_BACKUP { get; set; }
-        public virtual TB_HIGHLIGHTS TB_HIGHLIGHTS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_HIGHLIGHTS> TB_HIGHLIGHTS { get; set; }
+        public virtual TB_HIGHLIGHTS TB_HIGHLIGHTS1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
+        public virtual TB_HISTORIC_REMIT TB_HISTORIC_REMIT1 { get; set; }
         public virtual TB_ORACLE_LEGAL_ENTITIES TB_ORACLE_LEGAL_ENTITIES { get; set; }
         public virtual TB_ORACLE_PAY_TERMS TB_ORACLE_PAY_TERMS { get; set; }
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }
@@ -58,8 +64,8 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ALIAS> TB_ALIAS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_HIGHLIGHTS> TB_HIGHLIGHTS1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
+        public virtual ICollection<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
+        public string ALIAS_NAME { get; internal set; }
+        public string EMAIL_BACKUP { get; internal set; }
     }
 }

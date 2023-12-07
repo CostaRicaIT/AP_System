@@ -13,10 +13,10 @@ namespace AccountsPayable.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Accounts_Payable_Entities : DbContext
+    public partial class AccountsPayableTestProdEntities : DbContext
     {
-        public Accounts_Payable_Entities()
-            : base("name=Accounts_Payable_Entities")
+        public AccountsPayableTestProdEntities()
+            : base("name=AccountsPayableTestProdEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace AccountsPayable.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TB_ALIAS> TB_ALIAS { get; set; }
         public virtual DbSet<TB_APPROVER> TB_APPROVER { get; set; }
         public virtual DbSet<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }

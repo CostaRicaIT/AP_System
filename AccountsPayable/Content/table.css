@@ -1,0 +1,16 @@
+﻿.dt-button.filterButton {
+    white-space: nowrap !important;
+    margin-right: 10px !important;
+    border: none !important;
+    background: none !important;
+    font-size: 14px !important;
+    display: inline-table !important
+}
+tfoot input {
+    display: table-header-group;
+    width: 100%;
+    box-sizing: border-box;
+}
+.dataTables_filter input {
+    width: 300px;
+}

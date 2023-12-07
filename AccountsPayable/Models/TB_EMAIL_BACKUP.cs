@@ -23,6 +23,7 @@ namespace AccountsPayable.Models
         public int EMAIL_BACKUP_ID { get; set; }
         public System.DateTime EMAIL_BACKUP_DATE { get; set; }
         public string EMAIL_BACKUP { get; set; }
+        public Nullable<int> EMAIL_BACKUP_ISDISABLED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }

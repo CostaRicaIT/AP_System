@@ -17,14 +17,16 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_HISTORIC_REMIT()
         {
-            this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
+            this.TB_TEMPLATE1 = new HashSet<TB_TEMPLATE>();
         }
     
         public int HISTORIC_REMIT_ID { get; set; }
+        public Nullable<int> FK_TB_TEMPLATE_ID { get; set; }
         public System.DateTime HISTORIC_REMIT_DATE { get; set; }
         public string HISTORIC_REMIT_INFO { get; set; }
     
+        public virtual TB_TEMPLATE TB_TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
+        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE1 { get; set; }
     }
 }

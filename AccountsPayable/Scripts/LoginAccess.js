@@ -9,11 +9,9 @@
         $.post(url, param, function (data) {
             // If login data matches with DB Data, redirects to the main page
             if (data == "1") {
-                // Trigger the notification check
-                checkNotifications();
 
                 // Redirect to the main page
-                document.location.href = window.location.origin + '/Main/Create';
+                document.location.href = window.location.origin + '/Main/Index';
             } else {
                 // Send error message to label
                 document.getElementById('errormessage').innerHTML = (data);
@@ -32,14 +30,4 @@
         }
     });
 });
-function checkNotifications() {
-    $.ajax({
-        type: 'POST',
-        url: '/AssetsNotifications/CheckNotifications',
-        success: function (data) {
-            if (data.success) {
-                var alertMessages = data.alertMessages;
-            }
-        }
-    });
-}
+

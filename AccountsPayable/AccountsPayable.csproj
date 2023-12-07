@@ -136,59 +136,62 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accounts_Payable.Context.cs">
+    <Compile Include="Models\APTemplatesModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.Context.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accounts_Payable.cs">
+    <Compile Include="Models\APTemplatesModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accounts_Payable.Designer.cs">
+    <Compile Include="Models\APTemplatesModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_APPROVER.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_EMAIL_BACKUP.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_HIGHLIGHTS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_HISTORIC_REMIT.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_LOGIN_ROLES.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_LOG_IN.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ORACLE_LEGAL_ENTITIES.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ORACLE_PAY_TERMS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ORACLE_SOURCE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ORACLE_TYPE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_TEMPLATE.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_VIEW_PERMISSIONS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+      <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,32 +202,34 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\LoginStyle.css" />
     <Content Include="Content\Style.css" />
+    <Content Include="Content\table.css" />
     <Content Include="Content\TemplateModal.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Accounts_Payable.Context.tt">
+    <Content Include="Models\APTemplatesModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-      <LastGenOutput>Accounts_Payable.Context.cs</LastGenOutput>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+      <LastGenOutput>APTemplatesModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Accounts_Payable.tt">
+    <Content Include="Models\APTemplatesModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
-      <LastGenOutput>Accounts_Payable.cs</LastGenOutput>
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
+      <LastGenOutput>APTemplatesModels.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Accounts_Payable.edmx">
+    <EntityDeploy Include="Models\APTemplatesModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Accounts_Payable.Designer.cs</LastGenOutput>
+      <LastGenOutput>APTemplatesModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Accounts_Payable.edmx.diagram">
-      <DependentUpon>Accounts_Payable.edmx</DependentUpon>
+    <Content Include="Models\APTemplatesModels.edmx.diagram">
+      <DependentUpon>APTemplatesModels.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CRUDHistoric.js" />
+    <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -255,6 +260,8 @@
     <Content Include="Views\Access\LogIn.cshtml" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Shared\_PartialLayout.cshtml" />
+    <Content Include="Views\Main\Edit.cshtml" />
+    <Content Include="Views\Main\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
