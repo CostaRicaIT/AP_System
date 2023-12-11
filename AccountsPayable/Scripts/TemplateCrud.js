@@ -1,5 +1,8 @@
-﻿var aliasDataList = [];
+﻿//Global variables to store alias and emails
+var aliasDataList = [];
 var emailDataList = [];
+
+//Show scroll to top button
 window.onscroll = function () {
     scrollFunction();
 };
@@ -45,6 +48,8 @@ $(document).ready(function () {
         toggleInputState($(this), $('#TEMP_SUPPLIER_NAME'));
 
     });
+
+    // Query to get text from emails according to ID in dropdown
     function getEmailBackupText(selectedEmail, templateId) {
         if (selectedEmail != 0) {
             $.ajax({
@@ -68,6 +73,7 @@ $(document).ready(function () {
             });
         }
     }
+    // Query to get text from Historic Remit to according to ID in dropdown
 
     function getHistoricRemitText(selectedHistoric, templateId) {
         $.ajax({
@@ -90,7 +96,7 @@ $(document).ready(function () {
             }
         });
     }
-
+    // Query to get text from Highlights history according to ID in dropdown
     function getHighLigthsText(selectedHighLight, templateId) {
         $.ajax({
             url: '/Main/GetHighlights',
@@ -146,18 +152,24 @@ $(document).ready(function () {
             getHistoricRemitText(selectedHistoric, templateId);
         }
     }).change(); // Trigger the change event on page load
+
+    //Cancel button
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
 
+    //Trigger Save function on No alias and emails
     $("#NoAddAlias_Emailbtn").click(function (e) {
         e.preventDefault();
-        saveNoAliasEmail();
+        create();
     });
+    //Trigger Save function on templates with alias and emails
     $("#btn_AddAlias_Email").click(function (e) {
         e.preventDefault();
-        SaveWithAliasEmail();
+        create();
     });
+
+    //Function to store multiple aliases
     $("#btn-addAlias").click(function (e) {
         var alias = $('#form-AddAlias').val().replace(/[<>]/g, '');
         if (alias != "") {
@@ -168,6 +180,7 @@ $(document).ready(function () {
             alert("Alias cant be empty");
         }
     });
+    //Function to store multiple emails
     $("#ButtonAddEmail").click(function (e) {
         var email = $('#form-BackUpEmail').val().replace(/[<>]/g, '');
         var date = new Date();
@@ -188,6 +201,8 @@ $(document).ready(function () {
         }
     });
 });
+
+//funtion to check that all requered fields are filled
 function checkFormValidity() {
     var form = $("#form")[0];
 
@@ -219,71 +234,18 @@ function checkFormValidity() {
     }
 
     if (form.checkValidity()) {
-        // The form is valid, you can proceed with your logic
+        // The form is valid
         return true;
     } else {
-        // The form is invalid, you can display an overall error message or handle it accordingly
+        // If a field in the form thats required is not filled
         alert("Please fill all the required fields");
         return false;
     }
 }
 
-function saveNoAliasEmail() {
-    var templateData = {
-        TEMP_REMIT_TO: $("#form-RemitTo").val().replace(/[<>]/g, ''),
-        TEMP_SUPPLIER_NAME: $("#form-SupName").val().replace(/[<>]/g, ''),
-        TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val().replace(/[<>]/g, ''),
-        TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val().replace(/[<>]/g, ''),
-        TEMP_SUPPLIER_SITE: $("#form-SupSite").val().replace(/[<>]/g, ''),
-        TEMP_ADDRESS: $("#form-Address").val().replace(/[<>]/g, ''),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
-        TEMP_TAXPAYER_ID: $("#form-FirstParty").val().replace(/[<>]/g, ''),
-        FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
-        TEMP_ORACLE_DESCRIPTION: $("#form-Description").val().replace(/[<>]/g, ''),
-        FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
-        TEMP_ACCOUNT_CODING: $("#form-AccountC").val().replace(/[<>]/g, ''),
-        FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
-        TEMP_ORACLE_NOTES: $("#form-OracleN").val().replace(/[<>]/g, ''),
-        TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val().replace(/[<>]/g, ''),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
-        TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, '')
-    };
+function create() {
 
-    var HistoricRemitToData = { //data to TB_HISTORIC REMIT
-        HISTORIC_REMIT_INFO: $("#form-HistRemitTo").val().replace(/[<>]/g, '')
-    };
-
-    var HighLightsData = { //data to TB_HIGHLIGHTS
-        HIGHLIGHTS: $("#form-Higlights").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_COMMENTS: $("#form-HiglightsC").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_INSTRUCTIONS: $("#form-Instructions").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_EXCEPTIONS: $("#form-Exceptions").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_COMMON_ISSUES: $("#form-MostCI").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_SUPPLIER_AGENCY: $("#form-SupplierA").val().replace(/[<>]/g, ''),
-        HIGHLIGHTS_TEMPLATE_COMMENTS: $("#form-TemplateC").val().replace(/[<>]/g, ''),
-
-    };
-
-    $.ajax({
-        url: '/Main/CreateNoEmail_Alias',
-        type: 'POST',
-        data: {
-            templateData, HistoricRemitToData, HighLightsData
-        },
-        success: function (data) {
-            if (data.success) {
-                document.location.href = window.location.origin + '/Main/Index';
-            }
-        },
-        error: function () {
-            alert("An error occurred while saving the record.");
-        }
-    });
-}
-
-function SaveWithAliasEmail() {
+    // get data from template .replace(/[<>]/g, '') is to remove <> that can cause issues to save
     var templateData = {
         TEMP_TAX_ID: $("#form-TaxID").val(),
         TEMP_REMIT_TO: $("#form-RemitTo").val().replace(/[<>]/g, ''),
@@ -323,7 +285,7 @@ function SaveWithAliasEmail() {
     };
 
     $.ajax({
-        url: '/Main/CreateWithEmail_Alias',
+        url: '/Main/Create',
         type: 'POST',
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
@@ -341,12 +303,9 @@ function SaveWithAliasEmail() {
 
 
 }
-function sanitizeData(inputText) {
-    inputText = inputText.replace(/[<>]/g, '');
-    return inputText
-}
 
 function update() {
+    // get data from template .replace(/[<>]/g, '') is to remove <> that can cause issues to save
     var templateData = {
         TEMP_ID: $("#templateId").text().replace(/[<>]/g, ''),
         TEMP_TAX_ID: $("#TEMP_TAX_ID").val().replace(/[<>]/g, ''),
