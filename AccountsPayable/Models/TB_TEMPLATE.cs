@@ -38,7 +38,7 @@ namespace AccountsPayable.Models
         public Nullable<int> FK_TB_ORACLE_TYPE_ID { get; set; }
         public string TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
-        public string TEMP_ACCOUNT_CODING { get; set; }
+        public string TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> FK_TB_ORACLE_SOURCE_ID { get; set; }
         public string TEMP_ORACLE_NOTES { get; set; }
         public string TEMP_ORACLE_INSTRUCTIONS { get; set; }
@@ -49,6 +49,15 @@ namespace AccountsPayable.Models
         public string TEMP_INVOICE_FORMAT { get; set; }
         public string TEMP_INVOICE_TYPE { get; set; }
         public int TEMP_ISDISABLED { get; set; }
+        public string TEMP_FOLDER { get; set; }
+        public string TEMP_PAYMENT_METHOD { get; set; }
+        public string TEMP_REMIT_TOACCOUNT { get; set; }
+        public string TEMP_BILLING_PERIOD { get; set; }
+        public string TEMP_DISTRIBUTION_COMBINATION { get; set; }
+        public string TEMP_ACCOUNTING_DATE { get; set; }
+        public string TEMP_VSU { get; set; }
+        public string TEMP_W9_W8 { get; set; }
+        public string TEMP_INVOICE_NOTES { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
