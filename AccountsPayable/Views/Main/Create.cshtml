@@ -402,6 +402,9 @@
                     @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-6">
+                <button id="btn-legalEntity" type="button" class="styled-button align-right">Add a new Legal Entity</button>
+            </div>
         </div>
     </div>
     <!-- First-Party Taxpayer ID -->
@@ -669,6 +672,9 @@
                         @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <button class="btn form_btntbWC openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -677,6 +683,45 @@
                     <label class="control-label col-md-2" for="form-ApproverComents">Aprover Comments:</label>
                     <div class="col-md-10">
                         <textarea class="form-control" id="form-ApproverComents" rows="6" cols="120" placeholder="Approver comments"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Add a new approver modal-->
+        <div id="ShowApproverModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Approver</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Approver Section-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-6" for="form-AddApprover">Approver:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="form-AddApprover" placeholder="Approver"/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <br />
+                                <button class="btn form_btntbWC" type="button" id="btn-addAppover">Add a new approver</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div col-md-12>
+                                <div class="col-md-10">
+                                    <select name="Appove" id="FK_TB_TEMPLATE_APPROVER_ID" class="form-control" size="5"></select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

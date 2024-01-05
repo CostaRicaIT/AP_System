@@ -414,6 +414,9 @@
                         @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <button id="btn-legalEntity" type="button" class="styled-button align-right">Add a new Legal Entity</button>
+                </div>
             </div>
         </div>
         <!-- First-Party Taxpayer ID -->
@@ -708,6 +711,9 @@
                         @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <button id="btn-approver" type="button" class="styled-button align-right">Add a new Approver</button>
                 </div>
             </div>
         </div>
