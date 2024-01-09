@@ -90,6 +90,6 @@ select.form-control:disabled {
     margin-left: -95px;
 }
 
-#form-AddApprover {
+#form-AddApprover, #form-AddLegalEntity {
     margin-left: -2px;
 }

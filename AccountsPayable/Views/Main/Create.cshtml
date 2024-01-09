@@ -403,10 +403,50 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <button id="btn-legalEntity" type="button" class="styled-button align-right">Add a new Legal Entity</button>
+                <button class="btn form_btntbWC openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
             </div>
         </div>
     </div>
+
+    <!-- Add a new legal entity modal-->
+    <div id="ShowLegalEntityModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Approver</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Legal Entity Section-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label col-md-6" for="form-AddLegalEntity">Legal Entity:</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="form-AddLegalEntity" placeholder="Legal Entity" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <br />
+                            <button class="btn form_btntbWC" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div col-md-12>
+                            <div class="col-md-10">
+                                <select name="LegalEnty" id="FK_TB_TEMPLATE_LEGAL_ENTITY_ID" class="form-control" size="5"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- First-Party Taxpayer ID -->
     <div class="form-group">
         <div class="row">
