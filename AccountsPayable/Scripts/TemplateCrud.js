@@ -1,6 +1,8 @@
-﻿//Global variables to store alias and emails
+﻿//Global variables to store alias, emails, legal entity and approver
 var aliasDataList = [];
 var emailDataList = [];
+var legalEntityDataList = [];
+var approverDataList = [];
 
 //Show scroll to top button
 window.onscroll = function () {
@@ -180,6 +182,20 @@ $(document).ready(function () {
             alert("Alias cant be empty");
         }
     });
+
+    //Function to store multiple legal entity
+    $("#btn-addLegalEntity").click(function (e) {
+        var legalEntity = $('#form-AddLegalEntity').val().replace(/[<>]/g, '');
+        if (legalEntity != "") {
+            legalEntityDataList.push({ LEGAL_ENTITY: legalEntity });
+            $('#FK_TB_TEMPLATE_LEGALENTI_ID').append($("<option></option>").text(legalEntity));
+            $('#form-AddLegalEntity').val("");
+
+        } else {
+            alert("Legal Entity cant be empty");
+        };
+    };
+
     //Function to store multiple emails
     $("#ButtonAddEmail").click(function (e) {
         var email = $('#form-BackUpEmail').val().replace(/[<>]/g, '');

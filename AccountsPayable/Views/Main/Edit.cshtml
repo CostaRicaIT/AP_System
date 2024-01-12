@@ -86,7 +86,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO">Historic Remit To:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control", @rows = 5, @cols = 50})
+                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, "", new { @class = "text-danger" })
                         <br />
                     </div>
@@ -127,7 +127,7 @@
                     <div class="col-md-6">
                         <label class="control-label col-md-2" for="TEMP_VENDOR_ACCOUNT" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.TEMP_VENDOR_ACCOUNT, new { @class = "form-control", @rows = 5, @cols = 50})
+                            @Html.TextAreaFor(model => model.TEMP_VENDOR_ACCOUNT, new { @class = "form-control", @rows = 5, @cols = 50 })
                             @Html.ValidationMessageFor(model => model.TEMP_VENDOR_ACCOUNT, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -205,7 +205,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_INVOICE_FORMAT">Invoice Format:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control"}})
+                        @Html.EditorFor(model => model.TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TEMP_INVOICE_FORMAT, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -415,10 +415,50 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button id="btn-legalEntity" type="button" class="styled-button align-right">Add a new Legal Entity</button>
+                    <button class="btn form_btntbWC openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
                 </div>
             </div>
         </div>
+
+        <!-- Add a new legal entity modal-->
+        <div id="ShowLegalEntityModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Approver</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Legal Entity Section-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-6" for="form-AddLegalEntity">Legal Entity:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="form-AddLegalEntity" placeholder="Legal Entity" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button class="btn form_btntbWC" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-2" for="FK_TB_TEMPLATE_LEGALENTI_ID"></label>
+                                <div class="col-md-7">
+                                    @*@Html.DropDownList("FK_TB_TEMPLATE_LEGALENTI_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- First-Party Taxpayer ID -->
         <div class="form-group">
             <div class="row">
@@ -713,7 +753,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button id="btn-approver" type="button" class="styled-button align-right">Add a new Approver</button>
+                    <button class="btn form_btntbWC openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
                 </div>
             </div>
         </div>
@@ -729,6 +769,46 @@
             </div>
         </div>
     </div>
+
+    <!--Add a new approver modal-->
+    <div id="ShowApproverModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Approver</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- Approver Section-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label col-md-6" for="form-AddApprover">Approver:</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="form-AddApprover" placeholder="Approver" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <br />
+                            <button class="btn form_btntbWC" type="button" id="btn-addAppover">Add a new approver</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div col-md-12>
+                            <div class="col-md-10">
+                                <select name="Appove" id="FK_TB_TEMPLATE_APPROVER_ID" class="form-control" size="5"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br />
 
     <!-- Cancel and Save Buttons -->
