@@ -183,19 +183,6 @@ $(document).ready(function () {
         }
     });
 
-    //Function to store multiple legal entity
-    $("#btn-addLegalEntity").click(function (e) {
-        var legalEntity = $('#form-AddLegalEntity').val().replace(/[<>]/g, '');
-        if (legalEntity != "") {
-            legalEntityDataList.push({ LEGAL_ENTITY: legalEntity });
-            $('#FK_TB_TEMPLATE_LEGALENTI_ID').append($("<option></option>").text(legalEntity));
-            $('#form-AddLegalEntity').val("");
-
-        } else {
-            alert("Legal Entity cant be empty");
-        };
-    };
-
     //Function to store multiple emails
     $("#ButtonAddEmail").click(function (e) {
         var email = $('#form-BackUpEmail').val().replace(/[<>]/g, '');
