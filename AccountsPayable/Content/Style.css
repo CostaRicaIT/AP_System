@@ -93,3 +93,7 @@ select.form-control:disabled {
 #form-AddApprover, #form-AddLegalEntity {
     margin-left: -2px;
 }
+
+#btn-addLegalEntity, #btn-approver {
+    margin-top: 21px;
+}
