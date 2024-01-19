@@ -148,6 +148,7 @@
           <Property Name="TEMP_VSU" Type="varchar(max)" />
           <Property Name="TEMP_W9_W8" Type="varchar(max)" />
           <Property Name="TEMP_INVOICE_NOTES" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_DESCRIPTION" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TB_TEMPLATE_ALIAS">
           <Key>
@@ -357,13 +358,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-        
-        
-        
-        
-        
-        
         <EntityContainer Name="Accounts_Payable_ModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" Schema="dbo" store:Type="Tables" />
@@ -682,6 +676,7 @@
           <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0CA5D9DE" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
           <NavigationProperty Name="TB_ALIAS" Relationship="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
           <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Accounts_Payable_Model.TB_TEMPLATE_EMAIL_BACKUP" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
+          <Property Name="TEMP_INVOICE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TB_VIEW_PERMISSIONS">
           <Key>
@@ -961,6 +956,7 @@
           <EntitySetMapping Name="TB_TEMPLATE">
             <EntityTypeMapping TypeName="Accounts_Payable_Model.TB_TEMPLATE">
               <MappingFragment StoreEntitySet="TB_TEMPLATE">
+                <ScalarProperty Name="TEMP_INVOICE_DESCRIPTION" ColumnName="TEMP_INVOICE_DESCRIPTION" />
                 <ScalarProperty Name="TEMP_INVOICE_NOTES" ColumnName="TEMP_INVOICE_NOTES" />
                 <ScalarProperty Name="TEMP_W9_W8" ColumnName="TEMP_W9_W8" />
                 <ScalarProperty Name="TEMP_VSU" ColumnName="TEMP_VSU" />

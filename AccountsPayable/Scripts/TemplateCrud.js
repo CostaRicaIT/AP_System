@@ -262,14 +262,24 @@ function create() {
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_DESCRIPTION: $("#form-Description").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
-        TEMP_ACCOUNT_CODING: $("#form-AccountC").val().replace(/[<>]/g, ''),
+        TEMP_DISTRIBUTION_SET: $("#form-DistroSet").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_NOTES: $("#form-OracleN").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val().replace(/[<>]/g, ''),
         FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
         TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, ''),
+        TEMP_FOLDER: $("#form-Folder").val().replace(/[<>]/g, ''),
+        TEMP_PAYMENT_METHOD: $("#form-PayMethod").val().replace(/[<>]/g, ''),
+        TEMP_REMIT_TOACCOUNT: $("#form-RemitToAccount").val().replace(/[<>]/g, ''),
+        TEMP_BILLING_PERIOD: $("#form-BillPeriod").val().replace(/[<>]/g, ''),
+        TEMP_DISTRIBUTION_COMBINATION: $("#form-DistroCombination").val().replace(/[<>]/g, ''),
+        TEMP_ACCOUNTING_DATE: $("#form-AccoDate").val().replace(/[<>]/g, ''),
+        TEMP_VSU: $("#form-VSU").val().replace(/[<>]/g, ''),
+        TEMP_W9_W8: $("#form-W9W8").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_NOTES: $("#form-InvoiceNotes").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
@@ -323,14 +333,24 @@ function update() {
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_DESCRIPTION: $("#TEMP_ORACLE_DESCRIPTION").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val().replace(/[<>]/g, ''),
-        TEMP_ACCOUNT_CODING: $("#TEMP_ACCOUNT_CODING").val().replace(/[<>]/g, ''),
+        TEMP_DISTRIBUTION_SET: $("#TEMP_DISTRIBUTION_SET").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_NOTES: $("#TEMP_ORACLE_NOTES").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_INSTRUCTIONS: $("#TEMP_ORACLE_INSTRUCTIONS").val().replace(/[<>]/g, ''),
         FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
         TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val().replace(/[<>]/g, ''),
+        TEMP_FOLDER: $("#TEMP_FOLDER").val().replace(/[<>]/g, ''),
+        TEMP_PAYMENT_METHOD: $("#TEMP_PAYMENT_METHOD").val().replace(/[<>]/g, ''),
+        TEMP_REMIT_TOACCOUNT: $("#TEMP_REMIT_TOACCOUNT").val().replace(/[<>]/g, ''),
+        TEMP_BILLING_PERIOD: $("#TEMP_BILLING_PERIOD").val().replace(/[<>]/g, ''),
+        TEMP_DISTRIBUTION_COMBINATION: $("#TEMP_DISTRIBUTION_COMBINATION").val().replace(/[<>]/g, ''),
+        TEMP_ACCOUNTING_DATE: $("#TEMP_ACCOUNTING_DATE").val().replace(/[<>]/g, ''),
+        TEMP_VSU: $("#TEMP_VSU").val().replace(/[<>]/g, ''),
+        TEMP_W9_W8: $("#TEMP_W9_W8").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_NOTES: $("#TEMP_INVOICE_NOTES").val().replace(/[<>]/g, ''),
+        TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT

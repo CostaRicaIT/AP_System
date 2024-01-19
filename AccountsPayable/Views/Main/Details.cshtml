@@ -24,7 +24,7 @@
                 <div class="col-md-6">
                     <label for="TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="TEMP_FOLDER" placeholder="Select folder">
+                        @Html.EditorFor(model => model.TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -193,243 +193,272 @@
     <br />
 
     <!-- Invoice Number Format Section -->
-<div class="form-section">
-    <div class="section-title">Invoice Number Format</div>
-    <!-- Approver info -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2" for="TEMP_INVOICE_FORMAT">Invoice Format:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+    <div class="form-section">
+        <div class="section-title">Invoice Number Format</div>
+        <!-- Approver info -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_FORMAT">Invoice Format:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Type -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2" for="TEMP_INVOICE_TYPE">Type:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TEMP_INVOICE_TYPE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        <!-- Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_TYPE">Type:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_INVOICE_TYPE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Invoice Notes -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2" for="TEMP_InvoiceNotes" id="label-InvoiceNotes">Invoice Notes:</label>
-                <div class="col-md-10">
-                    <textarea class="form-control" id="TEMP_InvoiceNotes" rows="6" cols="50" required></textarea>
+        <!-- Invoice Notes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_NOTES" id="label-InvoiceNotes">Invoice Notes:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_INVOICE_NOTES, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <br />
+
+    <!-- Forms Section -->
+    <div class="form-section">
+        <div class="section-title">Forms</div>
+        <!-- W9/W-8BEN Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VSU Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br />
 
     <!-- Oracle and Apps Section -->
-<div class="form-section">
-    <div class="section-title">Oracle and Apps</div>
-    <!-- Supplier Number -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+    <div class="form-section">
+        <div class="section-title">Oracle and Apps</div>
+        <!-- Supplier Number -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Supplier Site -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        <!-- Supplier Site -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Payment Method -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_PayMethod">Payment Method:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_PayMethod" placeholder="Payment Method">
+        <!-- Payment Method -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Remit-To Account -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_RemitToAccount">Remit-To Account:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_RemitToAccount" placeholder="Remit-to Account">
+        <!-- Remit-To Account -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Pay Terms -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Payment Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
-                <div class="col-md-10">
-                    @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+        <!-- Pay Terms -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Payment Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Invoice Description -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_InvoiceDescrip">Invoice Description:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_InvoiceDescrip" placeholder="Invoice Description">
+        <!-- Invoice Description -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Billing Period -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_BillPeriod">Billing Period:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_BillPeriod" placeholder="Billing Period">
+        <!-- Billing Period -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Distribution Set -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_DistroSet">Distribution Set:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_DistroSet" placeholder="Distribution Set">
+        <!-- Distribution Set -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Distribution Combination -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_DistroCombination">Distribution Combination:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_DistroCombination" placeholder="Distribution Combination">
+        <!-- Distribution Combination -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Accounting Date -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_AccoDate">Accounting Date:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="TEMP_AccoDate" placeholder="Accounting Date">
+        <!-- Accounting Date -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Address -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_ADDRESS">Address:</label>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.TEMP_ADDRESS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+        <!-- Address -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ADDRESS">Address:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TEMP_ADDRESS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Legal Entity -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
-                <div class="col-md-10">
-                    @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+        <!-- Legal Entity -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- First-Party Taxpayer ID -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_TAXPAYER_ID">Taxpayer ID:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TEMP_TAXPAYER_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        <!-- First-Party Taxpayer ID -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_TAXPAYER_ID">Taxpayer ID:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_TAXPAYER_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Type -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
-                <div class="col-md-10">
-                    @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+        <!-- Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Description -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_DESCRIPTION">Description:</label>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.TEMP_ORACLE_DESCRIPTION, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+        <!-- Description -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_DESCRIPTION">Description:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_DESCRIPTION, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Oracle Notes -->
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label col-md-2" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+        <!-- Oracle Notes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
 
+                    </div>
                 </div>
-            </div>
-            <!-- Oracle Instructions -->
-            <div class="col-md-6">
-                <label class="control-label col-md-2 checkbox-label" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                <!-- Oracle Instructions -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 checkbox-label" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <br />
 
     <!-- Notes & Instructions Section -->
