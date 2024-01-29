@@ -154,6 +154,9 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>

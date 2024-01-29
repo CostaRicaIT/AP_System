@@ -6842,3 +6842,9 @@ button.close {
     height: 40px;
     background-color: #3B1E08;
 }
+
+.alias {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

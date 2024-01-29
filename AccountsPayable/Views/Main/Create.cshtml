@@ -11,10 +11,22 @@
 
 <form id="form">
 
-
     <!-- Supplier Information Section -->
     <div class="form-section">
         <div class="section-title">Supplier Information</div>
+
+        <!-- Folder -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Folder" class="control-label col-md-2">Folder:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="form-Folder" placeholder="Select folder">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Tax ID -->
         <div class="form-group">
             <div class=" row">
@@ -29,22 +41,6 @@
                     <input type="checkbox" id="BoxNoTaxId" name="NoTaxId" />
                 </div>
 
-            </div>
-        </div>
-
-        <!-- Remit To -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-RemitTo">Remit to:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-RemitTo" placeholder="Remit to">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
-                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
-                </div>
             </div>
         </div>
 
@@ -64,6 +60,21 @@
             </div>
         </div>
 
+        <!-- Remit To -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-RemitTo">Remit to:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="form-RemitTo" placeholder="Remit to">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
+                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                </div>
+            </div>
+        </div>
 
         <!-- Historic Remit To -->
         <div class="form-group">
@@ -71,7 +82,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-HistRemitTo">Historic Remit To:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-HistRemitTo" rows="6" cols="50" required></textarea>
+                        <textarea class="form-control" id="form-HistRemitTo" rows="6" cols="50"></textarea>
                         <br />
                     </div>
                 </div>
@@ -111,8 +122,91 @@
                     <div class="col-md-6">
                         <label class="control-label col-md-2" for="form-OurVendorA" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="form-OurVendorA" rows="6" cols="50" required></textarea>
+                            <textarea class="form-control" id="form-OurVendorA" rows="6" cols="50"></textarea>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Source -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.FK_TB_ORACLE_SOURCE_ID, "Source:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_SOURCE_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+    <!-- Invoice Number Format Section -->
+    <div class="form-section">
+        <div class="section-title">Invoice Number Format</div>
+        <!-- Approver info -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-InvoiceF">Invoice Format:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="form-InvoiceF" placeholder="Invoice Format">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-INFType">Type:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="form-INFType" placeholder="Invoice Type">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Notes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-InvoiceNotes" id="label-InvoiceNotes">Invoice Notes:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-InvoiceNotes" rows="6" cols="50"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Forms Section -->
+    <div class="form-section">
+        <div class="section-title">Forms</div>
+        <!-- W9/W-8BEN Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-W9W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-W9W8" rows="6" cols="50"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VSU Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-VSU" id="label-VSU">VSU Form:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-VSU" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -165,141 +259,240 @@
         </div>
         <br />*@
     <!-- Oracle and Apps Section -->
-    <div class="form-section">
-        <div class="section-title">Oracle and Apps</div>
-        <!-- Supplier Number -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="form-SupNumber">Supplier Number:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-SupNumber" placeholder="Supplier Number" required>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Supplier Site -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="form-SupSite">Supplier Site:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-SupSite" placeholder="Supplier Site" required>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Address -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="form-Address">Address:</label>
-                    <div class="col-md-10">
-                        <textarea id="form-Address" class="form-control" placeholder="Address" rows="6" cols="50" required></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Legal Entity -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- First-Party Taxpayer ID -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="form-FirstParty">Taxpayer ID:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-FirstParty" placeholder="Taxpayer ID" required>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Description -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="form-Description">Description:</label>
-                    <div class="col-md-10">
-                        <textarea id="form-Description" class="form-control" placeholder="Description" rows="6" cols="50" required></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Pay Terms -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Pay Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Account Coding -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-AccountC">Account Coding:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AccountC" placeholder="Account Coding" required>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Source -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_SOURCE_ID, "Source:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_SOURCE_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Oracle Notes -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-OracleN">Oracle Notes:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleN" rows="6" cols="50" placeholder="Oracle Notes" required></textarea>
-                    </div>
-                </div>
-                <!-- Oracle Instructions -->
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 checkbox-label" for="form-OracleI" id="Label-Oracle">Oracle Instructions:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleI" rows="6" cols="50" placeholder="Oracle instructions" required></textarea>
-                    </div>
+<div class="form-section">
+    <div class="section-title">Oracle and Apps</div>
+    <!-- Supplier Number -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-SupNumber">Supplier Number:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-SupNumber" placeholder="Supplier Number">
                 </div>
             </div>
         </div>
     </div>
+    <!-- Supplier Site -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-SupSite">Supplier Site:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-SupSite" placeholder="Supplier Site">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-PayMethod">Payment Method:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-PayMethod" placeholder="Payment Method">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remit-To Account -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-RemitToAccount">Remit-To Account:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-RemitToAccount" placeholder="Remit-to Account">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pay Terms -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Pay Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                <div class="col-md-10">
+                    @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice Description -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-InvoiceDescrip">Invoice Description:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-InvoiceDescrip" placeholder="Invoice Description">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Billing Period -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-BillPeriod">Billing Period:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-BillPeriod" placeholder="Billing Period">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distribution Set -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-DistroSet">Distribution Set:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-DistroSet" placeholder="Distribution Set">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distribution Combination -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-DistroCombination">Distribution Combination:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-DistroCombination" placeholder="Distribution Combination">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accounting Date -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-AccoDate">Accounting Date:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-AccoDate" placeholder="Accounting Date">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-Address">Address:</label>
+                <div class="col-md-10">
+                    <textarea id="form-Address" class="form-control" placeholder="Address" rows="6" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Legal Entity -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @id = "legalEntityDropdown" })
+                    @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button class="styled-button openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add a new legal entity modal-->
+    <div id="ShowLegalEntityModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Legal Entity</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- Legal Entity Section-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label col-md-6" for="form-AddLegalEntity">Legal Entity:</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="form-AddLegalEntity" placeholder="Legal Entity" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="styled-button" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- First-Party Taxpayer ID -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-FirstParty">Taxpayer ID:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="form-FirstParty" placeholder="Taxpayer ID">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Type -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                <div class="col-md-10">
+                    @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Description -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2 OracleText" for="form-Description">Description:</label>
+                <div class="col-md-10">
+                    <textarea id="form-Description" class="form-control" placeholder="Description" rows="6" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Oracle Notes -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2" for="form-OracleN">Oracle Notes:</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" id="form-OracleN" rows="6" cols="50" placeholder="Oracle Notes"></textarea>
+                </div>
+            </div>
+            <!-- Oracle Instructions -->
+            <div class="col-md-6">
+                <label class="control-label col-md-2 checkbox-label" for="form-OracleI" id="Label-Oracle">Oracle Instructions:</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" id="form-OracleI" rows="6" cols="50" placeholder="Oracle instructions"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <br />
 
     <!-- Notes & Instructions Section -->
@@ -311,7 +504,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Higlights">Highlights</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150"></textarea>
                     </div>
                 </div>
                 @*<div class="col-md-4">
@@ -328,7 +521,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-HiglightsC">Highlights Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -339,7 +532,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Instructions">Instructions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -350,7 +543,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Exceptions">Exceptions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -361,7 +554,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-MostCI">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -372,7 +565,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-SupplierA">Supplier Agency:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -383,7 +576,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-TemplateC">Template Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150" required></textarea>
+                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -507,9 +700,12 @@
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @id = "approverDropdown" })
                         @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="styled-button openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
                 </div>
             </div>
         </div>
@@ -518,35 +714,38 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-ApproverComents">Aprover Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-ApproverComents" rows="6" cols="120" placeholder="Approver comments" required></textarea>
+                        <textarea class="form-control" id="form-ApproverComents" rows="6" cols="120" placeholder="Approver comments"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br />
 
-    <!-- Invoice Number Format Section -->
-    <div class="form-section">
-        <div class="section-title">Invoice Number Format</div>
-        <!-- Approver info -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-InvoiceF">Invoice Format:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-InvoiceF" placeholder="Invoice Format" required>
-                    </div>
+        <!--Add a new approver modal-->
+        <div id="ShowApproverModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Approver</h4>
                 </div>
-            </div>
-        </div>
-        <!-- Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-INFType">Type:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-INFType" placeholder="Invoice Type" required>
+
+                <div class="modal-body">
+                    <!-- Approver Section-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-6" for="form-AddApprover">Approver:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="form-AddApprover" placeholder="Approver"/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button class="styled-button" type="button" id="btn-addAppover">Add a new approver</button>
+                            </div>
+                        </div>
+                        <br />
                     </div>
                 </div>
             </div>
