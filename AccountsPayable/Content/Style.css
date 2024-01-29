@@ -94,6 +94,6 @@ select.form-control:disabled {
     margin-left: -2px;
 }
 
-#btn-addLegalEntity, #btn-approver {
-    margin-top: 21px;
+#btn-addLegalEntity, #btn-addAppover {
+    margin-top: 27px;
 }

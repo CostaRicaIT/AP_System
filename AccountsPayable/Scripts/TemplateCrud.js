@@ -203,6 +203,111 @@ $(document).ready(function () {
             update();
         }
     });
+
+    //Function to store more legal entity data to the dropdown
+    $(document).ready(function () {
+
+        // Function to sort alphabetic the legal entity in dropdown
+        function sortLegalEntity() {
+
+            let options = $("#legalEntityDropdown option");
+            options.sort(function (a, b) {
+                return a.text.localeCompare(b.text);
+            });
+            $("#legalEntityDropdown").empty().append(options);
+        };
+
+        // Button click event to add Legal Entity to dropdown
+        $("#btn-addLegalEntity").on('click', function () {
+
+            // Get the value from the input field
+            let newLegalEntity = $("#form-AddLegalEntity").val();
+
+            //Check if the value is not empty
+            if (newLegalEntity.trim() != '') {
+
+                //AJAX to made the request to the server
+                $.ajax({
+                    url: '/Main/AddLegalEntity',
+                    type: 'POST',
+                    data: { legalEntityName: newLegalEntity },
+                    success: function (data) {
+
+                        $('#legalEntityDropdown').append('<option value="' + data.id + '">' + data.name + '</option>');
+                        $('#form-AddLegalEntity').val('');
+
+                        alert("New legal entity added to the list section.");
+
+                        // Call the function to sort
+                        sortLegalEntity();
+
+                    },
+
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+
+                }); 
+            }
+        });
+
+        // Call the function to sort
+        sortLegalEntity();
+
+    });
+
+    //Function to store more approver data to the dropdown
+    $(document).ready(function () {
+
+        // Function to sort alphabetic the approver in dropdown
+        function sortApprover() {
+
+            let options = $("#approverDropdown option");
+            options.sort(function (a, b) {
+                return a.text.localeCompare(b.text);
+            });
+            $("#approverDropdown").empty().append(options);
+        };
+
+        // Button click event to add approver to dropdown
+        $("#btn-addAppover").on('click', function () {
+
+            // Get the value from the input field
+            let newApprover = $("#form-AddApprover").val();
+
+            //Check if the value is not empty
+            if (newApprover.trim() != '') {
+
+                //AJAX to made the request to the server
+                $.ajax({
+                    url: '/Main/AddApprover',
+                    type: 'POST',
+                    data: { approverName: newApprover },
+                    success: function (data) {
+
+                        $('#approverDropdown').append('<option value="' + data.id + '">' + data.name + '</option>');
+                        $('#form-AddApprover').val('');
+
+                        alert("New approver added to the list section.");
+
+                        // Call the function to sort
+                        sortApprover();
+
+                    },
+
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+
+                });
+            }
+        });
+
+        // Call the function to sort
+        sortApprover();
+
+    });
+
 });
 
 //funtion to check that all requered fields are filled
@@ -257,7 +362,8 @@ function create() {
         TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_SITE: $("#form-SupSite").val().replace(/[<>]/g, ''),
         TEMP_ADDRESS: $("#form-Address").val().replace(/[<>]/g, ''),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        //FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val().replace(/[<>]/g, ''),
         TEMP_TAXPAYER_ID: $("#form-FirstParty").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_DESCRIPTION: $("#form-Description").val().replace(/[<>]/g, ''),
@@ -266,7 +372,8 @@ function create() {
         FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_NOTES: $("#form-OracleN").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_INSTRUCTIONS: $("#form-OracleI").val().replace(/[<>]/g, ''),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
+        /*FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),*/
+        FK_TB_APPROVER_ID: $("#approverDropdown").val().replace(/[<>]/g, ''),
         TEMP_APPROVER_COMMENTS: $("#form-ApproverComents").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_FORMAT: $("#form-InvoiceF").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_TYPE: $("#form-INFType").val().replace(/[<>]/g, ''),
@@ -328,7 +435,8 @@ function update() {
         TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val().replace(/[<>]/g, ''),
         TEMP_ADDRESS: $("#TEMP_ADDRESS").val().replace(/[<>]/g, ''),
-        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
+        FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val().replace(/[<>]/g, ''),
+        //FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
         TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_DESCRIPTION: $("#TEMP_ORACLE_DESCRIPTION").val().replace(/[<>]/g, ''),
@@ -337,7 +445,8 @@ function update() {
         FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_NOTES: $("#TEMP_ORACLE_NOTES").val().replace(/[<>]/g, ''),
         TEMP_ORACLE_INSTRUCTIONS: $("#TEMP_ORACLE_INSTRUCTIONS").val().replace(/[<>]/g, ''),
-        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),
+        /*FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val().replace(/[<>]/g, ''),*/
+        FK_TB_APPROVER_ID: $("#approverDropdown").val().replace(/[<>]/g, ''),
         TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val().replace(/[<>]/g, ''),
@@ -384,7 +493,5 @@ function update() {
             alert("An error occurred while saving the record.");
         }
     });
-
-
 
 }

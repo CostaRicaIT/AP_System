@@ -410,12 +410,12 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @id = "legalEntityDropdown" })
                         @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn form_btntbWC openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
+                    <button class="styled-button openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
                 </div>
             </div>
         </div>
@@ -427,7 +427,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Approver</h4>
+                    <h4 class="modal-title">Legal Entity</h4>
                 </div>
 
                 <div class="modal-body">
@@ -442,7 +442,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <button class="btn form_btntbWC" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
+                                <button class="styled-button" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
                             </div>
                         </div>
                         <br />
@@ -740,12 +740,12 @@
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @id = "approverDropdown" })
                         @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn form_btntbWC openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
+                    <button class="styled-button openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
                 </div>
             </div>
         </div>
@@ -783,9 +783,8 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <br />
-                            <button class="btn form_btntbWC" type="button" id="btn-addAppover">Add a new approver</button>
+                        <div class="col-md-6">
+                            <button class="styled-button" type="button" id="btn-addAppover">Add a new approver</button>
                         </div>
                     </div>
                     <br />

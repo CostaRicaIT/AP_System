@@ -45,13 +45,13 @@
           </Key>
           <Property Name="HIGHLIGHTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HIGHLIGHTS_DATE" Type="datetime" Nullable="false" />
-          <Property Name="HIGHLIGHTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_COMMENTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="varchar(max)" Nullable="false" />
-          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="varchar(max)" Nullable="false" />
+          <Property Name="HIGHLIGHTS" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_COMMENTS" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="varchar(max)" />
+          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_ID" Type="int" />
         </EntityType>
         <EntityType Name="TB_HISTORIC_REMIT">
@@ -60,7 +60,7 @@
           </Key>
           <Property Name="HISTORIC_REMIT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HISTORIC_REMIT_DATE" Type="datetime" Nullable="false" />
-          <Property Name="HISTORIC_REMIT_INFO" Type="varchar(max)" Nullable="false" />
+          <Property Name="HISTORIC_REMIT_INFO" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_ID" Type="int" />
         </EntityType>
         <EntityType Name="TB_LOG_IN">
@@ -119,25 +119,25 @@
           <Property Name="TEMP_SUPPLIER_NAME" Type="varchar(max)" />
           <Property Name="TEMP_SUPPLIER_NUMBER" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="int" />
-          <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
-          <Property Name="TEMP_SUPPLIER_SITE" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_ADDRESS" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_SUPPLIER_SITE" Type="varchar(max)" />
+          <Property Name="TEMP_ADDRESS" Type="varchar(max)" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" />
-          <Property Name="TEMP_TAXPAYER_ID" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_TAXPAYER_ID" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_TYPE_ID" Type="int" />
-          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="int" />
-          <Property Name="TEMP_DISTRIBUTION_SET" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_DISTRIBUTION_SET" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="int" />
-          <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" />
+          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" />
           <Property Name="FK_TB_HIGHLIGHTS_ID" Type="int" />
           <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" />
           <Property Name="FK_TB_APPROVER_ID" Type="int" />
-          <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_INVOICE_FORMAT" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_INVOICE_TYPE" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_FORMAT" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_TYPE" Type="varchar(max)" />
           <Property Name="TEMP_ISDISABLED" Type="int" Nullable="false" />
           <Property Name="TEMP_FOLDER" Type="varchar(max)" />
           <Property Name="TEMP_PAYMENT_METHOD" Type="varchar(max)" />
@@ -551,13 +551,13 @@
           </Key>
           <Property Name="HIGHLIGHTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HIGHLIGHTS_DATE" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HIGHLIGHTS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_COMMENTS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_EXCEPTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_COMMON_ISSUES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_SUPPLIER_AGENCY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HIGHLIGHTS_TEMPLATE_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_TEMPLATE_ID" Type="Int32" />
           <NavigationProperty Name="TB_TEMPLATE" Relationship="Accounts_Payable_Model.FK__TB_HIGHLI__FK_TB__38845C1C" FromRole="TB_HIGHLIGHTS" ToRole="TB_TEMPLATE" />
           <NavigationProperty Name="TB_TEMPLATE1" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0F824689" FromRole="TB_HIGHLIGHTS" ToRole="TB_TEMPLATE" />
@@ -568,7 +568,7 @@
           </Key>
           <Property Name="HISTORIC_REMIT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HISTORIC_REMIT_DATE" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HISTORIC_REMIT_INFO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HISTORIC_REMIT_INFO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_TEMPLATE_ID" Type="Int32" />
           <NavigationProperty Name="TB_TEMPLATE" Relationship="Accounts_Payable_Model.FK__TB_HISTOR__FK_TB__379037E3" FromRole="TB_HISTORIC_REMIT" ToRole="TB_TEMPLATE" />
           <NavigationProperty Name="TB_TEMPLATE1" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__30E33A54" FromRole="TB_HISTORIC_REMIT" ToRole="TB_TEMPLATE" />
@@ -636,25 +636,25 @@
           <Property Name="TEMP_SUPPLIER_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_SUPPLIER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="Int32" />
-          <Property Name="TEMP_VENDOR_ACCOUNT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_VENDOR_ACCOUNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" />
-          <Property Name="TEMP_SUPPLIER_SITE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_ADDRESS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_SUPPLIER_SITE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="Int32" />
-          <Property Name="TEMP_TAXPAYER_ID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TAXPAYER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_ORACLE_TYPE_ID" Type="Int32" />
-          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="Int32" />
-          <Property Name="TEMP_DISTRIBUTION_SET" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_DISTRIBUTION_SET" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="Int32" />
-          <Property Name="TEMP_ORACLE_NOTES" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_ORACLE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_HIGHLIGHTS_ID" Type="Int32" />
           <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="Int32" />
           <Property Name="FK_TB_APPROVER_ID" Type="Int32" />
-          <Property Name="TEMP_APPROVER_COMMENTS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_INVOICE_FORMAT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_INVOICE_TYPE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_APPROVER_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_INVOICE_FORMAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_INVOICE_TYPE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_ISDISABLED" Type="Int32" Nullable="false" />
           <Property Name="TEMP_FOLDER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_PAYMENT_METHOD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />

@@ -418,6 +418,61 @@ namespace AccountsPayable.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult AddLegalEntity(string legalEntityName)
+        {
+            try
+            {
+
+                bool entityExists = db.TB_ORACLE_LEGAL_ENTITIES.Any(entity => entity.LEGAL_ENTITY_NAME == legalEntityName);
+
+                if (!entityExists)
+                {
+                    var newEntity = new TB_ORACLE_LEGAL_ENTITIES { LEGAL_ENTITY_NAME = legalEntityName };
+                    db.TB_ORACLE_LEGAL_ENTITIES.Add(newEntity);
+                    db.SaveChanges();
+
+                    return Json(new { id = newEntity.LEGAL_ENTITY_ID, name = newEntity.LEGAL_ENTITY_NAME });
+
+                }
+
+                return Json(new { message = "Entity already exists" });
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddApprover(string approverName)
+        {
+            try
+            {
+
+                bool entiExists = db.TB_APPROVER.Any(enti => enti.APPROVER_NAME == approverName);
+
+                if (!entiExists)
+                {
+                    var newEnti = new TB_APPROVER { APPROVER_NAME = approverName };
+                    db.TB_APPROVER.Add(newEnti);
+                    db.SaveChanges();
+
+                    return Json(new { id = newEnti.APPROVER_ID, name = newEnti.APPROVER_NAME });
+
+                }
+
+                return Json(new { message = "Entity already exists" });
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
+        }
 
         public ActionResult Details(int? id)
         {
