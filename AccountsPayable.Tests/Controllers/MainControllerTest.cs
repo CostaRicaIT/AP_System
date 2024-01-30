@@ -297,7 +297,7 @@ namespace AccountsPayable.Tests.Controllers
                 var newApproverResult = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
                            .Invoke(controllerInstance, new object[] { newApprover });
 
-                var jsonResultnewApprover = newLegalEntityResult as JsonResult;
+                var jsonResultnewApprover = newApproverResult as JsonResult;
                 var responseDatanewApprover = jsonResultnewApprover.Data;
                 int newApproverId = (int)responseDatanewApprover.GetType().GetProperty("id")?.GetValue(responseDatanewApprover);
 
@@ -438,7 +438,7 @@ namespace AccountsPayable.Tests.Controllers
                 var newApproverResult = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
                            .Invoke(controllerInstance, new object[] { newApprover });
 
-                var jsonResultnewApprover = newLegalEntityResult as JsonResult;
+                var jsonResultnewApprover = newApproverResult as JsonResult;
                 var responseDatanewApprover = jsonResultnewApprover.Data;
                 int newApproverId = (int)responseDatanewApprover.GetType().GetProperty("id")?.GetValue(responseDatanewApprover);
 
