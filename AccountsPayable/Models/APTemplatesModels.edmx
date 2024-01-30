@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="APModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TB_ALIAS">
           <Key>
             <PropertyRef Name="ALIAS_ID" />
@@ -148,6 +138,7 @@
           <Property Name="TEMP_VSU" Type="varchar(max)" />
           <Property Name="TEMP_W9_W8" Type="varchar(max)" />
           <Property Name="TEMP_INVOICE_NOTES" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_DESCRIPTION" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TB_TEMPLATE_ALIAS">
           <Key>
@@ -358,7 +349,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="APModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_APPROVER" EntityType="Self.TB_APPROVER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_EMAIL_BACKUP" EntityType="Self.TB_EMAIL_BACKUP" Schema="dbo" store:Type="Tables" />
@@ -440,7 +430,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="APModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AccountsPayableTestProdEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="APModel.sysdiagram" />
           <EntitySet Name="TB_ALIAS" EntityType="APModel.TB_ALIAS" />
           <EntitySet Name="TB_APPROVER" EntityType="APModel.TB_APPROVER" />
           <EntitySet Name="TB_EMAIL_BACKUP" EntityType="APModel.TB_EMAIL_BACKUP" />
@@ -507,16 +496,6 @@
             <End Role="TB_EMAIL_BACKUP" EntitySet="TB_EMAIL_BACKUP" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TB_ALIAS">
           <Key>
             <PropertyRef Name="ALIAS_ID" />
@@ -664,6 +643,7 @@
           <Property Name="TEMP_VSU" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_W9_W8" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_INVOICE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_INVOICE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TB_APPROVER" Relationship="APModel.FK__TB_TEMPLA__FK_TB__531856C7" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
           <NavigationProperty Name="TB_HIGHLIGHTS" Relationship="APModel.FK__TB_HIGHLI__FK_TB__4C6B5938" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
           <NavigationProperty Name="TB_HIGHLIGHTS1" Relationship="APModel.FK__TB_TEMPLA__FK_TB__51300E55" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
@@ -829,23 +809,12 @@
           <End Type="APModel.TB_TEMPLATE" Role="TB_TEMPLATE" Multiplicity="*" />
           <End Type="APModel.TB_EMAIL_BACKUP" Role="TB_EMAIL_BACKUP" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="APModelStoreContainer" CdmEntityContainer="AccountsPayableTestProdEntities">
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="APModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_ALIAS">
             <EntityTypeMapping TypeName="APModel.TB_ALIAS">
               <MappingFragment StoreEntitySet="TB_ALIAS">
@@ -954,6 +923,7 @@
           <EntitySetMapping Name="TB_TEMPLATE">
             <EntityTypeMapping TypeName="APModel.TB_TEMPLATE">
               <MappingFragment StoreEntitySet="TB_TEMPLATE">
+                <ScalarProperty Name="TEMP_INVOICE_DESCRIPTION" ColumnName="TEMP_INVOICE_DESCRIPTION" />
                 <ScalarProperty Name="TEMP_INVOICE_NOTES" ColumnName="TEMP_INVOICE_NOTES" />
                 <ScalarProperty Name="TEMP_W9_W8" ColumnName="TEMP_W9_W8" />
                 <ScalarProperty Name="TEMP_VSU" ColumnName="TEMP_VSU" />
