@@ -59,7 +59,7 @@ namespace AccountsPayable.Controllers
                 template.EMAIL_BACKUP = data?.EmailBackup?.EMAIL_BACKUP;
             }
 
-            
+
             return View(templates);
         }
 
@@ -83,7 +83,7 @@ namespace AccountsPayable.Controllers
             var dateTimeUTC = DateTime.UtcNow;
             TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
-            
+
             //Start transaction for creation of template
             using (var transaction = db.Database.BeginTransaction())
             {
@@ -91,14 +91,26 @@ namespace AccountsPayable.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        // Add date to highlights and add data to be saved later
-                        HighLightsData.HIGHLIGHTS_DATE = targetTime;
-                        db.TB_HIGHLIGHTS.Add(HighLightsData);
+                        // Add date to highlights and add data to be saved later, verifies if all the HIGHLIGHTS data is different from null can be inserted
+                        if (HighLightsData.HIGHLIGHTS != null
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != null
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != null
+                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != null
+                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != null
+                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != null
+                                || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != null)
+                        {
+                            HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                            db.TB_HIGHLIGHTS.Add(HighLightsData);
+                        }
 
 
-                        // Add date to Historic Remit and add data to be saved later
-                        HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
-                        db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                        // Add date to Historic Remit and add data to be saved later, verifies if the HISTORIC_REMIT data is different from null can be inserted
+                        if (HistoricRemitToData.HISTORIC_REMIT_INFO != null)
+                        {
+                            HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+                            db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                        }
 
 
                         // Get all emails created add date and add data to be saved later
@@ -170,8 +182,16 @@ namespace AccountsPayable.Controllers
                             newEmailBackUpId = savedEmailsIds.LastOrDefault(); //getting the last Alias and Email backup saved
                             templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
                         }
-                        templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
-                        templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                        //Validates if data in historic remit is different from NULL, creates the needed table in TB_HIGHLIGHTS else omits creating it
+                        if (newHighLightsId != 0)
+                        {
+                            templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
+                        }
+                        //Validates if data in historic remit is different from NULL, creates the needed table in TB_HISTORIC_REMIT else omits creating it
+                        if (newHistoricRemitId != 0)
+                        {
+                            templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                        }
 
                         // Save changes once at the end
                         db.SaveChanges();
@@ -274,24 +294,59 @@ namespace AccountsPayable.Controllers
                         {
                             // Update template properties
 
-                            // Update highlights data if there are changes
-                            if (HighLightsData.HIGHLIGHTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS
-                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS
-                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
-                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS
-                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
-                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
-                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
-                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                            // Check if template contains a Highlight
+
+                            if (existingTemplate.FK_TB_HIGHLIGHTS_ID != null)
                             {
-                                HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                                HighLightsData.HIGHLIGHTS_DATE = targetTime;
-                                db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                //If highlights exists validate if there is changed and create a new one
+                                if (HighLightsData.HIGHLIGHTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS
+                               || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS
+                               || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                               || HighLightsData.HIGHLIGHTS_EXCEPTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS
+                               || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
+                               || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
+                               || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                               || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                                {
+                                    HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                }
+
+                            }
+                            else
+                            {
+                                //If there is not a highlight and there is data create a new one
+                                if (HighLightsData.HIGHLIGHTS != null
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != null
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != null
+                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != null
+                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != null
+                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != null
+                                || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != null)
+                                {
+                                    HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                }
                             }
 
                             // Update historic remit data if there are changes
-                            if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
+                            
+                            if (existingTemplate.FK_TB_TEMPLATE_HISTORIC_REMIT_ID != null)
                             {
+                                //If there is there is a historic remit create a new one
+                                if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
+                                {
+                                    HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+                                    db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                                }
+
+                            }
+                            else
+                            {
+                                // If there is not a historic remit create a new one
                                 HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                 HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                                 db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
