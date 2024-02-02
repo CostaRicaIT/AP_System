@@ -285,7 +285,7 @@ namespace AccountsPayable.Tests.Controllers
 
                 // Adding new legal entity and approver to be used on insert
 
-                var newLegalEntity = "Access";
+                var newLegalEntity = "Access Test";
                 var newLegalEntityResult = controllerType.GetMethod("AddLegalEntity", new[] { typeof(string) })
                            .Invoke(controllerInstance, new object[] { newLegalEntity });
 
@@ -426,7 +426,7 @@ namespace AccountsPayable.Tests.Controllers
 
                 // Adding new legal entity and approver to be used on insert
 
-                var newLegalEntity = "Access";
+                var newLegalEntity = "Access Test";
                 var newLegalEntityResult = controllerType.GetMethod("AddLegalEntity", new[] { typeof(string) })
                            .Invoke(controllerInstance, new object[] { newLegalEntity });
 
@@ -563,7 +563,7 @@ namespace AccountsPayable.Tests.Controllers
                 }
 
                 // Create necessary entities and data for the Edit method
-                var newLegalEntity = "Access";
+                var newLegalEntity = "Access Test";
 
                 // Act
                 var result = controllerType.GetMethod("AddLegalEntity", new[] { typeof(string) })
