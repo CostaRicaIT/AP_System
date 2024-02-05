@@ -1,18 +1,17 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 3, 4, 5, 9, 2, 23]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 5, 4, 10, 21, 3, 30]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({
-        orderCellsTop: true,
-        autoWidth: true,
-        stateSave: false,
-        responsive: true,
-        scrollCollapse: true,
+        orderCellsTop: true, //Show table sorting at top
+        autoWidth: true, //Set the widht of collumn depending on content
+        responsive: true, //Set the table to be responsive
+        scrollCollapse: true, //Add scroll to table, scrollY and Scroll X are max size on each axis that table can have
         scrollY: '60vh',
         scrollX: '80vh',
-        dom: '<"top"lBf>rt<"bottom"ip>',
-        order: [[0, 'desc']],
-        buttons: [
+        dom: '<"top"lBf>rt<"bottom"ip>', // set the order of table items to be drawn
+        order: [[0, 'desc']], // Set the default sort to ID by descending
+        buttons: [ // Add filter button
             {
                 text: '<i class="fas fa-filter"></i>',
                 className: 'filterButton',
@@ -23,11 +22,11 @@ function initializeDataTable() {
         ],
         columnDefs: [
             {
-                targets: '_all',
+                targets: '_all', //Hide all columns to show only default columns later
                 visible: false
             },
             {
-                targets: 23,
+                targets: 30, //Add View, edit and delete buttons to last column of table
                 render: function (data, type, full, meta) {
                     var rowId = full[0];
                     return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
@@ -37,8 +36,8 @@ function initializeDataTable() {
             }
         ],
         language: {
-            search:"",
-            searchPlaceholder: "Search... "
+            search:"", //Search bar label
+            searchPlaceholder: "Search... " // Search place holder
         },
         //initComplete: function () {
         //    this.api().columns().every(function () {
@@ -65,8 +64,8 @@ function initializeDataTable() {
 
 
     });
-    table.columns(defaultColumns).visible(true);
-    $('a.toggle-vis').on('click', function (e) {
+    table.columns(defaultColumns).visible(true); //Show the default columns set on defaultColumns variable
+    $('a.toggle-vis').on('click', function (e) {// Function to show columns of table
         e.preventDefault();
 
         var column = table.column($(this).attr('data-column'));
@@ -81,6 +80,8 @@ function initializeDataTable() {
     $('#resetColumnsButton').click(function () {
         resetFilters();
     });
+
+    //Funtion to handle View, edit and delete buttons
     $('#dataTable').on('click', '.view-button', function () {
         // Extract the ID from the clicked button
         var rowId = $(this).data('id');

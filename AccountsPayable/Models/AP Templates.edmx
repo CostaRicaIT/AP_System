@@ -119,26 +119,36 @@
           <Property Name="TEMP_SUPPLIER_NAME" Type="varchar(max)" />
           <Property Name="TEMP_SUPPLIER_NUMBER" Type="varchar(max)" Nullable="false" />
           <Property Name="FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="int" />
-          <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
-          <Property Name="TEMP_SUPPLIER_SITE" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_ADDRESS" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_SUPPLIER_SITE" Type="varchar(max)" />
+          <Property Name="TEMP_ADDRESS" Type="varchar(max)" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" />
-          <Property Name="TEMP_TAXPAYER_ID" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_TAXPAYER_ID" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_TYPE_ID" Type="int" />
-          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_PAY_TERMS_ID" Type="int" />
-          <Property Name="TEMP_ACCOUNT_CODING" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_DISTRIBUTION_SET" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_SOURCE_ID" Type="int" />
-          <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_ORACLE_NOTES" Type="varchar(max)" />
+          <Property Name="TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" />
           <Property Name="FK_TB_HIGHLIGHTS_ID" Type="int" />
           <Property Name="FK_TB_EMAIL_BACKUP_ID" Type="int" />
           <Property Name="FK_TB_APPROVER_ID" Type="int" />
-          <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_INVOICE_FORMAT" Type="varchar(max)" Nullable="false" />
-          <Property Name="TEMP_INVOICE_TYPE" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEMP_APPROVER_COMMENTS" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_FORMAT" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_TYPE" Type="varchar(max)" />
           <Property Name="TEMP_ISDISABLED" Type="int" Nullable="false" />
+          <Property Name="TEMP_FOLDER" Type="varchar(max)" />
+          <Property Name="TEMP_PAYMENT_METHOD" Type="varchar(max)" />
+          <Property Name="TEMP_REMIT_TOACCOUNT" Type="varchar(max)" />
+          <Property Name="TEMP_BILLING_PERIOD" Type="varchar(max)" />
+          <Property Name="TEMP_DISTRIBUTION_COMBINATION" Type="varchar(max)" />
+          <Property Name="TEMP_ACCOUNTING_DATE" Type="varchar(max)" />
+          <Property Name="TEMP_VSU" Type="varchar(max)" />
+          <Property Name="TEMP_W9_W8" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_NOTES" Type="varchar(max)" />
+          <Property Name="TEMP_INVOICE_DESCRIPTION" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TB_TEMPLATE_ALIAS">
           <Key>

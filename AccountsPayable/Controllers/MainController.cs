@@ -3,19 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Data.Entity.Validation;
-using System.Data.SqlClient;
-using System.Drawing.Printing;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
-using System.Web.UI;
-using System.Web.UI.WebControls.Expressions;
-using System.Web.WebPages;
 
 namespace AccountsPayable.Controllers
 {
@@ -29,33 +20,43 @@ namespace AccountsPayable.Controllers
         // GET: Main
         public ActionResult Index()
         {
+            //Get data for dashboard
             var tB_TEMPLATE = db.TB_TEMPLATE
                 .Include(t => t.TB_APPROVER)
-                .Include(t => t.TB_EMAIL_BACKUP)
                 .Include(t => t.TB_HIGHLIGHTS)
                 .Include(t => t.TB_ORACLE_LEGAL_ENTITIES)
                 .Include(t => t.TB_ORACLE_PAY_TERMS)
                 .Include(t => t.TB_ORACLE_SOURCE)
                 .Include(t => t.TB_ORACLE_TYPE)
-                .Include(t => t.TB_ALIAS); // Include the TB_ALIAS
-
-            
-            var templates = from t in db.TB_TEMPLATE
-                            where t.TEMP_ISDISABLED != 1
-                            select t; 
-            tB_TEMPLATE.ToList();
+                .Where(t => t.TEMP_ISDISABLED == 0);
 
 
-            foreach (var item in templates)
+            var templates = tB_TEMPLATE.ToList();
+
+            //Get data for email backup and alias
+
+            //get id of each template
+            var templateIds = templates.Select(t => t.TEMP_ID).ToList();
+            //Query to get the data
+            var templateData = db.TB_TEMPLATE
+                   .Where(t => templateIds.Contains(t.TEMP_ID))
+                   .Select(t => new
+                   {
+                       Template = t,
+                       Alias = t.TB_ALIAS.FirstOrDefault(a => a.ALIAS_ID == t.FK_TB_TEMPLATE_ALIAS_ID),
+                       EmailBackup = t.TB_EMAIL_BACKUP.FirstOrDefault(e => e.EMAIL_BACKUP_ID == t.FK_TB_EMAIL_BACKUP_ID)
+                   })
+                   .ToList();
+
+            //Join data of email and alias to template
+
+            //Is model is recreated due to db change ALIAS_NAME and EMAIL_BAKCUP properties need to be recreated using Generate property option on VS
+            foreach (var template in templates)
             {
-                var aliasItem = item.TB_ALIAS.FirstOrDefault(a => a.ALIAS_ID == item.FK_TB_TEMPLATE_ALIAS_ID);
-                item.ALIAS_NAME = aliasItem != null ? aliasItem.ALIAS_NAME : null;
-            }
+                var data = templateData.FirstOrDefault(t => t.Template.TEMP_ID == template.TEMP_ID);
 
-            foreach (var item in templates)
-            {
-                var emailBackupItem = item.TB_EMAIL_BACKUP.FirstOrDefault(a => a.EMAIL_BACKUP_ID == item.FK_TB_EMAIL_BACKUP_ID);
-                item.EMAIL_BACKUP = emailBackupItem != null ? emailBackupItem.EMAIL_BACKUP : null;
+                template.ALIAS_NAME = data?.Alias?.ALIAS_NAME;
+                template.EMAIL_BACKUP = data?.EmailBackup?.EMAIL_BACKUP;
             }
 
 
@@ -65,6 +66,7 @@ namespace AccountsPayable.Controllers
 
         public ActionResult Create()
         {
+            //Get data for dropdowns
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
             ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
             ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
@@ -73,83 +75,45 @@ namespace AccountsPayable.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public ActionResult CreateNoEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData) //Create when Alias and email backup are not filled
+        public ActionResult Create(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
         {
+            //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
             TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
 
+            //Start transaction for creation of template
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
                 {
                     if (ModelState.IsValid)
                     {
-                        // Add date, save to Highlights Table and get ID created
-                        HighLightsData.HIGHLIGHTS_DATE = targetTime;
-                        db.TB_HIGHLIGHTS.Add(HighLightsData);
-
-                        // Add date, save to Historic remit Table and get ID created
-                        HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
-                        db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
-
-                        // Save to template
-                        /*templateData.TEMP_ISDISABLED = 0;*/ //setting isdisabled to 0
-                        db.TB_TEMPLATE.Add(templateData);
-                        db.SaveChanges(); // Save changes for external tables
-
-
-                        // Get external tables ID, adding it to template and saving
-                        int newTemplateId = templateData.TEMP_ID;
-                        int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
-                        int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
-                        templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
-                        templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
-                        HighLightsData.FK_TB_TEMPLATE_ID = newTemplateId;
-                        HistoricRemitToData.FK_TB_TEMPLATE_ID = newTemplateId;
-                        // Save changes once at the end
-                        db.SaveChanges();
-
-                        transaction.Commit(); //If no issues appear confirm save changes
-                        return Json(new { success = true });
-                    }
-                    else
-                    {
-                        return Json(new { success = false, message = "Model validation failed" });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback(); // If there is a issue the data wont be saved
-                    return Json(new { success = false, message = "An error occurred while saving the record: " + ex.Message });
-                }
-            }
-        }
-
-        [HttpPost]
-        public ActionResult CreateWithEmail_Alias(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
-        {
-            var dateTimeUTC = DateTime.UtcNow;
-            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
-            DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
-            using (var transaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    if (ModelState.IsValid)
-                    {
-                        // Add date, save to Highlights Table and get ID created
-                        HighLightsData.HIGHLIGHTS_DATE = targetTime;
-                        db.TB_HIGHLIGHTS.Add(HighLightsData);
+                        // Add date to highlights and add data to be saved later, verifies if all the HIGHLIGHTS data is different from null can be inserted
+                        if (HighLightsData.HIGHLIGHTS != null
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != null
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != null
+                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != null
+                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != null
+                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != null
+                                || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != null)
+                        {
+                            HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                            db.TB_HIGHLIGHTS.Add(HighLightsData);
+                        }
 
 
-                        // Add date, save to Historic remit Table and get ID created
-                        HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
-                        db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                        // Add date to Historic Remit and add data to be saved later, verifies if the HISTORIC_REMIT data is different from null can be inserted
+                        if (HistoricRemitToData.HISTORIC_REMIT_INFO != null)
+                        {
+                            HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+                            db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                        }
 
 
-                        // Add date, save to Email Table
+                        // Get all emails created add date and add data to be saved later
                         if (emailDataList != null && emailDataList.Any())
                         {
                             foreach (var emailData in emailDataList)
@@ -160,7 +124,7 @@ namespace AccountsPayable.Controllers
                             }
                         }
 
-                        // Save to Alias Table 
+                        // Get all alias created and add data to be saved later
                         if (aliasDataList != null && aliasDataList.Any())
                         {
                             foreach (var aliasData in aliasDataList)
@@ -171,15 +135,18 @@ namespace AccountsPayable.Controllers
                         }
 
 
-                        // Save to template getting id´s from highlights, historicRemit, email, and alias and get saved template ID
+
                         /*templateData.TEMP_ISDISABLED = 0;*/ //setting isdisabled to 0
+
+                        //Save template data
                         db.TB_TEMPLATE.Add(templateData);
+                        //Save all changes to DB
                         db.SaveChanges(); // Save changes for external tables
 
 
                         // Update highlights, historicRemit, email, and alias to add template ID
-                        int newAliasId = 0;
-                        int newEmailBackUpId = 0;
+                        int newAliasId;
+                        int newEmailBackUpId;
                         int newTemplateId = templateData.TEMP_ID;
                         int newHighLightsId = HighLightsData.HIGHLIGHTS_ID;
                         int newHistoricRemitId = HistoricRemitToData.HISTORIC_REMIT_ID;
@@ -212,10 +179,19 @@ namespace AccountsPayable.Controllers
                                 template.TB_EMAIL_BACKUP.Add(email);
 
                             }
+                            newEmailBackUpId = savedEmailsIds.LastOrDefault(); //getting the last Alias and Email backup saved
                             templateData.FK_TB_EMAIL_BACKUP_ID = newEmailBackUpId;
                         }
-                        templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
-                        templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                        //Validates if data in historic remit is different from NULL, creates the needed table in TB_HIGHLIGHTS else omits creating it
+                        if (newHighLightsId != 0)
+                        {
+                            templateData.FK_TB_HIGHLIGHTS_ID = newHighLightsId;
+                        }
+                        //Validates if data in historic remit is different from NULL, creates the needed table in TB_HISTORIC_REMIT else omits creating it
+                        if (newHistoricRemitId != 0)
+                        {
+                            templateData.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = newHistoricRemitId;
+                        }
 
                         // Save changes once at the end
                         db.SaveChanges();
@@ -236,8 +212,6 @@ namespace AccountsPayable.Controllers
             }
         }
 
-
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -250,6 +224,7 @@ namespace AccountsPayable.Controllers
                 return HttpNotFound();
             }
 
+            //Get data for email backup
             var emailBackupList = db.TB_EMAIL_BACKUP
                 .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id))
                 .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
@@ -260,7 +235,7 @@ namespace AccountsPayable.Controllers
                     EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }
                 ).ToList();
-
+            //Get data for historic Remit
             var historicRemitToList = db.TB_HISTORIC_REMIT
                 .Where(x => x.FK_TB_TEMPLATE_ID == id)
                 .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
@@ -270,7 +245,7 @@ namespace AccountsPayable.Controllers
                     HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
                     HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }).ToList();
-
+            //Get data for highlights
             var HighLightsToList = db.TB_HIGHLIGHTS
                 .Where(e => e.FK_TB_TEMPLATE_ID == id)
                 .OrderByDescending(e => e.HIGHLIGHTS_DATE)
@@ -282,8 +257,10 @@ namespace AccountsPayable.Controllers
                 })
                 .ToList();
 
+            //Get data for alias
             var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
 
+            //Send data to view with external tables data
             ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
             ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
             ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
@@ -299,9 +276,11 @@ namespace AccountsPayable.Controllers
         [HttpPost]
         public ActionResult Edit(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
         {
+            //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
             TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+            //Start transaction for template update
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
@@ -315,24 +294,59 @@ namespace AccountsPayable.Controllers
                         {
                             // Update template properties
 
-                            // Update highlights data if there are changes
-                            if (HighLightsData.HIGHLIGHTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS
-                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS
-                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
-                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS
-                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
-                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
-                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
-                                || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                            // Check if template contains a Highlight
+
+                            if (existingTemplate.FK_TB_HIGHLIGHTS_ID != null)
                             {
-                                HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
-                                HighLightsData.HIGHLIGHTS_DATE = targetTime;
-                                db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                //If highlights exists validate if there is changed and create a new one
+                                if (HighLightsData.HIGHLIGHTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS
+                               || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS
+                               || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                               || HighLightsData.HIGHLIGHTS_EXCEPTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS
+                               || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
+                               || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
+                               || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
+                               || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                                {
+                                    HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                }
+
+                            }
+                            else
+                            {
+                                //If there is not a highlight and there is data create a new one
+                                if (HighLightsData.HIGHLIGHTS != null
+                                || HighLightsData.HIGHLIGHTS_COMMENTS != null
+                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != null
+                                || HighLightsData.HIGHLIGHTS_EXCEPTIONS != null
+                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != null
+                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != null
+                                || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != null)
+                                {
+                                    HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HighLightsData.HIGHLIGHTS_DATE = targetTime;
+                                    db.TB_HIGHLIGHTS.Add(HighLightsData);
+                                }
                             }
 
                             // Update historic remit data if there are changes
-                            if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
+                            
+                            if (existingTemplate.FK_TB_TEMPLATE_HISTORIC_REMIT_ID != null)
                             {
+                                //If there is there is a historic remit create a new one
+                                if (HistoricRemitToData.HISTORIC_REMIT_INFO != existingTemplate.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO)
+                                {
+                                    HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
+                                    HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+                                    db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
+                                }
+
+                            }
+                            else
+                            {
+                                // If there is not a historic remit create a new one
                                 HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                 HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                                 db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
@@ -461,6 +475,61 @@ namespace AccountsPayable.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult AddLegalEntity(string legalEntityName)
+        {
+            try
+            {
+
+                bool entityExists = db.TB_ORACLE_LEGAL_ENTITIES.Any(entity => entity.LEGAL_ENTITY_NAME == legalEntityName);
+
+                if (!entityExists)
+                {
+                    var newEntity = new TB_ORACLE_LEGAL_ENTITIES { LEGAL_ENTITY_NAME = legalEntityName };
+                    db.TB_ORACLE_LEGAL_ENTITIES.Add(newEntity);
+                    db.SaveChanges();
+
+                    return Json(new { id = newEntity.LEGAL_ENTITY_ID, name = newEntity.LEGAL_ENTITY_NAME });
+
+                }
+
+                return Json(new { message = "Entity already exists" });
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddApprover(string approverName)
+        {
+            try
+            {
+
+                bool entiExists = db.TB_APPROVER.Any(enti => enti.APPROVER_NAME == approverName);
+
+                if (!entiExists)
+                {
+                    var newEnti = new TB_APPROVER { APPROVER_NAME = approverName };
+                    db.TB_APPROVER.Add(newEnti);
+                    db.SaveChanges();
+
+                    return Json(new { id = newEnti.APPROVER_ID, name = newEnti.APPROVER_NAME });
+
+                }
+
+                return Json(new { message = "Entity already exists" });
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
+        }
 
         public ActionResult Details(int? id)
         {
@@ -537,47 +606,6 @@ namespace AccountsPayable.Controllers
             }
         }
 
-        //[HttpGet]
-        //public ActionResult GetHistoryInfo()
-        //{
-        //    var historicRemit = db.TB_HISTORIC_REMIT.OrderByDescending(item => item.HISTORIC_REMIT_DATE).ToList(); /*Bring the historic creations info in descending mode */
-
-        //    if (historicRemit != null)
-        //    {
-        //        var selectItems = historicRemit.Select(item => new SelectListItem
-        //        {
-        //            Text = item.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy"), // bring the Date
-        //            Value = item.HISTORIC_REMIT_ID.ToString() // Bring the ID
-        //        }).ToList();
-
-        //        return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Error in obtaining historical information." });
-        //    }
-        //}
-
-        //[HttpGet]
-        //public ActionResult GetHighlightsInfo()
-        //{
-        //    var HighlightsHistoric = db.TB_HIGHLIGHTS.OrderByDescending(item => item.HIGHLIGHTS_DATE).ToList(); /*Bring the historic creations info in descending mode */
-
-        //    if (HighlightsHistoric != null)
-        //    {
-        //        var selectItems = HighlightsHistoric.Select(item => new SelectListItem
-        //        {
-        //            Text = item.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy"), // bring the Date
-        //            Value = item.HIGHLIGHTS_ID.ToString() // Bring the ID
-        //        }).ToList();
-
-        //        return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Error in obtaining historical information." });
-        //    }
-        //}
 
         [HttpGet]
         public ActionResult GetEmailText(int emailId, int id)
@@ -647,206 +675,5 @@ namespace AccountsPayable.Controllers
 
             }
         }
-
-        //public ActionResult CreateAlias([Bind(Include = "ALIAS_NAME")] TB_ALIAS tB_ALIAS)
-        //{
-
-
-
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        db.TB_ALIAS.Add(tB_ALIAS);
-        //        db.SaveChanges();
-        //        return Json(new { success = true });
-        //    }
-        //    return Json(new { success = false, message = "There was an error saving the record " });
-        //}
-
-        //public ActionResult GetAliasInfo()
-        //{
-        //    var AliasList = db.TB_ALIAS.ToList();
-
-        //    if (AliasList != null)
-        //    {
-        //        var selectItems = AliasList.Select(item => new SelectListItem
-        //        {
-        //            Text = item.ALIAS_NAME.ToString(), // bring the Alias name
-        //            Value = item.ALIAS_ID.ToString() // Bring the Alias ID
-        //        }).ToList();
-
-        //        return Json(new { success = true, selectItems }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Error in obtaining historical information." });
-        //    }
-
-
-
-
-        //}
-
-
-        //public ActionResult GetAliasText(int AliasId)
-        //{
-        //    // Get the text based on the ID
-        //    var AliasText = db.TB_ALIAS
-        //        .Where(item => item.ALIAS_ID == AliasId)
-        //        .Select(item => item.ALIAS_NAME)
-        //        .FirstOrDefault();
-
-        //    if (AliasText != null)
-        //    {
-        //        return Json(new { success = true, AliasText }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Alias name not found." });
-        //    }
-        //}
-        //public ActionResult GetHighLightsText(int HighlightsID)
-        //{
-        //    // Get the text based on the ID
-        //    var HighLightsText = db.TB_HIGHLIGHTS.FirstOrDefault(h => h.HIGHLIGHTS_ID == HighlightsID);
-
-        //    if (HighLightsText != null)
-        //    {
-        //        return Json(new { success = true, HighLightsText.HIGHLIGHTS, HighLightsText.HIGHLIGHTS_COMMENTS, HighLightsText.HIGHLIGHTS_INSTRUCTIONS, HighLightsText.HIGHLIGHTS_EXCEPTIONS, HighLightsText.HIGHLIGHTS_COMMON_ISSUES, HighLightsText.HIGHLIGHTS_SUPPLIER_AGENCY, HighLightsText.HIGHLIGHTS_TEMPLATE_COMMENTS }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Alias name not found." });
-        //    }
-        //}
-
-        //public ActionResult GetHistoricRecentData()
-        //{
-        //    var mostRecentData = db.TB_HISTORIC_REMIT.OrderByDescending(h => h.HISTORIC_REMIT_DATE).FirstOrDefault();
-
-        //    if (mostRecentData != null)
-        //    {
-
-        //        string mostRecentInfo = mostRecentData.HISTORIC_REMIT_INFO;
-
-        //        return Json(new { success = true, mostRecentData = mostRecentInfo }, JsonRequestBehavior.AllowGet);
-
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "An error ocurred while fetching recent data" }, JsonRequestBehavior.AllowGet);
-
-        //    }
-        //}
-        //public ActionResult GetOracleLegalEntity()
-        //{
-        //    var OracleLegalEntityList = db.TB_ORACLE_LEGAL_ENTITIES.ToList();
-        //    if (OracleLegalEntityList != null)
-        //    {
-        //        var selectItems = OracleLegalEntityList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.LEGAL_ENTITY_ID.ToString(),
-        //            Text = item.LEGAL_ENTITY_NAME
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
-        //public ActionResult GetOracleType()
-        //{
-        //    var OracleTypeList = db.TB_ORACLE_TYPE.ToList();
-        //    if (OracleTypeList != null)
-        //    {
-        //        var selectItems = OracleTypeList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.ORACLE_TYPE_ID.ToString(),
-        //            Text = item.ORACLE_TYPE_NAME
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
-        //public ActionResult GetOraclePayTerms()
-        //{
-        //    var OraclePayTermsList = db.TB_ORACLE_PAY_TERMS.ToList();
-        //    if (OraclePayTermsList != null)
-        //    {
-        //        var selectItems = OraclePayTermsList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.PAY_TERMS_ID.ToString(),
-        //            Text = item.PAY_TERMS_DESCRIPTION
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
-        //public ActionResult GetOracleSource()
-        //{
-        //    var OracleSourceList = db.TB_ORACLE_SOURCE.ToList();
-        //    if (OracleSourceList != null)
-        //    {
-        //        var selectItems = OracleSourceList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.ORACLE_SOURCE_ID.ToString(),
-        //            Text = item.ORACLE_SOURCE_DESCRIPTION
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
-
-        //public ActionResult GetApprover()
-        //{
-        //    var ApproverList = db.TB_APPROVER.ToList();
-        //    if (ApproverList != null)
-        //    {
-        //        var selectItems = ApproverList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.APPROVER_ID.ToString(),
-        //            Text = item.APPROVER_NAME
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
-
-        //public ActionResult GetBackUpEmails()
-        //{
-        //    var ApproverList = db.TB_EMAIL_BACKUP.ToList();
-        //    if (ApproverList != null)
-        //    {
-        //        var selectItems = ApproverList.Select(item => new SelectListItem
-        //        {
-        //            Value = item.EMAIL_BACKUP_ID.ToString(),
-        //            Text = item.EMAIL_BACKUP_DATE.ToString()
-        //        }).ToList();
-
-        //        return Json(selectItems, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, Message = "Error obtaining Oracle Legal entities" });
-        //    }
-        //}
     }
 }

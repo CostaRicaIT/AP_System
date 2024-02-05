@@ -151,9 +151,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTemplatesModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>APTemplatesModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
@@ -228,7 +225,6 @@
       <DependentUpon>APTemplatesModels.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\CRUDHistoric.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

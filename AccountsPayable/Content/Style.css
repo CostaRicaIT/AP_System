@@ -81,3 +81,19 @@ select.form-control:disabled {
     #scrollToTop:hover {
         background-color: #65350F;
     }
+
+.form-control {
+    margin-left: 15px;
+}
+
+#btn-legalEntity, #btn-approver {
+    margin-left: -95px;
+}
+
+#form-AddApprover, #form-AddLegalEntity {
+    margin-left: -2px;
+}
+
+#btn-addLegalEntity, #btn-addAppover {
+    margin-top: 27px;
+}

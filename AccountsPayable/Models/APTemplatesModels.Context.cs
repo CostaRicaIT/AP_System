@@ -25,7 +25,6 @@ namespace AccountsPayable.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TB_ALIAS> TB_ALIAS { get; set; }
         public virtual DbSet<TB_APPROVER> TB_APPROVER { get; set; }
         public virtual DbSet<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
