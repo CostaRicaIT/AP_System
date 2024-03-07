@@ -6848,3 +6848,9 @@ button.close {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.tax {
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

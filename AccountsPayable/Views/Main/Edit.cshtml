@@ -63,6 +63,19 @@
             </div>
         </div>
 
+        <!-- Supplier Number -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Remit To -->
         <div class="form-group">
             <div class="row">
@@ -76,6 +89,19 @@
                 <div class="col-md-6">
                     <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
                     <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Supplier Site -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,7 +185,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
+                        <input type="text" class="form-control" id="form-AddAlias">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -270,30 +296,6 @@
     <!-- Oracle and Apps Section -->
     <div class="form-section">
         <div class="section-title">Oracle and Apps</div>
-        <!-- Supplier Number -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Supplier Site -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Payment Method -->
         <div class="form-group">
@@ -675,7 +677,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-BackUpEmail">Back Up Emails:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150" placeholder="Backup email"></textarea>
+                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
