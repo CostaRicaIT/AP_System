@@ -273,7 +273,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -285,7 +285,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -303,7 +303,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -340,19 +340,31 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Billing Period -->
+        <!-- Billing Period and Dates -->
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dates -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @id = "form-Dates" } })
                     </div>
                 </div>
             </div>
@@ -364,7 +376,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -376,7 +388,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -388,7 +400,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -596,6 +608,37 @@
             </div>
         </div>
     </div>
+
+    <br />
+
+    <!-- Contacts -->
+    <div class="form-section">
+        <div class="section-title">Contacts</div>
+        <!-- AR Key Contacts/Current -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="form-ARCurrent">AR Key Contacts/Current:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-ARCurrent" rows="8" cols="150"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AR Key Contacts/Prior -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="form-ARPrior">AR Key Contacts/Prior:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-ARPrior" rows="8" cols="150"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Add Highlights modal-->
     <!--<div id="AddAHighlights" class="modal">
         <div class="modal-content">

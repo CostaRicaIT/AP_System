@@ -35,6 +35,7 @@
                 <th>Pay Terms</th>
                 <th>Invoice Description</th>
                 <th>Billing Period</th>
+                <th>Dates</th>
                 <th>Distribution Set</th>
                 <th>Distribution Combination</th>
                 <th>Accounting Date</th>
@@ -100,6 +101,7 @@
                     <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
                     <td>@item.TEMP_INVOICE_DESCRIPTION</td>
                     <td>@item.TEMP_BILLING_PERIOD</td>
+                    <td>@item.TEMP_BILLING_PRERIOD_DATE</td>
                     <td>@item.TEMP_DISTRIBUTION_SET</td>
                     <td>@item.TEMP_DISTRIBUTION_COMBINATION</td>
                     <td>@item.TEMP_ACCOUNTING_DATE</td>
@@ -231,15 +233,19 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="17"> Distribution Set
+                    <input type="checkbox" class="toggle-column" data-column="17"> Dates
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="18"> Distribution Combination
+                    <input type="checkbox" class="toggle-column" data-column="18"> Distribution Set
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="19"> Accounting Date
+                    <input type="checkbox" class="toggle-column" data-column="19"> Distribution Combination
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="20"> Accounting Date
                 </label><br>
 
                 <label>
