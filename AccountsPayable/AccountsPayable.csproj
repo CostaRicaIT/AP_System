@@ -166,9 +166,6 @@
     <Compile Include="Models\TB_HISTORIC_REMIT.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TB_KEY_CONTACTS.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TB_LOGIN_ROLES.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>

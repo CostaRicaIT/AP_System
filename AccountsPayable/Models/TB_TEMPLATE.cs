@@ -21,7 +21,6 @@ namespace AccountsPayable.Models
             this.TB_HISTORIC_REMIT = new HashSet<TB_HISTORIC_REMIT>();
             this.TB_ALIAS = new HashSet<TB_ALIAS>();
             this.TB_EMAIL_BACKUP = new HashSet<TB_EMAIL_BACKUP>();
-            this.TB_KEY_CONTACTS = new HashSet<TB_KEY_CONTACTS>();
         }
     
         public int TEMP_ID { get; set; }
@@ -60,7 +59,8 @@ namespace AccountsPayable.Models
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
         public string TEMP_BILLING_PRERIOD_DATE { get; set; }
-        public Nullable<int> FK_TB_TEMPLATE_KEY_CONTACTS { get; set; }
+        public string CONTACTS_CURRENT { get; set; }
+        public string CONTACTS_PRIOR { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,8 +77,6 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_ALIAS> TB_ALIAS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_KEY_CONTACTS> TB_KEY_CONTACTS { get; set; }
         public string ALIAS_NAME { get; internal set; }
         public string EMAIL_BACKUP { get; internal set; }
     }

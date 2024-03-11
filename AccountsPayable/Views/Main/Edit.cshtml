@@ -495,7 +495,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_NOTES, "", new { @class = "text-danger" })
@@ -503,7 +503,7 @@
                 </div>
                 <!-- Oracle Instructions -->
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 checkbox-label" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_INSTRUCTIONS, "", new { @class = "text-danger" })
@@ -614,25 +614,22 @@
     <!-- Contacts -->
     <div class="form-section">
         <div class="section-title">Contacts</div>
-        <!-- AR Key Contacts/Current -->
         <div class="form-group">
             <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-ARCurrent">AR Key Contacts/Current:</label>
+
+                <!-- AR Key Contacts/Currents -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-ARCurrent" rows="8" cols="150"></textarea>
+                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Currents" })
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- AR Key Contacts/Prior -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="control-label col-md-2" for="form-ARPrior">AR Key Contacts/Prior:</label>
+                <!-- AR Key Contacts/Prior -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-ARPrior" rows="8" cols="150"></textarea>
+                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Prior" })
                     </div>
                 </div>
             </div>

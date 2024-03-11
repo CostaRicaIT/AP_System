@@ -386,7 +386,9 @@ function create() {
         TEMP_VSU: $("#form-VSU").val().replace(/[<>]/g, ''),
         TEMP_W9_W8: $("#form-W9W8").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_NOTES: $("#form-InvoiceNotes").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, ''),
+        CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
@@ -459,7 +461,9 @@ function update() {
         TEMP_VSU: $("#TEMP_VSU").val().replace(/[<>]/g, ''),
         TEMP_W9_W8: $("#TEMP_W9_W8").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_NOTES: $("#TEMP_INVOICE_NOTES").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, ''),
+        CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT

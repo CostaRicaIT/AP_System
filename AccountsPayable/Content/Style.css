@@ -107,3 +107,11 @@ select.form-control:disabled {
     margin-top: -61px;
     margin-left: 550px;
 }
+
+#form-Currents {
+    margin-left: 50px;
+}
+
+#form-Prior {
+    margin-left: 23px;
+}
