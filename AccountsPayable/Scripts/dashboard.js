@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 5, 4, 10, 21, 3, 30]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 6, 4, 5, 21, 3, 32]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({
@@ -26,7 +26,7 @@ function initializeDataTable() {
                 visible: false
             },
             {
-                targets: 30, //Add View, edit and delete buttons to last column of table
+                targets: 32, //Add View, edit and delete buttons to last column of table
                 render: function (data, type, full, meta) {
                     var rowId = full[0];
                     return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +

@@ -364,7 +364,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @id = "form-Dates" } })
+                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @id = "form-Dates" } })
                     </div>
                 </div>
             </div>
@@ -621,7 +621,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Currents" })
+                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150,@id = "form-Currents" })
                     </div>
                 </div>
 
@@ -629,7 +629,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Prior" })
+                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Prior" })
                     </div>
                 </div>
             </div>

@@ -23,13 +23,13 @@
                 <th>Folder</th>
                 <th>Tax ID</th>
                 <th>Supplier Name</th>
+                <th>Supplier Number</th>
                 <th>Remit To</th>
-                <th>Source</th>
+                <th>Supplier Site</th>
                 <th>Vendor Account</th>
+                <th>Source</th>
                 <th>Invoice Format</th>
                 <th>Invoice Type</th>
-                <th>Supplier Number</th>
-                <th>Supplier Site</th>
                 <th>Payment Method</th>
                 <th>Remit-To Account</th>
                 <th>Pay Terms</th>
@@ -45,6 +45,8 @@
                 <th>Description</th>
                 <th>Oracle Notes</th>
                 <th>Oracle Instructions</th>
+                <th>AR Key Contacts/Currents</th>
+                <th>AR Key Contacts/Prior</th>
                 <th>Approver</th>
                 <th>Approver Comments</th>
                 <th>Email Backup</th>
@@ -89,13 +91,13 @@
                     <td>@item.TEMP_FOLDER</td>
                     <td class="tax">@item.TEMP_TAX_ID</td>
                     <td>@item.TEMP_SUPPLIER_NAME</td>
+                    <td>@item.TEMP_SUPPLIER_NUMBER</td>
                     <td>@item.TEMP_REMIT_TO</td>
-                    <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
+                    <td>@item.TEMP_SUPPLIER_SITE</td>
                     <td>@item.TEMP_VENDOR_ACCOUNT</td>
+                    <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
                     <td>@item.TEMP_INVOICE_FORMAT</td>
                     <td>@item.TEMP_INVOICE_TYPE</td>
-                    <td>@item.TEMP_SUPPLIER_NUMBER</td>
-                    <td>@item.TEMP_SUPPLIER_SITE</td>
                     <td>@item.TEMP_PAYMENT_METHOD</td>
                     <td>@item.TEMP_REMIT_TOACCOUNT</td>
                     <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
@@ -111,6 +113,8 @@
                     <td>@item.TEMP_ORACLE_DESCRIPTION</td>
                     <td>@item.TEMP_ORACLE_NOTES</td>
                     <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
+                    <td>@item.CONTACTS_CURRENT</td>
+                    <td>@item.CONTACTS_PRIOR</td>
                     <td>@item.TB_APPROVER.APPROVER_NAME</td>
                     <td>@item.TEMP_APPROVER_COMMENTS</td>
                     <td>@item.EMAIL_BACKUP</td>
@@ -185,31 +189,31 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="5"> Remit To
+                    <input type="checkbox" class="toggle-column" data-column="5"> Supplier Number
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="6"> Source
+                    <input type="checkbox" class="toggle-column" data-column="6"> Remit To
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="7"> Vendor account
+                    <input type="checkbox" class="toggle-column" data-column="7"> Supplier Site
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="8"> Invoice Format
+                    <input type="checkbox" class="toggle-column" data-column="8"> Vendor account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="9"> Invoice Type
+                    <input type="checkbox" class="toggle-column" data-column="9"> Source
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="10"> Supplier Number
+                    <input type="checkbox" class="toggle-column" data-column="10"> Invoice Format
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="11"> Supplier Site
+                    <input type="checkbox" class="toggle-column" data-column="11"> Invoice Type
                 </label><br>
 
                 <label>
@@ -274,15 +278,23 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="27"> Approver
+                    <input type="checkbox" class="toggle-column" data-column="27"> AR Key Contacts/Current
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="28"> Approver Coments
+                    <input type="checkbox" class="toggle-column" data-column="28"> AR Key Contacts/Prior
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="29"> Email backup
+                    <input type="checkbox" class="toggle-column" data-column="29"> Approver
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="30"> Approver Coments
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="31"> Email backup
                 </label><br>
 
             </div>
