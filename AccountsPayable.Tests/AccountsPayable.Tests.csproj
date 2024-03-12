@@ -131,6 +131,12 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccountsPayable\AccountsPayable.csproj">
+      <Project>{CA9244ED-AA91-4840-9218-57D501AC8F4A}</Project>
+      <Name>AccountsPayable</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

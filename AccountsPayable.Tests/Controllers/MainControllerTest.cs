@@ -49,7 +49,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+                    
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -72,7 +72,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -172,7 +174,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+                    
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -195,7 +197,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -311,7 +315,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+                    
                     FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -334,7 +338,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -453,7 +459,6 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
                     FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -476,7 +481,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -674,7 +681,7 @@ namespace AccountsPayable.Tests.Controllers
                 }
 
                 // Create necessary entities and data for the Edit method
-                var newApprover = "Qminvoices@ayahealthcare.com (Several QMInvoices´ Representatives)"; // Legal entity that already exists on DB
+                var newApprover = "APPROVER"; // Legal entity that already exists on DB
 
                 // Act
                 var result = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
