@@ -63,6 +63,19 @@
             </div>
         </div>
 
+        <!-- Supplier Number -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Remit To -->
         <div class="form-group">
             <div class="row">
@@ -76,6 +89,19 @@
                 <div class="col-md-6">
                     <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
                     <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Supplier Site -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,7 +185,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
+                        <input type="text" class="form-control" id="form-AddAlias">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -247,7 +273,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -259,7 +285,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -270,30 +296,6 @@
     <!-- Oracle and Apps Section -->
     <div class="form-section">
         <div class="section-title">Oracle and Apps</div>
-        <!-- Supplier Number -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Supplier Site -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Payment Method -->
         <div class="form-group">
@@ -301,7 +303,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -313,7 +315,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -338,19 +340,31 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Billing Period -->
+        <!-- Billing Period and Dates -->
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dates -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @id = "form-Dates" } })
                     </div>
                 </div>
             </div>
@@ -362,7 +376,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -374,7 +388,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -386,24 +400,12 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Address -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ADDRESS">Address:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ADDRESS, new { @class = "form-control", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_ADDRESS, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Legal Entity -->
         <div class="form-group">
             <div class="row">
@@ -493,7 +495,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_NOTES, "", new { @class = "text-danger" })
@@ -501,7 +503,7 @@
                 </div>
                 <!-- Oracle Instructions -->
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 checkbox-label" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_INSTRUCTIONS, "", new { @class = "text-danger" })
@@ -606,6 +608,34 @@
             </div>
         </div>
     </div>
+
+    <br />
+
+    <!-- Contacts -->
+    <div class="form-section">
+        <div class="section-title">Contacts</div>
+        <div class="form-group">
+            <div class="row">
+
+                <!-- AR Key Contacts/Currents -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150,@id = "form-Currents" })
+                    </div>
+                </div>
+
+                <!-- AR Key Contacts/Prior -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Prior" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Add Highlights modal-->
     <!--<div id="AddAHighlights" class="modal">
         <div class="modal-content">
@@ -687,7 +717,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-BackUpEmail">Back Up Emails:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150" placeholder="Backup email"></textarea>
+                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">

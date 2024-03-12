@@ -32,7 +32,6 @@ namespace AccountsPayable.Models
         public string TEMP_VENDOR_ACCOUNT { get; set; }
         public Nullable<int> FK_TB_TEMPLATE_ALIAS_ID { get; set; }
         public string TEMP_SUPPLIER_SITE { get; set; }
-        public string TEMP_ADDRESS { get; set; }
         public Nullable<int> FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string TEMP_TAXPAYER_ID { get; set; }
         public Nullable<int> FK_TB_ORACLE_TYPE_ID { get; set; }
@@ -59,6 +58,9 @@ namespace AccountsPayable.Models
         public string TEMP_W9_W8 { get; set; }
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
+        public string TEMP_BILLING_PRERIOD_DATE { get; set; }
+        public string CONTACTS_CURRENT { get; set; }
+        public string CONTACTS_PRIOR { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

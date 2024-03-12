@@ -97,3 +97,21 @@ select.form-control:disabled {
 #btn-addLegalEntity, #btn-addAppover {
     margin-top: 27px;
 }
+
+#dates {
+    margin-top: -53px;
+    margin-left: 480px;
+}
+
+#form-Dates {
+    margin-top: -61px;
+    margin-left: 550px;
+}
+
+#form-Currents {
+    margin-left: 50px;
+}
+
+#form-Prior {
+    margin-left: 23px;
+}

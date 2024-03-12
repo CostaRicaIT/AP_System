@@ -361,7 +361,6 @@ function create() {
         TEMP_VENDOR_ACCOUNT: $("#form-OurVendorA").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_NUMBER: $("#form-SupNumber").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_SITE: $("#form-SupSite").val().replace(/[<>]/g, ''),
-        TEMP_ADDRESS: $("#form-Address").val().replace(/[<>]/g, ''),
         //FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
         FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val().replace(/[<>]/g, ''),
         TEMP_TAXPAYER_ID: $("#form-FirstParty").val().replace(/[<>]/g, ''),
@@ -381,12 +380,15 @@ function create() {
         TEMP_PAYMENT_METHOD: $("#form-PayMethod").val().replace(/[<>]/g, ''),
         TEMP_REMIT_TOACCOUNT: $("#form-RemitToAccount").val().replace(/[<>]/g, ''),
         TEMP_BILLING_PERIOD: $("#form-BillPeriod").val().replace(/[<>]/g, ''),
+        TEMP_BILLING_PRERIOD_DATE: $("#form-Dates").val().replace(/[<>]/g, ''),
         TEMP_DISTRIBUTION_COMBINATION: $("#form-DistroCombination").val().replace(/[<>]/g, ''),
         TEMP_ACCOUNTING_DATE: $("#form-AccoDate").val().replace(/[<>]/g, ''),
         TEMP_VSU: $("#form-VSU").val().replace(/[<>]/g, ''),
         TEMP_W9_W8: $("#form-W9W8").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_NOTES: $("#form-InvoiceNotes").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, ''),
+        CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
@@ -434,7 +436,6 @@ function update() {
         TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val().replace(/[<>]/g, ''),
-        TEMP_ADDRESS: $("#TEMP_ADDRESS").val().replace(/[<>]/g, ''),
         FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val().replace(/[<>]/g, ''),
         //FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val().replace(/[<>]/g, ''),
         TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val().replace(/[<>]/g, ''),
@@ -454,12 +455,15 @@ function update() {
         TEMP_PAYMENT_METHOD: $("#TEMP_PAYMENT_METHOD").val().replace(/[<>]/g, ''),
         TEMP_REMIT_TOACCOUNT: $("#TEMP_REMIT_TOACCOUNT").val().replace(/[<>]/g, ''),
         TEMP_BILLING_PERIOD: $("#TEMP_BILLING_PERIOD").val().replace(/[<>]/g, ''),
+        TEMP_BILLING_PRERIOD_DATE: $("#form-Dates").val().replace(/[<>]/g, ''),
         TEMP_DISTRIBUTION_COMBINATION: $("#TEMP_DISTRIBUTION_COMBINATION").val().replace(/[<>]/g, ''),
         TEMP_ACCOUNTING_DATE: $("#TEMP_ACCOUNTING_DATE").val().replace(/[<>]/g, ''),
         TEMP_VSU: $("#TEMP_VSU").val().replace(/[<>]/g, ''),
         TEMP_W9_W8: $("#TEMP_W9_W8").val().replace(/[<>]/g, ''),
         TEMP_INVOICE_NOTES: $("#TEMP_INVOICE_NOTES").val().replace(/[<>]/g, ''),
-        TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, '')
+        TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, ''),
+        CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT

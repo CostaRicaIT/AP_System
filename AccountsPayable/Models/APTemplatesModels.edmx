@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="APModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Accounts_Payable_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TB_ALIAS">
           <Key>
             <PropertyRef Name="ALIAS_ID" />
@@ -112,7 +112,6 @@
           <Property Name="TEMP_VENDOR_ACCOUNT" Type="varchar(max)" />
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="varchar(max)" />
-          <Property Name="TEMP_ADDRESS" Type="varchar(max)" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="int" />
           <Property Name="TEMP_TAXPAYER_ID" Type="varchar(max)" />
           <Property Name="FK_TB_ORACLE_TYPE_ID" Type="int" />
@@ -139,6 +138,9 @@
           <Property Name="TEMP_W9_W8" Type="varchar(max)" />
           <Property Name="TEMP_INVOICE_NOTES" Type="varchar(max)" />
           <Property Name="TEMP_INVOICE_DESCRIPTION" Type="varchar(max)" />
+          <Property Name="TEMP_BILLING_PRERIOD_DATE" Type="varchar(max)" />
+          <Property Name="CONTACTS_CURRENT" Type="varchar(max)" />
+          <Property Name="CONTACTS_PRIOR" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TB_TEMPLATE_ALIAS">
           <Key>
@@ -348,7 +350,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="APModelStoreContainer">
+        <EntityContainer Name="Accounts_Payable_ModelStoreContainer">
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_APPROVER" EntityType="Self.TB_APPROVER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_EMAIL_BACKUP" EntityType="Self.TB_EMAIL_BACKUP" Schema="dbo" store:Type="Tables" />
@@ -428,22 +430,22 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="APModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="AccountsPayableTestProdEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TB_ALIAS" EntityType="APModel.TB_ALIAS" />
-          <EntitySet Name="TB_APPROVER" EntityType="APModel.TB_APPROVER" />
-          <EntitySet Name="TB_EMAIL_BACKUP" EntityType="APModel.TB_EMAIL_BACKUP" />
-          <EntitySet Name="TB_HIGHLIGHTS" EntityType="APModel.TB_HIGHLIGHTS" />
-          <EntitySet Name="TB_HISTORIC_REMIT" EntityType="APModel.TB_HISTORIC_REMIT" />
-          <EntitySet Name="TB_LOG_IN" EntityType="APModel.TB_LOG_IN" />
-          <EntitySet Name="TB_LOGIN_ROLES" EntityType="APModel.TB_LOGIN_ROLES" />
-          <EntitySet Name="TB_ORACLE_LEGAL_ENTITIES" EntityType="APModel.TB_ORACLE_LEGAL_ENTITIES" />
-          <EntitySet Name="TB_ORACLE_PAY_TERMS" EntityType="APModel.TB_ORACLE_PAY_TERMS" />
-          <EntitySet Name="TB_ORACLE_SOURCE" EntityType="APModel.TB_ORACLE_SOURCE" />
-          <EntitySet Name="TB_ORACLE_TYPE" EntityType="APModel.TB_ORACLE_TYPE" />
-          <EntitySet Name="TB_TEMPLATE" EntityType="APModel.TB_TEMPLATE" />
-          <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="APModel.TB_VIEW_PERMISSIONS" />
-          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__531856C7" Association="APModel.FK__TB_TEMPLA__FK_TB__531856C7">
+      <Schema Namespace="Accounts_Payable_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Accounts_Payable_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_ALIAS" EntityType="Accounts_Payable_Model.TB_ALIAS" />
+          <EntitySet Name="TB_APPROVER" EntityType="Accounts_Payable_Model.TB_APPROVER" />
+          <EntitySet Name="TB_EMAIL_BACKUP" EntityType="Accounts_Payable_Model.TB_EMAIL_BACKUP" />
+          <EntitySet Name="TB_HIGHLIGHTS" EntityType="Accounts_Payable_Model.TB_HIGHLIGHTS" />
+          <EntitySet Name="TB_HISTORIC_REMIT" EntityType="Accounts_Payable_Model.TB_HISTORIC_REMIT" />
+          <EntitySet Name="TB_LOG_IN" EntityType="Accounts_Payable_Model.TB_LOG_IN" />
+          <EntitySet Name="TB_LOGIN_ROLES" EntityType="Accounts_Payable_Model.TB_LOGIN_ROLES" />
+          <EntitySet Name="TB_ORACLE_LEGAL_ENTITIES" EntityType="Accounts_Payable_Model.TB_ORACLE_LEGAL_ENTITIES" />
+          <EntitySet Name="TB_ORACLE_PAY_TERMS" EntityType="Accounts_Payable_Model.TB_ORACLE_PAY_TERMS" />
+          <EntitySet Name="TB_ORACLE_SOURCE" EntityType="Accounts_Payable_Model.TB_ORACLE_SOURCE" />
+          <EntitySet Name="TB_ORACLE_TYPE" EntityType="Accounts_Payable_Model.TB_ORACLE_TYPE" />
+          <EntitySet Name="TB_TEMPLATE" EntityType="Accounts_Payable_Model.TB_TEMPLATE" />
+          <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Accounts_Payable_Model.TB_VIEW_PERMISSIONS" />
+          <AssociationSet Name="FK__TB_TEMPLA__FK_TB__116A8EFB" Association="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__116A8EFB">
             <End Role="TB_APPROVER" EntitySet="TB_APPROVER" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
@@ -617,7 +619,6 @@
           <Property Name="TEMP_VENDOR_ACCOUNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" />
           <Property Name="TEMP_SUPPLIER_SITE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_LEGAL_ENTITY_ID" Type="Int32" />
           <Property Name="TEMP_TAXPAYER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_TB_ORACLE_TYPE_ID" Type="Int32" />
@@ -644,17 +645,20 @@
           <Property Name="TEMP_W9_W8" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_INVOICE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEMP_INVOICE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_APPROVER" Relationship="APModel.FK__TB_TEMPLA__FK_TB__531856C7" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
-          <NavigationProperty Name="TB_HIGHLIGHTS" Relationship="APModel.FK__TB_HIGHLI__FK_TB__4C6B5938" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
-          <NavigationProperty Name="TB_HIGHLIGHTS1" Relationship="APModel.FK__TB_TEMPLA__FK_TB__51300E55" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
-          <NavigationProperty Name="TB_HISTORIC_REMIT" Relationship="APModel.FK__TB_HISTOR__FK_TB__4A8310C6" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
-          <NavigationProperty Name="TB_HISTORIC_REMIT1" Relationship="APModel.FK__TB_TEMPLA__FK_TB__5224328E" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
-          <NavigationProperty Name="TB_ORACLE_LEGAL_ENTITIES" Relationship="APModel.FK__TB_TEMPLA__FK_TB__4D5F7D71" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_LEGAL_ENTITIES" />
-          <NavigationProperty Name="TB_ORACLE_PAY_TERMS" Relationship="APModel.FK__TB_TEMPLA__FK_TB__4F47C5E3" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_PAY_TERMS" />
-          <NavigationProperty Name="TB_ORACLE_SOURCE" Relationship="APModel.FK__TB_TEMPLA__FK_TB__503BEA1C" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_SOURCE" />
-          <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="APModel.FK__TB_TEMPLA__FK_TB__4E53A1AA" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
-          <NavigationProperty Name="TB_ALIAS" Relationship="APModel.TB_TEMPLATE_ALIAS" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
-          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="APModel.TB_TEMPLATE_EMAIL_BACKUP" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
+          <Property Name="TEMP_BILLING_PRERIOD_DATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CONTACTS_CURRENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CONTACTS_PRIOR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_APPROVER" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__116A8EFB" FromRole="TB_TEMPLATE" ToRole="TB_APPROVER" />
+          <NavigationProperty Name="TB_HIGHLIGHTS" Relationship="Accounts_Payable_Model.FK__TB_HIGHLI__FK_TB__38845C1C" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
+          <NavigationProperty Name="TB_HIGHLIGHTS1" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0F824689" FromRole="TB_TEMPLATE" ToRole="TB_HIGHLIGHTS" />
+          <NavigationProperty Name="TB_HISTORIC_REMIT" Relationship="Accounts_Payable_Model.FK__TB_HISTOR__FK_TB__379037E3" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
+          <NavigationProperty Name="TB_HISTORIC_REMIT1" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__30E33A54" FromRole="TB_TEMPLATE" ToRole="TB_HISTORIC_REMIT" />
+          <NavigationProperty Name="TB_ORACLE_LEGAL_ENTITIES" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0BB1B5A5" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_LEGAL_ENTITIES" />
+          <NavigationProperty Name="TB_ORACLE_PAY_TERMS" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0D99FE17" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_PAY_TERMS" />
+          <NavigationProperty Name="TB_ORACLE_SOURCE" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0E8E2250" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_SOURCE" />
+          <NavigationProperty Name="TB_ORACLE_TYPE" Relationship="Accounts_Payable_Model.FK__TB_TEMPLA__FK_TB__0CA5D9DE" FromRole="TB_TEMPLATE" ToRole="TB_ORACLE_TYPE" />
+          <NavigationProperty Name="TB_ALIAS" Relationship="Accounts_Payable_Model.TB_TEMPLATE_ALIAS" FromRole="TB_TEMPLATE" ToRole="TB_ALIAS" />
+          <NavigationProperty Name="TB_EMAIL_BACKUP" Relationship="Accounts_Payable_Model.TB_TEMPLATE_EMAIL_BACKUP" FromRole="TB_TEMPLATE" ToRole="TB_EMAIL_BACKUP" />
         </EntityType>
         <EntityType Name="TB_VIEW_PERMISSIONS">
           <Key>
@@ -809,12 +813,12 @@
           <End Type="APModel.TB_TEMPLATE" Role="TB_TEMPLATE" Multiplicity="*" />
           <End Type="APModel.TB_EMAIL_BACKUP" Role="TB_EMAIL_BACKUP" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="APModelStoreContainer" CdmEntityContainer="AccountsPayableTestProdEntities">
+        <EntityContainerMapping StorageEntityContainer="Accounts_Payable_ModelStoreContainer" CdmEntityContainer="Accounts_Payable_Entities">
           <EntitySetMapping Name="TB_ALIAS">
             <EntityTypeMapping TypeName="APModel.TB_ALIAS">
               <MappingFragment StoreEntitySet="TB_ALIAS">
@@ -923,6 +927,9 @@
           <EntitySetMapping Name="TB_TEMPLATE">
             <EntityTypeMapping TypeName="APModel.TB_TEMPLATE">
               <MappingFragment StoreEntitySet="TB_TEMPLATE">
+                <ScalarProperty Name="CONTACTS_PRIOR" ColumnName="CONTACTS_PRIOR" />
+                <ScalarProperty Name="CONTACTS_CURRENT" ColumnName="CONTACTS_CURRENT" />
+                <ScalarProperty Name="TEMP_BILLING_PRERIOD_DATE" ColumnName="TEMP_BILLING_PRERIOD_DATE" />
                 <ScalarProperty Name="TEMP_INVOICE_DESCRIPTION" ColumnName="TEMP_INVOICE_DESCRIPTION" />
                 <ScalarProperty Name="TEMP_INVOICE_NOTES" ColumnName="TEMP_INVOICE_NOTES" />
                 <ScalarProperty Name="TEMP_W9_W8" ColumnName="TEMP_W9_W8" />
@@ -949,7 +956,6 @@
                 <ScalarProperty Name="FK_TB_ORACLE_TYPE_ID" ColumnName="FK_TB_ORACLE_TYPE_ID" />
                 <ScalarProperty Name="TEMP_TAXPAYER_ID" ColumnName="TEMP_TAXPAYER_ID" />
                 <ScalarProperty Name="FK_TB_LEGAL_ENTITY_ID" ColumnName="FK_TB_LEGAL_ENTITY_ID" />
-                <ScalarProperty Name="TEMP_ADDRESS" ColumnName="TEMP_ADDRESS" />
                 <ScalarProperty Name="TEMP_SUPPLIER_SITE" ColumnName="TEMP_SUPPLIER_SITE" />
                 <ScalarProperty Name="FK_TB_TEMPLATE_ALIAS_ID" ColumnName="FK_TB_TEMPLATE_ALIAS_ID" />
                 <ScalarProperty Name="TEMP_VENDOR_ACCOUNT" ColumnName="TEMP_VENDOR_ACCOUNT" />
