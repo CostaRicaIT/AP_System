@@ -118,7 +118,7 @@
                         <div class="control-label col-md-12">
                             <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
                             <div class="col-md-10">
-                                <textarea class="form-control" id="historicRemitInfoView" readonly rows="6" cols="75" placeholder="..."></textarea>
+                                <textarea class="form-control TinyEditorReadOnly" id="historicRemitInfoView"  rows="6" cols="75"></textarea>
                                 <br />
                             </div>
                         </div>
@@ -664,31 +664,31 @@
             @*Highlights*@
 
             <p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-            <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="HighlightsHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Highlights Comments*@
             <p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-            <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="HighlightsCHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Instructions*@
             <p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-            <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="InstructionsHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Exceptions*@
             <p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-            <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="ExceptionsHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Most Common Issues*@
             <p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-            <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="MostCIHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Supplier Agency*@
             <p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-            <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="SupplierAHistoryView" rows="4" cols="80" disabled></textarea>
 
             @*Template Comments*@
             <p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryView" rows="4" cols="80" disabled></textarea>
+            <textarea class="form-control TinyEditorReadOnly" id="TemplateCHistoryView" rows="4" cols="80" disabled></textarea>
             <br />
             <div class="form-row">
                 @Html.DropDownList("FK_TB_HIGHLIGHTS", null, htmlAttributes: new { @class = "form-control" })
@@ -924,15 +924,6 @@
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
     <script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea.TinyEditor', //select field using textarea.class
-            promotion: false, //Hide upgrade promotion of TinyMCE
-            branding: false, //Hide TinyMCE logo
-            statusbar: false, //Hide status bar
-            menubar: false, //Hide menu bar
-            toolbar: "undo redo |forecolor |backcolor "
-        });
-    </script>
+    <script src="~/Scripts/TinyEditorConfig.js"></script>
 }
 
