@@ -38,11 +38,6 @@
                         @Html.ValidationMessageFor(model => model.TEMP_TAX_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="control-label col-md-6" for="BoxNoTaxId">No Tax Id information</label>
-                    <input type="checkbox" id="BoxNoTaxId" name="NoTaxId" />
-                </div>
-
             </div>
         </div>
 
@@ -55,10 +50,6 @@
                         @Html.EditorFor(model => model.TEMP_SUPPLIER_NAME, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NAME, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="BoxSupName" class="control-label col-md-6">There is no Supplier Name</label>
-                    <input type="checkbox" id="BoxSupName" value="1">
                 </div>
             </div>
         </div>
@@ -85,10 +76,6 @@
                         @Html.EditorFor(model => model.TEMP_REMIT_TO, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TEMP_REMIT_TO, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
-                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
                 </div>
             </div>
         </div>
