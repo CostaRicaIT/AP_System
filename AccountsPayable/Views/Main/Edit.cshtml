@@ -342,12 +342,7 @@
                         @Html.TextAreaFor(model => model.TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                     </div>
                 </div>
-            </div>
-        </div>
-
         <!-- Dates -->
-        <div class="form-group">
-            <div class="row">
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
                     <div class="col-md-10">
@@ -663,33 +658,83 @@
             <span id="cancelButton " class="close">&times;</span>
             @*Highlights*@
 
-            <p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="HighlightsHistoryView" rows="4" cols="80" disabled></textarea>
-
-            @*Highlights Comments*@
-            <p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="HighlightsCHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsHistoryView">Highlights</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsCHistoryView">Highlights Comments</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsCHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @*Instructions*@
-            <p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="InstructionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="InstructionsHistoryView">Instructions</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="InstructionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @*Exceptions*@
-            <p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="ExceptionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="ExceptionsHistoryView">Exceptions</label>
 
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="ExceptionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @*Most Common Issues*@
-            <p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="MostCIHistoryView" rows="4" cols="80" disabled></textarea>
-
+            <div class="row">
+                <div>
+                    <label class="control-label" for="MostCIHistoryView">Most Common Issues</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="MostCIHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
             @*Supplier Agency*@
-            <p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="SupplierAHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="SupplierAHistoryView">Supplier Agency</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="SupplierAHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
 
             @*Template Comments*@
-            <p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
-            <textarea class="form-control TinyEditorReadOnly" id="TemplateCHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="TemplateCHistoryView">Template Comments</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="TemplateCHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <br />
+
             <div class="form-row">
                 @Html.DropDownList("FK_TB_HIGHLIGHTS", null, htmlAttributes: new { @class = "form-control" })
             </div>

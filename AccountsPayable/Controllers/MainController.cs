@@ -79,7 +79,7 @@ namespace AccountsPayable.Controllers
         {
             //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
-            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
 
             //Start transaction for creation of template
@@ -276,8 +276,10 @@ namespace AccountsPayable.Controllers
         {
             //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
-            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+
+
             //Start transaction for template update
             using (var transaction = db.Database.BeginTransaction())
             {

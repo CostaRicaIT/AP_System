@@ -5,7 +5,8 @@
     readonly: true,
     statusbar: false,
     menubar: false,
-    toolbar: "undo redo |forecolor |backcolor "
+    toolbar: "undo redo |forecolor |backcolor ",
+    
 });
 tinymce.init({
     selector: 'textarea.TinyEditor', //select field using textarea.class

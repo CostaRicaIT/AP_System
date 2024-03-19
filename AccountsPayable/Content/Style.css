@@ -26,12 +26,12 @@
     margin-bottom: 10px;
 }
 
-.General {
+/*.General {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-left: 2%;
-}
+}*/
 
 textarea {
     resize: none;
@@ -86,7 +86,7 @@ select.form-control:disabled {
     margin-left: 15px;
 }
 
-#btn-legalEntity, #btn-approver {
+/*#btn-legalEntity, #btn-approver {
     margin-left: -95px;
 }
 
@@ -101,12 +101,12 @@ select.form-control:disabled {
 #dates {
     margin-top: -53px;
     margin-left: 480px;
-}
+}*/
 
-#form-Dates {
+/*#form-Dates {
     margin-top: -61px;
     margin-left: 550px;
-}
+}*/
 
 #form-Currents {
     margin-left: 50px;
