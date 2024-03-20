@@ -16,6 +16,7 @@
     border: 1px solid #888;
     width: fit-content;
     max-height: 70vh;
+    min-width:50vh;
     overflow-y: auto;
 }
 

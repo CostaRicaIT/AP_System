@@ -44,19 +44,21 @@ namespace AccountsPayable.Controllers
                    {
                        Template = t,
                        Alias = t.TB_ALIAS.FirstOrDefault(a => a.ALIAS_ID == t.FK_TB_TEMPLATE_ALIAS_ID),
-                       EmailBackup = t.TB_EMAIL_BACKUP.FirstOrDefault(e => e.EMAIL_BACKUP_ID == t.FK_TB_EMAIL_BACKUP_ID)
+                       EmailBackup = t.TB_EMAIL_BACKUP.FirstOrDefault(e => e.EMAIL_BACKUP_ID == t.FK_TB_EMAIL_BACKUP_ID),
+                       HistoricRemit = t.TB_HISTORIC_REMIT.FirstOrDefault(e => e.HISTORIC_REMIT_ID == t.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
                    })
                    .ToList();
 
             //Join data of email and alias to template
 
-            //Is model is recreated due to db change ALIAS_NAME and EMAIL_BAKCUP properties need to be recreated using Generate property option on VS
+            //Is model is recreated due to db change ALIAS_NAME and EMAIL_BACKCUP HISTORIC_REMIT properties need to be recreated using Generate property option on VS
             foreach (var template in templates)
             {
                 var data = templateData.FirstOrDefault(t => t.Template.TEMP_ID == template.TEMP_ID);
 
                 template.ALIAS_NAME = data?.Alias?.ALIAS_NAME;
                 template.EMAIL_BACKUP = data?.EmailBackup?.EMAIL_BACKUP;
+                template.HISTORIC_REMIT = data?.HistoricRemit?.HISTORIC_REMIT_INFO;
             }
 
 
@@ -81,7 +83,7 @@ namespace AccountsPayable.Controllers
         {
             //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
-            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
 
             //Start transaction for creation of template
@@ -278,8 +280,10 @@ namespace AccountsPayable.Controllers
         {
             //Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
-            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+
+
             //Start transaction for template update
             using (var transaction = db.Database.BeginTransaction())
             {
