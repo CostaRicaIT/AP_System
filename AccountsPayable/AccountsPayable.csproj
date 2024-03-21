@@ -131,8 +131,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessController.cs" />
+    <Compile Include="Controllers\HistoricController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\SignOutController.cs" />
+    <Compile Include="Controllers\CRUDController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -442,7 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Historic\" />
     <Folder Include="Views\SignOut\" />
+    <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

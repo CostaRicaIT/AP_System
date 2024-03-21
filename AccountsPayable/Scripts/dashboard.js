@@ -107,7 +107,7 @@ function initializeDataTable() {
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '/Main/Delete/' + rowId,
+                url: '/CRUD/Delete/' + rowId,
                 headers: {
                     'X-HTTP-Method-Override': 'DELETE'
                 },

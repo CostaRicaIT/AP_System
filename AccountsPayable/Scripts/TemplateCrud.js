@@ -25,37 +25,11 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 $(document).ready(function () {
-    // Function to disable or enable the input field according to the status of the checkbox.
-    function toggleInputState(checkbox, input) {
-        if (checkbox.is(':checked')) {
-            input.prop('disabled', true);
-            input.val(null)
-        } else {
-            input.prop('disabled', false);
-        }
-    }
-    // Listen for the change in the checkboxes and adjust the status of the corresponding input field
-    $('#BoxNoTaxId').change(function () {
-        toggleInputState($(this), $('#form-TaxID'));
-        toggleInputState($(this), $('#TEMP_TAX_ID'));
-    });
-
-    $('#BoxNoRemitInfo').change(function () {
-        toggleInputState($(this), $('#form-RemitTo'));
-        toggleInputState($(this), $('#TEMP_REMIT_TO'));
-    });
-
-    $('#BoxSupName').change(function () {
-        toggleInputState($(this), $('#form-SupName'));
-        toggleInputState($(this), $('#TEMP_SUPPLIER_NAME'));
-
-    });
-
     // Query to get text from emails according to ID in dropdown
     function getEmailBackupText(selectedEmail, templateId) {
         if (selectedEmail != 0) {
             $.ajax({
-                url: '/Main/GetEmailText',
+                url: '/Historic/GetEmailText',
                 type: 'GET',
                 data: { emailId: selectedEmail, id: templateId },
                 success: function (data) {
@@ -76,10 +50,9 @@ $(document).ready(function () {
         }
     }
     // Query to get text from Historic Remit to according to ID in dropdown
-
     function getHistoricRemitText(selectedHistoric, templateId) {
         $.ajax({
-            url: '/Main/GetHistoricRemitText',
+            url: '/Historic/GetHistoricRemitText',
             type: 'GET',
             data: { historicId: selectedHistoric, id: templateId },
             success: function (data) {
@@ -102,21 +75,12 @@ $(document).ready(function () {
     // Query to get text from Highlights history according to ID in dropdown
     function getHighLigthsText(selectedHighLight, templateId) {
         $.ajax({
-            url: '/Main/GetHighlights',
+            url: '/Historic/GetHighlights',
             type: 'GET',
             data: { highlightsId: selectedHighLight, id: templateId },
             success: function (data) {
                 // Check if the data is retrieved successfully
                 if (data.success) {
-
-                    // Updates the content of the textarea with the highlights text
-                    //$('#HighlightsHistoryView').val(data.historicText.HIGHLIGHTS);
-                    //$('#HighlightsCHistoryView').val(data.historicText.HIGHLIGHTS_COMMENTS);
-                    //$('#InstructionsHistoryView').val(data.historicText.HIGHLIGHTS_INSTRUCTIONS);
-                    //$('#ExceptionsHistoryView').val(data.historicText.HIGHLIGHTS_EXCEPTIONS);
-                    //$('#MostCIHistoryView').val(data.historicText.HIGHLIGHTS_COMMON_ISSUES);
-                    //$('#SupplierAHistoryView').val(data.historicText.HIGHLIGHTS_SUPPLIER_AGENCY);
-                    //$('#TemplateCHistoryView').val(data.historicText.HIGHLIGHTS_COMMENTS);
                     tinymce.get("HighlightsHistoryView").setContent(data.historicText.HIGHLIGHTS);
                     tinymce.get("HighlightsCHistoryView").setContent(data.historicText.HIGHLIGHTS_COMMENTS);
                     tinymce.get("InstructionsHistoryView").setContent(data.historicText.HIGHLIGHTS_INSTRUCTIONS);
@@ -130,7 +94,7 @@ $(document).ready(function () {
             },
             error: function () {
                 // Handles any errors that may occur during the AJAX request
-                alert("Error get historic Remit text.");
+                alert("Error get higlights.");
             }
         });
     }
@@ -151,9 +115,6 @@ $(document).ready(function () {
             getHighLigthsText(selectedHighLight, templateId);
         }
     }).change(); // Trigger the change event on page load
-    $(".btn-cancel").click(function () {
-        document.location.href = window.location.origin + '/Main/Index';
-    });
 
     $('#FK_TB_TEMPLATE_HISTORIC_REMIT_ID').on('change', function (e) {
         var selectedHistoric = $(this).val();
@@ -207,9 +168,7 @@ $(document).ready(function () {
         document.location.href = window.location.origin + '/Main/Index';
     });
     $("#btn-update").click(function (e) {
-        if (checkFormValidity()) {
-            update();
-        }
+        update();
     });
 
     //Function to store more legal entity data to the dropdown
@@ -236,7 +195,7 @@ $(document).ready(function () {
 
                 //AJAX to made the request to the server
                 $.ajax({
-                    url: '/Main/AddLegalEntity',
+                    url: '/CRUD/AddLegalEntity',
                     type: 'POST',
                     data: { legalEntityName: newLegalEntity },
                     success: function (data) {
@@ -255,7 +214,7 @@ $(document).ready(function () {
                         console.error('Error:', error);
                     }
 
-                }); 
+                });
             }
         });
 
@@ -288,7 +247,7 @@ $(document).ready(function () {
 
                 //AJAX to made the request to the server
                 $.ajax({
-                    url: '/Main/AddApprover',
+                    url: '/CRUD/AddApprover',
                     type: 'POST',
                     data: { approverName: newApprover },
                     success: function (data) {
@@ -300,67 +259,20 @@ $(document).ready(function () {
 
                         // Call the function to sort
                         sortApprover();
-
                     },
-
                     error: function (error) {
                         console.error('Error:', error);
                     }
-
                 });
             }
         });
-
         // Call the function to sort
         sortApprover();
 
     });
 
 });
-
-//funtion to check that all requered fields are filled
-function checkFormValidity() {
-    var form = $("#form")[0];
-
-    // Reset previous error messages and remove focus
-    $(".validation-message").remove();
-    $(":input").removeClass("invalid-field");
-
-    var firstInvalidField = null;
-
-    // Check each input field for validity
-    $(form).find(":input").each(function () {
-        // Check if the field is required and not empty
-        if (this.required && !$(this).val()) {
-            // Display a message in a label associated with the field
-            $(this).closest('div').append('<label class="validation-message text-danger">' + 'This field is required</label>');
-
-            // Add a class to highlight the invalid field
-            $(this).addClass("invalid-field");
-
-            // Set focus to the first invalid field
-            if (!firstInvalidField) {
-                firstInvalidField = this;
-            }
-        }
-    });
-
-    if (firstInvalidField) {
-        firstInvalidField.focus();
-    }
-
-    if (form.checkValidity()) {
-        // The form is valid
-        return true;
-    } else {
-        // If a field in the form thats required is not filled
-        alert("Please fill all the required fields");
-        return false;
-    }
-}
-
 function create() {
-
     // get data from template .replace(/[<>]/g, '') is to remove <> that can cause issues to save
     var templateData = {
         TEMP_TAX_ID: $("#form-TaxID").val(),
@@ -414,7 +326,7 @@ function create() {
     };
 
     $.ajax({
-        url: '/Main/Create',
+        url: '/CRUD/Create',
         type: 'POST',
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
@@ -487,9 +399,9 @@ function update() {
     };
 
     $.ajax({
-        url: '/Main/Edit',
+        url: '/CRUD/Edit',
         type: 'POST',
-        
+
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
         },
