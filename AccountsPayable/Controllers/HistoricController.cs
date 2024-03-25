@@ -38,7 +38,8 @@ namespace AccountsPayable.Controllers
             }
             else
             {
-                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);            }
+                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpGet]
         public ActionResult GetHighlights(int highlightsId, int id)

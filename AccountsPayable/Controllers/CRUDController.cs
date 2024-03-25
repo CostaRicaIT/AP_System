@@ -171,7 +171,6 @@ namespace AccountsPayable.Controllers
                                     HighLightsData.HIGHLIGHTS_DATE = targetTime;
                                     db.TB_HIGHLIGHTS.Add(HighLightsData);
                                 }
-
                             }
                             else
                             {
@@ -189,9 +188,7 @@ namespace AccountsPayable.Controllers
                                     db.TB_HIGHLIGHTS.Add(HighLightsData);
                                 }
                             }
-
                             // Update historic remit data if there are changes
-
                             if (existingTemplate.FK_TB_TEMPLATE_HISTORIC_REMIT_ID != null)
                             {
                                 //If there is there is a historic remit create a new one
@@ -201,7 +198,6 @@ namespace AccountsPayable.Controllers
                                     HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                                     db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                                 }
-
                             }
                             else
                             {
@@ -210,8 +206,6 @@ namespace AccountsPayable.Controllers
                                 HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
                                 db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                             }
-
-
                             // Update email data
                             if (emailDataList != null && emailDataList.Any())
                             {
@@ -219,7 +213,6 @@ namespace AccountsPayable.Controllers
                                 {
                                     emailData.EMAIL_BACKUP_ISDISABLED = 0;
                                     emailData.EMAIL_BACKUP_DATE = targetTime;
-
                                     // Check if emailData already exists
                                     var existingEmail = db.TB_EMAIL_BACKUP.Find(emailData.EMAIL_BACKUP_ID);
                                     var template = db.TB_TEMPLATE.Find(existingTemplate.TEMP_ID);
@@ -233,11 +226,9 @@ namespace AccountsPayable.Controllers
                                             template.TB_EMAIL_BACKUP.Add(email);
                                         }
                                     }
-
                                     existingTemplate.TB_EMAIL_BACKUP.Add(emailData);
                                 }
                             }
-
                             // Update alias data
                             if (aliasDataList != null && aliasDataList.Any())
                             {
@@ -262,10 +253,8 @@ namespace AccountsPayable.Controllers
                                     existingTemplate.TB_ALIAS.Add(aliasData);
                                 }
                             }
-
                             // Save changes once at the end
                             db.SaveChanges();
-
                             // Set foreign key properties for templateData after saving changes
                             int newHistoricRemit = (int)(HistoricRemitToData?.HISTORIC_REMIT_ID);
                             int newHighlightsId = (int)(HighLightsData?.HIGHLIGHTS_ID);
@@ -285,9 +274,6 @@ namespace AccountsPayable.Controllers
                             {
                                 templateData.FK_TB_HIGHLIGHTS_ID = existingTemplate.FK_TB_HIGHLIGHTS_ID;
                             }
-
-
-
                             if (emailDataList != null && emailDataList.Any())
                             {
                                 templateData.FK_TB_EMAIL_BACKUP_ID = emailDataList.LastOrDefault()?.EMAIL_BACKUP_ID;
@@ -297,7 +283,6 @@ namespace AccountsPayable.Controllers
 
                                 templateData.FK_TB_EMAIL_BACKUP_ID = existingTemplate.FK_TB_EMAIL_BACKUP_ID;
                             }
-
                             if (aliasDataList != null && aliasDataList.Any())
                             {
                                 templateData.FK_TB_TEMPLATE_ALIAS_ID = aliasDataList.LastOrDefault()?.ALIAS_ID;
@@ -338,7 +323,6 @@ namespace AccountsPayable.Controllers
         {
             try
             {
-
                 bool entityExists = db.TB_ORACLE_LEGAL_ENTITIES.Any(entity => entity.LEGAL_ENTITY_NAME == legalEntityName);
 
                 if (!entityExists)
@@ -348,41 +332,29 @@ namespace AccountsPayable.Controllers
                     db.SaveChanges();
 
                     return Json(new { id = newEntity.LEGAL_ENTITY_ID, name = newEntity.LEGAL_ENTITY_NAME });
-
                 }
-
                 return Json(new { message = "Entity already exists" });
-
             }
-
             catch (Exception ex)
             {
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }
-
         [HttpPost]
         public ActionResult AddApprover(string approverName)
         {
             try
             {
-
                 bool entiExists = db.TB_APPROVER.Any(enti => enti.APPROVER_NAME == approverName);
-
                 if (!entiExists)
                 {
                     var newEnti = new TB_APPROVER { APPROVER_NAME = approverName };
                     db.TB_APPROVER.Add(newEnti);
                     db.SaveChanges();
-
                     return Json(new { id = newEnti.APPROVER_ID, name = newEnti.APPROVER_NAME });
-
                 }
-
                 return Json(new { message = "Entity already exists" });
-
             }
-
             catch (Exception ex)
             {
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
