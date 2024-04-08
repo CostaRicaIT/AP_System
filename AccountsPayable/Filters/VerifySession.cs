@@ -25,7 +25,10 @@ namespace AccountsPayable.Filters
                     filterContext.HttpContext.Response.Redirect("~/Access/LogIn");
                 }
 
-                
+                if (filterContext.Controller is UserController == true)
+                {
+                    filterContext.HttpContext.Response.Redirect("~/Access/LogIn");
+                }
 
             }
             else

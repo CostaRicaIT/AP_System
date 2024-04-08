@@ -135,6 +135,7 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\SignOutController.cs" />
     <Compile Include="Controllers\CRUDController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -423,6 +424,8 @@
     <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\UserAdministrationCRUD.js" />
+    <Content Include="Scripts\UserDashboard.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -441,6 +444,7 @@
     <Content Include="Views\Shared\_PartialLayout.cshtml" />
     <Content Include="Views\Main\Edit.cshtml" />
     <Content Include="Views\Main\Details.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
