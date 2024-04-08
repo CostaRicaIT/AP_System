@@ -48,72 +48,89 @@ namespace AccountsPayable.Controllers
         }
         public ActionResult Create()
         {
-            //Get data for dropdowns
-            ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
-            ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
-            ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
-            ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
-            ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
-            return View();
+
+            //Check if user haves access to module
+            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
+            if (userPermission == null || userPermission.FK_TB_LOGIN_ROLE_ID == 1 || userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            {
+                //Get data for dropdowns
+                ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
+                ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
+                ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
+                ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
+                ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+                return View();
+            }
+            else { return View("Error"); }
+
         }
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            //Check if user haves access to module
+            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
+            if (userPermission == null || userPermission.FK_TB_LOGIN_ROLE_ID == 1 || userPermission.FK_TB_LOGIN_ROLE_ID == 2)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.Find(id);
-            if (tB_TEMPLATE == null)
-            {
-                return HttpNotFound();
-            }
-            //Get data for email backup
-            var emailBackupList = db.TB_EMAIL_BACKUP
-                .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id))
-                .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
-                .AsEnumerable()
-                .Select(e => new
+                if (id == null)
                 {
-                    EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
-                    EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                ).ToList();
-            //Get data for historic Remit
-            var historicRemitToList = db.TB_HISTORIC_REMIT
-                .Where(x => x.FK_TB_TEMPLATE_ID == id)
-                .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
-                .AsEnumerable()
-                .Select(e => new
+                TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.Find(id);
+                if (tB_TEMPLATE == null)
                 {
-                    HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
-                    HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-            //Get data for highlights
-            var HighLightsToList = db.TB_HIGHLIGHTS
-                .Where(e => e.FK_TB_TEMPLATE_ID == id)
-                .OrderByDescending(e => e.HIGHLIGHTS_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
-                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
-                })
-                .ToList();
+                    return HttpNotFound();
+                }
+                //Get data for email backup
+                var emailBackupList = db.TB_EMAIL_BACKUP
+                    .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id))
+                    .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
+                        EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }
+                    ).ToList();
+                //Get data for historic Remit
+                var historicRemitToList = db.TB_HISTORIC_REMIT
+                    .Where(x => x.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
+                        HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+                //Get data for highlights
+                var HighLightsToList = db.TB_HIGHLIGHTS
+                    .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(e => e.HIGHLIGHTS_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
+                        HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
+                    })
+                    .ToList();
 
-            //Get data for alias
-            var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
+                //Get data for alias
+                var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
 
-            //Send data to view with external tables data
-            ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
-            ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
-            ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_TEMPLATE.FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_TEMPLATE.FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
-            ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
-            return View(tB_TEMPLATE);
+                //Send data to view with external tables data
+                ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
+                ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
+                ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
+                ViewBag.FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_TEMPLATE.FK_TB_LEGAL_ENTITY_ID);
+                ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_PAY_TERMS_ID);
+                ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_SOURCE_ID);
+                ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_TEMPLATE.FK_TB_ORACLE_TYPE_ID);
+                ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
+                ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
+                return View(tB_TEMPLATE);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
         public ActionResult Details(int? id)
         {

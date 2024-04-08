@@ -25,15 +25,15 @@ function initializeDataTable() {
                 targets: '_all', //Hide all columns to show only default columns later
                 visible: false
             },
-            {
-                targets: 36, //Add View, edit and delete buttons to last column of table
-                render: function (data, type, full, meta) {
-                    var rowId = full[0];
-                    return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
-                        '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
-                        '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
-                }
-            }
+            //{
+            //    targets: 36, //Add View, edit and delete buttons to last column of table
+            //    render: function (data, type, full, meta) {
+            //        var rowId = full[0];
+            //        return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
+            //            '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
+            //            '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
+            //    }
+            //}
         ],
         language: {
             search:"", //Search bar label

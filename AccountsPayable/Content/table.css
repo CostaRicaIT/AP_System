@@ -6,11 +6,18 @@
     font-size: 14px !important;
     display: inline-table !important
 }
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
 tfoot input {
     display: table-header-group;
     width: 100%;
     box-sizing: border-box;
 }
+
 .dataTables_filter input {
     width: 300px;
 }
