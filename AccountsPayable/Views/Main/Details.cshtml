@@ -39,11 +39,6 @@
                         @Html.EditorFor(model => model.TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
-                @*<div class="col-md-6">
-                        <label class="control-label col-md-6" for="BoxNoTaxId">No Tax Id information</label>
-                        <input type="checkbox" id="BoxNoTaxId" name="NoTaxId" />
-                    </div>*@
-
             </div>
         </div>
 
@@ -56,10 +51,7 @@
                         @Html.EditorFor(model => model.TEMP_SUPPLIER_NAME, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
-                @*<div class="col-md-6">
-                        <label for="BoxSupName" class="control-label col-md-6">There is no Supplier Name</label>
-                        <input type="checkbox" id="BoxSupName" value="1">
-                    </div>*@
+               
             </div>
         </div>
 
@@ -84,10 +76,7 @@
                         @Html.EditorFor(model => model.TEMP_REMIT_TO, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
-                @*<div class="col-md-6">
-                        <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
-                        <input type="checkbox" id="BoxNoRemitInfo" value="1">
-                    </div>*@
+               
             </div>
         </div>
 
@@ -115,7 +104,6 @@
                 </div>
 
                 <div class="col-md-4">
-                    @*<button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit" disabled>Add Historic Remit to</button>*@
                     <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
                 </div>
             </div>
@@ -176,15 +164,6 @@
         <!-- Alias Input and Button-->
         <div class="form-group">
             <div class=" row">
-                @*<div class="col-md-6">
-                        <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
-                        </div>
-                    </div>*@
-                @*<div class="col-md-6">
-                        <button id="btn-addAlias" type="button" class="styled-button align-right">Add alias</button>
-                    </div>*@
             </div>
             <br />
             <div class="row">
@@ -199,21 +178,6 @@
             <!--Select Alias Dropdown-->
         </div>
     </div>
-    <!--Add Alias modal-->
-    @*<div id="AddAliasModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-                <div>
-                    <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
-                </div>
-                <div>
-                    <br />
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-                </div>
-            </div>
-        </div>*@
     <br />
 
     <!-- Invoice Number Format Section -->
@@ -503,7 +467,6 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-10">
-                        @*<button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>*@
                         <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
                     </div>
                 </div>
@@ -579,7 +542,7 @@
     <!--Show Highlights modal-->
     <div id="ShowHighlights" class="modal">
         <div class="modal-content">
-            <span id="cancelButton " class="close">&times;</span>
+            <span id="cancelButton" class="close">&times;</span>
             @*Highlights*@
             <div class="from-group">
                 <div class="row">
@@ -676,9 +639,6 @@
                         <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150" disabled></textarea>
                     </div>
                 </div>
-                @*<div class="col-md-6">
-                        <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal">Add Email</button>
-                    </div>*@
             </div>
         </div>
 

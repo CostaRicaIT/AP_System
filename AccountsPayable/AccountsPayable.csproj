@@ -448,9 +448,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Historic\" />
     <Folder Include="Views\SignOut\" />
-    <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

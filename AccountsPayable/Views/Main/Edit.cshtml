@@ -192,21 +192,6 @@
             <!--Select Alias Dropdown-->
         </div>
     </div>
-    <!--Add Alias modal-->
-    @*<div id="AddAliasModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-                <div>
-                    <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
-                </div>
-                <div>
-                    <br />
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-                </div>
-            </div>
-        </div>*@
     <br />
 
     <!-- Invoice Number Format Section -->
@@ -538,7 +523,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-10">
-                        @*<button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>*@
+                        
                         <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
                     </div>
                 </div>
@@ -619,43 +604,10 @@
     </div>
 
     <br />
-
-    <!--Add Highlights modal-->
-    <!--<div id="AddAHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>-->
-    <!-- Highlights -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsHistoryAdd">Highlights</label></p>
-    <textarea class="form-control" id="HighlightsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Highlights Comments -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsCHistoryAdd">Highlights Comments:</label></p>
-    <textarea class="form-control" id="HighlightsCHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Instructions -->
-    <!--<p><label class="control-label col-md-6" for="InstructionsHistoryAdd">Instructions:</label></p>
-    <textarea class="form-control" id="InstructionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Exceptions -->
-    <!--<p><label class="control-label col-md-6" for="ExceptionsHistoryAdd">Exceptions:</label></p>
-    <textarea class="form-control" id="ExceptionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Most Common Issues -->
-    <!--<p><label class="control-label col-md-6" for="MostCIHistoryAdd">Most Common Issues:</label></p>
-    <textarea class="form-control" id="MostCIHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Supplier Agency -->
-    <!--<p><label class="control-label col-md-6" for="SupplierAHistoryAdd">Supplier Agency:</label></p>
-    <textarea class="form-control" id="SupplierAHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Template Comments -->
-    <!--<p><label class="control-label col-md-6" for="TemplateCHistoryAdd">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
-            </div>
-        </div>
-    </div>-->
     <!--Show Highlights modal-->
     <div id="ShowHighlights" class="modal">
         <div class="modal-content">
-            <span id="cancelButton " class="close">&times;</span>
+            <span id="cancelButton" class="close">&times;</span>
             @*Highlights*@
 
             <div class="from-group">
@@ -862,103 +814,6 @@
     <!-- Cancel and Save Buttons -->
     <button class="btn form_btntbWC btn-cancel" type="button" id="form-cancel">Cancel</button>
     <button class="btn form_btntbWC" type="button" id="btn-update">Save</button>
-
-    <!--Save Changes modal-->
-    @*<div id="ShowSaveModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Save Changes</h4>
-                    <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-
-                            <h4 class="text-center">
-                                Would you like to add additional information to the template: <br />
-                                Alias / Backup Emails?
-                            </h4>
-                            <br />
-                            <div>
-                                <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
-                                <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-    <!--Add alias / Backup emails modal-->
-    <!--<div id="ShowAddAlias_EmailModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Alias and Backup email's information</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">-->
-    <!--Alias section-->
-    <!--<div class="form-group">
-        <div class=" row">
-            <div class="col-md-6">
-                <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <br />
-                <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-10">
-                    <select name="Alias" id="AliasToAdd" class="form-control" size="5">
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />-->
-    <!--Email section-->
-    <!--<div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-8" for="form-BackUpEmails">Back Up Emails:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <br />
-                            <button id="btn-addEmail" type="button" class="btn form_btntbWC">Add Email</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                <select name="Alias" id="EmailsToAdd" class="form-control" size="5">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
-            </div>
-        </div>
-    </div>-->
     <a href="javascript:void(0);" id="scrollToTop" onclick="scrollToTop()">Scroll Back to Top</a>
 </form>
 

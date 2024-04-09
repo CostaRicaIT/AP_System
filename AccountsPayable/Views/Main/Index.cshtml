@@ -13,7 +13,6 @@
 <div class="container">
     <p>
         <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
-        @*@Html.ActionLink("Create New", "Create")*@
     </p>
 
     <table id="dataTable" class="table cell-border stripe display" width="100%">
@@ -141,9 +140,7 @@
                 <button id="showColumnsButton" class="btn btn-link">
                     <i class="fa fa-eye"></i> Show Columns
                 </button><br />
-                @*<button id="saveColumnsButton" class="btn btn-link">
-                        <i class="fa fa-save"></i> Save Columns
-                    </button><br />*@
+
                 <button id="resetColumnsButton" class="btn btn-link">
                     <i class="fa fa-undo"></i> Reset Columns
                 </button><br />
@@ -166,10 +163,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                @*<label>
-                        <input type="checkbox" class="toggle-column" data-column="0"> ID
-                    </label><br>*@
 
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="1"> Alias
