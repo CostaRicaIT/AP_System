@@ -17,6 +17,11 @@ namespace AccountsPayable.Controllers
         // Helper method to strip <p> tags
         private string StripHtmlTags(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return null; // This will return null for empty fields
+            }
+
             // Replace <p> tags with an empty string
             return Regex.Replace(input, @"<p>|<\/p>", string.Empty);
         }
@@ -62,6 +67,10 @@ namespace AccountsPayable.Controllers
                         if (HistoricRemitToData.HISTORIC_REMIT_INFO != null)
                         {
                             HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+
+                            // Remove <p> tags from Historic Remit
+                            HistoricRemitToData.HISTORIC_REMIT_INFO = StripHtmlTags(HistoricRemitToData.HISTORIC_REMIT_INFO);
+
                             db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                         }
                         // Get all emails created add date and add data to be saved later
@@ -83,6 +92,16 @@ namespace AccountsPayable.Controllers
                                 db.TB_ALIAS.Add(aliasData);
                             }
                         }
+
+                        // Remove <p> tags from Template
+                        templateData.TEMP_INVOICE_NOTES = StripHtmlTags(templateData.TEMP_INVOICE_NOTES);
+                        templateData.TEMP_W9_W8 = StripHtmlTags(templateData.TEMP_W9_W8);
+                        templateData.TEMP_VSU = StripHtmlTags(templateData.TEMP_VSU);
+                        templateData.TEMP_BILLING_PERIOD = StripHtmlTags(templateData.TEMP_BILLING_PERIOD);
+                        templateData.TEMP_ORACLE_DESCRIPTION = StripHtmlTags(templateData.TEMP_ORACLE_DESCRIPTION);
+                        templateData.TEMP_ORACLE_NOTES = StripHtmlTags(templateData.TEMP_ORACLE_NOTES);
+                        templateData.TEMP_ORACLE_INSTRUCTIONS = StripHtmlTags(templateData.TEMP_ORACLE_INSTRUCTIONS);
+
                         //Save template data
                         db.TB_TEMPLATE.Add(templateData);
                         //Save all changes to DB
