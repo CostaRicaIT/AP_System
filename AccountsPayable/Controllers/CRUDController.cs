@@ -6,12 +6,20 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace AccountsPayable.Controllers
 {
     public class CRUDController : Controller
     {
         private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+
+        // Helper method to strip <p> tags
+        private string StripHtmlTags(string input)
+        {
+            // Replace <p> tags with an empty string
+            return Regex.Replace(input, @"<p>|<\/p>", string.Empty);
+        }
 
         [HttpPost]
         public ActionResult Create(TB_TEMPLATE templateData, TB_HIGHLIGHTS HighLightsData, TB_HISTORIC_REMIT HistoricRemitToData, List<TB_ALIAS> aliasDataList, List<TB_EMAIL_BACKUP> emailDataList)
@@ -38,6 +46,16 @@ namespace AccountsPayable.Controllers
                                 || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != null)
                         {
                             HighLightsData.HIGHLIGHTS_DATE = targetTime;
+
+                            // Remove <p> tags from Highlights
+                            HighLightsData.HIGHLIGHTS = StripHtmlTags(HighLightsData.HIGHLIGHTS);
+                            HighLightsData.HIGHLIGHTS_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMENTS);
+                            HighLightsData.HIGHLIGHTS_INSTRUCTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_INSTRUCTIONS);
+                            HighLightsData.HIGHLIGHTS_EXCEPTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_EXCEPTIONS);
+                            HighLightsData.HIGHLIGHTS_COMMON_ISSUES = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMON_ISSUES);
+                            HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY = StripHtmlTags(HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY);
+                            HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS);
+
                             db.TB_HIGHLIGHTS.Add(HighLightsData);
                         }
                         // Add date to Historic Remit and add data to be saved later, verifies if the HISTORIC_REMIT data is different from null can be inserted
