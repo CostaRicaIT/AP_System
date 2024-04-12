@@ -202,10 +202,20 @@ namespace AccountsPayable.Controllers
                                || HighLightsData.HIGHLIGHTS_COMMON_ISSUES != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES
                                || HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY
                                || HighLightsData.HIGHLIGHTS_INSTRUCTIONS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS
-                               || HighLightsData.HIGHLIGHTS_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS)
+                               || HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS != existingTemplate.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS)
                                 {
                                     HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                     HighLightsData.HIGHLIGHTS_DATE = targetTime;
+
+                                    // Remove <p> tags from current Highlights
+                                    HighLightsData.HIGHLIGHTS = StripHtmlTags(HighLightsData.HIGHLIGHTS);
+                                    HighLightsData.HIGHLIGHTS_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMENTS);
+                                    HighLightsData.HIGHLIGHTS_INSTRUCTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_INSTRUCTIONS);
+                                    HighLightsData.HIGHLIGHTS_EXCEPTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_EXCEPTIONS);
+                                    HighLightsData.HIGHLIGHTS_COMMON_ISSUES = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMON_ISSUES);
+                                    HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY = StripHtmlTags(HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY);
+                                    HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS);
+
                                     db.TB_HIGHLIGHTS.Add(HighLightsData);
                                 }
                             }
@@ -222,6 +232,16 @@ namespace AccountsPayable.Controllers
                                 {
                                     HighLightsData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                     HighLightsData.HIGHLIGHTS_DATE = targetTime;
+
+                                    // Remove <p> tags is there are no Highlights
+                                    HighLightsData.HIGHLIGHTS = StripHtmlTags(HighLightsData.HIGHLIGHTS);
+                                    HighLightsData.HIGHLIGHTS_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMENTS);
+                                    HighLightsData.HIGHLIGHTS_INSTRUCTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_INSTRUCTIONS);
+                                    HighLightsData.HIGHLIGHTS_EXCEPTIONS = StripHtmlTags(HighLightsData.HIGHLIGHTS_EXCEPTIONS);
+                                    HighLightsData.HIGHLIGHTS_COMMON_ISSUES = StripHtmlTags(HighLightsData.HIGHLIGHTS_COMMON_ISSUES);
+                                    HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY = StripHtmlTags(HighLightsData.HIGHLIGHTS_SUPPLIER_AGENCY);
+                                    HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS = StripHtmlTags(HighLightsData.HIGHLIGHTS_TEMPLATE_COMMENTS);
+
                                     db.TB_HIGHLIGHTS.Add(HighLightsData);
                                 }
                             }
@@ -233,6 +253,10 @@ namespace AccountsPayable.Controllers
                                 {
                                     HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                     HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+
+                                    // Remove <p> tags from current Histroic
+                                    HistoricRemitToData.HISTORIC_REMIT_INFO = StripHtmlTags(HistoricRemitToData.HISTORIC_REMIT_INFO);
+
                                     db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                                 }
                             }
@@ -241,6 +265,10 @@ namespace AccountsPayable.Controllers
                                 // If there is not a historic remit create a new one
                                 HistoricRemitToData.FK_TB_TEMPLATE_ID = existingTemplate.TEMP_ID;
                                 HistoricRemitToData.HISTORIC_REMIT_DATE = targetTime;
+
+                                // Remove <p> tag is there is no Historic
+                                HistoricRemitToData.HISTORIC_REMIT_INFO = StripHtmlTags(HistoricRemitToData.HISTORIC_REMIT_INFO);
+
                                 db.TB_HISTORIC_REMIT.Add(HistoricRemitToData);
                             }
                             // Update email data
@@ -290,6 +318,16 @@ namespace AccountsPayable.Controllers
                                     existingTemplate.TB_ALIAS.Add(aliasData);
                                 }
                             }
+
+                            // Remove <p> tags from current and empty Templates
+                            templateData.TEMP_INVOICE_NOTES = StripHtmlTags(templateData.TEMP_INVOICE_NOTES);
+                            templateData.TEMP_W9_W8 = StripHtmlTags(templateData.TEMP_W9_W8);
+                            templateData.TEMP_VSU = StripHtmlTags(templateData.TEMP_VSU);
+                            templateData.TEMP_BILLING_PERIOD = StripHtmlTags(templateData.TEMP_BILLING_PERIOD);
+                            templateData.TEMP_ORACLE_DESCRIPTION = StripHtmlTags(templateData.TEMP_ORACLE_DESCRIPTION);
+                            templateData.TEMP_ORACLE_NOTES = StripHtmlTags(templateData.TEMP_ORACLE_NOTES);
+                            templateData.TEMP_ORACLE_INSTRUCTIONS = StripHtmlTags(templateData.TEMP_ORACLE_INSTRUCTIONS);
+
                             // Save changes once at the end
                             db.SaveChanges();
                             // Set foreign key properties for templateData after saving changes
@@ -355,6 +393,7 @@ namespace AccountsPayable.Controllers
                 }
             }
         }
+
         [HttpPost]
         public ActionResult AddLegalEntity(string legalEntityName)
         {
@@ -377,6 +416,7 @@ namespace AccountsPayable.Controllers
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }
+
         [HttpPost]
         public ActionResult AddApprover(string approverName)
         {
@@ -397,6 +437,7 @@ namespace AccountsPayable.Controllers
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }
+
         [HttpDelete]
         public ActionResult DELETE(int? id, int disabled = 1)
         {
