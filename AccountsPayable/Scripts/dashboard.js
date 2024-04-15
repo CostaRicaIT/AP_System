@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 6, 4, 5, 21, 3, 32]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1,3,4,5,6,24,36]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({
@@ -25,44 +25,21 @@ function initializeDataTable() {
                 targets: '_all', //Hide all columns to show only default columns later
                 visible: false
             },
-            {
-                targets: 32, //Add View, edit and delete buttons to last column of table
-                render: function (data, type, full, meta) {
-                    var rowId = full[0];
-                    return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
-                        '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
-                        '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
-                }
-            }
+            //{
+            //    targets: 36, //Add View, edit and delete buttons to last column of table
+            //    render: function (data, type, full, meta) {
+            //        var rowId = full[0];
+            //        return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
+            //            '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
+            //            '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
+            //    }
+            //}
         ],
         language: {
             search:"", //Search bar label
             searchPlaceholder: "Search... " // Search place holder
         },
-        //initComplete: function () {
-        //    this.api().columns().every(function () {
-        //        var column = this;
-        //        var title = column.footer().textContent;
-
-        //        // Create input element and add event listener
-        //        var inputElement = $('<input type="text" placeholder="Search ' + title + '" />')
-        //            .appendTo($(column.footer()).empty())
-        //            .on('keyup change clear', function () {
-        //                if (column.search() !== this.value) {
-        //                    column.search(this.value).draw();
-        //                }
-        //            });
-
-        //        // Hide search input for actions column (index 23)
-        //        if (column.index() === 23) {
-        //            inputElement.hide();
-        //        }
-        //    });
-
-        //},
-
-
-
+       
     });
     table.columns(defaultColumns).visible(true); //Show the default columns set on defaultColumns variable
     $('a.toggle-vis').on('click', function (e) {// Function to show columns of table
@@ -70,8 +47,6 @@ function initializeDataTable() {
 
         var column = table.column($(this).attr('data-column'));
         column.visible(!column.visible());
-
-
     });
     $('#showColumnsButton').click(function () {
         $('#filtersModal').modal('hide');
@@ -107,7 +82,7 @@ function initializeDataTable() {
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '/Main/Delete/' + rowId,
+                url: '/CRUD/Delete/' + rowId,
                 headers: {
                     'X-HTTP-Method-Override': 'DELETE'
                 },
@@ -157,23 +132,3 @@ function resetFilters() {
 $(document).ready(function () {
     initializeDataTable();
 });
-
-    //window.onscroll = function() {
-    //    scrollFunction();
-    //    };
-
-    //function scrollFunction() {
-    //        var scrollToTopButton = document.getElementById("scrollToTop");
-
-    //        // Show or hide the button based on scroll position
-    //        if (document.body.scrollTop > document.body.scrollHeight / 2 || document.documentElement.scrollTop > document.documentElement.scrollHeight / 2) {
-    //    scrollToTopButton.style.display = "block";
-    //        } else {
-    //    scrollToTopButton.style.display = "none";
-    //        }
-    //    }
-
-    //function scrollToTop() {
-    //    document.body.scrollTop = 0;
-    //document.documentElement.scrollTop = 0;
-    //    }

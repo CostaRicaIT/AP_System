@@ -93,40 +93,12 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-HistRemitTo">Historic Remit To:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-HistRemitTo" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-HistRemitTo" rows="6" cols="50"></textarea>
                         <br />
                     </div>
                 </div>
-
-                @*<div class="col-md-4">
-                        <button id="ButtonAddHistoricRemit" type="button" class="styled-button align-right btn-submit" disabled>Add Historic Remit to</button>
-                        <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal" disabled>View Historic Remit to</button>
-                    </div>*@
             </div>
-            <!--Modal to see historic remit -->
-            @* <div id="ShowHistoricRemitModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <div class="row">
-                            <div class="control-label col-md-12">
-                                <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
-                                <div class="col-md-10">
-                                    <textarea class="form-control" id="historicRemitInfoView" readonly rows="6" cols="75" placeholder="..."></textarea>
-                                    <br />
-                                </div>
-                            </div>
-                        </div>
-                        <!--Select Historic Remit to -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    @Html.DropDownList("FK_TB_TEMPLATE_HISTORIC_REMIT_ID", null, htmlAttributes: new { @size = "5" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-
+        
             <!-- Our Vendor # / Account # -->
             <div class="form-group">
                 <div class="row">
@@ -188,7 +160,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-InvoiceNotes" id="label-InvoiceNotes">Invoice Notes:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-InvoiceNotes" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-InvoiceNotes" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -205,7 +177,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-W9W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-W9W8" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-W9W8" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -217,7 +189,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-VSU" id="label-VSU">VSU Form:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-VSU" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-VSU" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -225,50 +197,7 @@
     </div>
     <br />
 
-    <!-- Alias Section -->
-    @*<div class="form-section">
-            <div class="section-title">Alias</div>
-            Alias Input and Button
-            <div class="form-group">
-                <div class=" row">
-                    <div class="col-md-6">
-                        <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="form-Alias" placeholder="Alias name" disabled>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <button id="ButtonAddAlias" type="button" class="styled-button align-right openModalBtn" data-modal="AddAliasModal" disabled>Add alias</button>
-                    </div>
-                </div>
-                "<div class="row">
-                    <div class="col-md-6">
-                        <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID"></label>
-                        <div class="col-md-7">
-                            @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </div>
-                </div>
-
-                //Select Alias Dropdown
-            </div>
-        </div>
-        //Add Alias modal
-        <div id="AddAliasModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-                <div>
-                    <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
-                </div>
-                <div>
-                    <br />
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-                </div>
-            </div>
-        </div>
-        <br />*@
+   
     <!-- Oracle and Apps Section -->
     <div class="form-section">
         <div class="section-title">Oracle and Apps</div>
@@ -328,15 +257,11 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-BillPeriod">Billing Period:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-BillPeriod">
+                        <textarea class="form-control TinyEditor" id="form-BillPeriod"></textarea>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Dates -->
-        <div class="form-group">
-            <div class="row">
+                <!-- Dates -->
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
                     <div class="col-md-10">
@@ -458,7 +383,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Description">Description:</label>
                     <div class="col-md-10">
-                        <textarea id="form-Description" class="form-control" rows="6" cols="50"></textarea>
+                        <textarea id="form-Description" class="form-control TinyEditor" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -470,14 +395,14 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-OracleN">Oracle Notes:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleN" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-OracleN" rows="6" cols="50"></textarea>
                     </div>
                 </div>
                 <!-- Oracle Instructions -->
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-OracleI" id="Label-Oracle">Oracle Instructions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-OracleI" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-OracleI" rows="6" cols="50"></textarea>
                     </div>
                 </div>
             </div>
@@ -521,15 +446,10 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Higlights">Highlights</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Higlights" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-Higlights" rows="8" cols="150"></textarea>
                     </div>
                 </div>
-                @*<div class="col-md-4">
-                        <div class="col-md-10">
-                            <button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights">Add History</button>
-                            <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
-                        </div>
-                    </div>*@
+                </div>
             </div>
         </div>
         <!-- Highlights Comments -->
@@ -538,7 +458,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-HiglightsC">Highlights Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-HiglightsC" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-HiglightsC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -549,7 +469,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Instructions">Instructions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Instructions" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-Instructions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -560,7 +480,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-Exceptions">Exceptions:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-Exceptions" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-Exceptions" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -571,7 +491,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-MostCI">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-MostCI" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-MostCI" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -582,7 +502,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-SupplierA">Supplier Agency:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-SupplierA" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-SupplierA" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
@@ -593,125 +513,13 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="form-TemplateC">Template Comments:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-TemplateC" rows="8" cols="150"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-TemplateC" rows="8" cols="150"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
     <br />
-
-    <!--Add Highlights modal-->
-    <!--<div id="AddAHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>-->
-    <!-- Highlights -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsHistoryAdd">Highlights</label></p>
-    <textarea class="form-control" id="HighlightsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Highlights Comments -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsCHistoryAdd">Highlights Comments:</label></p>
-    <textarea class="form-control" id="HighlightsCHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Instructions -->
-    <!--<p><label class="control-label col-md-6" for="InstructionsHistoryAdd">Instructions:</label></p>
-    <textarea class="form-control" id="InstructionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Exceptions -->
-    <!--<p><label class="control-label col-md-6" for="ExceptionsHistoryAdd">Exceptions:</label></p>
-    <textarea class="form-control" id="ExceptionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Most Common Issues -->
-    <!--<p><label class="control-label col-md-6" for="MostCIHistoryAdd">Most Common Issues:</label></p>
-    <textarea class="form-control" id="MostCIHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Supplier Agency -->
-    <!--<p><label class="control-label col-md-6" for="SupplierAHistoryAdd">Supplier Agency:</label></p>
-    <textarea class="form-control" id="SupplierAHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Template Comments -->
-    <!--<p><label class="control-label col-md-6" for="TemplateCHistoryAdd">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
-            </div>
-        </div>
-    </div>-->
-    <!--Show Highlights modal-->
-    <!--<div id="ShowHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>-->
-    <!-- Highlights -->
-    <!--<p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-    <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Highlights Comments -->
-    <!--<p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-    <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Instructions -->
-    <!--<p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-    <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Exceptions -->
-    <!--<p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-    <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Most Common Issues -->
-    <!--<p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-    <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Supplier Agency -->
-    <!--<p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-    <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80"></textarea>-->
-    <!-- Template Comments -->
-    <!--<p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryView" rows="4" cols="80"></textarea>
-
-            <div class="form-row">
-                <select id="form-SelectHighlightsHistoric" size="4">
-                    <option>Select an option</option>
-                </select>
-            </div>
-        </div>
-    </div>-->
-
     <br />
-
-    <!-- Emails Section -->
-    <!--<div class="form-section">
-        <div class="section-title">Emails</div>
-        Back-Up Emails
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-BackUpEmails">Back Up Emails:</label>
-                    <div class="col-md-10">
-                        <textarea class="form-control" id="form-BackUpEmails" rows="6" cols="150" placeholder="Backup email" disabled></textarea>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="ButtonAddEmail" type="button" class="styled-button align-right openModalBtn" data-modal="AddEmailModal" disabled>Add Email</button>
-                </div>
-            </div>
-        </div>-->
-    <!--Select Mails Dropdown -->
-    @*<div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="AddEmailModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="emailinfo">Email:</label></p>
-                <textarea id="emailinfo" class="class=" form-control"" rows="6" cols="100"></textarea>
-                <div>
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC" type="button" id="submitEmail">Save</button>
-                </div>
-            </div>
-        </div>
-        <br />
-    *@
     <!-- Approver Section -->
     <div class="form-section">
         <div class="section-title">Approver</div>
@@ -880,12 +688,9 @@
 @section scripts {
 
 <script src="~/Scripts/TemplateCrud.js"></script>
-    @*
-<script src="~/Scripts/FillDropdowsTemplate.js"></script>*@
 <script src="~/Scripts/templateModal.js"></script>
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
-
-
-
-}
+<script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="~/Scripts/TinyEditorConfig.js"></script>
+    }

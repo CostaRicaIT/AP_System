@@ -9,14 +9,10 @@ openModalBtns.forEach(function (button) {
         var form = document.getElementById('form');
 
         if (modalId == 'ShowSaveModal') {
-            if (checkFormValidity()) {
                 modal.style.display = "block";
-            }
         } else {
             modal.style.display = "block";
         }
-
-
 
         /* Get the cancel button inside the modal */
         var cancelButton = modal.querySelector("#cancelButton");

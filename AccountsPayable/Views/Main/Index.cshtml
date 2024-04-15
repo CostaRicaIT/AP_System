@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AccountsPayable.Models.TB_TEMPLATE>
+@using AccountsPayable.Models
 
 @{
     ViewBag.Title = "AP Templates | Dashboard";
@@ -12,7 +13,6 @@
 <div class="container">
     <p>
         <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
-        @*@Html.ActionLink("Create New", "Create")*@
     </p>
 
     <table id="dataTable" class="table cell-border stripe display" width="100%">
@@ -26,10 +26,14 @@
                 <th>Supplier Number</th>
                 <th>Remit To</th>
                 <th>Supplier Site</th>
+                <th>Histoic Remit to</th>
                 <th>Vendor Account</th>
                 <th>Source</th>
                 <th>Invoice Format</th>
                 <th>Invoice Type</th>
+                <th>Invoice Notes</th>
+                <th>W9/W-8BEN Form</th>
+                <th>VSU Form</th>
                 <th>Payment Method</th>
                 <th>Remit-To Account</th>
                 <th>Pay Terms</th>
@@ -53,34 +57,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        @*<tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Alias</th>
-                    <th>Tax ID</th>
-                    <th>Remit To</th>
-                    <th>Supplier Name</th>
-                    <th>Supplier Number</th>
-                    <th>Vendor Account</th>
-                    <th>Supplier Site</th>
-                    <th>Address</th>
-                    <th>Legal Entity</th>
-                    <th>Tax Payer ID</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Pay Terms</th>
-                    <th>Account coding</th>
-                    <th>Source</th>
-                    <th>Oracle Notes</th>
-                    <th>Oracle Instructions</th>
-                    <th>Approver</th>
-                    <th>Approver Comments</th>
-                    <th>Invoice Format</th>
-                    <th>Invoice Type</th>
-                    <th>Email Backup</th>
-                    <th></th>
-                </tr>
-            </tfoot>*@
+
         <tbody>
             @foreach (var item in Model)
             {
@@ -94,15 +71,19 @@
                     <td>@item.TEMP_SUPPLIER_NUMBER</td>
                     <td>@item.TEMP_REMIT_TO</td>
                     <td>@item.TEMP_SUPPLIER_SITE</td>
+                    <td>@Html.Raw(item.HISTORIC_REMIT)</td>
                     <td>@item.TEMP_VENDOR_ACCOUNT</td>
                     <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
                     <td>@item.TEMP_INVOICE_FORMAT</td>
                     <td>@item.TEMP_INVOICE_TYPE</td>
+                    <td>@Html.Raw(item.TEMP_INVOICE_NOTES)</td>
+                    <td>@Html.Raw(item.TEMP_W9_W8)</td>
+                    <td>@Html.Raw(item.TEMP_VSU)</td>
                     <td>@item.TEMP_PAYMENT_METHOD</td>
                     <td>@item.TEMP_REMIT_TOACCOUNT</td>
                     <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
                     <td>@item.TEMP_INVOICE_DESCRIPTION</td>
-                    <td>@item.TEMP_BILLING_PERIOD</td>
+                    <td>@Html.Raw(item.TEMP_BILLING_PERIOD)</td>
                     <td>@item.TEMP_BILLING_PRERIOD_DATE</td>
                     <td>@item.TEMP_DISTRIBUTION_SET</td>
                     <td>@item.TEMP_DISTRIBUTION_COMBINATION</td>
@@ -110,15 +91,32 @@
                     <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
                     <td>@item.TEMP_TAXPAYER_ID</td>
                     <td>@item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME</td>
-                    <td>@item.TEMP_ORACLE_DESCRIPTION</td>
-                    <td>@item.TEMP_ORACLE_NOTES</td>
-                    <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
+                    <td>@Html.Raw(item.TEMP_ORACLE_DESCRIPTION)</td>
+                    <td>@Html.Raw(item.TEMP_ORACLE_NOTES)</td>
+                    <td>@Html.Raw(item.TEMP_ORACLE_INSTRUCTIONS)</td>
                     <td>@item.CONTACTS_CURRENT</td>
                     <td>@item.CONTACTS_PRIOR</td>
                     <td>@item.TB_APPROVER.APPROVER_NAME</td>
                     <td>@item.TEMP_APPROVER_COMMENTS</td>
                     <td>@item.EMAIL_BACKUP</td>
-                    <td></td>
+                    <td>
+                        <div class="button-container">
+
+
+                            @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                            }
+
+                            else
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
+                                <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
+                            }
+
+                        </div>
+                    </td>
 
                 </tr>
             }
@@ -142,9 +140,7 @@
                 <button id="showColumnsButton" class="btn btn-link">
                     <i class="fa fa-eye"></i> Show Columns
                 </button><br />
-                @*<button id="saveColumnsButton" class="btn btn-link">
-                        <i class="fa fa-save"></i> Save Columns
-                    </button><br />*@
+
                 <button id="resetColumnsButton" class="btn btn-link">
                     <i class="fa fa-undo"></i> Reset Columns
                 </button><br />
@@ -167,10 +163,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                @*<label>
-            <input type="checkbox" class="toggle-column" data-column="0"> ID
-        </label><br>*@
 
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="1"> Alias
@@ -201,15 +193,19 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="8"> Vendor account
+                    <input type="checkbox" class="toggle-column" data-column="8"> Historic Remit to
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="9"> Source
+                    <input type="checkbox" class="toggle-column" data-column="9"> Vendor account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="10"> Invoice Format
+                    <input type="checkbox" class="toggle-column" data-column="10"> Source
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="11"> Invoice Format
                 </label><br>
 
                 <label>
@@ -217,84 +213,97 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="12"> Payment Method
+                    <input type="checkbox" class="toggle-column" data-column="12"> Invoice Notes
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="13"> Remit-To Account
+                    <input type="checkbox" class="toggle-column" data-column="13"> W9/W-8BEN Form
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="14"> Pay Terms
+                    <input type="checkbox" class="toggle-column" data-column="14"> VSU Form
+
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="15"> Invoice Description
+                    <input type="checkbox" class="toggle-column" data-column="15"> Payment Method
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="16"> Billing Period
+                    <input type="checkbox" class="toggle-column" data-column="16"> Remit-To Account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="17"> Dates
+                    <input type="checkbox" class="toggle-column" data-column="17"> Pay Terms
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="18"> Distribution Set
+                    <input type="checkbox" class="toggle-column" data-column="18"> Invoice Description
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="19"> Distribution Combination
+                    <input type="checkbox" class="toggle-column" data-column="19"> Billing Period
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="20"> Accounting Date
+                    <input type="checkbox" class="toggle-column" data-column="20"> Dates
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="21"> Legal Entity
+                    <input type="checkbox" class="toggle-column" data-column="21"> Distribution Set
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="22"> Distribution Combination
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="23"> Accounting Date
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="24"> Legal Entity
                 </label><br>
 
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="22"> Tax Payer ID
+                    <input type="checkbox" class="toggle-column" data-column="25"> Tax Payer ID
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="23"> Type
+                    <input type="checkbox" class="toggle-column" data-column="26"> Type
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="24"> Description
+                    <input type="checkbox" class="toggle-column" data-column="27"> Description
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="25"> Oracle Notes
+                    <input type="checkbox" class="toggle-column" data-column="28"> Oracle Notes
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="26"> Oracle Instructions
+                    <input type="checkbox" class="toggle-column" data-column="29"> Oracle Instructions
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="27"> AR Key Contacts/Current
+                    <input type="checkbox" class="toggle-column" data-column="30"> AR Key Contacts/Current
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="28"> AR Key Contacts/Prior
+                    <input type="checkbox" class="toggle-column" data-column="31"> AR Key Contacts/Prior
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="29"> Approver
+                    <input type="checkbox" class="toggle-column" data-column="31"> Approver
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="30"> Approver Coments
+                    <input type="checkbox" class="toggle-column" data-column="32"> Approver Coments
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="31"> Email backup
+                    <input type="checkbox" class="toggle-column" data-column="33"> Email backup
                 </label><br>
 
             </div>
