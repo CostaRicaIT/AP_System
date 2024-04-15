@@ -15,7 +15,7 @@ namespace AccountsPayable.Controllers
 {
     public class UserController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         // GET: User
         public ActionResult Index()

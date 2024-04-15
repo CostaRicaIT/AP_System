@@ -6,7 +6,7 @@ namespace AccountsPayable.Controllers
 {
     public class HistoricController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
         [HttpGet]
         public ActionResult GetEmailText(int emailId, int id)
         {

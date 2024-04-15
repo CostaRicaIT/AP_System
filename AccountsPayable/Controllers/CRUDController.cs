@@ -12,7 +12,7 @@ namespace AccountsPayable.Controllers
 {
     public class CRUDController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         // Helper method to strip <p> tags
         private string StripHtmlTags(string input)
