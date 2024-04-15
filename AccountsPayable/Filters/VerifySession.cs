@@ -25,7 +25,10 @@ namespace AccountsPayable.Filters
                     filterContext.HttpContext.Response.Redirect("~/Access/LogIn");
                 }
 
-                
+                if (filterContext.Controller is UserController == true)
+                {
+                    filterContext.HttpContext.Response.Redirect("~/Access/LogIn");
+                }
 
             }
             else
@@ -36,6 +39,12 @@ namespace AccountsPayable.Filters
 
                     filterContext.HttpContext.Response.Redirect("~/Main/Index");
                 }
+            }
+
+            // Redirect admin to User administration view
+            if (filterContext.Controller is MainController == true && ouser.FK_TB_LOGIN_ROLES_ID == 1)
+            {
+                filterContext.HttpContext.Response.Redirect("~/User/Index");
             }
             base.OnActionExecuting(filterContext);
         }

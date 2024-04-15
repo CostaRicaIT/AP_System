@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AccountsPayable.Models.TB_TEMPLATE>
+@using AccountsPayable.Models
 
 @{
     ViewBag.Title = "AP Templates | Dashboard";
@@ -12,7 +13,6 @@
 <div class="container">
     <p>
         <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
-        @*@Html.ActionLink("Create New", "Create")*@
     </p>
 
     <table id="dataTable" class="table cell-border stripe display" width="100%">
@@ -57,7 +57,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-   
+
         <tbody>
             @foreach (var item in Model)
             {
@@ -99,7 +99,24 @@
                     <td>@item.TB_APPROVER.APPROVER_NAME</td>
                     <td>@item.TEMP_APPROVER_COMMENTS</td>
                     <td>@item.EMAIL_BACKUP</td>
-                    <td></td>
+                    <td>
+                        <div class="button-container">
+
+
+                            @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                            }
+
+                            else
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
+                                <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
+                            }
+
+                        </div>
+                    </td>
 
                 </tr>
             }
@@ -123,9 +140,7 @@
                 <button id="showColumnsButton" class="btn btn-link">
                     <i class="fa fa-eye"></i> Show Columns
                 </button><br />
-                @*<button id="saveColumnsButton" class="btn btn-link">
-                        <i class="fa fa-save"></i> Save Columns
-                    </button><br />*@
+
                 <button id="resetColumnsButton" class="btn btn-link">
                     <i class="fa fa-undo"></i> Reset Columns
                 </button><br />
@@ -148,10 +163,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                @*<label>
-            <input type="checkbox" class="toggle-column" data-column="0"> ID
-        </label><br>*@
 
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="1"> Alias
@@ -200,15 +211,15 @@
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="11"> Invoice Type
                 </label><br>
-                
+
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="12"> Invoice Notes
                 </label><br>
-                
+
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="13"> W9/W-8BEN Form
                 </label><br>
-                
+
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="14"> VSU Form
 

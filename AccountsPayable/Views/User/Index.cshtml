@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Accounts Administration";
+}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/table.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/staterestore/1.3.0/css/stateRestore.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<h2>Accounts Administration</h2>
+<button class="btn-create btn-primary">Add new</button>
+<br />
+<br />
+
+<div id="form-container" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="form-crud">
+                    <input type="hidden" id="hidden-Login-id" value="">
+                    <div class="form-group">
+                        <label for="form-name">Name</label>
+                        <input type="text" class="form-control" id="form-name" placeholder="Enter full name">
+                        <label id="error-model" class="error-message"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-username">Username</label>
+                        <input type="text" class="form-control" id="form-username" placeholder="Enter username" autocomplete="new-password">
+                        <label id="error-desc" class="error-message"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-password">Password</label>
+                        <input type="password" class="form-control" id="form-password" placeholder="Enter password" autocomplete="new-password">
+                        <label id="error-available" class="error-message"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-role">User Role</label>
+                        <select class="form-control" id="form-role">
+                            @foreach (var item in ViewBag.Roles)
+                            {
+                                <option value="@item.LOGIN_ROLE_ID">@item.LOGIN_ROLE_NAME</option>
+                            }
+                        </select>
+                    </div>
+                    <button class="btn form_btntbWC btn-update" id="form-update" style="display:none;">Update</button>
+                    <button class="btn form_btntbWC btn-submit" id="form-submit">Save</button>
+                    <button class="btn form_btntbWC" id="form-cancel">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="dataTable" class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.LOG_IN_ID">
+                <td>@item.LOG_IN_FULL_NAME</td>
+                <td>@item.LOG_IN_USER_NAME</td>
+                <td>@item.TB_LOGIN_ROLES.LOGIN_ROLE_NAME</td>
+                <td>
+                    <button class="btn-edit dt-button filterButton" data-log-id="@item.LOG_IN_ID">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-delete dt-button filterButton" data-log-id="@item.LOG_IN_ID">
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/UserAdministrationCRUD.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/UserDashboard.js"></script>
+}
