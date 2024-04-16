@@ -17,7 +17,7 @@ using System.Web.UI;
 namespace AccountsPayable.Tests.Controllers
 {
     [TestFixture]
-    public class MainControllerTests
+    public class CRUDControllerTests
     {
         [Test]
         public void Create_ValidModelState_Success()
@@ -25,7 +25,7 @@ namespace AccountsPayable.Tests.Controllers
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -150,7 +150,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -271,7 +271,7 @@ namespace AccountsPayable.Tests.Controllers
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -416,7 +416,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -555,7 +555,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -593,7 +593,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -629,7 +629,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -666,7 +666,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -703,7 +703,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
                 // Get the private or internal 'db' property
                 var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -743,7 +743,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
                 // Get the private or internal 'db' property
                 var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
