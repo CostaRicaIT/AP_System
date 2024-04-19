@@ -15,7 +15,7 @@ namespace AccountsPayable.Controllers
         private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         // Helper method to strip <p> tags
-        private string StripHtmlTags(string input)
+        public string StripHtmlTags(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {

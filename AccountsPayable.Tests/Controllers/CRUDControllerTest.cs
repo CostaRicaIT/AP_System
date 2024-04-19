@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -17,9 +18,11 @@ using System.Web.UI;
 
 namespace AccountsPayable.Tests.Controllers
 {
+
     [TestFixture]
     public class CRUDControllerTests
     {
+
         [Test]
         public void Create_ValidModelState_Success()
         {
@@ -764,5 +767,50 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.AreEqual(templateData.TEMP_ISDISABLED, 1);
             }
         }
+
+        [Test]
+        public void StripHtmlTags_Returns_Null_For_Null_Inputs()
+        {
+            // Arrange
+            var controller = new CRUDController();
+            string input = null;
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void StripHtmlTags_Removes_P_Tags()
+        {
+            // Arrange
+            var controller = new CRUDController();
+            string input = "<p>This is a <p>test</p>.</p>";
+            string expectedOutput = "This is a test.";
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.AreEqual(expectedOutput, result);
+        }
+
+        [Test]
+        public void StripHtmlTags_Uses_Regex_To_Remove_P_Tags()
+        {
+            // Arrange
+            var controller = new CRUDController(); // No need to mock anything for the controller
+            string input = "<p>This is a <p>test</p>.</p>";
+            string expectedResult = "This is a test.";
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result); // Assert the result based on your expectation
+        }
+
     }
 }
