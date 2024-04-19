@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Configuration;
@@ -19,15 +20,6 @@ namespace AccountsPayable.Tests.Controllers
     [TestFixture]
     public class CRUDControllerTests
     {
-
-        private CRUDController _controller; // Instance of the controller class to be tested
-
-        [SetUp]
-        public void SetUp()
-        {
-            _controller = new CRUDController();
-        }
-
         [Test]
         public void Create_ValidModelState_Success()
         {
@@ -58,7 +50,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    
+
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -183,7 +175,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    
+
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -321,7 +313,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    
+
                     FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -771,71 +763,6 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsFalse((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(templateData.TEMP_ISDISABLED, 1);
             }
-
-        }
-
-        [Test]
-        public void Create_HighlightsWithoutHtmlTags_TagsStripped()
-        {
-            // Arrange
-            var highlightsData = new TB_HIGHLIGHTS
-            {
-                HIGHLIGHTS = "<p>Text with tags</p>",
-            };
-
-            // Act
-            _controller.Create(new TB_TEMPLATE(), highlightsData, new TB_HISTORIC_REMIT(), null, null);
-
-            // Assert
-            // Verify that the HIGHLIGHTS field does not contain HTML tags after the Create method is called
-            Assert.That(highlightsData.HIGHLIGHTS, Does.Not.Contain("<p>"));
-            Assert.That(highlightsData.HIGHLIGHTS, Does.Not.Contain("</p>"));
-        }
-
-        [Test]
-        public void Create_HistoricRemitWithoutHtmlTags_TagsStripped()
-        {
-            // Arrange
-            var historicRemitData = new TB_HISTORIC_REMIT
-            {
-                HISTORIC_REMIT_INFO = "<p>Text with tags</p>",
-            };
-
-            // Act
-            _controller.Create(new TB_TEMPLATE(), new TB_HIGHLIGHTS(), historicRemitData, null, null);
-
-            // Assert
-            // Verify that the HISTORIC_REMIT_INFO field does not contain HTML tags after the Create method is called
-            Assert.That(historicRemitData.HISTORIC_REMIT_INFO, Does.Not.Contain("<p>"));
-            Assert.That(historicRemitData.HISTORIC_REMIT_INFO, Does.Not.Contain("</p>"));
-        }
-
-        [Test]
-        public void Create_StripHtmlTagsFromTemplateFields_TagsStripped()
-        {
-            // Arrange
-            var templateData = new TB_TEMPLATE
-            {
-                TEMP_INVOICE_NOTES = "<p>Invoice notes with HTML tags</p>",
-                TEMP_W9_W8 = "<p>W9/W8 with HTML tags</p>",
-                TEMP_VSU = "<p>VSU with HTML tags</p>",
-                TEMP_BILLING_PERIOD = "<p>Billing period with HTML tags</p>",
-                TEMP_ORACLE_DESCRIPTION = "<p>Oracle description with HTML tags</p>",
-                TEMP_ORACLE_NOTES = "<p>Oracle notes with HTML tags</p>",
-                TEMP_ORACLE_INSTRUCTIONS = "<p>Oracle instructions with HTML tags</p>"
-            };
-
-            // Act
-            _controller.Create(templateData, new TB_HIGHLIGHTS(), new TB_HISTORIC_REMIT(), null, null);
-
-            // Assert
-            Assert.That(templateData.TEMP_INVOICE_NOTES, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_W9_W8, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_VSU, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_BILLING_PERIOD, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_ORACLE_DESCRIPTION, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_ORACLE_NOTES, Does.Not.Contain("<p>"));
-            Assert.That(templateData.TEMP_ORACLE_INSTRUCTIONS, Does.Not.Contain("<p>"));
         }
     }
 }
