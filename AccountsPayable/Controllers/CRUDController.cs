@@ -15,7 +15,7 @@ namespace AccountsPayable.Controllers
         private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
 
         // Helper method to strip <p> tags
-        private string StripHtmlTags(string input)
+        public string StripHtmlTags(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
