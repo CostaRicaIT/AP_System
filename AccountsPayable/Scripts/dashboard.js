@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1,3,4,5,6,24,36]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 3, 4, 5, 6, 24, 36]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({
@@ -10,7 +10,11 @@ function initializeDataTable() {
         scrollY: '60vh',
         scrollX: '80vh',
         dom: '<"top"lBf>rt<"bottom"ip>', // set the order of table items to be drawn
-        order: [[0, 'desc']], // Set the default sort to ID by descending
+        order: [
+            [3, 'asc'], //Sort Tax ID by acsending order
+            [0, 'desc'], //Sort ID by descending order
+            
+        ], // Set the default sort to ID by descending
         buttons: [ // Add filter button
             {
                 text: '<i class="fas fa-filter"></i>',
@@ -25,21 +29,13 @@ function initializeDataTable() {
                 targets: '_all', //Hide all columns to show only default columns later
                 visible: false
             },
-            //{
-            //    targets: 36, //Add View, edit and delete buttons to last column of table
-            //    render: function (data, type, full, meta) {
-            //        var rowId = full[0];
-            //        return '<button class="dt-button filterButton view-button" data-id="' + rowId + '"><i class="fa-solid fa-eye"></i></button>' +
-            //            '<button class="dt-button filterButton edit-button" data-id="' + rowId + '"><i class="fas fa-edit"></i></button>' +
-            //            '<button class="dt-button filterButton erase-button" data-id="' + rowId + '"><i class="fa-solid fa-eraser"></i></button>';
-            //    }
-            //}
+
         ],
         language: {
-            search:"", //Search bar label
+            search: "", //Search bar label
             searchPlaceholder: "Search... " // Search place holder
         },
-       
+
     });
     table.columns(defaultColumns).visible(true); //Show the default columns set on defaultColumns variable
     $('a.toggle-vis').on('click', function (e) {// Function to show columns of table
