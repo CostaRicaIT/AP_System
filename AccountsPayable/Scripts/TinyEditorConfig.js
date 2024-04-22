@@ -5,7 +5,7 @@
     readonly: true,
     statusbar: false,
     menubar: false,
-    toolbar: "undo redo |forecolor |backcolor ",
+    toolbar: false,
     
 });
 tinymce.init({
