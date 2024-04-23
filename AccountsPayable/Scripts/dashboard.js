@@ -3,6 +3,7 @@ var defaultColumns = [1, 3, 4, 5, 6, 24, 36]; //Alias,Remit to,Supplier Name,Sup
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({
+        pageLength: 25,
         orderCellsTop: true, //Show table sorting at top
         autoWidth: true, //Set the widht of collumn depending on content
         responsive: true, //Set the table to be responsive
