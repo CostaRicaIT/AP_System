@@ -69,7 +69,7 @@ select.form-control:disabled {
 #scrollToTop {
     display: none;
     position: fixed;
-    bottom: 20px;
+    bottom: 70px;
     right: 20px;
     background-color: #3B1E08;
     color: #fff;
