@@ -21,3 +21,33 @@ tfoot input {
 .dataTables_filter input {
     width: 300px;
 }
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hidden {
+    display: none;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+
+.scrollable-content {
+    max-height: 100px; /* Set the maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Thin scrollbar for WebKit-based browsers (like Chrome, Safari) */
+.scrollable-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Thin scrollbar for Firefox */
+.scrollable-content {
+    scrollbar-width: thin;
+}
