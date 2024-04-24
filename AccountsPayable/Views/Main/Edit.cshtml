@@ -118,7 +118,7 @@
                         <div class="control-label col-md-12">
                             <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
                             <div class="col-md-10">
-                                <textarea class="form-control TinyEditorReadOnly" id="historicRemitInfoView"  rows="6" cols="75"></textarea>
+                                <textarea class="form-control TinyEditorReadOnly" id="historicRemitInfoView" rows="6" cols="75"></textarea>
                                 <br />
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                         @Html.TextAreaFor(model => model.TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                     </div>
                 </div>
-        <!-- Dates -->
+                <!-- Dates -->
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
                     <div class="col-md-10">
@@ -523,7 +523,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-10">
-                        
+
                         <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
                     </div>
                 </div>
@@ -815,6 +815,9 @@
     <button class="btn form_btntbWC btn-cancel" type="button" id="form-cancel">Cancel</button>
     <button class="btn form_btntbWC" type="button" id="btn-update">Save</button>
     <a href="javascript:void(0);" id="scrollToTop" onclick="scrollToTop()">Scroll Back to Top</a>
+    <hr />
+    <hr />
+    <hr style="display: none;" />
 </form>
 
 @section scripts {

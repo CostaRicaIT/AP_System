@@ -6835,11 +6835,12 @@ button.close {
 /*# sourceMappingURL=bootstrap.css.map */
 .footer_c {
     position: fixed;
+    z-index: 100;
     bottom: 0;
     width: 100%;
     color: #EAF2F8;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     height: 53px;
     background-color: #3B1E08;
 }
