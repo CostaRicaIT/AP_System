@@ -6834,6 +6834,7 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 .footer_c {
+    position: fixed;
     bottom: 0;
     width: 100%;
     color: #EAF2F8;
