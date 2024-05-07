@@ -11,7 +11,8 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class TB_HIGHLIGHTS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +24,19 @@ namespace AccountsPayable.Models
         public int HIGHLIGHTS_ID { get; set; }
         public Nullable<int> FK_TB_TEMPLATE_ID { get; set; }
         public System.DateTime HIGHLIGHTS_DATE { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_COMMENTS { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_INSTRUCTIONS { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_EXCEPTIONS { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_COMMON_ISSUES { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_SUPPLIER_AGENCY { get; set; }
+        [AllowHtml]
         public string HIGHLIGHTS_TEMPLATE_COMMENTS { get; set; }
     
         public virtual TB_TEMPLATE TB_TEMPLATE { get; set; }

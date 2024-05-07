@@ -1,9 +1,14 @@
-﻿<ul class="navbar-right" style="color: #ffff;">
-    @Session["CurrentUserName"]
+﻿<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="@Url.Action("EndSession", "SignOut")">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </li>
 </ul>
 
-<ul class="nav navbar-nav navbar-right">
-    <li>
-        @Html.ActionLink("Log Out", "EndSession", "SignOut")
+<ul class="navbar-right" style="color: #ffff;" id="user">
+    <li style="list-style: none;">
+        <i class="fa-solid fa-user" title="@Session["CurrentUserName"]"></i>
+        <span class="text">@Session["CurrentUserName"]</span>
     </li>
 </ul>

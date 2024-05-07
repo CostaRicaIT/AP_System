@@ -11,7 +11,8 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class TB_TEMPLATE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,15 +33,17 @@ namespace AccountsPayable.Models
         public string TEMP_VENDOR_ACCOUNT { get; set; }
         public Nullable<int> FK_TB_TEMPLATE_ALIAS_ID { get; set; }
         public string TEMP_SUPPLIER_SITE { get; set; }
-        public string TEMP_ADDRESS { get; set; }
         public Nullable<int> FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string TEMP_TAXPAYER_ID { get; set; }
         public Nullable<int> FK_TB_ORACLE_TYPE_ID { get; set; }
+        [AllowHtml]
         public string TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
         public string TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> FK_TB_ORACLE_SOURCE_ID { get; set; }
+        [AllowHtml]
         public string TEMP_ORACLE_NOTES { get; set; }
+        [AllowHtml]
         public string TEMP_ORACLE_INSTRUCTIONS { get; set; }
         public Nullable<int> FK_TB_HIGHLIGHTS_ID { get; set; }
         public Nullable<int> FK_TB_EMAIL_BACKUP_ID { get; set; }
@@ -52,13 +55,20 @@ namespace AccountsPayable.Models
         public string TEMP_FOLDER { get; set; }
         public string TEMP_PAYMENT_METHOD { get; set; }
         public string TEMP_REMIT_TOACCOUNT { get; set; }
+        [AllowHtml]
         public string TEMP_BILLING_PERIOD { get; set; }
         public string TEMP_DISTRIBUTION_COMBINATION { get; set; }
         public string TEMP_ACCOUNTING_DATE { get; set; }
+        [AllowHtml]
         public string TEMP_VSU { get; set; }
+        [AllowHtml]
         public string TEMP_W9_W8 { get; set; }
+        [AllowHtml]
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
+        public string TEMP_BILLING_PRERIOD_DATE { get; set; }
+        public string CONTACTS_CURRENT { get; set; }
+        public string CONTACTS_PRIOR { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,5 +87,6 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
         public string ALIAS_NAME { get; internal set; }
         public string EMAIL_BACKUP { get; internal set; }
+        public object HISTORIC_REMIT { get; internal set; }
     }
 }

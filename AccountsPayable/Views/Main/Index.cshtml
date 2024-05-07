@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AccountsPayable.Models.TB_TEMPLATE>
+@using AccountsPayable.Models
 
 @{
     ViewBag.Title = "AP Templates | Dashboard";
@@ -10,9 +11,11 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/staterestore/1.3.0/css/stateRestore.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="container">
-    <p>
-        <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
-        @*@Html.ActionLink("Create New", "Create")*@
+    <p>        
+        @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 2)
+        {
+            <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
+        }
     </p>
 
     <table id="dataTable" class="table cell-border stripe display" width="100%">
@@ -23,62 +26,41 @@
                 <th>Folder</th>
                 <th>Tax ID</th>
                 <th>Supplier Name</th>
+                <th>Supplier Number</th>
                 <th>Remit To</th>
-                <th>Source</th>
+                <th>Supplier Site</th>
+                <th>Histoic Remit to</th>
                 <th>Vendor Account</th>
+                <th>Source</th>
                 <th>Invoice Format</th>
                 <th>Invoice Type</th>
-                <th>Supplier Number</th>
-                <th>Supplier Site</th>
+                <th>Invoice Notes</th>
+                <th>W9/W-8BEN Form</th>
+                <th>VSU Form</th>
                 <th>Payment Method</th>
                 <th>Remit-To Account</th>
                 <th>Pay Terms</th>
                 <th>Invoice Description</th>
                 <th>Billing Period</th>
+                <th>Dates</th>
                 <th>Distribution Set</th>
                 <th>Distribution Combination</th>
                 <th>Accounting Date</th>
-                <th>Address</th>
                 <th>Legal Entity</th>
                 <th>Tax Payer ID</th>
                 <th>Type</th>
                 <th>Description</th>
                 <th>Oracle Notes</th>
                 <th>Oracle Instructions</th>
+                <th>AR Key Contacts/Currents</th>
+                <th>AR Key Contacts/Prior</th>
                 <th>Approver</th>
                 <th>Approver Comments</th>
                 <th>Email Backup</th>
                 <th>Action</th>
             </tr>
         </thead>
-        @*<tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Alias</th>
-                    <th>Tax ID</th>
-                    <th>Remit To</th>
-                    <th>Supplier Name</th>
-                    <th>Supplier Number</th>
-                    <th>Vendor Account</th>
-                    <th>Supplier Site</th>
-                    <th>Address</th>
-                    <th>Legal Entity</th>
-                    <th>Tax Payer ID</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Pay Terms</th>
-                    <th>Account coding</th>
-                    <th>Source</th>
-                    <th>Oracle Notes</th>
-                    <th>Oracle Instructions</th>
-                    <th>Approver</th>
-                    <th>Approver Comments</th>
-                    <th>Invoice Format</th>
-                    <th>Invoice Type</th>
-                    <th>Email Backup</th>
-                    <th></th>
-                </tr>
-            </tfoot>*@
+
         <tbody>
             @foreach (var item in Model)
             {
@@ -86,35 +68,186 @@
 
                     <td>@item.TEMP_ID</td>
                     <td class="alias">@item.ALIAS_NAME</td>
-                    <td>@item.TEMP_FOLDER</td>
-                    <td>@item.TEMP_TAX_ID</td>
-                    <td>@item.TEMP_SUPPLIER_NAME</td>
-                    <td>@item.TEMP_REMIT_TO</td>
-                    <td>@item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION</td>
-                    <td>@item.TEMP_VENDOR_ACCOUNT</td>
-                    <td>@item.TEMP_INVOICE_FORMAT</td>
-                    <td>@item.TEMP_INVOICE_TYPE</td>
-                    <td>@item.TEMP_SUPPLIER_NUMBER</td>
-                    <td>@item.TEMP_SUPPLIER_SITE</td>
-                    <td>@item.TEMP_PAYMENT_METHOD</td>
-                    <td>@item.TEMP_REMIT_TOACCOUNT</td>
-                    <td>@item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION</td>
-                    <td>@item.TEMP_INVOICE_DESCRIPTION</td>
-                    <td>@item.TEMP_BILLING_PERIOD</td>
-                    <td>@item.TEMP_DISTRIBUTION_SET</td>
-                    <td>@item.TEMP_DISTRIBUTION_COMBINATION</td>
-                    <td>@item.TEMP_ACCOUNTING_DATE</td>
-                    <td>@item.TEMP_ADDRESS</td>
-                    <td>@item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME</td>
-                    <td>@item.TEMP_TAXPAYER_ID</td>
-                    <td>@item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME</td>
-                    <td>@item.TEMP_ORACLE_DESCRIPTION</td>
-                    <td>@item.TEMP_ORACLE_NOTES</td>
-                    <td>@item.TEMP_ORACLE_INSTRUCTIONS</td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_FOLDER
+                        </div>
+                    </td>
+                    <td class="tax">@item.TEMP_TAX_ID</td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_SUPPLIER_NAME
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_SUPPLIER_NUMBER
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_REMIT_TO
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_SUPPLIER_SITE
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.HISTORIC_REMIT)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_VENDOR_ACCOUNT
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_INVOICE_FORMAT
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_INVOICE_TYPE
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_INVOICE_NOTES)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_W9_W8)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_VSU)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_PAYMENT_METHOD
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_REMIT_TOACCOUNT
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_INVOICE_DESCRIPTION
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_BILLING_PERIOD)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_BILLING_PRERIOD_DATE
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_DISTRIBUTION_SET
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_DISTRIBUTION_COMBINATION
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_ACCOUNTING_DATE
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_TAXPAYER_ID
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_ORACLE_DESCRIPTION)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_ORACLE_NOTES)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @Html.Raw(item.TEMP_ORACLE_INSTRUCTIONS)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.CONTACTS_CURRENT
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.CONTACTS_PRIOR
+                        </div>
+                    </td>
                     <td>@item.TB_APPROVER.APPROVER_NAME</td>
-                    <td>@item.TEMP_APPROVER_COMMENTS</td>
-                    <td>@item.EMAIL_BACKUP</td>
-                    <td></td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.TEMP_APPROVER_COMMENTS
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @item.EMAIL_BACKUP
+                        </div>
+                    </td>
+                    <td>
+                        <div class="button-container">
+
+
+                            @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                            }
+
+                            else
+                            {
+                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
+                                <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
+                            }
+
+                        </div>
+                    </td>
 
                 </tr>
             }
@@ -138,9 +271,7 @@
                 <button id="showColumnsButton" class="btn btn-link">
                     <i class="fa fa-eye"></i> Show Columns
                 </button><br />
-                @*<button id="saveColumnsButton" class="btn btn-link">
-                        <i class="fa fa-save"></i> Save Columns
-                    </button><br />*@
+
                 <button id="resetColumnsButton" class="btn btn-link">
                     <i class="fa fa-undo"></i> Reset Columns
                 </button><br />
@@ -164,10 +295,6 @@
             </div>
             <div class="modal-body">
 
-                @*<label>
-            <input type="checkbox" class="toggle-column" data-column="0"> ID
-        </label><br>*@
-
                 <label>
                     <input type="checkbox" class="toggle-column" data-column="1"> Alias
                 </label><br>
@@ -185,104 +312,129 @@
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="5"> Remit To
+                    <input type="checkbox" class="toggle-column" data-column="5"> Supplier Number
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="6"> Source
+                    <input type="checkbox" class="toggle-column" data-column="6"> Remit To
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="7"> Vendor account
+                    <input type="checkbox" class="toggle-column" data-column="7"> Supplier Site
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="8"> Invoice Format
+                    <input type="checkbox" class="toggle-column" data-column="8"> Historic Remit to
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="9"> Invoice Type
+                    <input type="checkbox" class="toggle-column" data-column="9"> Vendor account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="10"> Supplier Number
+                    <input type="checkbox" class="toggle-column" data-column="10"> Source
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="11"> Supplier Site
+                    <input type="checkbox" class="toggle-column" data-column="11"> Invoice Format
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="12"> Payment Method
+                    <input type="checkbox" class="toggle-column" data-column="12"> Invoice Type
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="13"> Remit-To Account
+                    <input type="checkbox" class="toggle-column" data-column="13"> Invoice Notes
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="14"> Pay Terms
+                    <input type="checkbox" class="toggle-column" data-column="14"> W9/W-8BEN Form
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="15"> Invoice Description
+                    <input type="checkbox" class="toggle-column" data-column="15"> VSU Form
+
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="16"> Billing Period
+                    <input type="checkbox" class="toggle-column" data-column="16"> Payment Method
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="17"> Distribution Set
+                    <input type="checkbox" class="toggle-column" data-column="17"> Remit-To Account
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="18"> Distribution Combination
+                    <input type="checkbox" class="toggle-column" data-column="18"> Pay Terms
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="19"> Accounting Date
+                    <input type="checkbox" class="toggle-column" data-column="19"> Invoice Description
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="20"> Address
+                    <input type="checkbox" class="toggle-column" data-column="20"> Billing Period
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="21"> Legal Entity
+                    <input type="checkbox" class="toggle-column" data-column="21"> Dates
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="22"> Distribution Set
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="23"> Distribution Combination
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="24"> Accounting Date
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="25"> Legal Entity
                 </label><br>
 
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="22"> Tax Payer ID
+                    <input type="checkbox" class="toggle-column" data-column="26"> Tax Payer ID
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="23"> Type
+                    <input type="checkbox" class="toggle-column" data-column="27"> Type
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="24"> Description
+                    <input type="checkbox" class="toggle-column" data-column="28"> Description
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="25"> Oracle Notes
+                    <input type="checkbox" class="toggle-column" data-column="29"> Oracle Notes
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="26"> Oracle Instructions
+                    <input type="checkbox" class="toggle-column" data-column="30"> Oracle Instructions
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="27"> Approver
+                    <input type="checkbox" class="toggle-column" data-column="31"> AR Key Contacts/Current
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="28"> Approver Coments
+                    <input type="checkbox" class="toggle-column" data-column="32"> AR Key Contacts/Prior
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="29"> Email backup
+                    <input type="checkbox" class="toggle-column" data-column="33"> Approver
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="34"> Approver Coments
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="35"> Email backup
                 </label><br>
 
             </div>

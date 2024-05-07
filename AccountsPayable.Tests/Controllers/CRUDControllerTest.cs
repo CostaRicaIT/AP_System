@@ -8,6 +8,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Configuration;
@@ -16,16 +18,18 @@ using System.Web.UI;
 
 namespace AccountsPayable.Tests.Controllers
 {
+
     [TestFixture]
-    public class MainControllerTests
+    public class CRUDControllerTests
     {
+
         [Test]
         public void Create_ValidModelState_Success()
         {
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -49,7 +53,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -72,7 +76,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -148,7 +154,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -172,7 +178,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+
                     FK_TB_LEGAL_ENTITY_ID = 4,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -195,7 +201,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -258,16 +266,13 @@ namespace AccountsPayable.Tests.Controllers
             }
         }
 
-
-
-
         [Test]
         public void Create_ValidModelState_newLegalEntity_new_Approver_Success()
         {
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -311,7 +316,7 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
+
                     FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -334,7 +339,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -410,7 +417,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -453,7 +460,6 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VENDOR_ACCOUNT = "NA",
                     TEMP_SUPPLIER_NUMBER = "2334",
                     TEMP_SUPPLIER_SITE = "MAIN",
-                    TEMP_ADDRESS = "PO BOX 34343. CALIFORNIA, CA",
                     FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
                     TEMP_TAXPAYER_ID = "27-43635",
                     FK_TB_ORACLE_TYPE_ID = 1,
@@ -476,7 +482,9 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_VSU = "VSU info",
                     TEMP_W9_W8 = "W9 Info",
                     TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X"
+                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                    CONTACTS_CURRENT = "Current contact",
+                    CONTACTS_PRIOR = "Prior Contact"
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -539,16 +547,13 @@ namespace AccountsPayable.Tests.Controllers
             }
         }
 
-
-
-
         [Test]
         public void Create_NewLegalEntity_Success()
         {
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -578,15 +583,13 @@ namespace AccountsPayable.Tests.Controllers
             }
         }
 
-
-
         [Test]
         public void Create_NewLegalEntity_Failture()
         {
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -622,7 +625,7 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -652,14 +655,13 @@ namespace AccountsPayable.Tests.Controllers
             }
         }
 
-
         [Test]
         public void Create_NewApprover_Failture()
         {
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
 
                 // Get the private or internal 'db' property
@@ -674,7 +676,7 @@ namespace AccountsPayable.Tests.Controllers
                 }
 
                 // Create necessary entities and data for the Edit method
-                var newApprover = "Qminvoices@ayahealthcare.com (Several QMInvoices´ Representatives)"; // Legal entity that already exists on DB
+                var newApprover = "APPROVER"; // Legal entity that already exists on DB
 
                 // Act
                 var result = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
@@ -689,14 +691,13 @@ namespace AccountsPayable.Tests.Controllers
             }
         }
 
-
         [Test]
         public void Delete_TemplateNotDisabled_Success()
         {
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
                 // Get the private or internal 'db' property
                 var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -729,14 +730,13 @@ namespace AccountsPayable.Tests.Controllers
 
         }
 
-
         [Test]
         public void Delete_TemplateAlreadyDisabled_Failture()
         {
             // Arrange
             using (var scope = new TransactionScope())
             {
-                var controllerType = typeof(MainController);
+                var controllerType = typeof(CRUDController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
                 // Get the private or internal 'db' property
                 var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -766,9 +766,51 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsFalse((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(templateData.TEMP_ISDISABLED, 1);
             }
+        }
 
+        [Test]
+        public void StripHtmlTags_Returns_Null_For_Null_Inputs()
+        {
+            // Arrange
+            var controller = new CRUDController();
+            string input = null;
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void StripHtmlTags_Removes_P_Tags()
+        {
+            // Arrange
+            var controller = new CRUDController();
+            string input = "<p>This is a <p>test</p>.</p>";
+            string expectedOutput = "This is a test.";
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.AreEqual(expectedOutput, result);
+        }
+
+        [Test]
+        public void StripHtmlTags_Uses_Regex_To_Remove_P_Tags()
+        {
+            // Arrange
+            var controller = new CRUDController(); // No need to mock anything for the controller
+            string input = "<p>This is a <p>test</p>.</p>";
+            string expectedResult = "This is a test.";
+
+            // Act
+            var result = controller.StripHtmlTags(input);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result); // Assert the result based on your expectation
         }
 
     }
-
 }

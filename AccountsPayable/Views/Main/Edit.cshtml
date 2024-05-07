@@ -38,11 +38,6 @@
                         @Html.ValidationMessageFor(model => model.TEMP_TAX_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="control-label col-md-6" for="BoxNoTaxId">No Tax Id information</label>
-                    <input type="checkbox" id="BoxNoTaxId" name="NoTaxId" />
-                </div>
-
             </div>
         </div>
 
@@ -56,9 +51,18 @@
                         @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NAME, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Supplier Number -->
+        <div class="form-group">
+            <div class="row">
                 <div class="col-md-6">
-                    <label for="BoxSupName" class="control-label col-md-6">There is no Supplier Name</label>
-                    <input type="checkbox" id="BoxSupName" value="1">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,9 +77,18 @@
                         @Html.ValidationMessageFor(model => model.TEMP_REMIT_TO, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Supplier Site -->
+        <div class="form-group">
+            <div class="row">
                 <div class="col-md-6">
-                    <label for="BoxNoRemitInfo" class="control-label col-md-6">There is no Remit information</label>
-                    <input type="checkbox" id="BoxNoRemitInfo" value="1">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,7 +99,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO">Historic Remit To:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, "", new { @class = "text-danger" })
                         <br />
                     </div>
@@ -105,7 +118,7 @@
                         <div class="control-label col-md-12">
                             <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
                             <div class="col-md-10">
-                                <textarea class="form-control" id="historicRemitInfoView" readonly rows="6" cols="75" placeholder="..."></textarea>
+                                <textarea class="form-control TinyEditorReadOnly" id="historicRemitInfoView" rows="6" cols="75"></textarea>
                                 <br />
                             </div>
                         </div>
@@ -159,7 +172,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
+                        <input type="text" class="form-control" id="form-AddAlias">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -179,21 +192,6 @@
             <!--Select Alias Dropdown-->
         </div>
     </div>
-    <!--Add Alias modal-->
-    @*<div id="AddAliasModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="form-AddAlias">Alias:</label></p>
-                <div>
-                    <input style="margin-left: 1px" class="form-control" type="text" id="form-AddAlias" />
-                </div>
-                <div>
-                    <br />
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                    <button class="btn form_btntbWC btn-submitAlias" type="button" id="btn-submitAlias">Save</button>
-                </div>
-            </div>
-        </div>*@
     <br />
 
     <!-- Invoice Number Format Section -->
@@ -230,7 +228,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_INVOICE_NOTES" id="label-InvoiceNotes">Invoice Notes:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_NOTES, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_INVOICE_NOTES, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -247,7 +245,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_W9_W8, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.TextAreaFor(model => model.TEMP_W9_W8, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -259,7 +257,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_VSU, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.TextAreaFor(model => model.TEMP_VSU, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -270,30 +268,6 @@
     <!-- Oracle and Apps Section -->
     <div class="form-section">
         <div class="section-title">Oracle and Apps</div>
-        <!-- Supplier Number -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Supplier Site -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Payment Method -->
         <div class="form-group">
@@ -301,7 +275,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -313,7 +287,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -338,19 +312,26 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Billing Period -->
+        <!-- Billing Period and Dates -->
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_BILLING_PERIOD, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.TextAreaFor(model => model.TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
+                    </div>
+                </div>
+                <!-- Dates -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @id = "form-Dates" } })
                     </div>
                 </div>
             </div>
@@ -362,7 +343,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -374,7 +355,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
@@ -386,24 +367,12 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Address -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ADDRESS">Address:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ADDRESS, new { @class = "form-control", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_ADDRESS, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Legal Entity -->
         <div class="form-group">
             <div class="row">
@@ -481,7 +450,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_DESCRIPTION">Description:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_DESCRIPTION, new { @class = "form-control", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_DESCRIPTION, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_DESCRIPTION, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -493,23 +462,50 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_NOTES, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <!-- Oracle Instructions -->
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 checkbox-label" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
                         @Html.ValidationMessageFor(model => model.TEMP_ORACLE_INSTRUCTIONS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br />
+
+    <!-- Contacts -->
+    <div class="form-section">
+        <div class="section-title">Contacts</div>
+        <div class="form-group">
+            <div class="row">
+
+                <!-- AR Key Contacts/Currents -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Currents" })
+                    </div>
+                </div>
+
+                <!-- AR Key Contacts/Prior -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Prior" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br />
 
     <!-- Notes & Instructions Section -->
@@ -521,13 +517,13 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS">Highlights</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-10">
-                        @*<button id="ButtonAddHistory" type="button" class="styled-button align-right openModalBtn" data-modal="AddAHighlights" >Add History</button>*@
+
                         <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
                     </div>
                 </div>
@@ -539,7 +535,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS">Highlights Comments:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -551,7 +547,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS">Instructions:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -563,7 +559,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS">Exceptions:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -575,7 +571,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -587,7 +583,7 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY">Supplier Agency:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -599,78 +595,98 @@
                 <div class="col-md-8">
                     <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS">Template Comments:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, new { @class = "form-control", @rows = 8, @cols = 150 })
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
                         @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Add Highlights modal-->
-    <!--<div id="AddAHighlights" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>-->
-    <!-- Highlights -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsHistoryAdd">Highlights</label></p>
-    <textarea class="form-control" id="HighlightsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Highlights Comments -->
-    <!--<p><label class="control-label col-md-6" for="HighlightsCHistoryAdd">Highlights Comments:</label></p>
-    <textarea class="form-control" id="HighlightsCHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Instructions -->
-    <!--<p><label class="control-label col-md-6" for="InstructionsHistoryAdd">Instructions:</label></p>
-    <textarea class="form-control" id="InstructionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Exceptions -->
-    <!--<p><label class="control-label col-md-6" for="ExceptionsHistoryAdd">Exceptions:</label></p>
-    <textarea class="form-control" id="ExceptionsHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Most Common Issues -->
-    <!--<p><label class="control-label col-md-6" for="MostCIHistoryAdd">Most Common Issues:</label></p>
-    <textarea class="form-control" id="MostCIHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Supplier Agency -->
-    <!--<p><label class="control-label col-md-6" for="SupplierAHistoryAdd">Supplier Agency:</label></p>
-    <textarea class="form-control" id="SupplierAHistoryAdd" rows="4" cols="80"></textarea>-->
-    <!-- Template Comments -->
-    <!--<p><label class="control-label col-md-6" for="TemplateCHistoryAdd">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryAdd" rows="4" cols="80"></textarea>
-            <div>
-                <br />
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="submitHiglihts">Save</button>
-            </div>
-        </div>
-    </div>-->
+
+    <br />
     <!--Show Highlights modal-->
     <div id="ShowHighlights" class="modal">
         <div class="modal-content">
-            <span id="cancelButton " class="close">&times;</span>
+            <span id="cancelButton" class="close">&times;</span>
             @*Highlights*@
 
-            <p><label class="control-label col-md-2" for="HighlightsHistoryView">Highlights</label></p>
-            <textarea class="form-control" id="HighlightsHistoryView" rows="4" cols="80" disabled></textarea>
-
-            @*Highlights Comments*@
-            <p><label class="control-label col-md-2" for="HighlightsCHistoryView">Highlights Comments:</label></p>
-            <textarea class="form-control" id="HighlightsCHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsHistoryView">Highlights</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsCHistoryView">Highlights Comments</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsCHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @*Instructions*@
-            <p><label class="control-label col-md-2" for="InstructionsHistoryView">Instructions:</label></p>
-            <textarea class="form-control" id="InstructionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="InstructionsHistoryView">Instructions</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="InstructionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @*Exceptions*@
-            <p><label class="control-label col-md-2" for="ExceptionsHistoryView">Exceptions:</label></p>
-            <textarea class="form-control" id="ExceptionsHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="ExceptionsHistoryView">Exceptions</label>
 
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="ExceptionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @*Most Common Issues*@
-            <p><label class="control-label col-md-2" for="MostCIHistoryView">Most Common Issues:</label></p>
-            <textarea class="form-control" id="MostCIHistoryView" rows="4" cols="80" disabled></textarea>
-
+            <div class="row">
+                <div>
+                    <label class="control-label" for="MostCIHistoryView">Most Common Issues</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="MostCIHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
             @*Supplier Agency*@
-            <p><label class="control-label col-md-2" for="SupplierAHistoryView">Supplier Agency:</label></p>
-            <textarea class="form-control" id="SupplierAHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="SupplierAHistoryView">Supplier Agency</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="SupplierAHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
 
             @*Template Comments*@
-            <p><label class="control-label col-md-2" for="TemplateCHistoryView">Template Comments:</label></p>
-            <textarea class="form-control" id="TemplateCHistoryView" rows="4" cols="80" disabled></textarea>
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="TemplateCHistoryView">Template Comments</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="TemplateCHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <br />
+
             <div class="form-row">
                 @Html.DropDownList("FK_TB_HIGHLIGHTS", null, htmlAttributes: new { @class = "form-control" })
             </div>
@@ -687,7 +703,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-BackUpEmail">Back Up Emails:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150" placeholder="Backup email"></textarea>
+                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -798,104 +814,10 @@
     <!-- Cancel and Save Buttons -->
     <button class="btn form_btntbWC btn-cancel" type="button" id="form-cancel">Cancel</button>
     <button class="btn form_btntbWC" type="button" id="btn-update">Save</button>
-
-    <!--Save Changes modal-->
-    @*<div id="ShowSaveModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Save Changes</h4>
-                    <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-
-                            <h4 class="text-center">
-                                Would you like to add additional information to the template: <br />
-                                Alias / Backup Emails?
-                            </h4>
-                            <br />
-                            <div>
-                                <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
-                                <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-    <!--Add alias / Backup emails modal-->
-    <!--<div id="ShowAddAlias_EmailModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Alias and Backup email's information</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">-->
-    <!--Alias section-->
-    <!--<div class="form-group">
-        <div class=" row">
-            <div class="col-md-6">
-                <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <br />
-                <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-10">
-                    <select name="Alias" id="AliasToAdd" class="form-control" size="5">
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />-->
-    <!--Email section-->
-    <!--<div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-8" for="form-BackUpEmails">Back Up Emails:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-BackUpEmails" placeholder="Backup email">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <br />
-                            <button id="btn-addEmail" type="button" class="btn form_btntbWC">Add Email</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                <select name="Alias" id="EmailsToAdd" class="form-control" size="5">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
-            </div>
-        </div>
-    </div>-->
     <a href="javascript:void(0);" id="scrollToTop" onclick="scrollToTop()">Scroll Back to Top</a>
+    <hr />
+    <hr />
+    <hr style="display: none;" />
 </form>
 
 @section scripts {
@@ -904,5 +826,7 @@
     <script src="~/Scripts/templateModal.js"></script>
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/Scripts/TinyEditorConfig.js"></script>
 }
 
