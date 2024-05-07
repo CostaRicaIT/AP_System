@@ -493,7 +493,6 @@
     <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
-    <Content Include="Scripts\tinymce_test.js" />
     <Content Include="Scripts\UserAdministrationCRUD.js" />
     <Content Include="Scripts\UserDashboard.js" />
     <Content Include="Web.config" />
