@@ -269,7 +269,7 @@ namespace AccountsPayable.Tests.Controllers
         }
 
         [Test]
-        public void Create_ValidModelState_newLegalEntity_new_Approver_Success()
+        public void Create_ValidModelState_newLegalEntity_new_Approver_Success_new_OT()
         {
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
@@ -308,6 +308,13 @@ namespace AccountsPayable.Tests.Controllers
                 var responseDatanewApprover = jsonResultnewApprover.Data;
                 int newApproverId = (int)responseDatanewApprover.GetType().GetProperty("id")?.GetValue(responseDatanewApprover);
 
+                var newOT = "Partnership - Test";
+                var newOTResult = controllerType.GetMethod("AddOrganizationType", new[] { typeof(string) })
+                           .Invoke(controllerInstance, new object[] { newOT });
+
+                var jsonResultnewOT = newOTResult as JsonResult;
+                var responseDatanewOT = jsonResultnewOT.Data;
+                int newOTId = (int)responseDatanewOT.GetType().GetProperty("id")?.GetValue(responseDatanewOT);
 
 
                 var template = new TB_TEMPLATE
@@ -343,7 +350,8 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_INVOICE_NOTES = "Valid invoice",
                     TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
                     CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact"
+                    CONTACTS_PRIOR = "Prior Contact",
+                    FK_TB_ORGANIZATION_TYPE_ID = newOTId
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -414,7 +422,7 @@ namespace AccountsPayable.Tests.Controllers
         }
 
         [Test]
-        public void Edit_ValidModelState_newLegalEntity_new_Approver_Success()
+        public void Edit_ValidModelState_newLegalEntity_new_Approver_Success_new_OT()
         {
             // Arrange
             using (var scope = new TransactionScope())
@@ -451,6 +459,14 @@ namespace AccountsPayable.Tests.Controllers
                 var responseDatanewApprover = jsonResultnewApprover.Data;
                 int newApproverId = (int)responseDatanewApprover.GetType().GetProperty("id")?.GetValue(responseDatanewApprover);
 
+                var newOT = "Partnership - Test";
+                var newOTResult = controllerType.GetMethod("AddOrganizationType", new[] { typeof(string) })
+                           .Invoke(controllerInstance, new object[] { newOT });
+
+                var jsonResultnewOT = newOTResult as JsonResult;
+                var responseDatanewOT = jsonResultnewOT.Data;
+                int newOTId = (int)responseDatanewOT.GetType().GetProperty("id")?.GetValue(responseDatanewOT);
+
 
                 // Create necessary entities and data for the Edit method
                 var template = new TB_TEMPLATE
@@ -486,7 +502,8 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_INVOICE_NOTES = "Valid invoice",
                     TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
                     CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact"
+                    CONTACTS_PRIOR = "Prior Contact",
+                    FK_TB_ORGANIZATION_TYPE_ID = newOTId,
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -692,7 +709,76 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.AreEqual("Entity already exists", responseData.GetType().GetProperty("message")?.GetValue(responseData));
             }
         }
+        [Test]
+        public void Create_OT_Success()
+        {
+            // Arrange
+            using (var scope = new TransactionScope())
+            {
+                var controllerType = typeof(CRUDController);
+                var controllerInstance = Activator.CreateInstance(controllerType);
 
+                // Get the private or internal 'db' property
+                var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
+
+                // Ensure that the property is not null before attempting to set its value
+                if (dbProperty != null)
+                {
+                    // Mock the database context
+                    var dbContextMock = new Mock<AccountsPayableTestProdEntities>();
+                    dbProperty.SetValue(controllerInstance, dbContextMock.Object);
+                }
+
+                // Create necessary entities and data for the Edit method
+                var newOT = "Partnership - Test";
+
+                // Act
+                var result = controllerType.GetMethod("AddOrganizationType", new[] { typeof(string) })
+                                          .Invoke(controllerInstance, new object[] { newOT });
+
+                // Assert
+                Assert.IsInstanceOf<JsonResult>(result);
+                var jsonResult = result as JsonResult;
+                var responseData = jsonResult.Data;
+                Assert.IsNotNull(jsonResult);
+                Assert.AreEqual(newOT, responseData.GetType().GetProperty("name")?.GetValue(responseData));
+            }
+        }
+        [Test]
+        public void Create_NewOT_Failture()
+        {
+            // Arrange
+            using (var scope = new TransactionScope())
+            {
+                var controllerType = typeof(CRUDController);
+                var controllerInstance = Activator.CreateInstance(controllerType);
+
+                // Get the private or internal 'db' property
+                var dbProperty = controllerType.GetProperty("db", BindingFlags.Instance | BindingFlags.NonPublic);
+
+                // Ensure that the property is not null before attempting to set its value
+                if (dbProperty != null)
+                {
+                    // Mock the database context
+                    var dbContextMock = new Mock<AccountsPayableTestProdEntities>();
+                    dbProperty.SetValue(controllerInstance, dbContextMock.Object);
+                }
+
+                // Create necessary entities and data for the Edit method
+                var newOT = "Partnership"; // Legal entity that already exists on DB
+
+                // Act
+                var result = controllerType.GetMethod("AddOrganizationType", new[] { typeof(string) })
+                                          .Invoke(controllerInstance, new object[] { newOT });
+
+                // Assert
+                Assert.IsInstanceOf<JsonResult>(result);
+                var jsonResult = result as JsonResult;
+                var responseData = jsonResult.Data;
+                Assert.IsNotNull(jsonResult);
+                Assert.AreEqual("Organization Type already exists", responseData.GetType().GetProperty("message")?.GetValue(responseData));
+            }
+        }
         [Test]
         public void Delete_TemplateNotDisabled_Success()
         {
