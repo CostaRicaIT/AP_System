@@ -224,6 +224,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTemplatesModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>
     </Compile>
@@ -247,6 +250,9 @@
     </Compile>
     <Compile Include="Models\TB_ORACLE_LEGAL_ENTITIES.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ORACLE_ORGANIZATION_TYPE.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_ORACLE_PAY_TERMS.cs">
       <DependentUpon>APTemplatesModels.tt</DependentUpon>

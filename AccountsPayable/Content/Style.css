@@ -86,15 +86,15 @@ select.form-control:disabled {
     margin-left: 15px;
 }
 
-#btn-legalEntity, #btn-approver {
+#btn-legalEntity, #btn-approver, #btn-OrganizationType {
     margin-left: -95px;
 }
 
-#form-AddApprover, #form-AddLegalEntity {
+#form-AddApprover, #form-AddLegalEntity, #form-AddOrganizationType {
     margin-left: -2px;
 }
 
-#btn-addLegalEntity, #btn-addAppover {
+#btn-addLegalEntity, #btn-addAppover, #btn-AddOrganizationType {
     margin-top: 27px;
 }
 

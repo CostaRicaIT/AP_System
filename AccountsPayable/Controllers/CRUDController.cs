@@ -416,7 +416,28 @@ namespace AccountsPayable.Controllers
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }
+        [HttpPost]
+        public ActionResult AddOrganizationType(string organizationTypeName)
+        {
+            try
+            {
+                bool organizationExists = db.TB_ORACLE_ORGANIZATION_TYPE.Any(entity => entity.ORGANIZATION_TYPE_NAME == organizationTypeName);
 
+                if (!organizationExists)
+                {
+                    var newOrganization = new TB_ORACLE_ORGANIZATION_TYPE { ORGANIZATION_TYPE_NAME = organizationTypeName };
+                    db.TB_ORACLE_ORGANIZATION_TYPE.Add(newOrganization);
+                    db.SaveChanges();
+
+                    return Json(new { id = newOrganization.ORGANIZATION_TYPE_ID, name = newOrganization.ORGANIZATION_TYPE_NAME });
+                }
+                return Json(new { message = "Organization Type already exists" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
+        }
         [HttpPost]
         public ActionResult AddApprover(string approverName)
         {
