@@ -78,7 +78,8 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_INVOICE_NOTES = "Valid invoice",
                     TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
                     CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact"
+                    CONTACTS_PRIOR = "Prior Contact",
+                    FK_TB_ORGANIZATION_TYPE_ID = 1,
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
@@ -203,7 +204,8 @@ namespace AccountsPayable.Tests.Controllers
                     TEMP_INVOICE_NOTES = "Valid invoice",
                     TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
                     CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact"
+                    CONTACTS_PRIOR = "Prior Contact",
+                    FK_TB_ORGANIZATION_TYPE_ID = 1,
                 };
                 var highlights = new TB_HIGHLIGHTS
                 {
