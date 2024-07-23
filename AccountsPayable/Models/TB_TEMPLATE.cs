@@ -12,7 +12,7 @@ namespace AccountsPayable.Models
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-
+    
     public partial class TB_TEMPLATE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -69,6 +69,7 @@ namespace AccountsPayable.Models
         public string TEMP_BILLING_PRERIOD_DATE { get; set; }
         public string CONTACTS_CURRENT { get; set; }
         public string CONTACTS_PRIOR { get; set; }
+        public Nullable<int> FK_TB_ORGANIZATION_TYPE_ID { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -78,6 +79,7 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
         public virtual TB_HISTORIC_REMIT TB_HISTORIC_REMIT1 { get; set; }
         public virtual TB_ORACLE_LEGAL_ENTITIES TB_ORACLE_LEGAL_ENTITIES { get; set; }
+        public virtual TB_ORACLE_ORGANIZATION_TYPE TB_ORACLE_ORGANIZATION_TYPE { get; set; }
         public virtual TB_ORACLE_PAY_TERMS TB_ORACLE_PAY_TERMS { get; set; }
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }
         public virtual TB_ORACLE_TYPE TB_ORACLE_TYPE { get; set; }

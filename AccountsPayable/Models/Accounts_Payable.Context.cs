@@ -25,6 +25,7 @@ namespace AccountsPayable.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TB_ALIAS> TB_ALIAS { get; set; }
         public virtual DbSet<TB_APPROVER> TB_APPROVER { get; set; }
         public virtual DbSet<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
@@ -33,6 +34,7 @@ namespace AccountsPayable.Models
         public virtual DbSet<TB_LOG_IN> TB_LOG_IN { get; set; }
         public virtual DbSet<TB_LOGIN_ROLES> TB_LOGIN_ROLES { get; set; }
         public virtual DbSet<TB_ORACLE_LEGAL_ENTITIES> TB_ORACLE_LEGAL_ENTITIES { get; set; }
+        public virtual DbSet<TB_ORACLE_ORGANIZATION_TYPE> TB_ORACLE_ORGANIZATION_TYPE { get; set; }
         public virtual DbSet<TB_ORACLE_PAY_TERMS> TB_ORACLE_PAY_TERMS { get; set; }
         public virtual DbSet<TB_ORACLE_SOURCE> TB_ORACLE_SOURCE { get; set; }
         public virtual DbSet<TB_ORACLE_TYPE> TB_ORACLE_TYPE { get; set; }

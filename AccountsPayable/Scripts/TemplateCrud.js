@@ -3,6 +3,7 @@ var aliasDataList = [];
 var emailDataList = [];
 var legalEntityDataList = [];
 var approverDataList = [];
+var organizationTypeDataList = [];
 
 //Show scroll to top button
 window.onscroll = function () {
@@ -222,6 +223,57 @@ $(document).ready(function () {
         sortLegalEntity();
 
     });
+    //Function to store more organization type data to the dropdown
+    $(document).ready(function () {
+
+        // Function to sort alphabetic the organization type in dropdown
+        function sortOrganizationType() {
+
+            let options = $("#organizationTypeDropdown option");
+            options.sort(function (a, b) {
+                return a.text.localeCompare(b.text);
+            });
+            $("#organizationTypeDropdown").empty().append(options);
+        };
+
+        // Button click event to add Legal Entity to dropdown
+        $("#btn-AddOrganizationType").on('click', function () {
+
+            // Get the value from the input field
+            let newOrganizationType = $("#form-AddOrganizationType").val();
+
+            //Check if the value is not empty
+            if (newOrganizationType.trim() != '') {
+
+                //AJAX to made the request to the server
+                $.ajax({
+                    url: '/CRUD/AddOrganizationType',
+                    type: 'POST',
+                    data: { organizationTypeName: newOrganizationType },
+                    success: function (data) {
+
+                        $('#organizationTypeDropdown').append('<option value="' + data.id + '">' + data.name + '</option>');
+                        $('#form-AddOrganizationType').val('');
+
+                        alert("New Organization Type added to the list section.");
+
+                        // Call the function to sort
+                        sortOrganizationType();
+
+                    },
+
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+
+                });
+            }
+        });
+
+        // Call the function to sort
+        sortOrganizationType();
+
+    });
 
     //Function to store more approver data to the dropdown
     $(document).ready(function () {
@@ -306,7 +358,8 @@ function create() {
         TEMP_INVOICE_NOTES: tinymce.get("form-InvoiceNotes").getContent(),
         TEMP_INVOICE_DESCRIPTION: $("#form-InvoiceDescrip").val().replace(/[<>]/g, ''),
         CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
-        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, ''),
+        FK_TB_ORGANIZATION_TYPE_ID: $("#organizationTypeDropdown").val().replace(/[<>]/g, '')
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
@@ -326,7 +379,7 @@ function create() {
     };
 
     $.ajax({
-        url: '/CRUD/Create',
+        url: '/CRUD/Create/',
         type: 'POST',
         data: {
             templateData, HistoricRemitToData, HighLightsData, aliasDataList, emailDataList
@@ -354,7 +407,7 @@ function update() {
         TEMP_SUPPLIER_NAME: $("#TEMP_SUPPLIER_NAME").val().replace(/[<>]/g, ''),
         TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val().replace(/[<>]/g, ''),
         TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val().replace(/[<>]/g, ''),
-        TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val().replace(/[<>]/g, ''),
+        TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val().replace(/[<>]/g, ''),       
         FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val().replace(/[<>]/g, ''),
         TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val().replace(/[<>]/g, ''),
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val().replace(/[<>]/g, ''),
@@ -380,7 +433,8 @@ function update() {
         TEMP_INVOICE_NOTES: tinymce.get("TEMP_INVOICE_NOTES").getContent(),
         TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val().replace(/[<>]/g, ''),
         CONTACTS_CURRENT: $("#form-Currents").val().replace(/[<>]/g, ''),
-        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, '')
+        CONTACTS_PRIOR: $("#form-Prior").val().replace(/[<>]/g, ''),
+        FK_TB_ORGANIZATION_TYPE_ID: $("#organizationTypeDropdown").val().replace(/[<>]/g, ''),
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
