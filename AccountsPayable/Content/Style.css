@@ -94,8 +94,12 @@ select.form-control:disabled {
     margin-left: -2px;
 }
 
-#btn-addLegalEntity, #btn-addAppover, #btn-AddOrganizationType {
+#btn-addLegalEntity, #btn-addAppover {
     margin-top: 27px;
+}
+
+#btn-AddOrganizationType {
+    margin-top: 45px;
 }
 
 #dates {
