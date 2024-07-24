@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 3, 4, 5, 6, 24, 36]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1, 3, 4, 5, 6, 24, 37]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
 
 function initializeDataTable() {
     table = $('#dataTable').DataTable({

@@ -63,12 +63,12 @@ namespace AccountsPayable.Models
         public string TEMP_VSU { get; set; }
         [AllowHtml]
         public string TEMP_W9_W8 { get; set; }
-        [AllowHtml]
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
         public string TEMP_BILLING_PRERIOD_DATE { get; set; }
         public string CONTACTS_CURRENT { get; set; }
         public string CONTACTS_PRIOR { get; set; }
+        public Nullable<int> FK_TB_ORGANIZATION_TYPE_ID { get; set; }
     
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -78,6 +78,7 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_HISTORIC_REMIT> TB_HISTORIC_REMIT { get; set; }
         public virtual TB_HISTORIC_REMIT TB_HISTORIC_REMIT1 { get; set; }
         public virtual TB_ORACLE_LEGAL_ENTITIES TB_ORACLE_LEGAL_ENTITIES { get; set; }
+        public virtual TB_ORACLE_ORGANIZATION_TYPE TB_ORACLE_ORGANIZATION_TYPE { get; set; }
         public virtual TB_ORACLE_PAY_TERMS TB_ORACLE_PAY_TERMS { get; set; }
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }
         public virtual TB_ORACLE_TYPE TB_ORACLE_TYPE { get; set; }
@@ -87,6 +88,6 @@ namespace AccountsPayable.Models
         public virtual ICollection<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
         public string ALIAS_NAME { get; internal set; }
         public string EMAIL_BACKUP { get; internal set; }
-        public object HISTORIC_REMIT { get; internal set; }
+        public string HISTORIC_REMIT { get; internal set; }
     }
 }

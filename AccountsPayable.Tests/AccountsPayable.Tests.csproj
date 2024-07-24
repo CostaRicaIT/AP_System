@@ -175,7 +175,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AccessControllerTest.cs" />
     <Compile Include="Controllers\CRUDControllerTest.cs" />
-    <Compile Include="Controllers\TinyMCETest.cs" />
     <Compile Include="Controllers\UserPermissionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

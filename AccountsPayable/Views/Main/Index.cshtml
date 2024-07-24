@@ -47,6 +47,7 @@
                 <th>Distribution Combination</th>
                 <th>Accounting Date</th>
                 <th>Legal Entity</th>
+                <th>Organization Type</th>
                 <th>Tax Payer ID</th>
                 <th>Type</th>
                 <th>Description</th>
@@ -182,6 +183,11 @@
                     <td>
                         <div class="scrollable-content">
                             @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scrollable-content">
+                            @(string.IsNullOrEmpty(item.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME) ? "" : item.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME)
                         </div>
                     </td>
                     <td>
@@ -396,45 +402,48 @@
                     <input type="checkbox" class="toggle-column" data-column="25"> Legal Entity
                 </label><br>
 
-
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="26"> Tax Payer ID
+                    <input type="checkbox" class="toggle-column" data-column="26"> Organization Type
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="27"> Type
+                    <input type="checkbox" class="toggle-column" data-column="27"> Tax Payer ID
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="28"> Description
+                    <input type="checkbox" class="toggle-column" data-column="28"> Type
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="29"> Oracle Notes
+                    <input type="checkbox" class="toggle-column" data-column="29"> Description
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="30"> Oracle Instructions
+                    <input type="checkbox" class="toggle-column" data-column="30"> Oracle Notes
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="31"> AR Key Contacts/Current
+                    <input type="checkbox" class="toggle-column" data-column="31"> Oracle Instructions
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="32"> AR Key Contacts/Prior
+                    <input type="checkbox" class="toggle-column" data-column="32"> AR Key Contacts/Current
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="33"> Approver
+                    <input type="checkbox" class="toggle-column" data-column="33"> AR Key Contacts/Prior
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="34"> Approver Coments
+                    <input type="checkbox" class="toggle-column" data-column="34"> Approver
                 </label><br>
 
                 <label>
-                    <input type="checkbox" class="toggle-column" data-column="35"> Email backup
+                    <input type="checkbox" class="toggle-column" data-column="35"> Approver Coments
+                </label><br>
+
+                <label>
+                    <input type="checkbox" class="toggle-column" data-column="36"> Email backup
                 </label><br>
 
             </div>
