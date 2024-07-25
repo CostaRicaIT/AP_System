@@ -63,6 +63,7 @@ namespace AccountsPayable.Models
         public string TEMP_VSU { get; set; }
         [AllowHtml]
         public string TEMP_W9_W8 { get; set; }
+        [AllowHtml]
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
         public string TEMP_BILLING_PRERIOD_DATE { get; set; }
