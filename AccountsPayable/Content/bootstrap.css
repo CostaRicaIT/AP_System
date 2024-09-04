@@ -1287,7 +1287,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 10px;
+margin: 0 0 10px;
 }
 .lead {
   margin-bottom: 20px;
@@ -3215,6 +3215,7 @@ fieldset[disabled] .btn-default.focus {
     background-color: #3B1E08;
     border-color: #3B1E08;
     border-radius: 5px;
+    margin-left:  -150px; 
 }
     .btn-primary:focus,
     .btn-primary.focus {
@@ -4365,7 +4366,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
-    margin-left: -15px;
+    margin-left: -155px;
   }
 }
 .navbar-toggle {
@@ -4563,7 +4564,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
+    margin-right: -84px;
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
