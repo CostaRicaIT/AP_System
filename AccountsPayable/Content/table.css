@@ -7,6 +7,18 @@
     display: inline-table !important
 }
 
+.dataTables_wrapper {
+    /*margin-left: -300px;
+    width: 150%;*/ /* Set initial width to 95% */
+    /*max-width: 150%;*/ /* Set maximum width to ensure full width on smaller screens */
+    /*padding-right: 5px;*/ /* Adjust padding for smaller screens */
+    /*padding-left: 5px;*/ /* Adjust padding for smaller screens */
+    /*margin-right: auto;*/
+    margin-left: -150px;
+    width: 125%; /* Set initial width to 95% */
+    max-width: 130%; /* Set maximum width to ensure full width on smaller screens */
+}
+
 .button-container {
     display: flex;
     align-items: center;
@@ -50,4 +62,41 @@ tfoot input {
 /* Thin scrollbar for Firefox */
 .scrollable-content {
     scrollbar-width: thin;
+}
+/*Loading spinner*/
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.custom-spin {
+    display: inline-block;
+    animation: spin 2s linear infinite
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255);
+    z-index: 100;
+}
+
+.hidden {
+    display: none;
+}
+
+.spinner-text {
+    font-size: 20px;
 }
