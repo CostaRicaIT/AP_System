@@ -17,7 +17,12 @@
             <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
         }
     </p>
-
+    @*Spinner to wait all the information loadss*@
+    <div class="spinner">
+        <span class="spinner-text">
+            <i class="fa-solid fa-spinner custom-spin"></i> Loading...
+        </span>
+    </div>
     <table id="dataTable" class="table cell-border stripe display" width="100%">
         <thead>
             <tr>

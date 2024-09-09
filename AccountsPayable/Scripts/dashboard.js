@@ -128,4 +128,8 @@ function resetFilters() {
 // Call the function to initialize the DataTable when the document is ready
 $(document).ready(function () {
     initializeDataTable();
+    // Set a timeout to hide the spinner after a certain period
+    setTimeout(function () {
+        $('.spinner').addClass('hidden');
+    }, 1000); // Delay
 });
