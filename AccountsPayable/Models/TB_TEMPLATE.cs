@@ -12,7 +12,7 @@ namespace AccountsPayable.Models
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    
+
     public partial class TB_TEMPLATE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +23,7 @@ namespace AccountsPayable.Models
             this.TB_ALIAS = new HashSet<TB_ALIAS>();
             this.TB_EMAIL_BACKUP = new HashSet<TB_EMAIL_BACKUP>();
         }
-    
+
         public int TEMP_ID { get; set; }
         public string TEMP_TAX_ID { get; set; }
         public string TEMP_REMIT_TO { get; set; }
@@ -70,7 +70,7 @@ namespace AccountsPayable.Models
         public string CONTACTS_CURRENT { get; set; }
         public string CONTACTS_PRIOR { get; set; }
         public Nullable<int> FK_TB_ORGANIZATION_TYPE_ID { get; set; }
-    
+
         public virtual TB_APPROVER TB_APPROVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_HIGHLIGHTS> TB_HIGHLIGHTS { get; set; }

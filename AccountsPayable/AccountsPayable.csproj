@@ -136,6 +136,7 @@
     <Compile Include="Controllers\SignOutController.cs" />
     <Compile Include="Controllers\CRUDController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkSpaceController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +199,18 @@
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_VIEW_PERMISSIONS.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_WORKSPACE.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WS_COMMENTS.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WS_INVOICE_CATEGORY.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WS_LAST_ACTIONS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -451,6 +464,10 @@
     <Content Include="Views\Main\Edit.cshtml" />
     <Content Include="Views\Main\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\WorkSpace\Create.cshtml" />
+    <Content Include="Views\WorkSpace\Details.cshtml" />
+    <Content Include="Views\WorkSpace\Edit.cshtml" />
+    <Content Include="Views\WorkSpace\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

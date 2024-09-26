@@ -12,20 +12,17 @@ namespace AccountsPayable.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_ORACLE_PAY_TERMS
+    public partial class WS_INVOICE_CATEGORY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_ORACLE_PAY_TERMS()
+        public WS_INVOICE_CATEGORY()
         {
-            this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
             this.TB_WORKSPACE = new HashSet<TB_WORKSPACE>();
         }
     
-        public int PAY_TERMS_ID { get; set; }
-        public string PAY_TERMS_DESCRIPTION { get; set; }
+        public int INVOICE_CATEGORY_ID { get; set; }
+        public string INVOICE_CATEGORY_NAME { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_WORKSPACE> TB_WORKSPACE { get; set; }
     }
