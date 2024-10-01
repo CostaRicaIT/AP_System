@@ -23,7 +23,7 @@ namespace AccountsPayable.Tests.Controllers
             public async Task Setup()
             {
                 _playwright = await Playwright.CreateAsync();
-                _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+                _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
             }
 
             [OneTimeTearDown]
@@ -54,11 +54,11 @@ namespace AccountsPayable.Tests.Controllers
                 {
                     page.SetDefaultTimeout(900000);
                     var startTime = DateTime.Now;
-                    await page.GotoAsync("http://ap-test.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
                     await page.FillAsync("[name='username']", "User.Write");
                     await page.FillAsync("#password", "password");
                     await page.ClickAsync("button[type='submit']"); // Clicks the submit button
-                    await page.WaitForURLAsync("http://ap-test.us-east-1.elasticbeanstalk.com/Main/Index");
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
                     var loadTime = DateTime.Now - startTime;
                     await page.WaitForSelectorAsync(".spinner.hidden", new PageWaitForSelectorOptions { State = WaitForSelectorState.Hidden });
                     TestContext.WriteLine($"{loadTime.Seconds}");
@@ -68,6 +68,7 @@ namespace AccountsPayable.Tests.Controllers
                 {
                     // Log any errors that occur
                     TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail(ex.ToString());
                 }
                 finally
                 {
@@ -91,22 +92,22 @@ namespace AccountsPayable.Tests.Controllers
             private async Task SimulateEdit(int userId)
             {
                 string UserId = userId.ToString();
-                string EditUrl = $"http://ap-test.us-east-1.elasticbeanstalk.com/Main/Edit/{userId}";
+                string EditUrl = $"http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Edit/{userId}";
                 var page = await _browser.NewPageAsync();
                 try
                 {
                     page.SetDefaultTimeout(900000);
                     var startTime = DateTime.Now;
-                    await page.GotoAsync("http://ap-test.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
                     await page.FillAsync("[name='username']", "User.Write");
                     await page.FillAsync("#password", "password");
                     await page.ClickAsync("button[type='submit']"); // Clicks the submit button
-                    await page.WaitForURLAsync("http://ap-test.us-east-1.elasticbeanstalk.com/Main/Index");
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
                     await page.WaitForSelectorAsync(".spinner.hidden", new PageWaitForSelectorOptions { State = WaitForSelectorState.Hidden });
                     await page.GotoAsync(EditUrl);
-                    await page.FillAsync("#TEMP_FOLDER", $"{UserId} Test user Demo");
+                    await page.FillAsync("#TEMP_FOLDER", $"{UserId} Test user 10/1");
                     await page.ClickAsync("#btn-update");
-                    await page.WaitForURLAsync("http://ap-test.us-east-1.elasticbeanstalk.com/Main/Index");
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
                     var loadTime = DateTime.Now - startTime;
                     TestContext.WriteLine($"{loadTime.Seconds}");
 
@@ -116,6 +117,7 @@ namespace AccountsPayable.Tests.Controllers
                 {
                     // Log any errors that occur
                     TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail( ex.ToString() );
                 }
                 finally
                 {
