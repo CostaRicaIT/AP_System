@@ -6,6 +6,7 @@
     statusbar: false,
     menubar: false,
     toolbar: false,
+    license_key: 'gpl'
     
 });
 tinymce.init({
@@ -14,5 +15,6 @@ tinymce.init({
     branding: false, //Hide TinyMCE logo
     statusbar: false,
     menubar: false,
-    toolbar: "undo redo |forecolor |backcolor "
+    toolbar: "undo redo |forecolor |backcolor ",
+    license_key: 'gpl'
 });
