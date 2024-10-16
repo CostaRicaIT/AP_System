@@ -18,11 +18,11 @@
         }
     </p>
     @*Spinner to wait all the information loadss*@
-    <div class="spinner">
-        <span class="spinner-text">
-            <i class="fa-solid fa-spinner custom-spin"></i> Loading...
-        </span>
-    </div>
+    @*<div class="spinner">
+            <span class="spinner-text">
+                <i class="fa-solid fa-spinner custom-spin"></i> Loading...
+            </span>
+        </div>*@
     <table id="dataTable" class="table cell-border stripe display" width="100%">
         <thead>
             <tr>
@@ -66,203 +66,206 @@
                 <th>Action</th>
             </tr>
         </thead>
-
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
 
-                    <td>@item.TEMP_ID</td>
-                    <td class="alias">@item.ALIAS_NAME</td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_FOLDER
-                        </div>
-                    </td>
-                    <td class="tax">@item.TEMP_TAX_ID</td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_SUPPLIER_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_SUPPLIER_NUMBER
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_REMIT_TO
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_SUPPLIER_SITE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.HISTORIC_REMIT)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_VENDOR_ACCOUNT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_INVOICE_FORMAT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_INVOICE_TYPE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_INVOICE_NOTES)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_W9_W8)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_VSU)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_PAYMENT_METHOD
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_REMIT_TOACCOUNT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_INVOICE_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_BILLING_PERIOD)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_BILLING_PRERIOD_DATE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_DISTRIBUTION_SET
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_DISTRIBUTION_COMBINATION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_ACCOUNTING_DATE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @(string.IsNullOrEmpty(item.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME) ? "" : item.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_TAXPAYER_ID
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_ORACLE_DESCRIPTION)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_ORACLE_NOTES)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.TEMP_ORACLE_INSTRUCTIONS)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.CONTACTS_CURRENT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.CONTACTS_PRIOR
-                        </div>
-                    </td>
-                    <td>@item.TB_APPROVER.APPROVER_NAME</td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TEMP_APPROVER_COMMENTS
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.EMAIL_BACKUP
-                        </div>
-                    </td>
-                    <td>
-                        <div class="button-container">
-
-
-                            @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
-                            {
-                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
-                            }
-
-                            else
-                            {
-                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
-                                <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
-                                <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
-                            }
-
-                        </div>
-                    </td>
-
-                </tr>
-            }
         </tbody>
+
+        @*<tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.TEMP_ID</td>
+                        <td class="alias">@item.ALIAS_NAME</td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_FOLDER
+                            </div>
+                        </td>
+                        <td class="tax">@item.TEMP_TAX_ID</td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_SUPPLIER_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_SUPPLIER_NUMBER
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_REMIT_TO
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_SUPPLIER_SITE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.HISTORIC_REMIT)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_VENDOR_ACCOUNT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_INVOICE_FORMAT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_INVOICE_TYPE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_INVOICE_NOTES)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_W9_W8)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_VSU)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_PAYMENT_METHOD
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_REMIT_TOACCOUNT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_INVOICE_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_BILLING_PERIOD)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_BILLING_PRERIOD_DATE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_DISTRIBUTION_SET
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_DISTRIBUTION_COMBINATION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_ACCOUNTING_DATE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @(string.IsNullOrEmpty(item.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME) ? "" : item.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_TAXPAYER_ID
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_ORACLE_DESCRIPTION)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_ORACLE_NOTES)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.TEMP_ORACLE_INSTRUCTIONS)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.CONTACTS_CURRENT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.CONTACTS_PRIOR
+                            </div>
+                        </td>
+                        <td>@item.TB_APPROVER.APPROVER_NAME</td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TEMP_APPROVER_COMMENTS
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.EMAIL_BACKUP
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
+
+
+                                @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
+                                {
+                                    <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                }
+
+                                else
+                                {
+                                    <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
+                                    <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
+                                }
+
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>*@
     </table>
 </div>
 
