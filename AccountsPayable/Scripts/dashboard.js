@@ -111,6 +111,7 @@ function showFilterModal() {
             var columnIdx = $(this).data('column');
             var isVisible = $(this).is(':checked');
             table.column(columnIdx).visible(isVisible);
+            wrapScrollableContent();
         });
 
         // Close the modal
@@ -123,6 +124,15 @@ function resetFilters() {
     table.state.clear();
     $('#filtersModal').modal('hide');
     table.columns(defaultColumns).visible(true);
+}
+
+function wrapScrollableContent() {
+    $('#dataTable tbody td.scrollable-content').each(function () {
+        if (!$(this).children('div').length) { // Prevent double-wrapping
+            var cellContent = $(this).html();
+            $(this).html(`<div class="scrollable-content">${cellContent}</div>`);
+        }
+    });
 }
 
 function DrawTable() {
@@ -154,42 +164,42 @@ function DrawTable() {
         },
         columns: [
             { data: 'Id', name: 'TEMP_ID' },
-            { data: 'Alias', name: 'TB_ALIAS.ALIAS_NAME', className: "scrollable-content" },
-            { data: 'Folder', name: 'TEMP_FOLDER', className: "scrollable-content" },
-            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className: "scrollable-content" },
-            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className: "scrollable-content" },
-            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className: "scrollable-content" },
-            { data: 'RemitTo', name: 'TEMP_REMIT_TO', className: "scrollable-content" },
-            { data: 'SupplierSite', name: 'TEMP_SUPPLIER_SITE', className: "scrollable-content" },
-            { data: 'HistoricRemitTo', name: 'TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO', className: "scrollable-content" },
-            { data: 'VendorAccount', name: 'TEMP_VENDOR_ACCOUNT', className: "scrollable-content", className: "scrollable-content" },
-            { data: 'Source', name: 'TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION', className: "scrollable-content" },
-            { data: 'InvoiceFormat', name: 'TEMP_INVOICE_FORMAT', className: "scrollable-content" },
-            { data: 'InvoiceType', name: 'TEMP_INVOICE_TYPE', className: "scrollable-content" },
-            { data: 'InvoiceNotes', name: 'TEMP_INVOICE_NOTES', className: "scrollable-content" },
-            { data: 'W9W8BENForm', name: 'TEMP_W9_W8', className: "scrollable-content" },
-            { data: 'VSUForm', name: 'TEMP_VSU', className: "scrollable-content" },
-            { data: 'PaymentMethod', name: 'TEMP_PAYMENT_METHOD', className: "scrollable-content" },
-            { data: 'RemitToAccount', name: 'TEMP_REMIT_TOACCOUNT', className: "scrollable-content" },
-            { data: 'PayTerms', name: 'TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION', className: "scrollable-content" },
-            { data: 'InvoiceDescription', name: 'TEMP_INVOICE_DESCRIPTION', className: "scrollable-content" },
-            { data: 'BillingPeriod', name: 'TEMP_BILLING_PERIOD', className: "scrollable-content" },
-            { data: 'Dates', name: 'TEMP_BILLING_PRERIOD_DATE', className: "scrollable-content" },
-            { data: 'DistributionSet', name: 'TEMP_DISTRIBUTION_SET', className: "scrollable-content" },
-            { data: 'DistributionCombination', name: 'TEMP_DISTRIBUTION_COMBINATION', className: "scrollable-content" },
+            { data: 'Alias', name: 'TB_ALIAS.ALIAS_NAME', className:"scrollable-content" },
+            { data: 'Folder', name: 'TEMP_FOLDER', className:"scrollable-content" },
+            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className:"scrollable-content" },
+            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className:"scrollable-content" },
+            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className:"scrollable-content" },
+            { data: 'RemitTo', name: 'TEMP_REMIT_TO', className:"scrollable-content" },
+            { data: 'SupplierSite', name: 'TEMP_SUPPLIER_SITE', className:"scrollable-content" },
+            { data: 'HistoricRemitTo', name: 'TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO',className:"scrollable-content" },
+            { data: 'VendorAccount', name: 'TEMP_VENDOR_ACCOUNT', className: "scrollable-content",className:"scrollable-content" },
+            { data: 'Source', name: 'TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION',className:"scrollable-content" },
+            { data: 'InvoiceFormat', name: 'TEMP_INVOICE_FORMAT',className:"scrollable-content" },
+            { data: 'InvoiceType', name: 'TEMP_INVOICE_TYPE',className:"scrollable-content" },
+            { data: 'InvoiceNotes', name: 'TEMP_INVOICE_NOTES',className:"scrollable-content" },
+            { data: 'W9W8BENForm', name: 'TEMP_W9_W8',className:"scrollable-content" },
+            { data: 'VSUForm', name: 'TEMP_VSU',className:"scrollable-content" },
+            { data: 'PaymentMethod', name: 'TEMP_PAYMENT_METHOD',className:"scrollable-content" },
+            { data: 'RemitToAccount', name: 'TEMP_REMIT_TOACCOUNT',className:"scrollable-content" },
+            { data: 'PayTerms', name: 'TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION',className:"scrollable-content" },
+            { data: 'InvoiceDescription', name: 'TEMP_INVOICE_DESCRIPTION',className:"scrollable-content" },
+            { data: 'BillingPeriod', name: 'TEMP_BILLING_PERIOD',className:"scrollable-content" },
+            { data: 'Dates', name: 'TEMP_BILLING_PRERIOD_DATE',className:"scrollable-content" },
+            { data: 'DistributionSet', name: 'TEMP_DISTRIBUTION_SET',className:"scrollable-content" },
+            { data: 'DistributionCombination', name: 'TEMP_DISTRIBUTION_COMBINATION',className:"scrollable-content" },
             { data: 'AccountingDate', name: 'TEMP_ACCOUNTING_DATE' },
-            { data: 'LegalEntity', name: 'TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME', className: "scrollable-content" },
-            { data: 'OrganizationType', name: 'TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME', className: "scrollable-content" },
-            { data: 'TaxPayerID', name: 'TEMP_TAXPAYER_ID', className: "scrollable-content" },
-            { data: 'Type', name: 'TB_ORACLE_TYPE.ORACLE_TYPE_NAME', className: "scrollable-content" },
-            { data: 'Description', name: 'TEMP_ORACLE_DESCRIPTION', className: "scrollable-content" },
-            { data: 'OracleNotes', name: 'TEMP_ORACLE_NOTES', className: "scrollable-content" },
-            { data: 'OracleInstructions', name: 'TEMP_ORACLE_INSTRUCTIONS', className: "scrollable-content" },
-            { data: 'ARKeyContactsCurrent', name: 'CONTACTS_CURRENT', className: "scrollable-content" },
-            { data: 'ARKeyContactsPrior', name: 'CONTACTS_PRIOR', className: "scrollable-content" },
-            { data: 'Approver', name: 'TB_APPROVER.APPROVER_NAME', className: "scrollable-content" },
-            { data: 'ApproverComments', name: 'TEMP_APPROVER_COMMENTS', className: "scrollable-content" },
-            { data: 'EmailBackup', name: 'EMAIL_BACKUP', className: "scrollable-content" },
+            { data: 'LegalEntity', name: 'TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME',className:"scrollable-content" },
+            { data: 'OrganizationType', name: 'TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME',className:"scrollable-content" },
+            { data: 'TaxPayerID', name: 'TEMP_TAXPAYER_ID',className:"scrollable-content" },
+            { data: 'Type', name: 'TB_ORACLE_TYPE.ORACLE_TYPE_NAME',className:"scrollable-content" },
+            { data: 'Description', name: 'TEMP_ORACLE_DESCRIPTION',className:"scrollable-content" },
+            { data: 'OracleNotes', name: 'TEMP_ORACLE_NOTES',className:"scrollable-content" },
+            { data: 'OracleInstructions', name: 'TEMP_ORACLE_INSTRUCTIONS',className:"scrollable-content" },
+            { data: 'ARKeyContactsCurrent', name: 'CONTACTS_CURRENT',className:"scrollable-content" },
+            { data: 'ARKeyContactsPrior', name: 'CONTACTS_PRIOR',className:"scrollable-content" },
+            { data: 'Approver', name: 'TB_APPROVER.APPROVER_NAME',className:"scrollable-content" },
+            { data: 'ApproverComments', name: 'TEMP_APPROVER_COMMENTS',className:"scrollable-content" },
+            { data: 'EmailBackup', name: 'EMAIL_BACKUP',className:"scrollable-content" },
             {
                 data: null,
                 render: function (data, type, row) {
@@ -241,21 +251,17 @@ function DrawTable() {
             [0, 'desc'], //Sort ID by descending order
 
         ], // Set the default sort to ID by descending
-        createdRow: function (row, data, dataIndex) {
-            // Loop through all cells in the row and wrap the text content in a div
-            $(row).find('td.scrollable-content').each(function () {
-                // If the cell doesn't already have a div, add it
-                var cellContent = $(this).html();
-                $(this).html(`<div class="scrollable-content">${cellContent}</div>`);
-            });
-        }
+        drawCallback: function () {
+            wrapScrollableContent(); // Apply the wrapping during every draw
+        },
     });
 
     table.columns(defaultColumns).visible(true); // Show the default columns set on defaultColumns variable
 
-    $('a.toggle-vis').on('click', function (e) { // Function to show columns of table
+    $('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
 
+        // Get the column and toggle its visibility
         var column = table.column($(this).attr('data-column'));
         column.visible(!column.visible());
     });
