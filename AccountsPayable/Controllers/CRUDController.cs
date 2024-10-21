@@ -278,22 +278,53 @@ namespace AccountsPayable.Controllers
                                 {
                                     emailData.EMAIL_BACKUP_ISDISABLED = 0;
                                     emailData.EMAIL_BACKUP_DATE = targetTime;
-                                    // Check if emailData already exists
-                                    var existingEmail = db.TB_EMAIL_BACKUP.Find(emailData.EMAIL_BACKUP_ID);
-                                    var template = db.TB_TEMPLATE.Find(existingTemplate.TEMP_ID);
+
+                                    // Check if the email backup exists in the database.
+                                    var existingEmail = db.TB_EMAIL_BACKUP
+                                                         .FirstOrDefault(e => e.EMAIL_BACKUP_ID == emailData.EMAIL_BACKUP_ID);
+
                                     if (existingEmail == null)
                                     {
+                                        // Add the new email backup to the database.
                                         db.TB_EMAIL_BACKUP.Add(emailData);
-                                        List<int> savedEmailsIds = emailDataList.Select(x => x.EMAIL_BACKUP_ID).ToList();
-                                        foreach (int emailId in savedEmailsIds)
+                                        existingTemplate.TB_EMAIL_BACKUP.Add(emailData); // Add to template's collection.
+                                    }
+                                    else
+                                    {
+                                        // If it already exists, ensure it's linked to the template.
+                                        if (!existingTemplate.TB_EMAIL_BACKUP.Contains(existingEmail))
                                         {
-                                            var email = db.TB_EMAIL_BACKUP.Find(emailId);
-                                            template.TB_EMAIL_BACKUP.Add(email);
+                                            existingTemplate.TB_EMAIL_BACKUP.Add(existingEmail);
                                         }
                                     }
-                                    existingTemplate.TB_EMAIL_BACKUP.Add(emailData);
                                 }
                             }
+
+                            //// Update alias data
+                            //if (aliasDataList != null && aliasDataList.Any())
+                            //{
+                            //    foreach (var aliasData in aliasDataList)
+                            //    {
+                            //        aliasData.ALIAS_ISDISABLED = 0;
+
+                            //        // Check if aliasData already exists
+                            //        var existingAlias = db.TB_ALIAS.Find(aliasData.ALIAS_ID);
+                            //        List<int> savedAliasIds = aliasDataList.Select(x => x.ALIAS_ID).ToList();
+                            //        var template = db.TB_TEMPLATE.Find(existingTemplate.TEMP_ID);
+                            //        if (existingAlias == null)
+                            //        {
+                            //            db.TB_ALIAS.Add(aliasData);
+                            //            foreach (int aliasId in savedAliasIds)
+                            //            {
+                            //                var alias = db.TB_ALIAS.Find(aliasId);
+                            //                template.TB_ALIAS.Add(alias);
+                            //            }
+                            //        }
+
+                            //        existingTemplate.TB_ALIAS.Add(aliasData);
+                            //    }
+                            //}
+
                             // Update alias data
                             if (aliasDataList != null && aliasDataList.Any())
                             {
@@ -301,21 +332,24 @@ namespace AccountsPayable.Controllers
                                 {
                                     aliasData.ALIAS_ISDISABLED = 0;
 
-                                    // Check if aliasData already exists
-                                    var existingAlias = db.TB_ALIAS.Find(aliasData.ALIAS_ID);
-                                    List<int> savedAliasIds = aliasDataList.Select(x => x.ALIAS_ID).ToList();
-                                    var template = db.TB_TEMPLATE.Find(existingTemplate.TEMP_ID);
+                                    // Check if the email backup exists in the database.
+                                    var existingAlias = db.TB_ALIAS
+                                                         .FirstOrDefault(e => e.ALIAS_ID == aliasData.ALIAS_ID);
+
                                     if (existingAlias == null)
                                     {
+                                        // Add the new email backup to the database.
                                         db.TB_ALIAS.Add(aliasData);
-                                        foreach (int aliasId in savedAliasIds)
+                                        existingTemplate.TB_ALIAS.Add(aliasData); // Add to template's collection.
+                                    }
+                                    else
+                                    {
+                                        // If it already exists, ensure it's linked to the template.
+                                        if (!existingTemplate.TB_ALIAS.Contains(existingAlias))
                                         {
-                                            var alias = db.TB_ALIAS.Find(aliasId);
-                                            template.TB_ALIAS.Add(alias);
+                                            existingTemplate.TB_ALIAS.Add(existingAlias);
                                         }
                                     }
-
-                                    existingTemplate.TB_ALIAS.Add(aliasData);
                                 }
                             }
 

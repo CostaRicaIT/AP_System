@@ -159,9 +159,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Accounts_Payable.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
@@ -244,6 +241,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dashboard.js" />
     <EntityDeploy Include="Models\Accounts_Payable.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Accounts_Payable.Designer.cs</LastGenOutput>
@@ -251,7 +249,6 @@
     <Content Include="Models\Accounts_Payable.edmx.diagram">
       <DependentUpon>Accounts_Payable.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\dashboard.js" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

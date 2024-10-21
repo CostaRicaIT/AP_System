@@ -164,7 +164,7 @@ function DrawTable() {
         },
         columns: [
             { data: 'Id', name: 'TEMP_ID' },
-            { data: 'Alias', name: 'TB_ALIAS.ALIAS_NAME', className:"scrollable-content" },
+            { data: 'Alias', name: 'TB_ALIAS1.ALIAS_NAME', className:"scrollable-content" },
             { data: 'Folder', name: 'TEMP_FOLDER', className:"scrollable-content" },
             { data: 'TempTaxId', name: 'TEMP_TAX_ID', className:"scrollable-content" },
             { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className:"scrollable-content" },
@@ -199,7 +199,7 @@ function DrawTable() {
             { data: 'ARKeyContactsPrior', name: 'CONTACTS_PRIOR',className:"scrollable-content" },
             { data: 'Approver', name: 'TB_APPROVER.APPROVER_NAME',className:"scrollable-content" },
             { data: 'ApproverComments', name: 'TEMP_APPROVER_COMMENTS',className:"scrollable-content" },
-            { data: 'EmailBackup', name: 'EMAIL_BACKUP',className:"scrollable-content" },
+            { data: 'EmailBackup', name: 'TB_EMAIL_BACKUP1.EMAIL_BACKUP',className:"scrollable-content" },
             {
                 data: null,
                 render: function (data, type, row) {

@@ -18,7 +18,5 @@ namespace AccountsPayable.Models
         public Nullable<int> FK_WS_WORKSPACE_ID { get; set; }
         public System.DateTime LAST_ACTIONS_DATE { get; set; }
         public string LAST_ACTIONS_INFO { get; set; }
-    
-        public virtual TB_WORKSPACE TB_WORKSPACE { get; set; }
     }
 }

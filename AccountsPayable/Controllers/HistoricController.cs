@@ -12,9 +12,13 @@ namespace AccountsPayable.Controllers
         {
             // Get the text based on the ID
             var historicEmailText = db.TB_EMAIL_BACKUP
-                    .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id) && a.EMAIL_BACKUP_ID == emailId)
+                    .Where(a => a.EMAIL_BACKUP_ID == emailId)
                     .Select(item => item.EMAIL_BACKUP)
-                    .FirstOrDefault();
+                    .FirstOrDefault();            
+            //var historicEmailText = db.TB_EMAIL_BACKUP
+            //        .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id) && a.EMAIL_BACKUP_ID == emailId)
+            //        .Select(item => item.EMAIL_BACKUP)
+            //        .FirstOrDefault();
             if (historicEmailText != null)
             {
                 return Json(new { success = true, historicEmailText }, JsonRequestBehavior.AllowGet);

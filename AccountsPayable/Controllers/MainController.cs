@@ -135,8 +135,8 @@ namespace AccountsPayable.Controllers
                     .Select(m => new TemplateDto
                     {
                         Id = m.TEMP_ID,
-                        Alias = m.TB_ALIAS.LastOrDefault()?.ALIAS_NAME ?? "",
-                        //Alias = m.ALIAS_NAME,
+                        //Alias = m.TB_ALIAS.LastOrDefault()?.ALIAS_NAME ?? "",
+                        Alias = m.TB_ALIAS1?.ALIAS_NAME ?? "",
                         Folder = m.TEMP_FOLDER,
                         TempTaxId = m.TEMP_TAX_ID ?? "",
                         TempSupplierName = m.TEMP_SUPPLIER_NAME ?? "",
@@ -171,8 +171,8 @@ namespace AccountsPayable.Controllers
                         ARKeyContactsPrior = m.CONTACTS_PRIOR ?? "",
                         Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
                         ApproverComments = m.TEMP_APPROVER_COMMENTS ?? "",
-                        EmailBackup = m.TB_EMAIL_BACKUP.LastOrDefault()?.EMAIL_BACKUP ?? ""
-                        //EmailBackup = m.EMAIL_BACKUP?? ""
+                        //EmailBackup = m.TB_EMAIL_BACKUP.LastOrDefault()?.EMAIL_BACKUP ?? ""
+                        EmailBackup = m.TB_EMAIL_BACKUP1?.EMAIL_BACKUP ?? ""
                     }).ToList();
 
                 // Prepare JSON response
@@ -203,44 +203,12 @@ namespace AccountsPayable.Controllers
             {
                 if (sortDirection.Equals("asc", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Sorting on a navigation property
-                    if (sortColumn == "TB_ALIAS.ALIAS_NAME")
-                    {
-                        templateData = templateData
-                            .Include(m => m.TB_ALIAS) // Eager loading
-                            .OrderBy(m => m.TB_ALIAS.FirstOrDefault().ALIAS_NAME);
-                    }
-                    else if (sortColumn == "EMAIL_BACKUP")
-                    {
-                        templateData = templateData
-                            .Include(m => m.TB_EMAIL_BACKUP) // Eager loading
-                            .OrderBy(m => m.TB_EMAIL_BACKUP.FirstOrDefault().EMAIL_BACKUP);
-                    }
-                    else
-                    {
-                        templateData = templateData.OrderBy(sortColumn); // Default sorting
-                    }
-
+                    templateData = templateData.OrderBy(sortColumn); // Default sorting
                 }
                 else
                 {
-                    // Sorting on a navigation property
-                    if (sortColumn == "TB_ALIAS.ALIAS_NAME")
-                    {
-                        templateData = templateData
-                            .Include(m => m.TB_ALIAS) // Eager loading
-                            .OrderByDescending(m => m.TB_ALIAS.FirstOrDefault().ALIAS_NAME);
-                    } 
-                    else if (sortColumn == "EMAIL_BACKUP")
-                    {
-                        templateData = templateData
-                            .Include(m => m.TB_EMAIL_BACKUP) // Eager loading
-                            .OrderByDescending(m => m.TB_EMAIL_BACKUP.FirstOrDefault().EMAIL_BACKUP);
-                    }
-                    else
-                    {
-                        templateData = templateData.OrderBy($"{sortColumn} descending");
-                    }
+                    templateData = templateData.OrderBy($"{sortColumn} descending");
+
                 }
             }
             else
@@ -294,7 +262,7 @@ namespace AccountsPayable.Controllers
                 }
                 //Get data for email backup
                 var emailBackupList = db.TB_EMAIL_BACKUP
-                    .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id))
+                    .Where(a => a.FK_TEMP_ID == id)
                     .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -326,7 +294,15 @@ namespace AccountsPayable.Controllers
                     .ToList();
 
                 //Get data for alias
-                var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
+                var aliasesForTemplate = db.TB_ALIAS.
+                    Where(a => a.FK_TEMP_ID == id)
+                    .OrderByDescending(a => a.ALIAS_NAME)
+                    .AsEnumerable()
+                    .Select(a => new
+                    {
+                        ALIAS_ID = a.ALIAS_ID,
+                        ALIAS_NAME = a.ALIAS_NAME,
+                    }).ToList();
 
                 //Send data to view with external tables data
                 ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
@@ -362,7 +338,7 @@ namespace AccountsPayable.Controllers
                     return HttpNotFound();
                 }
                 var emailBackupList = db.TB_EMAIL_BACKUP
-                    .Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id))
+                    .Where(a => a.FK_TEMP_ID == id)
                     .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -390,7 +366,17 @@ namespace AccountsPayable.Controllers
                         HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
                         HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
                     }).ToList();
-                var aliasesForTemplate = db.TB_ALIAS.Where(a => a.TB_TEMPLATE.Any(t => t.TEMP_ID == id)).ToList();
+                //Get data for alias
+                var AliasToList = db.TB_ALIAS.
+                    Where(a => a.FK_TEMP_ID == id)
+                    .OrderByDescending(a => a.ALIAS_NAME)
+                    .AsEnumerable()
+                    .Select(a => new
+                    {
+                        ALIAS_ID = a.ALIAS_ID,
+                        ALIAS_NAME = a.ALIAS_NAME,
+                    }).ToList();
+
                 ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_TEMPLATE.FK_TB_APPROVER_ID);
                 ViewBag.FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
                 ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
@@ -399,7 +385,7 @@ namespace AccountsPayable.Controllers
                 ViewBag.FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_PAY_TERMS_ID);
                 ViewBag.FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_TEMPLATE.FK_TB_ORACLE_SOURCE_ID);
                 ViewBag.FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_TEMPLATE.FK_TB_ORACLE_TYPE_ID);
-                ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
+                ViewBag.FK_TB_TEMPLATE_ALIAS_ID = new SelectList(AliasToList, "ALIAS_ID", "ALIAS_NAME");
                 ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
                 return View(tB_TEMPLATE);
             }
