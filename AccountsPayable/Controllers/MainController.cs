@@ -18,40 +18,6 @@ namespace AccountsPayable.Controllers
             // Check user permision to access Template creation only Standard user should be able to access this view
             if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3)
             {
-                ////Get data for dashboard
-                //var tB_TEMPLATE = db.TB_TEMPLATE
-                //.Include(t => t.TB_APPROVER)
-                //.Include(t => t.TB_HIGHLIGHTS)
-                //.Include(t => t.TB_ORACLE_LEGAL_ENTITIES)
-                //.Include(t => t.TB_ORACLE_ORGANIZATION_TYPE)
-                //.Include(t => t.TB_ORACLE_PAY_TERMS)
-                //.Include(t => t.TB_ORACLE_SOURCE)
-                //.Include(t => t.TB_ORACLE_TYPE)
-                //.Where(t => t.TEMP_ISDISABLED == 0);
-                //var templates = tB_TEMPLATE.ToList();
-                ////get id of each template
-                //var templateIds = templates.Select(t => t.TEMP_ID).ToList();
-                ////Query to get the data
-                //var templateData = db.TB_TEMPLATE
-                //       .Where(t => templateIds.Contains(t.TEMP_ID))
-                //       .Select(t => new
-                //       {
-                //           Template = t,
-                //           Alias = t.TB_ALIAS.FirstOrDefault(a => a.ALIAS_ID == t.FK_TB_TEMPLATE_ALIAS_ID),
-                //           EmailBackup = t.TB_EMAIL_BACKUP.FirstOrDefault(e => e.EMAIL_BACKUP_ID == t.FK_TB_EMAIL_BACKUP_ID),
-                //           HistoricRemit = t.TB_HISTORIC_REMIT.FirstOrDefault(e => e.HISTORIC_REMIT_ID == t.FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
-                //       })
-                //       .ToList();
-                ////Join data of email and alias to template
-                ////If model is recreated due to db change ALIAS_NAME and EMAIL_BACKCUP HISTORIC_REMIT properties need to be recreated using Generate property option on VS
-                //foreach (var template in templates)
-                //{
-                //    var data = templateData.FirstOrDefault(t => t.Template.TEMP_ID == template.TEMP_ID);
-                //    template.ALIAS_NAME = data?.Alias?.ALIAS_NAME;
-                //    template.EMAIL_BACKUP = data?.EmailBackup?.EMAIL_BACKUP;
-                //    template.HISTORIC_REMIT = data?.HistoricRemit?.HISTORIC_REMIT_INFO;
-                //}
-                //return View(templates);
                 return View();
             }
             else
@@ -82,7 +48,7 @@ namespace AccountsPayable.Controllers
                 if (!string.IsNullOrEmpty(searchValue))
                 {
                     templateData = templateData.Where(m =>
-                        m.TB_ALIAS.Any(alias => alias.ALIAS_NAME.Contains(searchValue)) // Check if any alias matches the search value
+                        m.TB_ALIAS1.ALIAS_NAME.Contains(searchValue) // Check if any alias matches the search value
                         || m.TEMP_FOLDER.Contains(searchValue)
                         || m.TEMP_TAX_ID.Contains(searchValue)
                         || m.TEMP_SUPPLIER_NAME.Contains(searchValue)
@@ -116,7 +82,7 @@ namespace AccountsPayable.Controllers
                         || m.CONTACTS_PRIOR.Contains(searchValue)
                         || m.TB_APPROVER.APPROVER_NAME.Contains(searchValue)
                         || m.TEMP_APPROVER_COMMENTS.Contains(searchValue)
-                        || m.TB_EMAIL_BACKUP.Any(email => email.EMAIL_BACKUP.Contains(searchValue)));
+                        || m.TB_EMAIL_BACKUP1.EMAIL_BACKUP.Contains(searchValue));
 
                 }
 
@@ -135,7 +101,6 @@ namespace AccountsPayable.Controllers
                     .Select(m => new TemplateDto
                     {
                         Id = m.TEMP_ID,
-                        //Alias = m.TB_ALIAS.LastOrDefault()?.ALIAS_NAME ?? "",
                         Alias = m.TB_ALIAS1?.ALIAS_NAME ?? "",
                         Folder = m.TEMP_FOLDER,
                         TempTaxId = m.TEMP_TAX_ID ?? "",
@@ -171,7 +136,6 @@ namespace AccountsPayable.Controllers
                         ARKeyContactsPrior = m.CONTACTS_PRIOR ?? "",
                         Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
                         ApproverComments = m.TEMP_APPROVER_COMMENTS ?? "",
-                        //EmailBackup = m.TB_EMAIL_BACKUP.LastOrDefault()?.EMAIL_BACKUP ?? ""
                         EmailBackup = m.TB_EMAIL_BACKUP1?.EMAIL_BACKUP ?? ""
                     }).ToList();
 

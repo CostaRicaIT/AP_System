@@ -300,31 +300,7 @@ namespace AccountsPayable.Controllers
                                 }
                             }
 
-                            //// Update alias data
-                            //if (aliasDataList != null && aliasDataList.Any())
-                            //{
-                            //    foreach (var aliasData in aliasDataList)
-                            //    {
-                            //        aliasData.ALIAS_ISDISABLED = 0;
-
-                            //        // Check if aliasData already exists
-                            //        var existingAlias = db.TB_ALIAS.Find(aliasData.ALIAS_ID);
-                            //        List<int> savedAliasIds = aliasDataList.Select(x => x.ALIAS_ID).ToList();
-                            //        var template = db.TB_TEMPLATE.Find(existingTemplate.TEMP_ID);
-                            //        if (existingAlias == null)
-                            //        {
-                            //            db.TB_ALIAS.Add(aliasData);
-                            //            foreach (int aliasId in savedAliasIds)
-                            //            {
-                            //                var alias = db.TB_ALIAS.Find(aliasId);
-                            //                template.TB_ALIAS.Add(alias);
-                            //            }
-                            //        }
-
-                            //        existingTemplate.TB_ALIAS.Add(aliasData);
-                            //    }
-                            //}
-
+                            
                             // Update alias data
                             if (aliasDataList != null && aliasDataList.Any())
                             {
