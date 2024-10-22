@@ -226,7 +226,7 @@ namespace AccountsPayable.Controllers
                 }
                 //Get data for email backup
                 var emailBackupList = db.TB_EMAIL_BACKUP
-                    .Where(a => a.FK_TEMP_ID == id)
+                    .Where(a => a.FK_TB_TEMPLATE_ID == id)
                     .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -259,7 +259,7 @@ namespace AccountsPayable.Controllers
 
                 //Get data for alias
                 var aliasesForTemplate = db.TB_ALIAS.
-                    Where(a => a.FK_TEMP_ID == id)
+                    Where(a => a.FK_TB_TEMPLATE_ID == id)
                     .OrderByDescending(a => a.ALIAS_NAME)
                     .AsEnumerable()
                     .Select(a => new
@@ -302,7 +302,7 @@ namespace AccountsPayable.Controllers
                     return HttpNotFound();
                 }
                 var emailBackupList = db.TB_EMAIL_BACKUP
-                    .Where(a => a.FK_TEMP_ID == id)
+                    .Where(a => a.FK_TB_TEMPLATE_ID == id)
                     .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -332,7 +332,7 @@ namespace AccountsPayable.Controllers
                     }).ToList();
                 //Get data for alias
                 var AliasToList = db.TB_ALIAS.
-                    Where(a => a.FK_TEMP_ID == id)
+                    Where(a => a.FK_TB_TEMPLATE_ID == id)
                     .OrderByDescending(a => a.ALIAS_NAME)
                     .AsEnumerable()
                     .Select(a => new

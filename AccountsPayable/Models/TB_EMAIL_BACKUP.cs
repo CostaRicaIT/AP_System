@@ -24,7 +24,7 @@ namespace AccountsPayable.Models
         public System.DateTime EMAIL_BACKUP_DATE { get; set; }
         public string EMAIL_BACKUP { get; set; }
         public Nullable<int> EMAIL_BACKUP_ISDISABLED { get; set; }
-        public Nullable<int> FK_TEMP_ID { get; set; }
+        public Nullable<int> FK_TB_TEMPLATE_ID { get; set; }
     
         public virtual TB_TEMPLATE TB_TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
