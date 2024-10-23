@@ -14,6 +14,13 @@ namespace AccountsPayable.Models
     
     public partial class TB_WORKSPACE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_WORKSPACE()
+        {
+            this.WS_COMMENTS1 = new HashSet<WS_COMMENTS>();
+            this.WS_LAST_ACTIONS1 = new HashSet<WS_LAST_ACTIONS>();
+        }
+    
         public int WS_ID { get; set; }
         public int TEMP_ID { get; set; }
         public Nullable<int> FK_WS_INVOICE_CATEGORY_ID { get; set; }
@@ -22,8 +29,8 @@ namespace AccountsPayable.Models
         public string WS_EMAIL_RECEIVED { get; set; }
         public string WS_CREATED_DATE { get; set; }
         public string WS_SOURCE { get; set; }
-        public string WS_PATIENT_NAME { get; set; }
-        public string WS_DATEOF_SERVICE { get; set; }
+        public string WS_HANDLED_BY { get; set; }
+        public string WS_INVOICE_DATE { get; set; }
         public string WS_AMOUNT { get; set; }
         public string WS_INVOICE_NUMBER { get; set; }
         public Nullable<int> FK_WS_COMMENTS_ID { get; set; }
@@ -43,7 +50,7 @@ namespace AccountsPayable.Models
         public Nullable<int> WS_FK_TB_ORACLE_TYPE_ID { get; set; }
         public string WS_TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
-        public string WS_TEMP_ACCOUNT_CODING { get; set; }
+        public string WS_TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_SOURCE_ID { get; set; }
         public string WS_TEMP_ORACLE_NOTES { get; set; }
         public string WS_TEMP_ORACLE_INSTRUCTIONS { get; set; }
@@ -67,14 +74,24 @@ namespace AccountsPayable.Models
         public string WS_TEMP_BILLING_PERIOD_DATE { get; set; }
         public string WS_CONTACTS_CURRENT { get; set; }
         public Nullable<int> WS_FK_TB_ORGANIZATION_TYPE_ID { get; set; }
+        public string WS_CONTACTS_PRIOR { get; set; }
     
+        public virtual TB_ALIAS TB_ALIAS { get; set; }
         public virtual TB_APPROVER TB_APPROVER { get; set; }
+        public virtual TB_EMAIL_BACKUP TB_EMAIL_BACKUP { get; set; }
         public virtual TB_HIGHLIGHTS TB_HIGHLIGHTS { get; set; }
         public virtual TB_HISTORIC_REMIT TB_HISTORIC_REMIT { get; set; }
         public virtual TB_ORACLE_LEGAL_ENTITIES TB_ORACLE_LEGAL_ENTITIES { get; set; }
+        public virtual TB_ORACLE_ORGANIZATION_TYPE TB_ORACLE_ORGANIZATION_TYPE { get; set; }
         public virtual TB_ORACLE_PAY_TERMS TB_ORACLE_PAY_TERMS { get; set; }
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }
         public virtual TB_ORACLE_TYPE TB_ORACLE_TYPE { get; set; }
+        public virtual WS_COMMENTS WS_COMMENTS { get; set; }
+        public virtual WS_LAST_ACTIONS WS_LAST_ACTIONS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WS_COMMENTS> WS_COMMENTS1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WS_LAST_ACTIONS> WS_LAST_ACTIONS1 { get; set; }
         public virtual WS_INVOICE_CATEGORY WS_INVOICE_CATEGORY { get; set; }
     }
 }

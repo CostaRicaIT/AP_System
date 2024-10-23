@@ -159,6 +159,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Accounts_Payable.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Accounts_Payable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TB_ALIAS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>

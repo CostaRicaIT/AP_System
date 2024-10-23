@@ -11,7 +11,6 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
     
     public partial class TB_TEMPLATE
     {
@@ -36,14 +35,11 @@ namespace AccountsPayable.Models
         public Nullable<int> FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string TEMP_TAXPAYER_ID { get; set; }
         public Nullable<int> FK_TB_ORACLE_TYPE_ID { get; set; }
-        [AllowHtml]
         public string TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
         public string TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> FK_TB_ORACLE_SOURCE_ID { get; set; }
-        [AllowHtml]
         public string TEMP_ORACLE_NOTES { get; set; }
-        [AllowHtml]
         public string TEMP_ORACLE_INSTRUCTIONS { get; set; }
         public Nullable<int> FK_TB_HIGHLIGHTS_ID { get; set; }
         public Nullable<int> FK_TB_EMAIL_BACKUP_ID { get; set; }
@@ -55,15 +51,11 @@ namespace AccountsPayable.Models
         public string TEMP_FOLDER { get; set; }
         public string TEMP_PAYMENT_METHOD { get; set; }
         public string TEMP_REMIT_TOACCOUNT { get; set; }
-        [AllowHtml]
         public string TEMP_BILLING_PERIOD { get; set; }
         public string TEMP_DISTRIBUTION_COMBINATION { get; set; }
         public string TEMP_ACCOUNTING_DATE { get; set; }
-        [AllowHtml]
         public string TEMP_VSU { get; set; }
-        [AllowHtml]
         public string TEMP_W9_W8 { get; set; }
-        [AllowHtml]
         public string TEMP_INVOICE_NOTES { get; set; }
         public string TEMP_INVOICE_DESCRIPTION { get; set; }
         public string TEMP_BILLING_PRERIOD_DATE { get; set; }

@@ -18,6 +18,7 @@ namespace AccountsPayable.Models
         public TB_EMAIL_BACKUP()
         {
             this.TB_TEMPLATE1 = new HashSet<TB_TEMPLATE>();
+            this.TB_WORKSPACE = new HashSet<TB_WORKSPACE>();
         }
     
         public int EMAIL_BACKUP_ID { get; set; }
@@ -29,5 +30,7 @@ namespace AccountsPayable.Models
         public virtual TB_TEMPLATE TB_TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_WORKSPACE> TB_WORKSPACE { get; set; }
     }
 }

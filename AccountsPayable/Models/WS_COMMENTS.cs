@@ -14,9 +14,19 @@ namespace AccountsPayable.Models
     
     public partial class WS_COMMENTS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public WS_COMMENTS()
+        {
+            this.TB_WORKSPACE = new HashSet<TB_WORKSPACE>();
+        }
+    
         public int COMMENTS_ID { get; set; }
         public Nullable<int> FK_WS_WORKSPACE_ID { get; set; }
         public System.DateTime WORKSPACE_DATE { get; set; }
         public string WORKSPACE_INFO { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_WORKSPACE> TB_WORKSPACE { get; set; }
+        public virtual TB_WORKSPACE TB_WORKSPACE1 { get; set; }
     }
 }
