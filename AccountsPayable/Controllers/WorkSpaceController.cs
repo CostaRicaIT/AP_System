@@ -12,7 +12,7 @@ namespace AccountsPayable.Controllers
 {
     public class WorkSpaceController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         // GET: WorkSpace
         public ActionResult Index()
