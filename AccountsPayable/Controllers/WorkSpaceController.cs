@@ -17,7 +17,7 @@ namespace AccountsPayable.Controllers
         // GET: WorkSpace
         public ActionResult Index()
         {
-            var tB_WORKSPACE = db.TB_WORKSPACE.Include(t => t.TB_APPROVER).Include(t => t.TB_HIGHLIGHTS).Include(t => t.TB_HISTORIC_REMIT).Include(t => t.TB_ORACLE_LEGAL_ENTITIES).Include(t => t.TB_ORACLE_PAY_TERMS).Include(t => t.TB_ORACLE_SOURCE).Include(t => t.TB_ORACLE_TYPE).Include(t => t.WS_INVOICE_CATEGORY);
+            var tB_WORKSPACE = db.TB_WORKSPACE.Include(t => t.TB_APPROVER).Include(t => t.TB_HIGHLIGHTS).Include(t => t.TB_HISTORIC_REMIT).Include(t => t.TB_ORACLE_LEGAL_ENTITIES).Include(t => t.TB_ORACLE_PAY_TERMS).Include(t => t.TB_ORACLE_SOURCE).Include(t => t.TB_ORACLE_TYPE);
             return View(tB_WORKSPACE.ToList());
         }
 
@@ -46,7 +46,6 @@ namespace AccountsPayable.Controllers
             ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
             ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
             ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME");
             return View();
         }
 
@@ -71,7 +70,6 @@ namespace AccountsPayable.Controllers
             ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
             ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
             ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
             return View(tB_WORKSPACE);
         }
 
@@ -94,7 +92,6 @@ namespace AccountsPayable.Controllers
             ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
             ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
             ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
             return View(tB_WORKSPACE);
         }
 
@@ -118,7 +115,6 @@ namespace AccountsPayable.Controllers
             ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
             ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
             ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
             return View(tB_WORKSPACE);
         }
 

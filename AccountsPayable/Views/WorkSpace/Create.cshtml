@@ -25,19 +25,6 @@
             </div>
         </div>
 
-        <!-- Invoice Category -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_WS_INVOICE_CATEGORY_ID, "Invoice Category:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_WS_INVOICE_CATEGORY_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_WS_INVOICE_CATEGORY_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Status -->
         <div class="form-group">
             <div class=" row">
@@ -120,6 +107,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Due date -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Due date">Due date:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditor" id="form-Comments" rows="6" cols="50"></textarea>
+                        <br />
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Amount -->

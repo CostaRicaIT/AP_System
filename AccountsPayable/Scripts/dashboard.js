@@ -123,11 +123,14 @@ function DrawTable() {
                         `;
                     } else if (userRoleId === 2) {
                         buttons += `
+                         <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
                             <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
-                            </button>
-                            <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
-                                <i class="fas fa-edit"></i>
+                            </button>   
+                            <button class="dt-button filterButton Workspace-button" data-id="${row.Id}" aria-label="create">
+                              <i class="fa-regular fa-file-lines"></i>
                             </button>
                             <button class="dt-button filterButton erase-button" data-id="${row.Id}" aria-label="Delete">
                                 <i class="fa-solid fa-eraser"></i>
