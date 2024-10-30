@@ -23,7 +23,7 @@ namespace AccountsPayable.Models
     
         public int WS_ID { get; set; }
         public int TEMP_ID { get; set; }
-        public Nullable<int> FK_WS_INVOICE_CATEGORY_ID { get; set; }
+        public string WS_DUE_DATE { get; set; }
         public string WS_STATUS { get; set; }
         public string WS_REASON { get; set; }
         public string WS_EMAIL_RECEIVED { get; set; }
@@ -44,7 +44,6 @@ namespace AccountsPayable.Models
         public string WS_TEMP_VENDOR_ACCOUNT { get; set; }
         public Nullable<int> WS_FK_TB_TEMPLATE_ALIAS_ID { get; set; }
         public string WS_TEMP_SUPPLIER_SITE { get; set; }
-        public string WS_TEMP_ADDRESS { get; set; }
         public Nullable<int> WS_FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string WS_TEMP_TAXPAYER_ID { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_TYPE_ID { get; set; }
@@ -92,6 +91,5 @@ namespace AccountsPayable.Models
         public virtual ICollection<WS_COMMENTS> WS_COMMENTS1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WS_LAST_ACTIONS> WS_LAST_ACTIONS1 { get; set; }
-        public virtual WS_INVOICE_CATEGORY WS_INVOICE_CATEGORY { get; set; }
     }
 }

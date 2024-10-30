@@ -211,9 +211,6 @@
     <Compile Include="Models\WS_COMMENTS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WS_INVOICE_CATEGORY.cs">
-      <DependentUpon>Accounts_Payable.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\WS_LAST_ACTIONS.cs">
       <DependentUpon>Accounts_Payable.tt</DependentUpon>
     </Compile>
