@@ -56,6 +56,7 @@ function DrawTable() {
         scrollX: '80vh',
         processing: true,
         serverSide: true,
+        searchDelay: 2000,
         filter: true,
         dom: '<"top"lBf>rt<"bottom"ip>', // set the order of table items to be drawn
         ajax: {
