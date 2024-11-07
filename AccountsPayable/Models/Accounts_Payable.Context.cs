@@ -25,7 +25,6 @@ namespace AccountsPayable.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TB_ALIAS> TB_ALIAS { get; set; }
         public virtual DbSet<TB_APPROVER> TB_APPROVER { get; set; }
         public virtual DbSet<TB_EMAIL_BACKUP> TB_EMAIL_BACKUP { get; set; }
@@ -40,9 +39,5 @@ namespace AccountsPayable.Models
         public virtual DbSet<TB_ORACLE_TYPE> TB_ORACLE_TYPE { get; set; }
         public virtual DbSet<TB_TEMPLATE> TB_TEMPLATE { get; set; }
         public virtual DbSet<TB_VIEW_PERMISSIONS> TB_VIEW_PERMISSIONS { get; set; }
-        public virtual DbSet<TB_WORKSPACE> TB_WORKSPACE { get; set; }
-        public virtual DbSet<WS_COMMENTS> WS_COMMENTS { get; set; }
-        public virtual DbSet<WS_INVOICE_CATEGORY> WS_INVOICE_CATEGORY { get; set; }
-        public virtual DbSet<WS_LAST_ACTIONS> WS_LAST_ACTIONS { get; set; }
     }
 }
