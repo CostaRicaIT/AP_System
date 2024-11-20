@@ -17,9 +17,20 @@
             <button class="btn-primary" type="submit">@Html.ActionLink("Create New", "Create")</button>
         }
     </p>
-    <table id="dataTable" class="table cell-border stripe display" width="100%">
+    <table id="wsdataTable" class="table cell-border stripe display" width="100%">
         <thead>
             <tr>
+                <th>Workspace ID</th>
+                <th>Due date</th>
+                <th>Status</th>
+                <th>Reason</th>
+                <th>Email received</th>
+                <th>Created Date</th>
+                <th>Source</th>
+                <th>Handled by</th>
+                <th>Invoice date</th>
+                <th>Amount</th>
+                <th>Invoice number</th>
                 <th>ID</th>
                 <th>Alias</th>
                 <th>Folder</th>
@@ -61,202 +72,209 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
+            @*@foreach (var item in Model)
+                {
+                    <tr>
 
-                    <td>@item.WS_ID</td>
-                    <td class="alias">@item.WS_FK_TB_TEMPLATE_ALIAS_ID</td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_FOLDER
-                        </div>
-                    </td>
-                    <td class="tax">@item.WS_TEMP_TAX_ID </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_SUPPLIER_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_SUPPLIER_NUMBER
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_REMIT_TO
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_SUPPLIER_SITE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_VENDOR_ACCOUNT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_INVOICE_FORMAT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_INVOICE_TYPE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_INVOICE_NOTES)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_W9_W8)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_VSU)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_PAYMENT_METHOD
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_REMIT_TOACCOUNT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_INVOICE_DESCRIPTION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_BILLING_PERIOD)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_BILLING_PERIOD_DATE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_DISTRIBUTION_SET
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_DISTRIBUTION_COMBINATION
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_ACCOUNTING_DATE
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @(string.IsNullOrEmpty(item.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME) ? "" : item.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_TAXPAYER_ID
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_ORACLE_DESCRIPTION)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_ORACLE_NOTES)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @Html.Raw(item.WS_TEMP_ORACLE_INSTRUCTIONS)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_CONTACTS_CURRENT
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_CONTACTS_PRIOR
-                        </div>
-                    </td>
-                    <td>@item.TB_APPROVER.APPROVER_NAME</td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_TEMP_APPROVER_COMMENTS
-                        </div>
-                    </td>
-                    <td>
-                        <div class="scrollable-content">
-                            @item.WS_FK_TB_EMAIL_BACKUP_ID
-                        </div>
-                    </td>
-                    <td>
-                        <div class="button-container">
+                        <td>@item.WS_ID</td>
+                        <td class="alias">@item.WS_FK_TB_TEMPLATE_ALIAS_ID</td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_FOLDER
+                            </div>
+                        </td>
+                        <td class="tax">@item.WS_TEMP_TAX_ID </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_SUPPLIER_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_SUPPLIER_NUMBER
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_REMIT_TO
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_SUPPLIER_SITE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_VENDOR_ACCOUNT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_INVOICE_FORMAT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_INVOICE_TYPE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_INVOICE_NOTES)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_W9_W8)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_VSU)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_PAYMENT_METHOD
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_REMIT_TOACCOUNT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_INVOICE_DESCRIPTION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_BILLING_PERIOD)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_BILLING_PERIOD_DATE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_DISTRIBUTION_SET
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_DISTRIBUTION_COMBINATION
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_ACCOUNTING_DATE
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @(string.IsNullOrEmpty(item.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME) ? "" : item.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_TAXPAYER_ID
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.TB_ORACLE_TYPE.ORACLE_TYPE_NAME
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_ORACLE_DESCRIPTION)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_ORACLE_NOTES)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @Html.Raw(item.WS_TEMP_ORACLE_INSTRUCTIONS)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_CONTACTS_CURRENT
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_CONTACTS_PRIOR
+                            </div>
+                        </td>
+                        <td>@item.TB_APPROVER.APPROVER_NAME</td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_TEMP_APPROVER_COMMENTS
+                            </div>
+                        </td>
+                        <td>
+                            <div class="scrollable-content">
+                                @item.WS_FK_TB_EMAIL_BACKUP_ID
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
 
 
-                            @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
-                            {
-                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
-                            }
+                                @if (Session["Permission"] != null && ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID == 3)
+                                {
+                                    <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                }
 
-                            else
-                            {
-                                <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
-                                <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
-                                <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
-                            }
+                                else
+                                {
+                                    <button class="dt-button filterButton view-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="dt-button filterButton edit-button" data-id="@item.TEMP_ID"><i class="fas fa-edit"></i></button>
+                                    <button class="dt-button filterButton erase-button" data-id="@item.TEMP_ID"><i class="fa-solid fa-eraser"></i></button>
+                                }
 
-                        </div>
-                    </td>
+                            </div>
+                        </td>
 
-                </tr>
-            }
+                    </tr>
+                }*@
         </tbody>
 
     </table>
 
 </div>
+@section scripts {
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/staterestore/1.3.0/js/dataTables.stateRestore.min.js"></script>
+
+    <script src="~/Scripts/ws_dashboard.js"></script>
+}
