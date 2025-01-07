@@ -180,7 +180,7 @@
           </Key>
           <Property Name="WS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TEMP_ID" Type="int" Nullable="false" />
-          <Property Name="FK_WS_INVOICE_CATEGORY_ID" Type="int" />
+          <Property Name="WS_DUE_DATE" Type="varchar(max)" />
           <Property Name="WS_STATUS" Type="varchar(max)" />
           <Property Name="WS_REASON" Type="varchar(max)" />
           <Property Name="WS_EMAIL_RECEIVED" Type="varchar(max)" />
@@ -196,27 +196,26 @@
           <Property Name="WS_TEMP_TAX_ID" Type="varchar(max)" />
           <Property Name="WS_TEMP_REMIT_TO" Type="varchar(max)" />
           <Property Name="WS_TEMP_SUPPLIER_NAME" Type="varchar(max)" />
-          <Property Name="WS_TEMP_SUPPLIER_NUMBER" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_SUPPLIER_NUMBER" Type="varchar(max)" />
           <Property Name="WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="int" />
-          <Property Name="WS_TEMP_VENDOR_ACCOUNT" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_VENDOR_ACCOUNT" Type="varchar(max)" />
           <Property Name="WS_FK_TB_TEMPLATE_ALIAS_ID" Type="int" />
-          <Property Name="WS_TEMP_SUPPLIER_SITE" Type="varchar(max)" Nullable="false" />
-          <Property Name="WS_TEMP_ADDRESS" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_SUPPLIER_SITE" Type="varchar(max)" />
           <Property Name="WS_FK_TB_LEGAL_ENTITY_ID" Type="int" />
-          <Property Name="WS_TEMP_TAXPAYER_ID" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_TAXPAYER_ID" Type="varchar(max)" />
           <Property Name="WS_FK_TB_ORACLE_TYPE_ID" Type="int" />
-          <Property Name="WS_TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_ORACLE_DESCRIPTION" Type="varchar(max)" />
           <Property Name="WS_FK_TB_ORACLE_PAY_TERMS_ID" Type="int" />
-          <Property Name="WS_TEMP_DISTRIBUTION_SET" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_DISTRIBUTION_SET" Type="varchar(max)" />
           <Property Name="WS_FK_TB_ORACLE_SOURCE_ID" Type="int" />
-          <Property Name="WS_TEMP_ORACLE_NOTES" Type="varchar(max)" Nullable="false" />
-          <Property Name="WS_TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_ORACLE_NOTES" Type="varchar(max)" />
+          <Property Name="WS_TEMP_ORACLE_INSTRUCTIONS" Type="varchar(max)" />
           <Property Name="WS_FK_TB_HIGHLIGHTS_ID" Type="int" />
           <Property Name="WS_FK_TB_EMAIL_BACKUP_ID" Type="int" />
           <Property Name="WS_FK_TB_APPROVER_ID" Type="int" />
-          <Property Name="WS_TEMP_APPROVER_COMMENTS" Type="varchar(max)" Nullable="false" />
-          <Property Name="WS_TEMP_INVOICE_FORMAT" Type="varchar(max)" Nullable="false" />
-          <Property Name="WS_TEMP_INVOICE_TYPE" Type="varchar(max)" Nullable="false" />
+          <Property Name="WS_TEMP_APPROVER_COMMENTS" Type="varchar(max)" />
+          <Property Name="WS_TEMP_INVOICE_FORMAT" Type="varchar(max)" />
+          <Property Name="WS_TEMP_INVOICE_TYPE" Type="varchar(max)" />
           <Property Name="WS_TEMP_ISDISABLED" Type="int" Nullable="false" />
           <Property Name="WS_TEMP_FOLDER" Type="varchar(max)" />
           <Property Name="WS_TEMP_PAYMENT_METHOD" Type="varchar(max)" />
@@ -241,13 +240,6 @@
           <Property Name="FK_WS_WORKSPACE_ID" Type="int" />
           <Property Name="WORKSPACE_DATE" Type="datetime" Nullable="false" />
           <Property Name="WORKSPACE_INFO" Type="varchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="WS_INVOICE_CATEGORY">
-          <Key>
-            <PropertyRef Name="INVOICE_CATEGORY_ID" />
-          </Key>
-          <Property Name="INVOICE_CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="INVOICE_CATEGORY_NAME" Type="varchar" MaxLength="120" />
         </EntityType>
         <EntityType Name="WS_LAST_ACTIONS">
           <Key>
@@ -618,18 +610,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID">
-          <End Role="WS_INVOICE_CATEGORY" Type="Self.WS_INVOICE_CATEGORY" Multiplicity="0..1" />
-          <End Role="TB_WORKSPACE" Type="Self.TB_WORKSPACE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WS_INVOICE_CATEGORY">
-              <PropertyRef Name="INVOICE_CATEGORY_ID" />
-            </Principal>
-            <Dependent Role="TB_WORKSPACE">
-              <PropertyRef Name="FK_WS_INVOICE_CATEGORY_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Accounts_Payable_ModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ALIAS" EntityType="Self.TB_ALIAS" Schema="dbo" store:Type="Tables" />
@@ -648,7 +628,6 @@
           <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Self.TB_VIEW_PERMISSIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WORKSPACE" EntityType="Self.TB_WORKSPACE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WS_COMMENTS" EntityType="Self.WS_COMMENTS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WS_INVOICE_CATEGORY" EntityType="Self.WS_INVOICE_CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WS_LAST_ACTIONS" EntityType="Self.WS_LAST_ACTIONS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__TB_ALIAS__FK_TEM__737017C0" Association="Self.FK__TB_ALIAS__FK_TEM__737017C0">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
@@ -770,10 +749,6 @@
             <End Role="TB_ORACLE_ORGANIZATION_TYPE" EntitySet="TB_ORACLE_ORGANIZATION_TYPE" />
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID" Association="Self.FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID">
-            <End Role="WS_INVOICE_CATEGORY" EntitySet="WS_INVOICE_CATEGORY" />
-            <End Role="TB_WORKSPACE" EntitySet="TB_WORKSPACE" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -797,7 +772,6 @@
           <EntitySet Name="TB_VIEW_PERMISSIONS" EntityType="Accounts_Payable_Model.TB_VIEW_PERMISSIONS" />
           <EntitySet Name="TB_WORKSPACE" EntityType="Accounts_Payable_Model.TB_WORKSPACE" />
           <EntitySet Name="WS_COMMENTS" EntityType="Accounts_Payable_Model.WS_COMMENTS" />
-          <EntitySet Name="WS_INVOICE_CATEGORY" EntityType="Accounts_Payable_Model.WS_INVOICE_CATEGORY" />
           <EntitySet Name="WS_LAST_ACTIONS" EntityType="Accounts_Payable_Model.WS_LAST_ACTIONS" />
           <AssociationSet Name="FK__TB_ALIAS__FK_TEM__737017C0" Association="Accounts_Payable_Model.FK__TB_ALIAS__FK_TEM__737017C0">
             <End Role="TB_TEMPLATE" EntitySet="TB_TEMPLATE" />
@@ -918,10 +892,6 @@
           <AssociationSet Name="FK__WS_LAST_A__FK_WS__00CA12DE" Association="Accounts_Payable_Model.FK__WS_LAST_A__FK_WS__00CA12DE">
             <End Role="TB_WORKSPACE" EntitySet="TB_WORKSPACE" />
             <End Role="WS_LAST_ACTIONS" EntitySet="WS_LAST_ACTIONS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID" Association="Accounts_Payable_Model.FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID">
-            <End Role="WS_INVOICE_CATEGORY" EntitySet="WS_INVOICE_CATEGORY" />
-            <End Role="TB_WORKSPACE" EntitySet="TB_WORKSPACE" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
@@ -1141,7 +1111,7 @@
           </Key>
           <Property Name="WS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TEMP_ID" Type="Int32" Nullable="false" />
-          <Property Name="FK_WS_INVOICE_CATEGORY_ID" Type="Int32" />
+          <Property Name="WS_DUE_DATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_REASON" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_EMAIL_RECEIVED" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1157,27 +1127,26 @@
           <Property Name="WS_TEMP_TAX_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_TEMP_REMIT_TO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_TEMP_SUPPLIER_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WS_TEMP_SUPPLIER_NUMBER" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_SUPPLIER_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID" Type="Int32" />
-          <Property Name="WS_TEMP_VENDOR_ACCOUNT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_VENDOR_ACCOUNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_TEMPLATE_ALIAS_ID" Type="Int32" />
-          <Property Name="WS_TEMP_SUPPLIER_SITE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WS_TEMP_ADDRESS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_SUPPLIER_SITE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_LEGAL_ENTITY_ID" Type="Int32" />
-          <Property Name="WS_TEMP_TAXPAYER_ID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_TAXPAYER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_ORACLE_TYPE_ID" Type="Int32" />
-          <Property Name="WS_TEMP_ORACLE_DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_ORACLE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_ORACLE_PAY_TERMS_ID" Type="Int32" />
-          <Property Name="WS_TEMP_DISTRIBUTION_SET" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_DISTRIBUTION_SET" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_ORACLE_SOURCE_ID" Type="Int32" />
-          <Property Name="WS_TEMP_ORACLE_NOTES" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WS_TEMP_ORACLE_INSTRUCTIONS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_ORACLE_NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_ORACLE_INSTRUCTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_FK_TB_HIGHLIGHTS_ID" Type="Int32" />
           <Property Name="WS_FK_TB_EMAIL_BACKUP_ID" Type="Int32" />
           <Property Name="WS_FK_TB_APPROVER_ID" Type="Int32" />
-          <Property Name="WS_TEMP_APPROVER_COMMENTS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WS_TEMP_INVOICE_FORMAT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WS_TEMP_INVOICE_TYPE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_APPROVER_COMMENTS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_INVOICE_FORMAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WS_TEMP_INVOICE_TYPE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_TEMP_ISDISABLED" Type="Int32" Nullable="false" />
           <Property Name="WS_TEMP_FOLDER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WS_TEMP_PAYMENT_METHOD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1207,7 +1176,6 @@
           <NavigationProperty Name="WS_LAST_ACTIONS" Relationship="Accounts_Payable_Model.FK__TB_WORKSP__FK_WS__02B25B50" FromRole="TB_WORKSPACE" ToRole="WS_LAST_ACTIONS" />
           <NavigationProperty Name="WS_COMMENTS1" Relationship="Accounts_Payable_Model.FK__WS_COMMEN__FK_WS__7FD5EEA5" FromRole="TB_WORKSPACE" ToRole="WS_COMMENTS" />
           <NavigationProperty Name="WS_LAST_ACTIONS1" Relationship="Accounts_Payable_Model.FK__WS_LAST_A__FK_WS__00CA12DE" FromRole="TB_WORKSPACE" ToRole="WS_LAST_ACTIONS" />
-          <NavigationProperty Name="WS_INVOICE_CATEGORY" Relationship="Accounts_Payable_Model.FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID" FromRole="TB_WORKSPACE" ToRole="WS_INVOICE_CATEGORY" />
         </EntityType>
         <EntityType Name="WS_COMMENTS">
           <Key>
@@ -1219,14 +1187,6 @@
           <Property Name="WORKSPACE_INFO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TB_WORKSPACE" Relationship="Accounts_Payable_Model.FK__TB_WORKSP__FK_WS__01BE3717" FromRole="WS_COMMENTS" ToRole="TB_WORKSPACE" />
           <NavigationProperty Name="TB_WORKSPACE1" Relationship="Accounts_Payable_Model.FK__WS_COMMEN__FK_WS__7FD5EEA5" FromRole="WS_COMMENTS" ToRole="TB_WORKSPACE" />
-        </EntityType>
-        <EntityType Name="WS_INVOICE_CATEGORY">
-          <Key>
-            <PropertyRef Name="INVOICE_CATEGORY_ID" />
-          </Key>
-          <Property Name="INVOICE_CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="INVOICE_CATEGORY_NAME" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_WORKSPACE" Relationship="Accounts_Payable_Model.FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID" FromRole="WS_INVOICE_CATEGORY" ToRole="TB_WORKSPACE" />
         </EntityType>
         <EntityType Name="WS_LAST_ACTIONS">
           <Key>
@@ -1599,19 +1559,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_WORKSPACE_FK_WS_INVOICE_CATEGORY_ID">
-          <End Type="Accounts_Payable_Model.WS_INVOICE_CATEGORY" Role="WS_INVOICE_CATEGORY" Multiplicity="0..1" />
-          <End Type="Accounts_Payable_Model.TB_WORKSPACE" Role="TB_WORKSPACE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WS_INVOICE_CATEGORY">
-              <PropertyRef Name="INVOICE_CATEGORY_ID" />
-            </Principal>
-            <Dependent Role="TB_WORKSPACE">
-              <PropertyRef Name="FK_WS_INVOICE_CATEGORY_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1834,7 +1782,6 @@
                 <ScalarProperty Name="WS_FK_TB_ORACLE_TYPE_ID" ColumnName="WS_FK_TB_ORACLE_TYPE_ID" />
                 <ScalarProperty Name="WS_TEMP_TAXPAYER_ID" ColumnName="WS_TEMP_TAXPAYER_ID" />
                 <ScalarProperty Name="WS_FK_TB_LEGAL_ENTITY_ID" ColumnName="WS_FK_TB_LEGAL_ENTITY_ID" />
-                <ScalarProperty Name="WS_TEMP_ADDRESS" ColumnName="WS_TEMP_ADDRESS" />
                 <ScalarProperty Name="WS_TEMP_SUPPLIER_SITE" ColumnName="WS_TEMP_SUPPLIER_SITE" />
                 <ScalarProperty Name="WS_FK_TB_TEMPLATE_ALIAS_ID" ColumnName="WS_FK_TB_TEMPLATE_ALIAS_ID" />
                 <ScalarProperty Name="WS_TEMP_VENDOR_ACCOUNT" ColumnName="WS_TEMP_VENDOR_ACCOUNT" />
@@ -1855,7 +1802,7 @@
                 <ScalarProperty Name="WS_EMAIL_RECEIVED" ColumnName="WS_EMAIL_RECEIVED" />
                 <ScalarProperty Name="WS_REASON" ColumnName="WS_REASON" />
                 <ScalarProperty Name="WS_STATUS" ColumnName="WS_STATUS" />
-                <ScalarProperty Name="FK_WS_INVOICE_CATEGORY_ID" ColumnName="FK_WS_INVOICE_CATEGORY_ID" />
+                <ScalarProperty Name="WS_DUE_DATE" ColumnName="WS_DUE_DATE" />
                 <ScalarProperty Name="TEMP_ID" ColumnName="TEMP_ID" />
                 <ScalarProperty Name="WS_ID" ColumnName="WS_ID" />
               </MappingFragment>
@@ -1868,14 +1815,6 @@
                 <ScalarProperty Name="WORKSPACE_DATE" ColumnName="WORKSPACE_DATE" />
                 <ScalarProperty Name="FK_WS_WORKSPACE_ID" ColumnName="FK_WS_WORKSPACE_ID" />
                 <ScalarProperty Name="COMMENTS_ID" ColumnName="COMMENTS_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WS_INVOICE_CATEGORY">
-            <EntityTypeMapping TypeName="Accounts_Payable_Model.WS_INVOICE_CATEGORY">
-              <MappingFragment StoreEntitySet="WS_INVOICE_CATEGORY">
-                <ScalarProperty Name="INVOICE_CATEGORY_NAME" ColumnName="INVOICE_CATEGORY_NAME" />
-                <ScalarProperty Name="INVOICE_CATEGORY_ID" ColumnName="INVOICE_CATEGORY_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1, 3, 4, 5, 6, 24, 37]; //Alias,Remit to,Supplier Name,Supplier Number,Legal Entity,Tax ID,Actions
+var defaultColumns = [1,2,3,4,5,6,7,8,9,10,48]; //
 
 function showFilterModal() {
     // Open the modal
@@ -46,7 +46,7 @@ function wrapScrollableContent() {
 function DrawTable() {
     var userRoleId = 0;
     // Initialize the DataTable
-    table = $('#dataTable').DataTable({
+    table = $('#wsdataTable').DataTable({
         pageLength: 25,
         orderCellsTop: true, //Show table sorting at top
         autoWidth: true, //Set the widht of collumn depending on content
@@ -56,11 +56,10 @@ function DrawTable() {
         scrollX: '80vh',
         processing: true,
         serverSide: true,
-        searchDelay: 2000,
         filter: true,
         dom: '<"top"lBf>rt<"bottom"ip>', // set the order of table items to be drawn
         ajax: {
-            "url": "/Main/GetTemplateData",
+            "url": "/WorkSpace/GetWorkspaceData",
             "type": "POST",
             "datatype": "json",
             "dataSrc": function (json) {
@@ -72,43 +71,54 @@ function DrawTable() {
             }
         },
         columns: [
+            { data: 'WS_Id', name: 'WS_ID', className: "scrollable-content" },
+            { data: 'Ws_duedate', name: 'WS_DUE_DATE', className: "scrollable-content" },
+            { data: 'Ws_status', name: 'WS_STATUS', className: "scrollable-content" },
+            { data: 'Ws_reason', name: 'WS_REASON', className: "scrollable-content" },
+            { data: 'Ws_email_received', name: 'WS_EMAIL_RECEIVED', className: "scrollable-content" },
+            { data: 'Ws_created_date', name: 'WS_CREATED_DATE', className: "scrollable-content" },
+            { data: 'Ws_source', name: 'WS_SOURCE', className: "scrollable-content" },
+            { data: 'Ws_handled_by', name: 'WS_HANDLED_BY', className: "scrollable-content" },
+            { data: 'Ws_invoice_date', name: 'WS_INVOICE_DATE', className: "scrollable-content" },
+            { data: 'Ws_amount', name: 'WS_AMOUNT', className: "scrollable-content" },
+            { data: 'Ws_invoice_number', name: 'WS_INVOICE_NUMBER', className: "scrollable-content" },
             { data: 'Id', name: 'TEMP_ID' },
-            { data: 'Alias', name: 'TB_ALIAS1.ALIAS_NAME', className:"scrollable-content" },
-            { data: 'Folder', name: 'TEMP_FOLDER', className:"scrollable-content" },
-            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className:"scrollable-content" },
-            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className:"scrollable-content" },
-            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className:"scrollable-content" },
-            { data: 'RemitTo', name: 'TEMP_REMIT_TO', className:"scrollable-content" },
-            { data: 'SupplierSite', name: 'TEMP_SUPPLIER_SITE', className:"scrollable-content" },
-            { data: 'HistoricRemitTo', name: 'TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO',className:"scrollable-content" },
-            { data: 'VendorAccount', name: 'TEMP_VENDOR_ACCOUNT', className: "scrollable-content",className:"scrollable-content" },
-            { data: 'Source', name: 'TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION',className:"scrollable-content" },
-            { data: 'InvoiceFormat', name: 'TEMP_INVOICE_FORMAT',className:"scrollable-content" },
-            { data: 'InvoiceType', name: 'TEMP_INVOICE_TYPE',className:"scrollable-content" },
-            { data: 'InvoiceNotes', name: 'TEMP_INVOICE_NOTES',className:"scrollable-content" },
-            { data: 'W9W8BENForm', name: 'TEMP_W9_W8',className:"scrollable-content" },
-            { data: 'VSUForm', name: 'TEMP_VSU',className:"scrollable-content" },
-            { data: 'PaymentMethod', name: 'TEMP_PAYMENT_METHOD',className:"scrollable-content" },
-            { data: 'RemitToAccount', name: 'TEMP_REMIT_TOACCOUNT',className:"scrollable-content" },
-            { data: 'PayTerms', name: 'TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION',className:"scrollable-content" },
-            { data: 'InvoiceDescription', name: 'TEMP_INVOICE_DESCRIPTION',className:"scrollable-content" },
-            { data: 'BillingPeriod', name: 'TEMP_BILLING_PERIOD',className:"scrollable-content" },
-            { data: 'Dates', name: 'TEMP_BILLING_PRERIOD_DATE',className:"scrollable-content" },
-            { data: 'DistributionSet', name: 'TEMP_DISTRIBUTION_SET',className:"scrollable-content" },
-            { data: 'DistributionCombination', name: 'TEMP_DISTRIBUTION_COMBINATION',className:"scrollable-content" },
+            { data: 'Alias', name: 'TB_ALIAS1.ALIAS_NAME', className: "scrollable-content" },
+            { data: 'Folder', name: 'TEMP_FOLDER', className: "scrollable-content" },
+            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className: "scrollable-content" },
+            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className: "scrollable-content" },
+            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className: "scrollable-content" },
+            { data: 'RemitTo', name: 'TEMP_REMIT_TO', className: "scrollable-content" },
+            { data: 'SupplierSite', name: 'TEMP_SUPPLIER_SITE', className: "scrollable-content" },
+            { data: 'HistoricRemitTo', name: 'TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO', className: "scrollable-content" },
+            { data: 'VendorAccount', name: 'TEMP_VENDOR_ACCOUNT', className: "scrollable-content", className: "scrollable-content" },
+            { data: 'Source', name: 'TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION', className: "scrollable-content" },
+            { data: 'InvoiceFormat', name: 'TEMP_INVOICE_FORMAT', className: "scrollable-content" },
+            { data: 'InvoiceType', name: 'TEMP_INVOICE_TYPE', className: "scrollable-content" },
+            { data: 'InvoiceNotes', name: 'TEMP_INVOICE_NOTES', className: "scrollable-content" },
+            { data: 'W9W8BENForm', name: 'TEMP_W9_W8', className: "scrollable-content" },
+            { data: 'VSUForm', name: 'TEMP_VSU', className: "scrollable-content" },
+            { data: 'PaymentMethod', name: 'TEMP_PAYMENT_METHOD', className: "scrollable-content" },
+            { data: 'RemitToAccount', name: 'TEMP_REMIT_TOACCOUNT', className: "scrollable-content" },
+            { data: 'PayTerms', name: 'TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION', className: "scrollable-content" },
+            { data: 'InvoiceDescription', name: 'TEMP_INVOICE_DESCRIPTION', className: "scrollable-content" },
+            { data: 'BillingPeriod', name: 'TEMP_BILLING_PERIOD', className: "scrollable-content" },
+            { data: 'Dates', name: 'TEMP_BILLING_PRERIOD_DATE', className: "scrollable-content" },
+            { data: 'DistributionSet', name: 'TEMP_DISTRIBUTION_SET', className: "scrollable-content" },
+            { data: 'DistributionCombination', name: 'TEMP_DISTRIBUTION_COMBINATION', className: "scrollable-content" },
             { data: 'AccountingDate', name: 'TEMP_ACCOUNTING_DATE' },
-            { data: 'LegalEntity', name: 'TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME',className:"scrollable-content" },
-            { data: 'OrganizationType', name: 'TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME',className:"scrollable-content" },
-            { data: 'TaxPayerID', name: 'TEMP_TAXPAYER_ID',className:"scrollable-content" },
-            { data: 'Type', name: 'TB_ORACLE_TYPE.ORACLE_TYPE_NAME',className:"scrollable-content" },
-            { data: 'Description', name: 'TEMP_ORACLE_DESCRIPTION',className:"scrollable-content" },
-            { data: 'OracleNotes', name: 'TEMP_ORACLE_NOTES',className:"scrollable-content" },
-            { data: 'OracleInstructions', name: 'TEMP_ORACLE_INSTRUCTIONS',className:"scrollable-content" },
-            { data: 'ARKeyContactsCurrent', name: 'CONTACTS_CURRENT',className:"scrollable-content" },
-            { data: 'ARKeyContactsPrior', name: 'CONTACTS_PRIOR',className:"scrollable-content" },
-            { data: 'Approver', name: 'TB_APPROVER.APPROVER_NAME',className:"scrollable-content" },
-            { data: 'ApproverComments', name: 'TEMP_APPROVER_COMMENTS',className:"scrollable-content" },
-            { data: 'EmailBackup', name: 'TB_EMAIL_BACKUP1.EMAIL_BACKUP',className:"scrollable-content" },
+            { data: 'LegalEntity', name: 'TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME', className: "scrollable-content" },
+            { data: 'OrganizationType', name: 'TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME', className: "scrollable-content" },
+            { data: 'TaxPayerID', name: 'TEMP_TAXPAYER_ID', className: "scrollable-content" },
+            { data: 'Type', name: 'TB_ORACLE_TYPE.ORACLE_TYPE_NAME', className: "scrollable-content" },
+            { data: 'Description', name: 'TEMP_ORACLE_DESCRIPTION', className: "scrollable-content" },
+            { data: 'OracleNotes', name: 'TEMP_ORACLE_NOTES', className: "scrollable-content" },
+            { data: 'OracleInstructions', name: 'TEMP_ORACLE_INSTRUCTIONS', className: "scrollable-content" },
+            { data: 'ARKeyContactsCurrent', name: 'CONTACTS_CURRENT', className: "scrollable-content" },
+            { data: 'ARKeyContactsPrior', name: 'CONTACTS_PRIOR', className: "scrollable-content" },
+            { data: 'Approver', name: 'TB_APPROVER.APPROVER_NAME', className: "scrollable-content" },
+            { data: 'ApproverComments', name: 'TEMP_APPROVER_COMMENTS', className: "scrollable-content" },
+            { data: 'EmailBackup', name: 'TB_EMAIL_BACKUP1.EMAIL_BACKUP', className: "scrollable-content" },
             {
                 data: null,
                 render: function (data, type, row) {
@@ -118,22 +128,19 @@ function DrawTable() {
                     // Check permissions for buttons
                     if (userRoleId === 3) { // View permission
                         buttons += `
-                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                            <button class="dt-button filterButton view-button" data-id="${row.WS_Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         `;
                     } else if (userRoleId === 2) {
                         buttons += `
-                         <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
+                            <button class="dt-button filterButton view-button" data-id="${row.WS_Id}" aria-label="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button class="dt-button filterButton edit-button" data-id="${row.WS_Id}" aria-label="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>   
-                            <button class="dt-button filterButton Workspace-button" data-id="${row.Id}" aria-label="create">
-                              <i class="fa-regular fa-file-lines"></i>
-                            </button>
-                            <button class="dt-button filterButton erase-button" data-id="${row.Id}" aria-label="Delete">
+                            <button class="dt-button filterButton erase-button" data-id="${row.WS_Id}" aria-label="Delete">
                                 <i class="fa-solid fa-eraser"></i>
                             </button>
                         `;
@@ -187,7 +194,7 @@ function DrawTable() {
         resetFilters();
     });
     //Funtion to handle View, edit and delete buttons
-    $('#dataTable').on('click', '.view-button', function () {
+    $('#wsdataTable').on('click', '.view-button', function () {
         // Extract the ID from the clicked button
         var rowId = $(this).data('id');
 
@@ -199,14 +206,14 @@ function DrawTable() {
     });
 
     // Click event handler for the "Edit" button
-    $('#dataTable').on('click', '.edit-button', function () {
+    $('#wsdataTable').on('click', '.edit-button', function () {
         var rowId = $(this).data('id');
         var redirectUrl = 'Edit/' + rowId;
         window.location.href = redirectUrl;
     });
 
     // Click event handler for the "Erase" button
-    $('#dataTable').on('click', '.erase-button', function () {
+    $('#wsdataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');
         var confirmDelete = confirm("Are you sure you want to delete this Template?");
         if (confirmDelete) {

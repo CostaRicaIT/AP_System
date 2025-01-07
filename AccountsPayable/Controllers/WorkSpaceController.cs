@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AccountsPayable.Models;
+using System.Linq.Dynamic.Core;
 
 namespace AccountsPayable.Controllers
 {
@@ -17,10 +18,185 @@ namespace AccountsPayable.Controllers
         // GET: WorkSpace
         public ActionResult Index()
         {
-            var tB_WORKSPACE = db.TB_WORKSPACE.Include(t => t.TB_APPROVER).Include(t => t.TB_HIGHLIGHTS).Include(t => t.TB_HISTORIC_REMIT).Include(t => t.TB_ORACLE_LEGAL_ENTITIES).Include(t => t.TB_ORACLE_PAY_TERMS).Include(t => t.TB_ORACLE_SOURCE).Include(t => t.TB_ORACLE_TYPE).Include(t => t.WS_INVOICE_CATEGORY);
-            return View(tB_WORKSPACE.ToList());
+            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
+            // Check user permision to access Template creation only Standard user should be able to access this view
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3)
+            {
+                return View();
+            }
+            else
+            {
+                return View("Error");
+            }
         }
+        public JsonResult GetWorkspaceData()
+        {
+            try
+            {
+                var draw = Request.Form["draw"];
+                var start = Request.Form["start"];
+                var length = Request.Form["length"];
+                var sortColumnIndex = Request.Form["order[0][column]"];
+                var sortColumn = Request.Form["columns[" + sortColumnIndex + "][name]"];
+                var sortColumnDirection = Request.Form["order[0][dir]"];
+                var searchValue = Request.Form["search[value]"];
 
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+
+                // Fetch data from database
+                var workspaceData = db.TB_WORKSPACE.Where(t => t.WS_ISDISABLED == 0);
+
+                // Apply search
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    workspaceData = workspaceData.Where(m =>
+                        m.TB_ALIAS.ALIAS_NAME.Contains(searchValue) // Check if any alias matches the search value
+                        || m.WS_TEMP_FOLDER.Contains(searchValue)
+                        || m.WS_TEMP_TAX_ID.Contains(searchValue)
+                        || m.WS_TEMP_SUPPLIER_NAME.Contains(searchValue)
+                        || m.WS_TEMP_SUPPLIER_NUMBER.Contains(searchValue)
+                        || m.WS_TEMP_REMIT_TO.Contains(searchValue)
+                        || m.WS_TEMP_SUPPLIER_SITE.Contains(searchValue)
+                        || m.TB_HISTORIC_REMIT.HISTORIC_REMIT_INFO.Contains(searchValue)
+                        || m.WS_TEMP_VENDOR_ACCOUNT.Contains(searchValue)
+                        || m.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION.Contains(searchValue)
+                        || m.WS_TEMP_INVOICE_FORMAT.Contains(searchValue)
+                        || m.WS_TEMP_INVOICE_TYPE.Contains(searchValue)
+                        || m.WS_TEMP_INVOICE_NOTES.Contains(searchValue)
+                        || m.WS_TEMP_W9_W8.Contains(searchValue)
+                        || m.WS_TEMP_VSU.Contains(searchValue)
+                        || m.WS_TEMP_PAYMENT_METHOD.Contains(searchValue)
+                        || m.WS_TEMP_REMIT_TOACCOUNT.Contains(searchValue)
+                        || m.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION.Contains(searchValue)
+                        || m.WS_TEMP_BILLING_PERIOD.Contains(searchValue)
+                        || m.WS_TEMP_BILLING_PERIOD_DATE.Contains(searchValue)
+                        || m.WS_TEMP_DISTRIBUTION_SET.Contains(searchValue)
+                        || m.WS_TEMP_DISTRIBUTION_COMBINATION.Contains(searchValue)
+                        || m.WS_TEMP_ACCOUNTING_DATE.Contains(searchValue)
+                        || m.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME.Contains(searchValue)
+                        || m.TB_ORACLE_ORGANIZATION_TYPE.ORGANIZATION_TYPE_NAME.Contains(searchValue)
+                        || m.WS_TEMP_TAXPAYER_ID.Contains(searchValue)
+                        || m.WS_TEMP_INVOICE_TYPE.Contains(searchValue)
+                        || m.WS_TEMP_INVOICE_DESCRIPTION.Contains(searchValue)
+                        || m.WS_TEMP_ORACLE_NOTES.Contains(searchValue)
+                        || m.WS_TEMP_ORACLE_INSTRUCTIONS.Contains(searchValue)
+                        || m.WS_CONTACTS_CURRENT.Contains(searchValue)
+                        || m.WS_CONTACTS_PRIOR.Contains(searchValue)
+                        || m.TB_APPROVER.APPROVER_NAME.Contains(searchValue)
+                        || m.WS_TEMP_APPROVER_COMMENTS.Contains(searchValue)
+                        || m.TB_EMAIL_BACKUP.EMAIL_BACKUP.Contains(searchValue));
+
+                }
+
+                // Apply sorting
+                workspaceData = ApplySorting(workspaceData, sortColumn, sortColumnDirection);
+
+                // Paging after sorting
+                var data = workspaceData.Skip(skip).Take(pageSize).ToList();
+
+                recordsTotal = workspaceData.Count(); // Count after filtering
+
+
+
+                // Map entities to DTOs
+                var workspaceDtos = data.Where(m => m.WS_ISDISABLED == 0)
+                    .Select(m => new WorkspaceDto
+                    {
+                        WS_Id = m.WS_ID,
+                        Ws_duedate = m.WS_DUE_DATE ?? "",
+                        Ws_status = m.WS_STATUS ?? "",
+                        Ws_reason = m.WS_REASON ?? "",
+                        Ws_email_received = m.WS_EMAIL_RECEIVED ?? "",
+                        Ws_created_date = m.WS_CREATED_DATE ?? "",
+                        Ws_source = m.WS_SOURCE ?? "",
+                        Ws_handled_by = m.WS_HANDLED_BY ?? "",
+                        Ws_invoice_date = m.WS_INVOICE_DATE ?? "",
+                        Ws_amount = m.WS_AMOUNT ?? "",
+                        Ws_invoice_number = m.WS_INVOICE_NUMBER ?? "",
+                        Ws_comments = m.WS_COMMENTS?.WORKSPACE_INFO ?? "",
+                        Ws_last_actions = m.WS_LAST_ACTIONS?.LAST_ACTIONS_INFO ?? "",
+                        Id = m.TEMP_ID,
+                        Alias = m.TB_ALIAS?.ALIAS_NAME ?? "",
+                        Folder = m.WS_TEMP_FOLDER,
+                        TempTaxId = m.WS_TEMP_TAX_ID ?? "",
+                        TempSupplierName = m.WS_TEMP_SUPPLIER_NAME ?? "",
+                        TempSupplierNumber = m.WS_TEMP_SUPPLIER_NUMBER ?? "",
+                        RemitTo = m.WS_TEMP_REMIT_TO ?? "",
+                        SupplierSite = m.WS_TEMP_SUPPLIER_SITE ?? "",
+                        HistoricRemitTo = m.TB_HISTORIC_REMIT?.HISTORIC_REMIT_INFO ?? "",
+                        VendorAccount = m.WS_TEMP_VENDOR_ACCOUNT ?? "",
+                        Source = m.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION ?? "",
+                        InvoiceFormat = m.WS_TEMP_INVOICE_FORMAT ?? "",
+                        InvoiceType = m.WS_TEMP_INVOICE_TYPE ?? "",
+                        InvoiceNotes = m.WS_TEMP_INVOICE_NOTES ?? "",
+                        W9W8BENForm = m.WS_TEMP_W9_W8 ?? "",
+                        VSUForm = m.WS_TEMP_VSU ?? "",
+                        PaymentMethod = m.WS_TEMP_PAYMENT_METHOD ?? "",
+                        RemitToAccount = m.WS_TEMP_REMIT_TOACCOUNT ?? "",
+                        PayTerms = m.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION ?? "",
+                        InvoiceDescription = m.WS_TEMP_INVOICE_DESCRIPTION ?? "",
+                        BillingPeriod = m.WS_TEMP_BILLING_PERIOD ?? "",
+                        Dates = m.WS_TEMP_BILLING_PERIOD_DATE ?? "",
+                        DistributionSet = m.WS_TEMP_DISTRIBUTION_SET ?? "",
+                        DistributionCombination = m.WS_TEMP_DISTRIBUTION_COMBINATION ?? "",
+                        AccountingDate = m.WS_TEMP_ACCOUNTING_DATE ?? "",
+                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME ?? "",
+                        OrganizationType = m.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME ?? "",
+                        TaxPayerID = m.WS_TEMP_TAXPAYER_ID ?? "",
+                        Type = m.TB_ORACLE_TYPE.ORACLE_TYPE_NAME ?? "",
+                        Description = m.WS_TEMP_ORACLE_DESCRIPTION ?? "",
+                        OracleNotes = m.WS_TEMP_ORACLE_NOTES ?? "",
+                        OracleInstructions = m.WS_TEMP_ORACLE_INSTRUCTIONS ?? "",
+                        ARKeyContactsCurrent = m.WS_CONTACTS_CURRENT ?? "",
+                        ARKeyContactsPrior = m.WS_CONTACTS_PRIOR ?? "",
+                        Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
+                        ApproverComments = m.WS_TEMP_APPROVER_COMMENTS ?? "",
+                        EmailBackup = m.TB_EMAIL_BACKUP?.EMAIL_BACKUP ?? ""
+                    }).ToList();
+
+                // Prepare JSON response
+                var jsonData = new
+                {
+                    draw = draw,
+                    recordsFiltered = recordsTotal,
+                    recordsTotal = recordsTotal,
+                    UserRoleId = ((TB_VIEW_PERMISSIONS)Session["Permission"]).FK_TB_LOGIN_ROLE_ID,
+                    data = workspaceDtos, // Use DTOs instead of entities,
+                };
+
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        // Helper function for dynamic sorting
+        private IQueryable<TB_WORKSPACE> ApplySorting(IQueryable<TB_WORKSPACE> workspaceData, string sortColumn, string sortDirection)
+        {
+            // Validate sortColumn to avoid SQL Injection (create a whitelist of allowed columns)
+            if (!string.IsNullOrWhiteSpace(sortColumn))
+            {
+                if (sortDirection.Equals("asc", StringComparison.OrdinalIgnoreCase))
+                {
+                    workspaceData = workspaceData.OrderBy(sortColumn); // Default sorting
+                }
+                else
+                {
+                    workspaceData = workspaceData.OrderBy($"{sortColumn} descending");
+
+                }
+            }
+            else
+            {
+                string defaultSort = "WS_ID";
+                workspaceData = workspaceData.OrderBy($"{defaultSort} descending");
+            }
+            return workspaceData;
+        }
         // GET: WorkSpace/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,122 +215,103 @@ namespace AccountsPayable.Controllers
         // GET: WorkSpace/Create
         public ActionResult Create()
         {
-            ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS");
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO");
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME");
-            return View();
-        }
-
-        // POST: WorkSpace/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WS_ID,TEMP_ID,FK_WS_INVOICE_CATEGORY_ID,WS_STATUS,WS_REASON,WS_EMAIL_RECEIVED,WS_CREATED_DATE,WS_SOURCE,WS_HANDLED_BY,WS_INVOICE_DATE,WS_AMOUNT,WS_INVOICE_NUMBER,FK_WS_COMMENTS_ID,FK_WS_LAST_ACTIONS_ID,WS_ISDISABLED,WS_TEMP_TAX_ID,WS_TEMP_REMIT_TO,WS_TEMP_SUPPLIER_NAME,WS_TEMP_SUPPLIER_NUMBER,WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID,WS_TEMP_VENDOR_ACCOUNT,WS_FK_TB_TEMPLATE_ALIAS_ID,WS_TEMP_SUPPLIER_SITE,WS_TEMP_ADDRESS,WS_FK_TB_LEGAL_ENTITY_ID,WS_TEMP_TAXPAYER_ID,WS_FK_TB_ORACLE_TYPE_ID,WS_TEMP_ORACLE_DESCRIPTION,WS_FK_TB_ORACLE_PAY_TERMS_ID,WS_TEMP_ACCOUNT_CODING,WS_FK_TB_ORACLE_SOURCE_ID,WS_TEMP_ORACLE_NOTES,WS_TEMP_ORACLE_INSTRUCTIONS,WS_FK_TB_HIGHLIGHTS_ID,WS_FK_TB_EMAIL_BACKUP_ID,WS_FK_TB_APPROVER_ID,WS_TEMP_APPROVER_COMMENTS,WS_TEMP_INVOICE_FORMAT,WS_TEMP_INVOICE_TYPE,WS_TEMP_ISDISABLED,WS_TEMP_FOLDER,WS_TEMP_PAYMENT_METHOD,WS_TEMP_REMIT_TOACCOUNT,WS_TEMP_BILLING_PERIOD,WS_TEMP_DISTRIBUTION_COMBINATION,WS_TEMP_ACCOUNTING_DATE,WS_TEMP_VSU,WS_TEMP_W9_W8,WS_TEMP_INVOICE_NOTES,WS_TEMP_INVOICE_DESCRIPTION,WS_TEMP_BILLING_PERIOD_DATE,WS_CONTACTS_CURRENT,WS_FK_TB_ORGANIZATION_TYPE_ID")] TB_WORKSPACE tB_WORKSPACE)
-        {
-            if (ModelState.IsValid)
+            //Check if user haves access to module
+            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
+            // Check user permision to access WorkSPace creation only Standard user should be able to access this view
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
             {
-                db.TB_WORKSPACE.Add(tB_WORKSPACE);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //Get data for dropdowns
+                ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
+                ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS");
+                ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO");
+                ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME");
+                ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION");
+                ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION");
+                ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+                return View();
             }
-
-            ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
-            return View(tB_WORKSPACE);
+            else { return View("Error"); }
         }
 
         // GET: WorkSpace/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            //Check if user haves access to module
+            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
+            // Check user permision to access Template update only Standard user should be able to access this view
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
+                if (tB_WORKSPACE == null)
+                {
+                    return HttpNotFound();
+                }
+                //Get data for email backup
+                var emailBackupList = db.TB_EMAIL_BACKUP
+                    .Where(a => a.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
+                        EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }
+                    ).ToList();
+                //Get data for historic Remit
+                var historicRemitToList = db.TB_HISTORIC_REMIT
+                    .Where(x => x.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
+                        HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+                //Get data for highlights
+                var HighLightsToList = db.TB_HIGHLIGHTS
+                    .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(e => e.HIGHLIGHTS_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
+                        HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
+                    })
+                    .ToList();
+
+                //Get data for alias
+                var aliasesForTemplate = db.TB_ALIAS.
+                    Where(a => a.FK_TB_TEMPLATE_ID == id)
+                    .OrderByDescending(a => a.ALIAS_NAME)
+                    .AsEnumerable()
+                    .Select(a => new
+                    {
+                        ALIAS_ID = a.ALIAS_ID,
+                        ALIAS_NAME = a.ALIAS_NAME,
+                    }).ToList();
+                ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
+                ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
+                ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
+                ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
+                ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
+                ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
+                ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
+                ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
+                ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
+                ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
+                ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
+                ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME");
+                return View(tB_WORKSPACE);
             }
-            TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
-            if (tB_WORKSPACE == null)
+            else
             {
-                return HttpNotFound();
+                return View("Error");
             }
-            ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
-            return View(tB_WORKSPACE);
         }
 
-        // POST: WorkSpace/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WS_ID,TEMP_ID,FK_WS_INVOICE_CATEGORY_ID,WS_STATUS,WS_REASON,WS_EMAIL_RECEIVED,WS_CREATED_DATE,WS_SOURCE,WS_HANDLED_BY,WS_INVOICE_DATE,WS_AMOUNT,WS_INVOICE_NUMBER,FK_WS_COMMENTS_ID,FK_WS_LAST_ACTIONS_ID,WS_ISDISABLED,WS_TEMP_TAX_ID,WS_TEMP_REMIT_TO,WS_TEMP_SUPPLIER_NAME,WS_TEMP_SUPPLIER_NUMBER,WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID,WS_TEMP_VENDOR_ACCOUNT,WS_FK_TB_TEMPLATE_ALIAS_ID,WS_TEMP_SUPPLIER_SITE,WS_TEMP_ADDRESS,WS_FK_TB_LEGAL_ENTITY_ID,WS_TEMP_TAXPAYER_ID,WS_FK_TB_ORACLE_TYPE_ID,WS_TEMP_ORACLE_DESCRIPTION,WS_FK_TB_ORACLE_PAY_TERMS_ID,WS_TEMP_ACCOUNT_CODING,WS_FK_TB_ORACLE_SOURCE_ID,WS_TEMP_ORACLE_NOTES,WS_TEMP_ORACLE_INSTRUCTIONS,WS_FK_TB_HIGHLIGHTS_ID,WS_FK_TB_EMAIL_BACKUP_ID,WS_FK_TB_APPROVER_ID,WS_TEMP_APPROVER_COMMENTS,WS_TEMP_INVOICE_FORMAT,WS_TEMP_INVOICE_TYPE,WS_TEMP_ISDISABLED,WS_TEMP_FOLDER,WS_TEMP_PAYMENT_METHOD,WS_TEMP_REMIT_TOACCOUNT,WS_TEMP_BILLING_PERIOD,WS_TEMP_DISTRIBUTION_COMBINATION,WS_TEMP_ACCOUNTING_DATE,WS_TEMP_VSU,WS_TEMP_W9_W8,WS_TEMP_INVOICE_NOTES,WS_TEMP_INVOICE_DESCRIPTION,WS_TEMP_BILLING_PERIOD_DATE,WS_CONTACTS_CURRENT,WS_FK_TB_ORGANIZATION_TYPE_ID")] TB_WORKSPACE tB_WORKSPACE)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tB_WORKSPACE).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
-            ViewBag.FK_WS_INVOICE_CATEGORY_ID = new SelectList(db.WS_INVOICE_CATEGORY, "INVOICE_CATEGORY_ID", "INVOICE_CATEGORY_NAME", tB_WORKSPACE.FK_WS_INVOICE_CATEGORY_ID);
-            return View(tB_WORKSPACE);
-        }
-
-        // GET: WorkSpace/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
-            if (tB_WORKSPACE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tB_WORKSPACE);
-        }
-
-        // POST: WorkSpace/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
-            db.TB_WORKSPACE.Remove(tB_WORKSPACE);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
