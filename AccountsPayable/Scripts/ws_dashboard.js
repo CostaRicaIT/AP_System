@@ -1,6 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var totalColumns = 49;
-var defaultColumns = Array.from({ length: totalColumns }, (_, i) => i);
+var defaultColumns = [1,2,3,4,5,6,7,8,9,10,48]; //
 
 function showFilterModal() {
     // Open the modal
@@ -129,19 +128,19 @@ function DrawTable() {
                     // Check permissions for buttons
                     if (userRoleId === 3) { // View permission
                         buttons += `
-                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                            <button class="dt-button filterButton view-button" data-id="${row.WS_Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         `;
                     } else if (userRoleId === 2) {
                         buttons += `
-                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                            <button class="dt-button filterButton view-button" data-id="${row.WS_Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
-                            <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
+                            <button class="dt-button filterButton edit-button" data-id="${row.WS_Id}" aria-label="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="dt-button filterButton erase-button" data-id="${row.Id}" aria-label="Delete">
+                            <button class="dt-button filterButton erase-button" data-id="${row.WS_Id}" aria-label="Delete">
                                 <i class="fa-solid fa-eraser"></i>
                             </button>
                         `;
