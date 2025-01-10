@@ -205,6 +205,13 @@ function DrawTable() {
         window.location.href = redirectUrl;
     });
 
+    // Click event handler for the "Create Workspace" button
+    $('#dataTable').on('click', '.Workspace-button', function () {
+        var rowId = $(this).data('id');
+        var redirectUrl = window.location.origin + '/Workspace/Create/' + rowId;
+        window.location.href = redirectUrl;
+    });
+
     // Click event handler for the "Erase" button
     $('#dataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');

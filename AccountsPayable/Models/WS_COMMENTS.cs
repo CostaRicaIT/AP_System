@@ -11,7 +11,8 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class WS_COMMENTS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace AccountsPayable.Models
         public int COMMENTS_ID { get; set; }
         public Nullable<int> FK_WS_WORKSPACE_ID { get; set; }
         public System.DateTime WORKSPACE_DATE { get; set; }
+        [AllowHtml]
         public string WORKSPACE_INFO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
