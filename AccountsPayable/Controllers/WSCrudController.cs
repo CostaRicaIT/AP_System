@@ -31,6 +31,7 @@ namespace AccountsPayable.Controllers
             var dateTimeUTC = DateTime.UtcNow;
             TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+            var username = Session["FullName"].ToString();
 
             // Start transaction for workspace creation
             using (var transaction = db.Database.BeginTransaction())
@@ -53,7 +54,7 @@ namespace AccountsPayable.Controllers
                                 WS_EMAIL_RECEIVED = workspaceData.WS_EMAIL_RECEIVED,
                                 WS_CREATED_DATE = workspaceData.WS_CREATED_DATE,
                                 WS_SOURCE = workspaceData.WS_SOURCE,
-                                WS_HANDLED_BY = workspaceData.WS_HANDLED_BY,
+                                WS_HANDLED_BY = username,
                                 WS_INVOICE_DATE = workspaceData.WS_INVOICE_DATE,
                                 WS_DUE_DATE = workspaceData.WS_DUE_DATE,
                                 WS_AMOUNT = workspaceData.WS_AMOUNT,
@@ -103,21 +104,22 @@ namespace AccountsPayable.Controllers
                                 WS_FK_TB_ORGANIZATION_TYPE_ID = existingTemplate.FK_TB_ORGANIZATION_TYPE_ID
                             };
 
-                            if (WorkspaceCommentsData.WORKSPACE_INFO != null) { }
+                            if (WorkspaceCommentsData.WORKSPACE_INFO != null) 
                             {
                                 WorkspaceCommentsData.WORKSPACE_DATE = targetTime;
-                                
+                                WorkspaceCommentsData.WORKSPACE_INFO = StripHtmlTags(WorkspaceCommentsData.WORKSPACE_INFO);
+                                db.WS_COMMENTS.Add(WorkspaceCommentsData);
                             }
-                            WorkspaceCommentsData.WORKSPACE_INFO = StripHtmlTags(WorkspaceCommentsData.WORKSPACE_INFO);
-                            db.WS_COMMENTS.Add(WorkspaceCommentsData);
+                           
 
                             if (WorkspaceLastActionsData.LAST_ACTIONS_INFO != null)
                             {
                                 WorkspaceLastActionsData.LAST_ACTIONS_DATE = targetTime;
-                                
+                                WorkspaceLastActionsData.LAST_ACTIONS_INFO = StripHtmlTags(WorkspaceLastActionsData.LAST_ACTIONS_INFO);
+                                db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
+
                             }
-                            WorkspaceLastActionsData.LAST_ACTIONS_INFO = StripHtmlTags(WorkspaceLastActionsData.LAST_ACTIONS_INFO);
-                            db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
+                           
 
                             // Add the new workspace entry to the database
                             db.TB_WORKSPACE.Add(newWorkspace);
