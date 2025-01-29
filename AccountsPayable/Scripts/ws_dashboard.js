@@ -219,7 +219,7 @@ function DrawTable() {
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '/CRUD/Delete/' + rowId,
+                url: '/WSCrud/Delete/' + rowId,
                 headers: {
                     'X-HTTP-Method-Override': 'DELETE'
                 },

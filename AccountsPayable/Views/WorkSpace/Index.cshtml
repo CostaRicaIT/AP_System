@@ -10,8 +10,11 @@
 <link rel="stylesheet" href="~/Content/table.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/staterestore/1.3.0/css/stateRestore.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<br />
+<br />
 <div class="container">
-   
+
     <table id="wsdataTable" class="table cell-border stripe display" width="100%">
         <thead>
             <tr>
@@ -304,216 +307,210 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="display: flex; justify-content: center; gap: 5px;">
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="0"> Workspace ID
-                </label><br>
+                <div class="left-column" style="flex: 1; max-width: 43%;">
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="1"> Tax ID
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="1"> Tax ID
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="2"> Due date
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="2"> Due date
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="3"> Status
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="3"> Status
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="4"> Handled by
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="4"> Handled by
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="5"> Created Date
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="5"> Created Date
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="6"> Supplier Name
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="6"> Supplier Name
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="7"> Invoice Number
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="7"> Invoice Number
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="8"> Amount
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="8"> Amount
+                    </label><br>
 
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="9"> Invoice date
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="9"> Invoice date
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="10"> Supplier Number
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="10"> Supplier Number 
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="12"> Alias
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="11"> ID
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="13"> Folder
+                    </label><br>
 
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="14"> Reason
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="12"> Alias
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="15"> Source
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="13"> Folder
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="16"> Email received
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="14"> Reason
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="17"> Remit To
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="15"> Source
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="18"> Supplier Site
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="16"> Email received 
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="19"> Historic Remit to
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="17"> Remit To
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="20"> Vendor account
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="18"> Supplier Site
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="21"> Source
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="19"> Historic Remit to
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="22"> Invoice Format
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="20"> Vendor account
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="23"> Invoice Type
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="21"> Source
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="24"> Invoice Notes
+                    </label><br>
+                </div>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="22"> Invoice Format
-                </label><br>
+                <div class="right-column" style="flex: 1; max-width: 40%;">
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="25"> W9/W-8BEN Form
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="23"> Invoice Type
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="26"> VSU Form
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="24"> Invoice Notes
-                </label><br>
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="25"> W9/W-8BEN Form
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="27"> Payment Method
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="26"> VSU Form
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="28"> Remit-To Account
+                    </label><br>
 
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="29"> Pay Terms
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="27"> Payment Method
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="30"> Invoice Description
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="28"> Remit-To Account
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="31"> Billing Period
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="29"> Pay Terms
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="32"> Dates
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="30"> Invoice Description
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="33"> Distribution Set
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="31"> Billing Period
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="34"> Distribution Combination
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="32"> Dates
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="35"> Accounting Date
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="33"> Distribution Set
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="36"> Legal Entity
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="34"> Distribution Combination
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="37"> Organization Type
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="35"> Accounting Date
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="38"> Tax Payer ID
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="36"> Legal Entity
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="39"> Type
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="37"> Organization Type
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="40"> Description
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="38"> Tax Payer ID
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="41"> Oracle Notes
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="39"> Type
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="42"> Oracle Instructions
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="40"> Description
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="43"> AR Key Contacts/Current
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="41"> Oracle Notes
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="44"> AR Key Contacts/Prior
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="42"> Oracle Instructions
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="45"> Approver
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="43"> AR Key Contacts/Current
-                </label><br>
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="46"> Approver Coments
+                    </label><br>
 
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="44"> AR Key Contacts/Prior
-                </label><br>
-
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="45"> Approver
-                </label><br>
-
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="46"> Approver Coments
-                </label><br>
-
-                <label>
-                    <input type="checkbox" class="toggle-column" data-column="47"> Email backup
-                </label><br>
-
+                    <label>
+                        <input type="checkbox" class="toggle-column" data-column="47"> Email backup
+                    </label><br>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="saveColumnVisibility">Ok</button>
-                <button type="button" class="btn btn-info" id="toggleFilters">Select all</button>
+                <button type="button" class="btn btn-secondary" id="toggleFilters">Select all</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // List of boxes selected by default 
-    const defaultCheckedIndices = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 49];
+    // List of boxes selected by default
+    const defaultCheckedIndices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 48];
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const toggleButton = document.getElementById('toggleFilters');
     let allSelected = false; // State of alternation

@@ -133,5 +133,24 @@ namespace AccountsPayable.Controllers
                 }
             }
         }
+
+        [HttpDelete]
+        public ActionResult DELETE(int? id, int disabled = 1)
+        {
+            TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
+            if (tB_WORKSPACE.WS_ISDISABLED != 1)
+            {
+                tB_WORKSPACE.WS_ISDISABLED= disabled;
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
+
+
+
+        }
     }
 }
