@@ -5,7 +5,7 @@
     var template = Model.Item2; // This gives you the TB_TEMPLATE object
     ViewBag.Title = "AP Workspace | Create";
 }
-
+<label hidden id="templateId">@Model.Item1.TEMP_ID</label>
 <h2> </h2>
 <br />
 <link href="~/Content/Style.css" rel="stylesheet" />
@@ -19,22 +19,10 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Tax ID" class="control-label col-md-2">Tax ID:</label>
+                    <label for="Item1_WS_TEMP_TAX_ID" class="control-label col-md-2">Tax Id:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Tax ID">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Invoice Category -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(workspace => workspace.Item1.WS_DUE_DATE, "Invoice Category:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_WS_INVOICE_CATEGORY_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(workspace => workspace.Item1.WS_DUE_DATE, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_TAX_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -68,9 +56,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Email Received" class="control-label col-md-2">Email Received:</label>
+                    <label for="form-Email-Received" class="control-label col-md-2">Email Received:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Email Received">
+                        <input type="text" class="form-control" id="form-Email-Received">
                     </div>
                 </div>
             </div>
@@ -80,9 +68,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Create Date" class="control-label col-md-2">Create Date:</label>
+                    <label for="form-CreateDate" class="control-label col-md-2">Create Date:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Create Date">
+                        <input type="text" class="form-control" id="form-CreateDate">
                     </div>
                 </div>
             </div>
@@ -104,9 +92,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Handled By" class="control-label col-md-2">Handled By:</label>
+                    <label for="form-Handled-By" class="control-label col-md-2">Handled By:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Handled By">
+                        <input type="text" class="form-control" id="form-Handled-By" value="@Session["FullName"]" disabled>
                     </div>
                 </div>
             </div>
@@ -116,9 +104,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Invoice Date" class="control-label col-md-2">Invoice Date:</label>
+                    <label for="form-Invoice-Date" class="control-label col-md-2">Invoice Date:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Invoice Date">
+                        <input type="text" class="form-control" id="form-Invoice-Date">
                     </div>
                 </div>
             </div>
@@ -128,9 +116,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Due Date" class="control-label col-md-2">Due Date:</label>
+                    <label for="form-Due-Date" class="control-label col-md-2">Due Date:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-Due Date">
+                        <input type="text" class="form-control" id="form-Due-Date">
                     </div>
                 </div>
             </div>
@@ -152,9 +140,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="form-Invoice Number" class="control-label col-md-2">Invoice Number:</label>
+                    <label for="form-Invoice-Number" class="control-label col-md-2">Invoice Number:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-">
+                        <input type="text" class="form-control" id="form-Invoice-Number">
                     </div>
                 </div>
             </div>
@@ -177,9 +165,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Last Actions">Last Action:</label>
+                    <label class="control-label col-md-2" for="form-Last-Action">Last Action:</label>
                     <div class="col-md-10">
-                        <textarea class="form-control TinyEditor" id="form-Last Action" rows="6" cols="50"></textarea>
+                        <textarea class="form-control TinyEditor" id="form-Last-Action" rows="6" cols="50"></textarea>
                         <br />
                     </div>
                 </div>
@@ -196,22 +184,9 @@
         <div class="form-group">
             <div class=" row">
                 <div class="col-md-6">
-                    <label for="TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
+                    <label for="Item1_WS_TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tax ID -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax Id:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_TAX_ID, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -221,10 +196,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NAME">Supplier Name:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_SUPPLIER_NAME">Supplier Name:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NAME, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NAME, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_SUPPLIER_NAME, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_SUPPLIER_NAME, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -234,10 +209,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_SUPPLIER_NUMBER, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -247,10 +222,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_REMIT_TO">Remit to:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_REMIT_TO">Remit to:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TO, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_REMIT_TO, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_REMIT_TO, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_REMIT_TO, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -260,10 +235,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_SUPPLIER_SITE">Supplier Site:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_SUPPLIER_SITE, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -273,10 +248,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO">Historic Remit To:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO">Historic Remit To:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO, "", new { @class = "text-danger" })
                         <br />
                     </div>
                 </div>
@@ -314,10 +289,10 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="control-label col-md-2" for="TEMP_VENDOR_ACCOUNT" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
+                        <label class="control-label col-md-2" for="Item1_WS_TEMP_VENDOR_ACCOUNT" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.TEMP_VENDOR_ACCOUNT, new { @class = "form-control", @rows = 5, @cols = 50 })
-                            @Html.ValidationMessageFor(model => model.TEMP_VENDOR_ACCOUNT, "", new { @class = "text-danger" })
+                            @Html.TextAreaFor(model => model.Item1.WS_TEMP_VENDOR_ACCOUNT, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_VENDOR_ACCOUNT, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -327,15 +302,15 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        @Html.LabelFor(model => model.FK_TB_ORACLE_SOURCE_ID, "Source:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2" for="FK_TB_ORACLE_SOURCE_ID" id="label-SourceID">Source:</label>
                         <div class="col-md-10">
-                            @Html.DropDownList("FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_SOURCE_ID, "", new { @class = "text-danger" })
+                            @Html.DropDownList("FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_ORACLE_SOURCE_ID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
-        </div>.
+        </div>
     </div>
     <br />
 
@@ -344,21 +319,9 @@
         <div class="section-title">Alias</div>
         <!-- Alias Input and Button-->
         <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-AddAlias">Alias:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="form-AddAlias">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="btn-addAlias" type="button" class="styled-button align-right">Add alias</button>
-                </div>
-            </div>
-            <br />
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID"></label>
+                    <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID">Alias</label>
                     <div class="col-md-7">
                         @Html.DropDownList("FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
                     </div>
@@ -377,10 +340,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_INVOICE_FORMAT">Invoice Format:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_INVOICE_FORMAT">Invoice Format:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_INVOICE_FORMAT, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_INVOICE_FORMAT, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -389,10 +352,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_INVOICE_TYPE">Type:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_INVOICE_TYPE">Type:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_TYPE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_INVOICE_TYPE, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_INVOICE_TYPE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_INVOICE_TYPE, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -402,9 +365,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_INVOICE_NOTES" id="label-InvoiceNotes">Invoice Notes:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_INVOICE_NOTES" id="label-InvoiceNotes">Invoice Notes:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_INVOICE_NOTES, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.Item1.WS_TEMP_INVOICE_NOTES, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -419,9 +382,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_W9_W8, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.Item1.WS_TEMP_W9_W8, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -431,9 +394,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_VSU" id="label-VSU">VSU Form:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_VSU, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.Item1.WS_TEMP_VSU, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
                     </div>
                 </div>
             </div>
@@ -449,9 +412,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_PAYMENT_METHOD">Payment Method:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -461,9 +424,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -473,10 +436,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "Payment Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                    <label class="control-label col-md-2" for="FK_TB_ORACLE_PAY_TERMS_ID" id="label-Oracle_PayTerms">Payment Terms:</label>
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
+                        @Html.DropDownList("FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_ORACLE_PAY_TERMS_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -486,9 +449,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -498,16 +461,16 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_BILLING_PERIOD">Billing Period:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
+                        @Html.TextAreaFor(model => model.Item1.WS_TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
                     </div>
                 </div>
                 <!-- Dates -->
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_BILLING_PRERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @id = "form-Dates" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_BILLING_PERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @id = "form-Dates" } })
                     </div>
                 </div>
             </div>
@@ -517,9 +480,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -529,9 +492,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -541,9 +504,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
+                    <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_ACCOUNTING_DATE">Accounting Date:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -553,156 +516,89 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                    <label class="control-label col-md-2 OracleText" for="legalEntityDropdown">Legal Entity:</label>
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @id = "legalEntityDropdown" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
+                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @id = "legalEntityDropdown", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <button class="styled-button openModalBtn" data-modal="ShowLegalEntityModal" type="button" id="form-legalEntity">Add a new Legal Entity</button>
-                </div>
             </div>
-        </div>
 
-        <!-- Add a new legal entity modal-->
-        <div id="ShowLegalEntityModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Legal Entity</h4>
-                </div>
-
-                <div class="modal-body">
-                    <!-- Legal Entity Section-->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="control-label col-md-6" for="form-AddLegalEntity">Legal Entity:</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="form-AddLegalEntity" placeholder="Legal Entity" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <button class="styled-button" type="button" id="btn-addLegalEntity">Add a new Legal Entity</button>
-                            </div>
+            <!-- Organization Type -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2 OracleText" for="organizationTypeDropdown">Organization Type:</label>
+                        <div class="col-md-10">
+                            @Html.DropDownList("FK_TB_ORGANIZATION_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @id = "organizationTypeDropdown", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_ORGANIZATION_TYPE_ID, "", new { @class = "text-danger" })
                         </div>
-                        <br />
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Organization Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="FK_TB_ORGANIZATION_TYPE_ID">Organization Type:</label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORGANIZATION_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @id = "organizationTypeDropdown" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORGANIZATION_TYPE_ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button class="styled-button openModalBtn" data-modal="ShowOrganizationTypeModal" type="button" id="form-OrganizationType">Add a new Organization Type</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add a new organization type modal-->
-        <div id="ShowOrganizationTypeModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Organization Type</h4>
-                </div>
-
-                <div class="modal-body">
-                    <!-- Organization Type Section-->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="control-label col-md-6" for="form-AddOrganizationType">Organization Type:</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="form-AddOrganizationType" placeholder="Organization Type" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <button class="styled-button" type="button" id="btn-AddOrganizationType">Add a new Organization Type</button>
-                            </div>
+            <!-- First-Party Taxpayer ID -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_TAXPAYER_ID">Taxpayer ID:</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Item1.WS_TEMP_TAXPAYER_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_TAXPAYER_ID, "", new { @class = "text-danger" })
                         </div>
-                        <br />
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Type -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
 
-        <!-- First-Party Taxpayer ID -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_TAXPAYER_ID">Taxpayer ID:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_TAXPAYER_ID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEMP_TAXPAYER_ID, "", new { @class = "text-danger" })
+                        <label class="control-label col-md-2 OracleText" for="FK_TB_ORACLE_TYPE_ID">Type:</label>
+                        <div class="col-md-10">
+                            @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Type -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_ORACLE_TYPE_ID, "", new { @class = "text-danger" })
+            <!-- Description -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_ORACLE_DESCRIPTION">Description:</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Item1.WS_TEMP_ORACLE_DESCRIPTION, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_ORACLE_DESCRIPTION, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Description -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_DESCRIPTION">Description:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_DESCRIPTION, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_ORACLE_DESCRIPTION, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
-        <!-- Oracle Notes -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_NOTES, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_ORACLE_NOTES, "", new { @class = "text-danger" })
+            <!-- Oracle Notes -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Item1.WS_TEMP_ORACLE_NOTES, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_ORACLE_NOTES, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <!-- Oracle Instructions -->
-                <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control TinyEditor", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_ORACLE_INSTRUCTIONS, "", new { @class = "text-danger" })
+                    <!-- Oracle Instructions -->
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2 OracleText" for="Item1_WS_TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Item1.WS_TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
+                            @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_ORACLE_INSTRUCTIONS, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br />
     </div>
     <br />
-
     <!-- Contacts -->
     <div class="form-section">
         <div class="section-title">Contacts</div>
@@ -713,7 +609,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Currents" })
+                        @Html.TextAreaFor(model => model.Item1.WS_CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Currents", @disabled = "disabled" })
                     </div>
                 </div>
 
@@ -721,7 +617,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Prior" })
+                        @Html.TextAreaFor(model => model.Item1.WS_CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @id = "form-Prior"  ,@disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -729,7 +625,6 @@
     </div>
 
     <br />
-
     <!-- Notes & Instructions Section -->
     <div class="form-section">
         <div class="section-title">Notes & Instructions</div>
@@ -737,10 +632,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS">Highlights</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS">Highlights</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -755,10 +650,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS">Highlights Comments:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS">Highlights Comments:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMENTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -767,10 +662,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS">Instructions:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS">Instructions:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_INSTRUCTIONS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -779,10 +674,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS">Exceptions:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS">Exceptions:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_EXCEPTIONS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -791,10 +686,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES">Most Common <br> Issues:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES">Most Common <br> Issues:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_COMMON_ISSUES, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -803,10 +698,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY">Supplier Agency:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY">Supplier Agency:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_SUPPLIER_AGENCY, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -815,10 +710,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS">Template Comments:</label>
+                    <label class="control-label col-md-2" for="Item2_TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS">Template Comments:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, new { @class = "form-control TinyEditor", @rows = 8, @cols = 150 })
-                        @Html.ValidationMessageFor(model => model.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150 })
+                        @Html.ValidationMessageFor(model => model.Item2.TB_HIGHLIGHTS1.HIGHLIGHTS_TEMPLATE_COMMENTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -928,9 +823,6 @@
                         <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150"></textarea>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <button id="ButtonAddEmail" type="button" class="styled-button align-right">Add Email</button>
-                </div>
             </div>
         </div>
 
@@ -941,29 +833,8 @@
                     <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
                     <div class="col-md-10">
                         @Html.DropDownList("FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_EMAIL_BACKUP_ID, "", new { @class = "text-danger" })
                     </div>
-                </div>
-            </div>
-        </div>
-        <div id="AddEmailModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p><label class="control-label col-md-2" for="form-BackUpEmails">Email:</label></p>
-                <textarea id="form-BackUpEmails" class="form-control" form-control"" rows="6" cols="100"></textarea>
-                <br />
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-10">
-                            <select name="Alias" id="EmailsToAdd" class="form-control" size="5">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div>
-                    <button class="btn form_btntbWC" type="button" id="cancelButton">Close</button>
-                    <button class="btn form_btntbWC" type="button" id="btn-addEmail">Add Email</button>
                 </div>
             </div>
         </div>
@@ -976,162 +847,34 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(model => model.FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2" for="approverDropdown">Aprover:</label>
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @id = "approverDropdown" })
-                        @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
+                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @id = "approverDropdown", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <button class="styled-button openModalBtn" data-modal="ShowApproverModal" type="button" id="form-approver">Add a new Approver</button>
-                </div>
+
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2" for="TEMP_APPROVER_COMMENTS">Aprover Comments:</label>
+                    <label class="control-label col-md-2" for="Item1_WS_TEMP_APPROVER_COMMENTS">Aprover Comments:</label>
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.TEMP_APPROVER_COMMENTS, new { @class = "form-control", @rows = 5, @cols = 50 })
-                        @Html.ValidationMessageFor(model => model.TEMP_APPROVER_COMMENTS, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Item1.WS_TEMP_APPROVER_COMMENTS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_APPROVER_COMMENTS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--Add a new approver modal-->
-    <div id="ShowApproverModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Approver</h4>
-            </div>
 
-            <div class="modal-body">
-                <!-- Approver Section-->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-6" for="form-AddApprover">Approver:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-AddApprover" placeholder="Approver" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <button class="styled-button" type="button" id="btn-addAppover">Add a new approver</button>
-                        </div>
-                    </div>
-                    <br />
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Cancel and Save Buttons -->
     <button class="btn form_btntbWC btn-cancel" type="button" id="form-cancel">Cancel</button>
-    <button class="btn form_btntbWC openModalBtn" data-modal="ShowSaveModal" type="button" id="form-submit">Save</button>
+    <button class="btn form_btntbWC" type="button" id="btn-save">Save</button>
 
-    <!--Save Changes modal-->
-    <div id="ShowSaveModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Save Changes</h4>
-                <button type="button" id="cancelButton" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="row">
-
-                        <h4 class="text-center">
-                            Would you like to add additional information to the template: <br />
-                            Alias / Backup Emails?
-                        </h4>
-                        <br />
-                        <div style="display: flex; justify-content: center; gap: 10vw;">
-                            <button class="btn form_btntbWC openModalBtn" data-modal="ShowAddAlias_EmailModal" type="button" id="AddAlias_Emailbtn">Yes</button>
-                            <button class="btn form_btntbWC" type="button" id="NoAddAlias_Emailbtn">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Add alias / Backup emails modal-->
-    <div id="ShowAddAlias_EmailModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Alias and Backup email's information</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!--Alias section-->
-                <div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-6" for="form-AddAlias">Alias:</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="form-AddAlias" placeholder="Alias name">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <br />
-                            <button class="btn form_btntbWC" type="button" id="btn-addAlias">Add Alias</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                <select name="Alias" id="FK_TB_TEMPLATE_ALIAS_ID" class="form-control" size="5">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br />
-
-                <!--Email section-->
-                <div class="form-group">
-                    <div class=" row">
-                        <div class="col-md-6">
-                            <label class="control-label col-md-8" for="form-BackUpEmail">Back Up Emails:</label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" id="form-BackUpEmail" placeholder="Backup email" rows="5" cols="100"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <br />
-                            <button id="ButtonAddEmail" type="button" class="btn form_btntbWC">Add Email</button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                                <select name="Alias" id="FK_TB_EMAIL_BACKUP_ID" class="form-control" size="5">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button class="btn form_btntbWC" type="button" id="cancelButton">Cancel</button>
-                <button class="btn form_btntbWC" type="button" id="btn_AddAlias_Email">Save</button>
-            </div>
-        </div>
-    </div>
     <hr />
     <hr />
     <hr style="display: none;" />
@@ -1140,7 +883,7 @@
 
 @section scripts {
 
-    <script src="~/Scripts/TemplateCrud.js"></script>
+    <script src="~/Scripts/WSCrud.js"></script>
     <script src="~/Scripts/templateModal.js"></script>
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>

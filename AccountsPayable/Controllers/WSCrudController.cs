@@ -25,12 +25,13 @@ namespace AccountsPayable.Controllers
         }
         // GET: WSCrud
         [HttpPost]
-        public ActionResult Create(TB_WORKSPACE workspaceData)
+        public ActionResult Create(TB_WORKSPACE workspaceData, WS_COMMENTS WorkspaceCommentsData, WS_LAST_ACTIONS WorkspaceLastActionsData, TB_TEMPLATE templateData)
         {
             // Get UTC timezone and convert it to UTC-6 Costa Rica local time
             var dateTimeUTC = DateTime.UtcNow;
             TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
             DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+            var username = Session["FullName"].ToString();
 
             // Start transaction for workspace creation
             using (var transaction = db.Database.BeginTransaction())
@@ -40,7 +41,7 @@ namespace AccountsPayable.Controllers
                     if (ModelState.IsValid)
                     {
                         // Retrieve the template based on TEMP_ID from the user input
-                        var existingTemplate = db.TB_TEMPLATE.Find(workspaceData.TEMP_ID);
+                        var existingTemplate = db.TB_TEMPLATE.Find(templateData.TEMP_ID);
 
                         if (existingTemplate != null)
                         {
@@ -48,21 +49,20 @@ namespace AccountsPayable.Controllers
                             var newWorkspace = new TB_WORKSPACE
                             {
                                 // Fields entered manually by the user
-                                WS_DUE_DATE = workspaceData.WS_DUE_DATE,
                                 WS_STATUS = workspaceData.WS_STATUS,
-                                WS_REASON = StripHtmlTags(workspaceData.WS_REASON), // Use StripHtmlTags if necessary
+                                WS_REASON = workspaceData.WS_REASON,
                                 WS_EMAIL_RECEIVED = workspaceData.WS_EMAIL_RECEIVED,
                                 WS_CREATED_DATE = workspaceData.WS_CREATED_DATE,
                                 WS_SOURCE = workspaceData.WS_SOURCE,
-                                WS_HANDLED_BY = workspaceData.WS_HANDLED_BY,
+                                WS_HANDLED_BY = username,
                                 WS_INVOICE_DATE = workspaceData.WS_INVOICE_DATE,
+                                WS_DUE_DATE = workspaceData.WS_DUE_DATE,
                                 WS_AMOUNT = workspaceData.WS_AMOUNT,
                                 WS_INVOICE_NUMBER = workspaceData.WS_INVOICE_NUMBER,
-                                FK_WS_COMMENTS_ID = workspaceData.FK_WS_COMMENTS_ID,
-                                FK_WS_LAST_ACTIONS_ID = workspaceData.FK_WS_LAST_ACTIONS_ID,
                                 WS_ISDISABLED = workspaceData.WS_ISDISABLED,
 
                                 // Copy fields from TB_TEMPLATE
+                                TEMP_ID = existingTemplate.TEMP_ID,
                                 WS_TEMP_TAX_ID = existingTemplate.TEMP_TAX_ID,
                                 WS_TEMP_REMIT_TO = existingTemplate.TEMP_REMIT_TO,
                                 WS_TEMP_SUPPLIER_NAME = existingTemplate.TEMP_SUPPLIER_NAME,
@@ -104,13 +104,47 @@ namespace AccountsPayable.Controllers
                                 WS_FK_TB_ORGANIZATION_TYPE_ID = existingTemplate.FK_TB_ORGANIZATION_TYPE_ID
                             };
 
+                            if (WorkspaceCommentsData.WORKSPACE_INFO != null) 
+                            {
+                                WorkspaceCommentsData.WORKSPACE_DATE = targetTime;
+                                WorkspaceCommentsData.WORKSPACE_INFO = StripHtmlTags(WorkspaceCommentsData.WORKSPACE_INFO);
+                                db.WS_COMMENTS.Add(WorkspaceCommentsData);
+                            }
+                           
+
+                            if (WorkspaceLastActionsData.LAST_ACTIONS_INFO != null)
+                            {
+                                WorkspaceLastActionsData.LAST_ACTIONS_DATE = targetTime;
+                                WorkspaceLastActionsData.LAST_ACTIONS_INFO = StripHtmlTags(WorkspaceLastActionsData.LAST_ACTIONS_INFO);
+                                db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
+
+                            }
+                           
+
                             // Add the new workspace entry to the database
                             db.TB_WORKSPACE.Add(newWorkspace);
 
                             // Save changes to the new workspace
                             db.SaveChanges();
+                            int newComments_Id = WorkspaceCommentsData.COMMENTS_ID;
+                            int newLastActions_Id = WorkspaceLastActionsData.LAST_ACTIONS_ID;
+                            int newWorkspaceid = newWorkspace.WS_ID;
 
+
+
+                            if (newComments_Id != 0)
+                            {
+                                newWorkspace.FK_WS_COMMENTS_ID = newComments_Id;
+                                WorkspaceCommentsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
+                            }
+
+                            if(newLastActions_Id != 0)
+                            {
+                                newWorkspace.FK_WS_LAST_ACTIONS_ID = newLastActions_Id;
+                                WorkspaceLastActionsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
+                            }
                             // Commit the transaction
+                            db.SaveChanges();
                             transaction.Commit();
                             return Json(new { success = true });
                         }

@@ -56,6 +56,7 @@ function DrawTable() {
         scrollX: '80vh',
         processing: true,
         serverSide: true,
+        searchDelay: 2000,
         filter: true,
         dom: '<"top"lBf>rt<"bottom"ip>', // set the order of table items to be drawn
         ajax: {
@@ -201,6 +202,13 @@ function DrawTable() {
     $('#dataTable').on('click', '.edit-button', function () {
         var rowId = $(this).data('id');
         var redirectUrl = 'Edit/' + rowId;
+        window.location.href = redirectUrl;
+    });
+
+    // Click event handler for the "Create Workspace" button
+    $('#dataTable').on('click', '.Workspace-button', function () {
+        var rowId = $(this).data('id');
+        var redirectUrl = window.location.origin + '/Workspace/Create/' + rowId;
         window.location.href = redirectUrl;
     });
 
