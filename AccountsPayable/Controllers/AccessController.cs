@@ -60,6 +60,7 @@ namespace AccountsPayable.Controllers
                         {
                             Session["User"] = user;
                             Session["CurrentUserName"] = username;
+                            Session["FullName"] = user.LOG_IN_FULL_NAME;
 
                             //Set the user's permission in the session
                             Session["Permission"] = userPermission;

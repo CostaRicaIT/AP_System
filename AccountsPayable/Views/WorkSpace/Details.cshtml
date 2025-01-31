@@ -1,442 +1,864 @@
 ﻿@model AccountsPayable.Models.TB_WORKSPACE
 
 @{
-    Layout = null;
+    ViewBag.Title = "AP Workspace | Details";
 }
 
-<!DOCTYPE html>
+<link href="~/Content/Style.css" rel="stylesheet" />
+<link href="~/Content/TemplateModal.css" rel="stylesheet" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>TB_WORKSPACE</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.TEMP_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TEMP_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_STATUS)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_STATUS)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_REASON)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_REASON)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_EMAIL_RECEIVED)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_EMAIL_RECEIVED)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_CREATED_DATE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_CREATED_DATE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_SOURCE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_SOURCE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_HANDLED_BY)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_HANDLED_BY)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_INVOICE_DATE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_INVOICE_DATE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_AMOUNT)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_AMOUNT)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_INVOICE_NUMBER)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_INVOICE_NUMBER)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FK_WS_COMMENTS_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FK_WS_COMMENTS_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FK_WS_LAST_ACTIONS_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FK_WS_LAST_ACTIONS_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_ISDISABLED)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_ISDISABLED)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_TAX_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_TAX_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_REMIT_TO)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_REMIT_TO)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_SUPPLIER_NAME)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_SUPPLIER_NAME)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_SUPPLIER_NUMBER)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_SUPPLIER_NUMBER)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_VENDOR_ACCOUNT)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_VENDOR_ACCOUNT)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_FK_TB_TEMPLATE_ALIAS_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_FK_TB_TEMPLATE_ALIAS_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_SUPPLIER_SITE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_SUPPLIER_SITE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ADDRESS)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ADDRESS)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_TAXPAYER_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_TAXPAYER_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ORACLE_DESCRIPTION)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ORACLE_DESCRIPTION)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ACCOUNT_CODING)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ACCOUNT_CODING)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ORACLE_NOTES)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ORACLE_NOTES)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ORACLE_INSTRUCTIONS)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ORACLE_INSTRUCTIONS)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_FK_TB_EMAIL_BACKUP_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_FK_TB_EMAIL_BACKUP_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_APPROVER_COMMENTS)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_APPROVER_COMMENTS)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_INVOICE_FORMAT)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_INVOICE_FORMAT)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_INVOICE_TYPE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_INVOICE_TYPE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ISDISABLED)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ISDISABLED)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_FOLDER)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_FOLDER)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_PAYMENT_METHOD)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_PAYMENT_METHOD)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_REMIT_TOACCOUNT)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_REMIT_TOACCOUNT)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_BILLING_PERIOD)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_BILLING_PERIOD)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_DISTRIBUTION_COMBINATION)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_DISTRIBUTION_COMBINATION)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_ACCOUNTING_DATE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_ACCOUNTING_DATE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_VSU)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_VSU)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_W9_W8)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_W9_W8)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_INVOICE_NOTES)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_INVOICE_NOTES)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_INVOICE_DESCRIPTION)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_INVOICE_DESCRIPTION)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_TEMP_BILLING_PERIOD_DATE)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_TEMP_BILLING_PERIOD_DATE)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_CONTACTS_CURRENT)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_CONTACTS_CURRENT)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_FK_TB_ORGANIZATION_TYPE_ID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_FK_TB_ORGANIZATION_TYPE_ID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_APPROVER.APPROVER_NAME)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_APPROVER.APPROVER_NAME)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_HISTORIC_REMIT.HISTORIC_REMIT_INFO)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_HISTORIC_REMIT.HISTORIC_REMIT_INFO)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TB_ORACLE_TYPE.ORACLE_TYPE_NAME)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WS_INVOICE_CATEGORY.INVOICE_CATEGORY_NAME)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WS_INVOICE_CATEGORY.INVOICE_CATEGORY_NAME)
-            </dd>
-    
-        </dl>
+<h2> </h2>
+<label hidden id="templateId">@Model.TEMP_ID</label>
+<br />
+
+@using (Html.BeginForm())
+{
+
+    <!-- Workspace Section -->
+    <div class="form-section">
+        <div class="section-title">Workspace</div>
+
+        <!-- Tax ID -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax ID:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.WS_TEMP_TAX_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Status" class="control-label col-md-2">Status:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_STATUS, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reason -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Reason" class="control-label col-md-2">Reason:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_REASON, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Received -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Email Received" class="control-label col-md-2">Email Received:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_EMAIL_RECEIVED, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Created Date -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Create Date" class="control-label col-md-2">Create Date:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_CREATED_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Source -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Source" class="control-label col-md-2">Source:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_SOURCE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Handled By -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Handled By" class="control-label col-md-2">Handled By:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_HANDLED_BY, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Date -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Invoice Date" class="control-label col-md-2">Invoice Date:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_INVOICE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Due Date -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Due Date" class="control-label col-md-2">Due Date:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_DUE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Amount" class="control-label col-md-2">Amount:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_AMOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Number -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="form-Invoice Number" class="control-label col-md-2">Invoice Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_INVOICE_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Comments -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Comments">Comments:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_COMMENTS.WORKSPACE_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Last Actions -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Last Actions">Last Action:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_LAST_ACTIONS.LAST_ACTIONS_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.WS_ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+    <br>
+
+    <!-- Supplier Information Section -->
+    <div class="form-section">
+        <div class="section-title">Supplier Information</div>
+
+        <!-- Folder -->
+        <div class="form-group">
+            <div class=" row">
+                <div class="col-md-6">
+                    <label for="TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supplier Name -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NAME">Supplier Name:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_SUPPLIER_NAME, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Supplier Number -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_NUMBER">Supplier Number:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_SUPPLIER_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remit To -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_REMIT_TO">Remit to:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_REMIT_TO, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Supplier Site -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_SUPPLIER_SITE">Supplier Site:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_SUPPLIER_SITE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historic Remit To -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TB_HISTORIC_REMIT1_HISTORIC_REMIT_INFO">Historic Remit To:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HISTORIC_REMIT.HISTORIC_REMIT_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <button id="ButtonViewHisticRemit" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHistoricRemitModal">View Historic Remit to</button>
+                </div>
+            </div>
+            <!--Modal to see historic remit -->
+            <div id="ShowHistoricRemitModal" class="modal">
+                <div class="modal-content">
+                    <span id="cancelButton" class="close">&times;</span>
+                    <div class="row">
+                        <div class="control-label col-md-12">
+                            <label class="control-label col-md-4" for="historicRemitInfoView">Historic Remit to:</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control TinyEditorReadOnly" id="historicRemitInfoView" readonly rows="6" cols="75" disabled placeholder="..."></textarea>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <!--Select Historic Remit to -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                @Html.DropDownList("WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Vendor # / Account # -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-2" for="TEMP_VENDOR_ACCOUNT" id="label-OurVendorA">OUR VENDOR #/ ACCOUNT #:</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.WS_TEMP_VENDOR_ACCOUNT, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Source -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.WS_FK_TB_ORACLE_SOURCE_ID, "Source:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("WS_FK_TB_ORACLE_SOURCE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Alias Section -->
+    <div class="form-section">
+        <div class="section-title">Alias</div>
+        <!-- Alias Input and Button-->
+        <div class="form-group">
+            <div class=" row">
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="FK_TB_TEMPLATE_ALIAS_ID">Alias</label>
+                    <div class="col-md-7">
+                        @Html.DropDownList("WS_FK_TB_TEMPLATE_ALIAS_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
+                    </div>
+                </div>
+            </div>
+
+            <!--Select Alias Dropdown-->
+        </div>
+    </div>
+    <br />
+
+    <!-- Invoice Number Format Section -->
+    <div class="form-section">
+        <div class="section-title">Invoice Number Format</div>
+        <!-- Approver info -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_FORMAT">Invoice Format:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_INVOICE_FORMAT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_TYPE">Type:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_INVOICE_TYPE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Notes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_INVOICE_NOTES" id="label-InvoiceNotes">Invoice Notes:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_INVOICE_NOTES, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Forms Section -->
+    <div class="form-section">
+        <div class="section-title">Forms</div>
+        <!-- W9/W-8BEN Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_W9_W8" id="label-W9/W-8BEN">W9/W-8BEN Form:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_W9_W8, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VSU Form -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_VSU" id="label-VSU">VSU Form:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_VSU, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Oracle and Apps Section -->
+    <div class="form-section">
+        <div class="section-title">Oracle and Apps</div>
+
+        <!-- Payment Method -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_PAYMENT_METHOD">Payment Method:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_PAYMENT_METHOD, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remit-To Account -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pay Terms -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.WS_FK_TB_ORACLE_PAY_TERMS_ID, "Payment Terms:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_ORACLE_PAY_TERMS_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Description -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_INVOICE_DESCRIPTION">Invoice Description:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_INVOICE_DESCRIPTION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Period -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_BILLING_PERIOD">Billing Period:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_BILLING_PERIOD, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <!-- Dates -->
+
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="form-Dates" id="dates">Dates:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_BILLING_PERIOD_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @id = "form-Dates" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribution Set -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribution Combination -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accounting Date -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ACCOUNTING_DATE">Accounting Date:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_ACCOUNTING_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal Entity -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organization Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="FK_TB_ORGANIZATION_TYPE_ID">Organization Type:</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_ORGANIZATION_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- First-Party Taxpayer ID -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_TAXPAYER_ID">Taxpayer ID:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WS_TEMP_TAXPAYER_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Type -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.WS_FK_TB_ORACLE_TYPE_ID, "Type:", htmlAttributes: new { @class = "control-label col-md-2 OracleText" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_ORACLE_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_DESCRIPTION">Description:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_ORACLE_DESCRIPTION, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Oracle Notes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_NOTES">Oracle Notes:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_ORACLE_NOTES, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+
+                    </div>
+                </div>
+                <!-- Oracle Instructions -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2 OracleText" for="TEMP_ORACLE_INSTRUCTIONS" id="Label-Oracle">Oracle Instructions:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_ORACLE_INSTRUCTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Contacts -->
+    <div class="form-section">
+        <div class="section-title">Contacts</div>
+        <div class="form-group">
+            <div class="row">
+
+                <!-- AR Key Contacts/Currents -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Currents">AR Key Contacts/Currents:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_CONTACTS_CURRENT, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Currents" })
+                    </div>
+                </div>
+
+                <!-- AR Key Contacts/Prior -->
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-Prior">AR Key Contacts/Prior:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_CONTACTS_PRIOR, new { @class = "form-control", @rows = 8, @cols = 150, @disabled = "disabled", @id = "form-Prior" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- Notes & Instructions Section -->
+    <div class="form-section">
+        <div class="section-title">Notes & Instructions</div>
+        <!-- Highlights -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS">Highlights</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-10">
+                        <button id="ButtonViewHistory" type="button" class="styled-button align-right openModalBtn" data-modal="ShowHighlights">View History</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Highlights Comments -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMENTS">Highlights Comments:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_COMMENTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Instructions -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_INSTRUCTIONS">Instructions:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_INSTRUCTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Exceptions -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_EXCEPTIONS">Exceptions:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_EXCEPTIONS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Most Common Issues -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_COMMON_ISSUES">Most Common <br> Issues:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_COMMON_ISSUES, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Supplier Agency -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_SUPPLIER_AGENCY">Supplier Agency:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_SUPPLIER_AGENCY, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Template Comments -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="control-label col-md-2" for="TB_HIGHLIGHTS1_HIGHLIGHTS_TEMPLATE_COMMENTS">Template Comments:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TB_HIGHLIGHTS.HIGHLIGHTS_TEMPLATE_COMMENTS, new { @class = "form-control TinyEditorReadOnly", @rows = 8, @cols = 150, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Show Highlights modal-->
+    <div id="ShowHighlights" class="modal">
+        <div class="modal-content">
+            <span id="cancelButton" class="close">&times;</span>
+            @*Highlights*@
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsHistoryView">Highlights</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="HighlightsCHistoryView">Highlights Comments</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="HighlightsCHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Instructions*@
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="InstructionsHistoryView">Instructions</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="InstructionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Exceptions*@
+            <div class="from-group">
+                <div class="row">
+                    <div>
+                        <label class="control-label col-md-6" for="ExceptionsHistoryView">Exceptions</label>
+
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="ExceptionsHistoryView"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Most Common Issues*@
+            <div class="row">
+                <div>
+                    <label class="control-label" for="MostCIHistoryView">Most Common Issues</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="MostCIHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
+            @*Supplier Agency*@
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="SupplierAHistoryView">Supplier Agency</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="SupplierAHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            @*Template Comments*@
+            <div class="row">
+                <div>
+                    <label class="control-label col-md-6" for="TemplateCHistoryView">Template Comments</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="TemplateCHistoryView"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-row">
+                @Html.DropDownList("WS_FK_TB_HIGHLIGHTS", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- Emails Section -->
+    <div class="form-section">
+        <div class="section-title">Emails</div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="form-BackUpEmail">Back Up Emails:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="form-BackUpEmail" rows="6" cols="150" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Select Mails Dropdown -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class=" control-label col-md-2" for="FK_TB_EMAIL_BACKUP_ID"></label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_EMAIL_BACKUP_ID", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Approver Section -->
+    <div class="form-section">
+        <div class="section-title">Approver</div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.WS_FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("WS_FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-2" for="TEMP_APPROVER_COMMENTS">Aprover Comments:</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WS_TEMP_APPROVER_COMMENTS, new { @class = "form-control", @rows = 5, @cols = 50, @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <hr />
+    <hr style="display: none;" />
+    <a href="javascript:void(0);" id="scrollToTop" onclick="scrollToTop()">Scroll Back to Top</a>
+    @Html.ActionLink("Back To list", "Index", null, new { @class = "returnLink" })
+
+}
+
+@section scripts {
+
+    <script src="~/Scripts/TemplateCrud.js"></script>
+    <script src="~/Scripts/templateModal.js"></script>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/Scripts/TinyEditorConfig.js"></script>
+}
