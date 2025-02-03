@@ -204,25 +204,36 @@ namespace AccountsPayable.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
             if (tB_WORKSPACE == null)
             {
                 return HttpNotFound();
             }
-            //Get data for email backup
+            var TempID = tB_WORKSPACE.TEMP_ID;
+            // Retrieve the associated TB_TEMPLATE object
+            TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.FirstOrDefault(t => t.TEMP_ID == tB_WORKSPACE.TEMP_ID);
+            if (tB_TEMPLATE == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Pass the data as a tuple to the view
+            var model = new Tuple<TB_WORKSPACE, TB_TEMPLATE>(tB_WORKSPACE, tB_TEMPLATE);
+
+            // Prepare viewbags as before
             var emailBackupList = db.TB_EMAIL_BACKUP
-                .Where(a => a.FK_TB_TEMPLATE_ID == id)
+                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                 .AsEnumerable()
                 .Select(e => new
                 {
                     EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
                     EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }
-                ).ToList();
-            //Get data for historic Remit
+                }).ToList();
+
             var historicRemitToList = db.TB_HISTORIC_REMIT
-                .Where(x => x.FK_TB_TEMPLATE_ID == id)
+                .Where(x => x.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
                 .AsEnumerable()
                 .Select(e => new
@@ -230,42 +241,42 @@ namespace AccountsPayable.Controllers
                     HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
                     HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }).ToList();
-            //Get data for highlights
+
             var HighLightsToList = db.TB_HIGHLIGHTS
-                .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                .Where(e => e.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.HIGHLIGHTS_DATE)
                 .AsEnumerable()
                 .Select(e => new
                 {
                     HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
-                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
-                })
-                .ToList();
+                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                }).ToList();
 
-            //Get data for alias
-            var aliasesForTemplate = db.TB_ALIAS.
-                Where(a => a.FK_TB_TEMPLATE_ID == id)
+            var aliasesForTemplate = db.TB_ALIAS
+                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(a => a.ALIAS_NAME)
                 .AsEnumerable()
                 .Select(a => new
                 {
                     ALIAS_ID = a.ALIAS_ID,
-                    ALIAS_NAME = a.ALIAS_NAME,
+                    ALIAS_NAME = a.ALIAS_NAME
                 }).ToList();
+
             ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
             ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
             ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
             ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
-            ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME");
-            return View(tB_WORKSPACE);
+            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
+            //ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
+            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
+            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
+            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
+            ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORGANIZATION_TYPE_ID);
+            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
+
+            return View(model);
         }
+
 
         // GET: WorkSpace/Create
         public ActionResult Create(int? id)
@@ -285,7 +296,7 @@ namespace AccountsPayable.Controllers
                     return HttpNotFound();
                 }
 
-                // Example: Fetching workspace (adjust according to your logic)
+                // Example: Fetching workspace
                 TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.FirstOrDefault(x => x.TEMP_ID == id);
 
                 if (tB_WORKSPACE == null)
