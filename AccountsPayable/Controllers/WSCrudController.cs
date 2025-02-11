@@ -104,13 +104,13 @@ namespace AccountsPayable.Controllers
                                 WS_FK_TB_ORGANIZATION_TYPE_ID = existingTemplate.FK_TB_ORGANIZATION_TYPE_ID
                             };
 
-                            if (WorkspaceCommentsData.WORKSPACE_INFO != null) 
+                            if (WorkspaceCommentsData.WORKSPACE_INFO != null)
                             {
                                 WorkspaceCommentsData.WORKSPACE_DATE = targetTime;
                                 WorkspaceCommentsData.WORKSPACE_INFO = StripHtmlTags(WorkspaceCommentsData.WORKSPACE_INFO);
                                 db.WS_COMMENTS.Add(WorkspaceCommentsData);
                             }
-                           
+
 
                             if (WorkspaceLastActionsData.LAST_ACTIONS_INFO != null)
                             {
@@ -119,7 +119,7 @@ namespace AccountsPayable.Controllers
                                 db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
 
                             }
-                           
+
 
                             // Add the new workspace entry to the database
                             db.TB_WORKSPACE.Add(newWorkspace);
@@ -138,7 +138,7 @@ namespace AccountsPayable.Controllers
                                 WorkspaceCommentsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
                             }
 
-                            if(newLastActions_Id != 0)
+                            if (newLastActions_Id != 0)
                             {
                                 newWorkspace.FK_WS_LAST_ACTIONS_ID = newLastActions_Id;
                                 WorkspaceLastActionsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
@@ -174,7 +174,7 @@ namespace AccountsPayable.Controllers
             TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
             if (tB_WORKSPACE.WS_ISDISABLED != 1)
             {
-                tB_WORKSPACE.WS_ISDISABLED= disabled;
+                tB_WORKSPACE.WS_ISDISABLED = disabled;
                 db.SaveChanges();
                 return Json(new { success = true });
             }
@@ -186,5 +186,114 @@ namespace AccountsPayable.Controllers
 
 
         }
+        [HttpPost]
+        public ActionResult Edit(TB_WORKSPACE WorkspaceData, WS_COMMENTS WorkspaceCommentsData, WS_LAST_ACTIONS WorkspaceLastActionsData)
+        {
+            //Get UTC timezone and convert it to UTC-6 Costa Rica local time
+            var dateTimeUTC = DateTime.UtcNow;
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central America Standard Time");
+            DateTime targetTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUTC, targetTimeZone);
+
+
+            //Start transaction for template update
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        // Retrieve existing template from the database
+
+                        var existingWorkspace = db.TB_WORKSPACE.Find(WorkspaceData.WS_ID);
+
+                        if (existingWorkspace != null)
+                        {
+
+
+                            if (existingWorkspace.FK_WS_COMMENTS_ID != null)
+                            {
+                                if (WorkspaceCommentsData.WORKSPACE_INFO != existingWorkspace.WS_COMMENTS.WORKSPACE_INFO)
+                                {
+                                    WorkspaceCommentsData.WORKSPACE_DATE = targetTime;
+                                   
+                                    db.WS_COMMENTS.Add(WorkspaceCommentsData);
+                                }
+                            }
+                            else
+                            {
+                                if (WorkspaceCommentsData.WORKSPACE_INFO != null)
+                                {
+                                    WorkspaceCommentsData.WORKSPACE_DATE = targetTime;
+
+                                    db.WS_COMMENTS.Add(WorkspaceCommentsData);
+                                }
+                            }
+
+
+                            if (existingWorkspace.FK_WS_LAST_ACTIONS_ID != null)
+                            {
+                                if (WorkspaceLastActionsData.LAST_ACTIONS_INFO != existingWorkspace.WS_LAST_ACTIONS.LAST_ACTIONS_INFO)
+                                {
+                                    WorkspaceLastActionsData.LAST_ACTIONS_DATE = targetTime;
+                                    
+                                    db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
+                                }
+                            }
+                            else
+                            {
+                                if (WorkspaceLastActionsData.LAST_ACTIONS_INFO != null)
+                                {
+                                    WorkspaceLastActionsData.LAST_ACTIONS_DATE = targetTime;
+
+                                    db.WS_LAST_ACTIONS.Add(WorkspaceLastActionsData);
+                                }
+
+                            }
+
+                            // Save changes to the new workspace
+                            db.SaveChanges();
+                            int newComments_Id = WorkspaceCommentsData.COMMENTS_ID;
+                            int newLastActions_Id = WorkspaceLastActionsData.LAST_ACTIONS_ID;
+                            int newWorkspaceid = WorkspaceData.WS_ID;
+
+
+
+                            if (newComments_Id != 0)
+                            {
+                                WorkspaceData.FK_WS_COMMENTS_ID = newComments_Id;
+                                WorkspaceCommentsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
+                            }
+
+                            if (newLastActions_Id != 0)
+                            {
+                                WorkspaceData.FK_WS_LAST_ACTIONS_ID = newLastActions_Id;
+                                WorkspaceLastActionsData.FK_WS_WORKSPACE_ID = newWorkspaceid;
+                            }
+                            // Commit the transaction
+                            db.Entry(existingWorkspace).CurrentValues.SetValues(WorkspaceData);
+                            db.SaveChanges();
+                            transaction.Commit();
+                            return Json(new { success = true });
+                        }
+                        else
+                        {
+                            // Handle template not found
+                            transaction.Rollback();
+                            return Json(new { success = false, message = "Template not found" });
+                        }
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Model validation failed" });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Rollback the transaction if there's an error
+                    return Json(new { success = false, message = "An error occurred while saving the record: " + ex.Message });
+                }
+            }
+        }
     }
+
 }
