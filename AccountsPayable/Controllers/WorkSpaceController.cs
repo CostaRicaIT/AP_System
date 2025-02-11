@@ -142,7 +142,7 @@ namespace AccountsPayable.Controllers
                         DistributionSet = m.WS_TEMP_DISTRIBUTION_SET ?? "",
                         DistributionCombination = m.WS_TEMP_DISTRIBUTION_COMBINATION ?? "",
                         AccountingDate = m.WS_TEMP_ACCOUNTING_DATE ?? "",
-                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME ?? "",
+                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES?.LEGAL_ENTITY_NAME ?? "",
                         OrganizationType = m.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME ?? "",
                         TaxPayerID = m.WS_TEMP_TAXPAYER_ID ?? "",
                         Type = m.TB_ORACLE_TYPE.ORACLE_TYPE_NAME ?? "",
@@ -151,7 +151,7 @@ namespace AccountsPayable.Controllers
                         OracleInstructions = m.WS_TEMP_ORACLE_INSTRUCTIONS ?? "",
                         ARKeyContactsCurrent = m.WS_CONTACTS_CURRENT ?? "",
                         ARKeyContactsPrior = m.WS_CONTACTS_PRIOR ?? "",
-                        Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
+                        Approver = m.TB_APPROVER?.APPROVER_NAME ?? "",
                         ApproverComments = m.WS_TEMP_APPROVER_COMMENTS ?? "",
                         EmailBackup = m.TB_EMAIL_BACKUP?.EMAIL_BACKUP ?? ""
                     }).ToList();

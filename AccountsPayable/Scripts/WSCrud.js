@@ -127,15 +127,19 @@ $(document).ready(function () {
         create();
     });
 
+    $("#btn-update").click(function (e) {
+        update();
+    });
+
 });
 function create() {
     // get data from template
     var templateData = {
         TEMP_ID: $("#templateId").text(),
-        WS_WS_TEMPTAX_ID: $("#Item1_WS_TEMP_TAX_ID").val(),
+        WS_WS_TEMP_TAX_ID: $("#Item1_WS_TEMP_TAX_ID").val(),
         WS_TEMP_FOLDER: $("#Item1_WS_TEMP_FOLDER").val(),
         WS_TEMP_SUPPLIER_NAME: $("#Item1_WS_TEMP_SUPPLIER_NAME").val(),
-        WS_TEMP_SUPPLIER_NUMBER: $("#Item1_WS_TEMP_SUPPLIER_NAME").val(),
+        WS_TEMP_SUPPLIER_NUMBER: $("#Item1_WS_TEMP_SUPPLIER_NUMBER").val(),
         WS_TEMP_REMIT_TO: $("#Item1_WS_TEMP_REMIT_TO").val(),
         WS_TEMP_SUPPLIER_SITE: $("#Item1_WS_TEMP_SUPPLIER_SITE").val(),
         WS_TEMP_VENDOR_ACCOUNT: $("#Item1_WS_TEMP_VENDOR_ACCOUNT").val(),
@@ -150,7 +154,7 @@ function create() {
         WS_FK_TB_ORACLE_PAY_TERMS_ID: $("#FK_TB_ORACLE_PAY_TERMS_ID").val(),
         WS_TEMP_INVOICE_DESCRIPTION: $("#Item1_WS_TEMP_INVOICE_DESCRIPTION").val(),
         WS_TEMP_BILLING_PERIOD: tinymce.get("Item1_WS_TEMP_BILLING_PERIOD").getContent(),
-        WS_TEMP_BILLING_PRERIOD_DATE: $("#Item1_WS_TEMP_BILLING_PERIOD").val(),
+        WS_TEMP_BILLING_PERIOD_DATE: $("#Item1_WS_TEMP_BILLING_PERIOD_DATE").val(),
         WS_TEMP_DISTRIBUTION_SET: $("#Item1_WS_TEMP_DISTRIBUTION_SET").val(),
         WS_TEMP_DISTRIBUTION_COMBINATION: $("#Item1_WS_TEMP_DISTRIBUTION_COMBINATION").val(),
         WS_TEMP_ACCOUNTING_DATE: $("#Item1_WS_TEMP_ACCOUNTING_DATE").val(),
@@ -206,4 +210,81 @@ function create() {
             alert("An error occurred while saving the record.");
         }
     });
+}
+function update() {
+    // get data from template .replace(/[<>]/g, '') is to remove <> that can cause issues to save
+    var WorkspaceData = {
+        WS_ID: $("#WorkspaceID").text(),
+        WS_STATUS: $("#WS_STATUS").val(),
+        WS_REASON: $("#WS_REASON").val(),
+        WS_EMAIL_RECEIVED: $("#WS_EMAIL_RECEIVED").val(),
+        WS_CREATED_DATE: $("#WS_CREATED_DATE").val(),
+        WS_SOURCE: $("#WS_SOURCE").val(),
+        WS_HANDLED_BY: $("#WS_HANDLED_BY").val(),
+        WS_DUE_DATE: $("#WS_DUE_DATE").val(),
+        WS_INVOICE_DATE: $("#WS_INVOICE_DATE").val(),
+        WS_AMOUNT: $("#WS_AMOUNT").val(),
+        WS_INVOICE_NUMBER: $("#WS_INVOICE_NUMBER").val(),
+        TEMP_ID: $("#templateId").text(),
+        WS_TEMP_TAX_ID: $("#WS_TEMP_TAX_ID").val(),
+        WS_TEMP_FOLDER: $("#WS_TEMP_FOLDER").val(),
+        WS_TEMP_SUPPLIER_NAME: $("#WS_TEMP_SUPPLIER_NAME").val(),
+        WS_TEMP_SUPPLIER_NUMBER: $("#WS_TEMP_SUPPLIER_NUMBER").val(),
+        WS_TEMP_REMIT_TO: $("#WS_TEMP_REMIT_TO").val(),
+        WS_TEMP_SUPPLIER_SITE: $("#WS_TEMP_SUPPLIER_SITE").val(),
+        WS_TEMP_VENDOR_ACCOUNT: $("#WS_TEMP_VENDOR_ACCOUNT").val(),
+        WS_FK_TB_ORACLE_SOURCE_ID: $("#WS_FK_TB_ORACLE_SOURCE_ID").val(),
+        WS_TEMP_INVOICE_FORMAT: $("#WS_TEMP_INVOICE_FORMAT").val(),
+        WS_TEMP_INVOICE_TYPE: $("#WS_TEMP_INVOICE_TYPE").val(),
+        WS_TEMP_INVOICE_NOTES: tinymce.get("WS_TEMP_INVOICE_NOTES").getContent(),
+        WS_TEMP_W9_W8: tinymce.get("WS_TEMP_W9_W8").getContent(),
+        WS_TEMP_VSU: tinymce.get("WS_TEMP_VSU").getContent(),
+        WS_TEMP_PAYMENT_METHOD: $("#WS_TEMP_PAYMENT_METHOD").val(),
+        WS_TEMP_REMIT_TOACCOUNT: $("#WS_TEMP_REMIT_TOACCOUNT").val(),
+        WS_FK_TB_ORACLE_PAY_TERMS_ID: $("#WS_FK_TB_ORACLE_PAY_TERMS_ID").val(),
+        WS_TEMP_INVOICE_DESCRIPTION: $("#WS_TEMP_INVOICE_DESCRIPTION").val(),
+        WS_TEMP_BILLING_PERIOD: tinymce.get("WS_TEMP_BILLING_PERIOD").getContent(),
+        WS_TEMP_BILLING_PERIOD_DATE: $("#WS_TEMP_BILLING_PERIOD_DATE").val(),
+        WS_TEMP_DISTRIBUTION_SET: $("#WS_TEMP_DISTRIBUTION_SET").val(),
+        WS_TEMP_DISTRIBUTION_COMBINATION: $("#WS_TEMP_DISTRIBUTION_COMBINATION").val(),
+        WS_TEMP_ACCOUNTING_DATE: $("#WS_TEMP_ACCOUNTING_DATE").val(),
+        WS_FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val(),
+        WS_FK_TB_ORGANIZATION_TYPE_ID: $("#organizationTypeDropdown").val(),
+        WS_TEMP_TAXPAYER_ID: $("#WS_TEMP_TAXPAYER_ID").val(),
+        WS_FK_TB_ORACLE_TYPE_ID: $("#WS_FK_TB_ORACLE_TYPE_ID").val(),
+        WS_TEMP_ORACLE_DESCRIPTION: tinymce.get("WS_TEMP_ORACLE_DESCRIPTION").getContent(),
+        WS_TEMP_ORACLE_NOTES: tinymce.get("WS_TEMP_ORACLE_NOTES").getContent(),
+        WS_TEMP_ORACLE_INSTRUCTIONS: tinymce.get("WS_TEMP_ORACLE_INSTRUCTIONS").getContent(),
+        WS_CONTACTS_CURRENT: $("#form-Currents").val(),
+        WS_CONTACTS_PRIOR: $("#form-Prior").val(),
+        WS_FK_TB_APPROVER_ID: $("#approverDropdown").val(),
+        WS_TEMP_APPROVER_COMMENTS: $("#WS_TEMP_APPROVER_COMMENTS").val(),
+        
+    };
+
+    var WorkspaceCommentsData = {
+        WORKSPACE_INFO: tinymce.get("WS_COMMENTS_WORKSPACE_INFO").getContent()
+    }
+
+    var WorkspaceLastActionsData = {
+        LAST_ACTIONS_INFO: tinymce.get("WS_LAST_ACTIONS_LAST_ACTIONS_INFO").getContent()
+    }
+
+    $.ajax({
+        url: '/WSCrud/Edit',
+        type: 'POST',
+
+        data: {
+            WorkspaceData, WorkspaceCommentsData, WorkspaceLastActionsData
+        },
+        success: function (data) {
+            if (data.success) {
+                document.location.href = window.location.origin + '/WorkSpace/Index';
+            }
+        },
+        error: function () {
+            alert("An error occurred while saving the record.");
+        }
+    });
+
 }

@@ -1,5 +1,5 @@
 ﻿var table; // Declare the 'table' variable in a global scope
-var defaultColumns = [1,2,3,4,5,6,7,8,9,10,48]; //
+var defaultColumns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 48]; //
 
 function showFilterModal() {
     // Open the modal
@@ -72,22 +72,22 @@ function DrawTable() {
         },
         columns: [
             { data: 'WS_Id', name: 'WS_ID', className: "scrollable-content" },
+            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className: "scrollable-content" },
             { data: 'Ws_duedate', name: 'WS_DUE_DATE', className: "scrollable-content" },
             { data: 'Ws_status', name: 'WS_STATUS', className: "scrollable-content" },
-            { data: 'Ws_reason', name: 'WS_REASON', className: "scrollable-content" },
-            { data: 'Ws_email_received', name: 'WS_EMAIL_RECEIVED', className: "scrollable-content" },
-            { data: 'Ws_created_date', name: 'WS_CREATED_DATE', className: "scrollable-content" },
-            { data: 'Ws_source', name: 'WS_SOURCE', className: "scrollable-content" },
             { data: 'Ws_handled_by', name: 'WS_HANDLED_BY', className: "scrollable-content" },
-            { data: 'Ws_invoice_date', name: 'WS_INVOICE_DATE', className: "scrollable-content" },
-            { data: 'Ws_amount', name: 'WS_AMOUNT', className: "scrollable-content" },
+            { data: 'Ws_created_date', name: 'WS_CREATED_DATE', className: "scrollable-content" },
+            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className: "scrollable-content" },
             { data: 'Ws_invoice_number', name: 'WS_INVOICE_NUMBER', className: "scrollable-content" },
+            { data: 'Ws_amount', name: 'WS_AMOUNT', className: "scrollable-content" },
+            { data: 'Ws_invoice_date', name: 'WS_INVOICE_DATE', className: "scrollable-content" },
+            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className: "scrollable-content" },
             { data: 'Id', name: 'TEMP_ID' },
             { data: 'Alias', name: 'TB_ALIAS1.ALIAS_NAME', className: "scrollable-content" },
             { data: 'Folder', name: 'TEMP_FOLDER', className: "scrollable-content" },
-            { data: 'TempTaxId', name: 'TEMP_TAX_ID', className: "scrollable-content" },
-            { data: 'TempSupplierName', name: 'TEMP_SUPPLIER_NAME', className: "scrollable-content" },
-            { data: 'TempSupplierNumber', name: 'TEMP_SUPPLIER_NUMBER', className: "scrollable-content" },
+            { data: 'Ws_reason', name: 'WS_REASON', className: "scrollable-content" },
+            { data: 'Ws_source', name: 'WS_SOURCE', className: "scrollable-content" },
+            { data: 'Ws_email_received', name: 'WS_EMAIL_RECEIVED', className: "scrollable-content" },
             { data: 'RemitTo', name: 'TEMP_REMIT_TO', className: "scrollable-content" },
             { data: 'SupplierSite', name: 'TEMP_SUPPLIER_SITE', className: "scrollable-content" },
             { data: 'HistoricRemitTo', name: 'TB_HISTORIC_REMIT1.HISTORIC_REMIT_INFO', className: "scrollable-content" },
