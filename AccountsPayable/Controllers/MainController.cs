@@ -183,18 +183,13 @@ namespace AccountsPayable.Controllers
             return templateData;
         }
 
-
-
-
-
-
         public ActionResult Create()
         {
 
             //Check if user haves access to module
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
             {
                 //Get data for dropdowns
                 ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
@@ -213,7 +208,7 @@ namespace AccountsPayable.Controllers
             //Check if user haves access to module
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template update only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
             {
                 if (id == null)
                 {
@@ -290,7 +285,7 @@ namespace AccountsPayable.Controllers
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
             {
                 if (id == null)
                 {

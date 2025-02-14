@@ -142,7 +142,7 @@ namespace AccountsPayable.Controllers
                         DistributionSet = m.WS_TEMP_DISTRIBUTION_SET ?? "",
                         DistributionCombination = m.WS_TEMP_DISTRIBUTION_COMBINATION ?? "",
                         AccountingDate = m.WS_TEMP_ACCOUNTING_DATE ?? "",
-                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME ?? "",
+                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES?.LEGAL_ENTITY_NAME ?? "",
                         OrganizationType = m.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME ?? "",
                         TaxPayerID = m.WS_TEMP_TAXPAYER_ID ?? "",
                         Type = m.TB_ORACLE_TYPE.ORACLE_TYPE_NAME ?? "",
@@ -151,7 +151,7 @@ namespace AccountsPayable.Controllers
                         OracleInstructions = m.WS_TEMP_ORACLE_INSTRUCTIONS ?? "",
                         ARKeyContactsCurrent = m.WS_CONTACTS_CURRENT ?? "",
                         ARKeyContactsPrior = m.WS_CONTACTS_PRIOR ?? "",
-                        Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
+                        Approver = m.TB_APPROVER?.APPROVER_NAME ?? "",
                         ApproverComments = m.WS_TEMP_APPROVER_COMMENTS ?? "",
                         EmailBackup = m.TB_EMAIL_BACKUP?.EMAIL_BACKUP ?? ""
                     }).ToList();
@@ -272,7 +272,7 @@ namespace AccountsPayable.Controllers
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
 
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
             {
                 if (id == null)
                 {
@@ -367,7 +367,7 @@ namespace AccountsPayable.Controllers
             //Check if user haves access to module
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template update only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
             {
                 if (id == null)
                 {

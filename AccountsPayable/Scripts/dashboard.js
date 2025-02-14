@@ -116,13 +116,47 @@ function DrawTable() {
                     var buttons = '';
 
                     // Check permissions for buttons
-                    if (userRoleId === 3) { // View permission
+                    if (userRoleId === 3) { // Viewer / Read-Only User
                         buttons += `
                             <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         `;
-                    } else if (userRoleId === 2) {
+                    } else if (userRoleId === 2) { // Operations Lead User
+                        buttons += `
+                         <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>   
+                            <button class="dt-button filterButton Workspace-button" data-id="${row.Id}" aria-label="create">
+                              <i class="fa-regular fa-file-lines"></i>
+                            </button>
+                           
+                        `; 
+                    } else if (userRoleId === 4) { // Operations Manager User
+                        buttons += `
+                         <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>   
+                            <button class="dt-button filterButton Workspace-button" data-id="${row.Id}" aria-label="create">
+                              <i class="fa-regular fa-file-lines"></i>
+                            </button>
+                            <button class="dt-button filterButton erase-button" data-id="${row.Id}" aria-label="Delete">
+                                <i class="fa-solid fa-eraser"></i>
+                            </button>
+                        `;
+                    } else if (userRoleId === 5) { // Workspace Specialist User
+                        buttons += `
+                            <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>                        
+                        `;
+                    } else if (userRoleId === 1) { // System Administrator User
                         buttons += `
                          <button class="dt-button filterButton edit-button" data-id="${row.Id}" aria-label="Edit">
                                 <i class="fas fa-edit"></i>
