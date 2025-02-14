@@ -18,168 +18,218 @@
 {
 
     <!-- Workspace Section -->
-    <div class="form-section">
-        <div class="section-title">Workspace</div>
+<div class="form-section">
+    <div class="section-title">Workspace</div>
 
-        <!-- Tax ID -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax ID:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_TAX_ID, "", new { @class = "text-danger" })
-                    </div>
+    <!-- Tax ID -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax ID:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_TAX_ID, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-
-        <!-- Status -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Status" class="control-label col-md-2">Status:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_STATUS, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Reason -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Reason" class="control-label col-md-2">Reason:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_REASON, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Email Received -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Email Received" class="control-label col-md-2">Email Received:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_EMAIL_RECEIVED, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Created Date -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Create Date" class="control-label col-md-2">Create Date:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_CREATED_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Source -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Source" class="control-label col-md-2">Source:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_SOURCE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Handled By -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Handled By" class="control-label col-md-2">Handled By:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_HANDLED_BY, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Invoice Date -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Invoice Date" class="control-label col-md-2">Invoice Date:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_INVOICE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Due Date -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Due Date" class="control-label col-md-2">Due Date:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_DUE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Amount -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Amount" class="control-label col-md-2">Amount:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_AMOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Invoice Number -->
-        <div class="form-group">
-            <div class=" row">
-                <div class="col-md-6">
-                    <label for="form-Invoice Number" class="control-label col-md-2">Invoice Number:</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_INVOICE_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Comments -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Comments">Comments:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Item1.WS_COMMENTS.WORKSPACE_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
-                        <br />
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- Last Actions -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label col-md-2" for="form-Last Actions">Last Action:</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Item1.WS_LAST_ACTIONS.LAST_ACTIONS_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50, @disabled = "disabled" })
-                        <br />
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
+
+    <!-- Status -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Status" class="control-label col-md-2">Status:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_STATUS, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reason -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Reason" class="control-label col-md-2">Reason:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_REASON, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Received -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Email Received" class="control-label col-md-2">Email Received:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_EMAIL_RECEIVED, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Created Date -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Create Date" class="control-label col-md-2">Create Date:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_CREATED_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Source -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Source" class="control-label col-md-2">Source:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_SOURCE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Handled By -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Handled By" class="control-label col-md-2">Handled By:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_HANDLED_BY, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice Date -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Invoice Date" class="control-label col-md-2">Invoice Date:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_INVOICE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Due Date -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Due Date" class="control-label col-md-2">Due Date:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_DUE_DATE, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Amount -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Amount" class="control-label col-md-2">Amount:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_AMOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice Number -->
+    <div class="form-group">
+        <div class=" row">
+            <div class="col-md-6">
+                <label for="form-Invoice Number" class="control-label col-md-2">Invoice Number:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Item1.WS_INVOICE_NUMBER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comments -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2" for="form-Comments">Comments:</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Item1.WS_COMMENTS.WORKSPACE_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50d })
+                    <br />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button id="ButtonViewComments" type="button" class="styled-button align-right openModalBtn" data-modal="ShowCommentsModal">View Comments History</button>
+            </div>
+        </div>
+    </div>
+    <!--Modal to see Comments -->
+    <div id="ShowCommentsModal" class="modal">
+        <div class="modal-content">
+            <span id="cancelButton" class="close">&times;</span>
+            <div class="row">
+                <div class="control-label col-md-12">
+                    <label class="control-label col-md-4" for="historicCommentsView">Comments History:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control TinyEditorReadOnly" id="historicCommentsView" readonly rows="6" cols="75" disabled placeholder="..."></textarea>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <!--Select Comments to -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        @Html.DropDownList("FK_WS_COMMENTS_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Last Actions -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label col-md-2" for="form-Last Actions">Last Action:</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Item1.WS_LAST_ACTIONS.LAST_ACTIONS_INFO, new { @class = "form-control TinyEditorReadOnly", @rows = 5, @cols = 50 })
+                    <br />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button id="ButtonViewLastActions" type="button" class="styled-button align-right openModalBtn" data-modal="ShowLastActionsModal">View Last Actions</button>
+            </div>
+        </div>
+        <!--Modal to see LastActions -->
+        <div id="ShowLastActionsModal" class="modal">
+            <div class="modal-content">
+                <span id="cancelButton" class="close">&times;</span>
+                <div class="row">
+                    <div class="control-label col-md-12">
+                        <label class="control-label col-md-4" for="lastActionsView">Last Actions:</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control TinyEditorReadOnly" id="lastActionsView" readonly rows="6" cols="75" disabled placeholder="..."></textarea>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <!--Select LastActions to -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            @Html.DropDownList("FK_WS_LAST_ACTIONS_ID", null, htmlAttributes: new { @class = "form-control", @size = "5" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <br>
 
     <!-- Supplier Information Section -->

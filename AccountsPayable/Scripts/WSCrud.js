@@ -66,6 +66,50 @@ $(document).ready(function () {
             }
         });
     }
+    // Query to get text from Comments to according to ID in dropdown
+    function getCommentsText(selectedComments, wsId) {
+        $.ajax({
+            url: '/Historic/GetCommentsText',
+            type: 'GET',
+            data: { commentsID: selectedComments, id: wsId },
+            success: function (data) {
+                // Check if the data is retrieved successfully
+                if (data.success) {
+                    // Updates the content of the textarea with the historic email text
+                    var comments = data.commentsText;
+                    tinymce.get("historicCommentsView").setContent(comments);
+                } else {
+                    alert("Failed to get comments text. " + data.message);
+                }
+            },
+            error: function () {
+                // Handles any errors that may occur during the AJAX request
+                alert("Error getting comments text.");
+            }
+        });
+    }
+    // Query to get text from Last Actions according to ID in dropdown
+    function getLastActionsText(selectedLastActions, wsId) {
+        $.ajax({
+            url: '/Historic/GetLastActionsText',
+            type: 'GET',
+            data: { lastActionsID: selectedLastActions, id: wsId },
+            success: function (data) {
+                // Check if the data is retrieved successfully
+                if (data.success) {
+                    // Updates the content of the textarea with the historic email text
+                    var lastActions = data.lastActionsText;
+                    tinymce.get("lastActionsView").setContent(lastActions);
+                } else {
+                    alert("Failed to get last actions text. " + data.message);
+                }
+            },
+            error: function () {
+                // Handles any errors that may occur during the AJAX request
+                alert("Error getting last actions text.");
+            }
+        });
+    }
     // Query to get text from Highlights history according to ID in dropdown
     function getHighLigthsText(selectedHighLight, templateId) {
         $.ajax({
@@ -118,6 +162,21 @@ $(document).ready(function () {
         }
     }).change(); // Trigger the change event on page load
 
+    $('#FK_WS_COMMENTS_ID').on('change', function (e) {
+        var selectedComments = $(this).val();
+        var wsId = $('#WorkspaceID').text();
+        if (selectedComments !== null && wsId !== null) {
+            getCommentsText(selectedComments, wsId);
+        }
+    }).change(); // Trigger the change event on page load
+
+    $('#FK_WS_LAST_ACTIONS_ID').on('change', function (e) {
+        var selectedLastActions = $(this).val();
+        var wsId = $('#WorkspaceID').text();
+        if (selectedLastActions !== null && wsId !== null) {
+            getLastActionsText(selectedLastActions, wsId);
+        }
+    }).change(); // Trigger the change event on page load
     //Cancel button
     $(".btn-cancel").click(function () {
         document.location.href = window.location.origin + '/Workspace/Index';
