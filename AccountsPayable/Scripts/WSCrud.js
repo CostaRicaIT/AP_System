@@ -111,7 +111,17 @@ $(document).ready(function () {
         });
     }
     // Query to get text from Highlights history according to ID in dropdown
+    function clearHighlights() {
+        tinymce.get("HighlightsHistoryView").setContent('');
+        tinymce.get("HighlightsCHistoryView").setContent('');
+        tinymce.get("InstructionsHistoryView").setContent('');
+        tinymce.get("ExceptionsHistoryView").setContent('');
+        tinymce.get("MostCIHistoryView").setContent('');
+        tinymce.get("SupplierAHistoryView").setContent('');
+        tinymce.get("TemplateCHistoryView").setContent('');
+    }
     function getHighLigthsText(selectedHighLight, templateId) {
+        clearHighlights(); // Llama a la función para limpiar los datos antes de cargar los nuevos
         $.ajax({
             url: '/Historic/GetHighlights',
             type: 'GET',
