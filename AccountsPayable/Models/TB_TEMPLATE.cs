@@ -23,8 +23,9 @@ namespace AccountsPayable.Models
             this.TB_HIGHLIGHTS = new HashSet<TB_HIGHLIGHTS>();
             this.TB_HISTORIC_REMIT = new HashSet<TB_HISTORIC_REMIT>();
         }
-    
+        
         public int TEMP_ID { get; set; }
+        [AllowHtml]
         public string TEMP_TAX_ID { get; set; }
         public string TEMP_REMIT_TO { get; set; }
         public string TEMP_SUPPLIER_NAME { get; set; }
@@ -39,6 +40,7 @@ namespace AccountsPayable.Models
         [AllowHtml]
         public string TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
+        [AllowHtml]
         public string TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> FK_TB_ORACLE_SOURCE_ID { get; set; }
         [AllowHtml]
@@ -52,11 +54,14 @@ namespace AccountsPayable.Models
         public string TEMP_INVOICE_FORMAT { get; set; }
         public string TEMP_INVOICE_TYPE { get; set; }
         public int TEMP_ISDISABLED { get; set; }
+        [AllowHtml]
         public string TEMP_FOLDER { get; set; }
         public string TEMP_PAYMENT_METHOD { get; set; }
+        [AllowHtml]
         public string TEMP_REMIT_TOACCOUNT { get; set; }
         [AllowHtml]
         public string TEMP_BILLING_PERIOD { get; set; }
+        [AllowHtml]
         public string TEMP_DISTRIBUTION_COMBINATION { get; set; }
         public string TEMP_ACCOUNTING_DATE { get; set; }
         [AllowHtml]

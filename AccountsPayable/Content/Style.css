@@ -118,3 +118,7 @@ select.form-control:disabled {
 #form-Prior {
     margin-left: 23px;
 }
+.tox {
+    position: relative;
+    left: 12px; /* Adjust this to move the editor */
+}
