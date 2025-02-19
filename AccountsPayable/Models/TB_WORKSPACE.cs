@@ -11,7 +11,8 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class TB_WORKSPACE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -47,11 +48,14 @@ namespace AccountsPayable.Models
         public Nullable<int> WS_FK_TB_LEGAL_ENTITY_ID { get; set; }
         public string WS_TEMP_TAXPAYER_ID { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_TYPE_ID { get; set; }
+        [AllowHtml]
         public string WS_TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
         public string WS_TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_SOURCE_ID { get; set; }
+        [AllowHtml]
         public string WS_TEMP_ORACLE_NOTES { get; set; }
+        [AllowHtml]
         public string WS_TEMP_ORACLE_INSTRUCTIONS { get; set; }
         public Nullable<int> WS_FK_TB_HIGHLIGHTS_ID { get; set; }
         public Nullable<int> WS_FK_TB_EMAIL_BACKUP_ID { get; set; }
@@ -63,11 +67,15 @@ namespace AccountsPayable.Models
         public string WS_TEMP_FOLDER { get; set; }
         public string WS_TEMP_PAYMENT_METHOD { get; set; }
         public string WS_TEMP_REMIT_TOACCOUNT { get; set; }
+        [AllowHtml]
         public string WS_TEMP_BILLING_PERIOD { get; set; }
         public string WS_TEMP_DISTRIBUTION_COMBINATION { get; set; }
         public string WS_TEMP_ACCOUNTING_DATE { get; set; }
+        [AllowHtml]
         public string WS_TEMP_VSU { get; set; }
+        [AllowHtml]
         public string WS_TEMP_W9_W8 { get; set; }
+        [AllowHtml]
         public string WS_TEMP_INVOICE_NOTES { get; set; }
         public string WS_TEMP_INVOICE_DESCRIPTION { get; set; }
         public string WS_TEMP_BILLING_PERIOD_DATE { get; set; }
@@ -86,8 +94,10 @@ namespace AccountsPayable.Models
         public virtual TB_ORACLE_SOURCE TB_ORACLE_SOURCE { get; set; }
         public virtual TB_ORACLE_TYPE TB_ORACLE_TYPE { get; set; }
         public virtual WS_COMMENTS WS_COMMENTS { get; set; }
+        [AllowHtml]
         public virtual WS_LAST_ACTIONS WS_LAST_ACTIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [AllowHtml]
         public virtual ICollection<WS_COMMENTS> WS_COMMENTS1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WS_LAST_ACTIONS> WS_LAST_ACTIONS1 { get; set; }
