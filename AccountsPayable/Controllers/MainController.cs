@@ -16,7 +16,7 @@ namespace AccountsPayable.Controllers
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
             {
                 return View();
             }
