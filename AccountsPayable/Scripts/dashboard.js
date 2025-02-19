@@ -154,7 +154,10 @@ function DrawTable() {
                         buttons += `
                             <button class="dt-button filterButton view-button" data-id="${row.Id}" aria-label="View">
                                 <i class="fa-solid fa-eye"></i>
-                            </button>                        
+                            </button>
+                            <button class="dt-button filterButton Workspace-button" data-id="${row.Id}" aria-label="create">
+                              <i class="fa-regular fa-file-lines"></i>
+                            </button>
                         `;
                     } else if (userRoleId === 1) { // System Administrator User
                         buttons += `
