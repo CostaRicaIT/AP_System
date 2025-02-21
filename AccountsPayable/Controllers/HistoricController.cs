@@ -46,6 +46,40 @@ namespace AccountsPayable.Controllers
             }
         }
         [HttpGet]
+        public ActionResult GetCommentsText(int commentsId, int id)
+        {
+            // Get the text based on the ID
+            var commentsText = db.WS_COMMENTS
+                    .Where(a => a.COMMENTS_ID == commentsId)
+                    .Select(item => item.WORKSPACE_INFO)
+                    .FirstOrDefault();
+            if (commentsText != null)
+            {
+                return Json(new { success = true, commentsText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult GetLastActionsText(int lastActionsId, int id)
+        {
+            // Get the text based on the ID
+            var lastActionsText = db.WS_LAST_ACTIONS
+                    .Where(a => a.LAST_ACTIONS_ID == lastActionsId)
+                    .Select(item => item.LAST_ACTIONS_INFO)
+                    .FirstOrDefault();
+            if (lastActionsText != null)
+            {
+                return Json(new { success = true, lastActionsText }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
         public ActionResult GetHighlights(int highlightsId, int id)
         {
             // Get the text based on the ID

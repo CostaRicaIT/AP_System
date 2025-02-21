@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AccountsPayable.Models;
 using System.Linq.Dynamic.Core;
+using System.Data.Entity.Core.Metadata.Edm;
 
 namespace AccountsPayable.Controllers
 {
@@ -19,14 +20,16 @@ namespace AccountsPayable.Controllers
         public ActionResult Index()
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3)
+            // Check user permission to access Template creation only Standard user should be able to access this view
+            if (userPermission == null || (userPermission.FK_TB_LOGIN_ROLE_ID != 2 && userPermission.FK_TB_LOGIN_ROLE_ID != 3 && userPermission.FK_TB_LOGIN_ROLE_ID != 5 && userPermission.FK_TB_LOGIN_ROLE_ID != 4))
             {
-                return View();
+                // Close session and redirect to login page
+                Session.Abandon();
+                return RedirectToAction("Login", "Account");
             }
             else
             {
-                return View("Error");
+                return View();
             }
         }
         public JsonResult GetWorkspaceData()
@@ -127,7 +130,7 @@ namespace AccountsPayable.Controllers
                         SupplierSite = m.WS_TEMP_SUPPLIER_SITE ?? "",
                         HistoricRemitTo = m.TB_HISTORIC_REMIT?.HISTORIC_REMIT_INFO ?? "",
                         VendorAccount = m.WS_TEMP_VENDOR_ACCOUNT ?? "",
-                        Source = m.TB_ORACLE_SOURCE.ORACLE_SOURCE_DESCRIPTION ?? "",
+                        Source = m.TB_ORACLE_SOURCE?.ORACLE_SOURCE_DESCRIPTION ?? "",
                         InvoiceFormat = m.WS_TEMP_INVOICE_FORMAT ?? "",
                         InvoiceType = m.WS_TEMP_INVOICE_TYPE ?? "",
                         InvoiceNotes = m.WS_TEMP_INVOICE_NOTES ?? "",
@@ -135,14 +138,14 @@ namespace AccountsPayable.Controllers
                         VSUForm = m.WS_TEMP_VSU ?? "",
                         PaymentMethod = m.WS_TEMP_PAYMENT_METHOD ?? "",
                         RemitToAccount = m.WS_TEMP_REMIT_TOACCOUNT ?? "",
-                        PayTerms = m.TB_ORACLE_PAY_TERMS.PAY_TERMS_DESCRIPTION ?? "",
+                        PayTerms = m.TB_ORACLE_PAY_TERMS?.PAY_TERMS_DESCRIPTION ?? "",
                         InvoiceDescription = m.WS_TEMP_INVOICE_DESCRIPTION ?? "",
                         BillingPeriod = m.WS_TEMP_BILLING_PERIOD ?? "",
                         Dates = m.WS_TEMP_BILLING_PERIOD_DATE ?? "",
                         DistributionSet = m.WS_TEMP_DISTRIBUTION_SET ?? "",
                         DistributionCombination = m.WS_TEMP_DISTRIBUTION_COMBINATION ?? "",
                         AccountingDate = m.WS_TEMP_ACCOUNTING_DATE ?? "",
-                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES.LEGAL_ENTITY_NAME ?? "",
+                        LegalEntity = m.TB_ORACLE_LEGAL_ENTITIES?.LEGAL_ENTITY_NAME ?? "",
                         OrganizationType = m.TB_ORACLE_ORGANIZATION_TYPE?.ORGANIZATION_TYPE_NAME ?? "",
                         TaxPayerID = m.WS_TEMP_TAXPAYER_ID ?? "",
                         Type = m.TB_ORACLE_TYPE.ORACLE_TYPE_NAME ?? "",
@@ -151,7 +154,7 @@ namespace AccountsPayable.Controllers
                         OracleInstructions = m.WS_TEMP_ORACLE_INSTRUCTIONS ?? "",
                         ARKeyContactsCurrent = m.WS_CONTACTS_CURRENT ?? "",
                         ARKeyContactsPrior = m.WS_CONTACTS_PRIOR ?? "",
-                        Approver = m.TB_APPROVER.APPROVER_NAME ?? "",
+                        Approver = m.TB_APPROVER?.APPROVER_NAME ?? "",
                         ApproverComments = m.WS_TEMP_APPROVER_COMMENTS ?? "",
                         EmailBackup = m.TB_EMAIL_BACKUP?.EMAIL_BACKUP ?? ""
                     }).ToList();
@@ -204,25 +207,36 @@ namespace AccountsPayable.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
             if (tB_WORKSPACE == null)
             {
                 return HttpNotFound();
             }
-            //Get data for email backup
+            var TempID = tB_WORKSPACE.TEMP_ID;
+            // Retrieve the associated TB_TEMPLATE object
+            TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.FirstOrDefault(t => t.TEMP_ID == tB_WORKSPACE.TEMP_ID);
+            if (tB_TEMPLATE == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Pass the data as a tuple to the view
+            var model = new Tuple<TB_WORKSPACE, TB_TEMPLATE>(tB_WORKSPACE, tB_TEMPLATE);
+
+            // Prepare viewbags as before
             var emailBackupList = db.TB_EMAIL_BACKUP
-                .Where(a => a.FK_TB_TEMPLATE_ID == id)
+                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                 .AsEnumerable()
                 .Select(e => new
                 {
                     EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
                     EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }
-                ).ToList();
-            //Get data for historic Remit
+                }).ToList();
+
             var historicRemitToList = db.TB_HISTORIC_REMIT
-                .Where(x => x.FK_TB_TEMPLATE_ID == id)
+                .Where(x => x.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
                 .AsEnumerable()
                 .Select(e => new
@@ -230,49 +244,69 @@ namespace AccountsPayable.Controllers
                     HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
                     HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }).ToList();
-            //Get data for highlights
+
             var HighLightsToList = db.TB_HIGHLIGHTS
-                .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                .Where(e => e.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(e => e.HIGHLIGHTS_DATE)
                 .AsEnumerable()
                 .Select(e => new
                 {
                     HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
-                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt"),
-                })
-                .ToList();
+                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                }).ToList();
 
-            //Get data for alias
-            var aliasesForTemplate = db.TB_ALIAS.
-                Where(a => a.FK_TB_TEMPLATE_ID == id)
+            var aliasesForTemplate = db.TB_ALIAS
+                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                 .OrderByDescending(a => a.ALIAS_NAME)
                 .AsEnumerable()
                 .Select(a => new
                 {
                     ALIAS_ID = a.ALIAS_ID,
-                    ALIAS_NAME = a.ALIAS_NAME,
+                    ALIAS_NAME = a.ALIAS_NAME
+                }).ToList();
+            //Get data for Comments
+            var commentsToList = db.WS_COMMENTS
+                .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                .OrderByDescending(e => e.WORKSPACE_DATE)
+                .AsEnumerable()
+                .Select(e => new
+                {
+                    COMMENTS_ID = e.COMMENTS_ID,
+                    WORKSPACE_DATE = e.WORKSPACE_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                }).ToList();
+            //Get data for LastActions
+            var lastActionsToList = db.WS_LAST_ACTIONS
+                .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                .OrderByDescending(e => e.LAST_ACTIONS_DATE)
+                .AsEnumerable()
+                .Select(e => new
+                {
+                    LAST_ACTIONS_ID = e.LAST_ACTIONS_ID,
+                    LAST_ACTIONS_DATE = e.LAST_ACTIONS_DATE.ToString("MM/dd/yyyy hh:mm tt")
                 }).ToList();
             ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
             ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
-            ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
+            ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
             ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
-            ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME");
-            return View(tB_WORKSPACE);
+            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
+            //ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
+            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
+            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
+            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
+            ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORGANIZATION_TYPE_ID);
+            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+            ViewBag.FK_WS_COMMENTS_ID = new SelectList(commentsToList, "COMMENTS_ID", "WORKSPACE_DATE");
+            ViewBag.FK_WS_LAST_ACTIONS_ID = new SelectList(lastActionsToList, "LAST_ACTIONS_ID", "LAST_ACTIONS_DATE");
+            return View(model);
         }
+
 
         // GET: WorkSpace/Create
         public ActionResult Create(int? id)
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
 
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
             {
                 if (id == null)
                 {
@@ -285,7 +319,7 @@ namespace AccountsPayable.Controllers
                     return HttpNotFound();
                 }
 
-                // Example: Fetching workspace (adjust according to your logic)
+                // Example: Fetching workspace
                 TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.FirstOrDefault(x => x.TEMP_ID == id);
 
                 if (tB_WORKSPACE == null)
@@ -367,7 +401,7 @@ namespace AccountsPayable.Controllers
             //Check if user haves access to module
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
             // Check user permision to access Template update only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
             {
                 if (id == null)
                 {
@@ -378,9 +412,10 @@ namespace AccountsPayable.Controllers
                 {
                     return HttpNotFound();
                 }
+                var TempID = tB_WORKSPACE.TEMP_ID;
                 //Get data for email backup
                 var emailBackupList = db.TB_EMAIL_BACKUP
-                    .Where(a => a.FK_TB_TEMPLATE_ID == id)
+                    .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                     .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -391,7 +426,7 @@ namespace AccountsPayable.Controllers
                     ).ToList();
                 //Get data for historic Remit
                 var historicRemitToList = db.TB_HISTORIC_REMIT
-                    .Where(x => x.FK_TB_TEMPLATE_ID == id)
+                    .Where(x => x.FK_TB_TEMPLATE_ID == TempID)
                     .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -401,7 +436,7 @@ namespace AccountsPayable.Controllers
                     }).ToList();
                 //Get data for highlights
                 var HighLightsToList = db.TB_HIGHLIGHTS
-                    .Where(e => e.FK_TB_TEMPLATE_ID == id)
+                    .Where(e => e.FK_TB_TEMPLATE_ID == TempID)
                     .OrderByDescending(e => e.HIGHLIGHTS_DATE)
                     .AsEnumerable()
                     .Select(e => new
@@ -413,7 +448,7 @@ namespace AccountsPayable.Controllers
 
                 //Get data for alias
                 var aliasesForTemplate = db.TB_ALIAS.
-                    Where(a => a.FK_TB_TEMPLATE_ID == id)
+                    Where(a => a.FK_TB_TEMPLATE_ID == TempID)
                     .OrderByDescending(a => a.ALIAS_NAME)
                     .AsEnumerable()
                     .Select(a => new
@@ -421,18 +456,39 @@ namespace AccountsPayable.Controllers
                         ALIAS_ID = a.ALIAS_ID,
                         ALIAS_NAME = a.ALIAS_NAME,
                     }).ToList();
+                //Get data for Comments
+                var commentsToList = db.WS_COMMENTS
+                    .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                    .OrderByDescending(e => e.WORKSPACE_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        COMMENTS_ID = e.COMMENTS_ID,
+                        WORKSPACE_DATE = e.WORKSPACE_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+                //Get data for LastActions
+                var lastActionsToList = db.WS_LAST_ACTIONS
+                    .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                    .OrderByDescending(e => e.LAST_ACTIONS_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        LAST_ACTIONS_ID = e.LAST_ACTIONS_ID,
+                        LAST_ACTIONS_DATE = e.LAST_ACTIONS_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+
                 ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-                ViewBag.WS_FK_TB_HIGHLIGHTS_ID = new SelectList(db.TB_HIGHLIGHTS, "HIGHLIGHTS_ID", "HIGHLIGHTS", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-                ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(db.TB_HISTORIC_REMIT, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_INFO", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
+                ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
                 ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
                 ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
                 ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
                 ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORACLE_TYPE_ID);
                 ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
-                ViewBag.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE");
+                ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
                 ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-                ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
                 ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME");
+                ViewBag.FK_WS_COMMENTS_ID = new SelectList(commentsToList, "COMMENTS_ID", "WORKSPACE_DATE");
+                ViewBag.FK_WS_LAST_ACTIONS_ID = new SelectList(lastActionsToList, "LAST_ACTIONS_ID", "LAST_ACTIONS_DATE");
                 return View(tB_WORKSPACE);
             }
             else
