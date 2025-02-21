@@ -37,6 +37,7 @@ namespace AccountsPayable.Models
         public Nullable<int> FK_WS_COMMENTS_ID { get; set; }
         public Nullable<int> FK_WS_LAST_ACTIONS_ID { get; set; }
         public int WS_ISDISABLED { get; set; }
+        [AllowHtml]
         public string WS_TEMP_TAX_ID { get; set; }
         public string WS_TEMP_REMIT_TO { get; set; }
         public string WS_TEMP_SUPPLIER_NAME { get; set; }
@@ -51,6 +52,7 @@ namespace AccountsPayable.Models
         [AllowHtml]
         public string WS_TEMP_ORACLE_DESCRIPTION { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_PAY_TERMS_ID { get; set; }
+        [AllowHtml]
         public string WS_TEMP_DISTRIBUTION_SET { get; set; }
         public Nullable<int> WS_FK_TB_ORACLE_SOURCE_ID { get; set; }
         [AllowHtml]
@@ -64,11 +66,13 @@ namespace AccountsPayable.Models
         public string WS_TEMP_INVOICE_FORMAT { get; set; }
         public string WS_TEMP_INVOICE_TYPE { get; set; }
         public int WS_TEMP_ISDISABLED { get; set; }
+        [AllowHtml]
         public string WS_TEMP_FOLDER { get; set; }
         public string WS_TEMP_PAYMENT_METHOD { get; set; }
         public string WS_TEMP_REMIT_TOACCOUNT { get; set; }
         [AllowHtml]
         public string WS_TEMP_BILLING_PERIOD { get; set; }
+        [AllowHtml]
         public string WS_TEMP_DISTRIBUTION_COMBINATION { get; set; }
         public string WS_TEMP_ACCOUNTING_DATE { get; set; }
         [AllowHtml]

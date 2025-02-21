@@ -22,7 +22,8 @@
                 <div class="col-md-6">
                     <label for="TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_FOLDER, new { @class = "form-control TinyEditorSmall", id = "form-Folder" })
+                        @Html.ValidationMessageFor(model => model.TEMP_FOLDER, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                 <div class="col-md-6">
                     <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax Id:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_TAX_ID, new { @class = "form-control TinyEditorSmall", id = "form-TaxID" })
                         @Html.ValidationMessageFor(model => model.TEMP_TAX_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -287,7 +288,8 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_REMIT_TOACCOUNT, new { @class = "form-control TinyEditorSmall", id = "form-RemitToAccount" })
+                        @Html.ValidationMessageFor(model => model.TEMP_REMIT_TOACCOUNT, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -343,7 +345,8 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_DISTRIBUTION_SET, new { @class = "form-control TinyEditorSmall", id = "form-DistroSet" })
+                        @Html.ValidationMessageFor(model => model.TEMP_DISTRIBUTION_SET, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -355,7 +358,8 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.TEMP_DISTRIBUTION_COMBINATION, new { @class = "form-control TinyEditorSmall", id = "form-DistroCombination" })
+                        @Html.ValidationMessageFor(model => model.TEMP_DISTRIBUTION_COMBINATION, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
