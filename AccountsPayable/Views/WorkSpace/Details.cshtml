@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <label for="TEMP_TAX_ID" class="control-label col-md-2">Tax ID:</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Item1.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.EditorFor(model => model.Item1.WS_TEMP_TAX_ID, new { htmlAttributes = new { @class = "form-control TinyEditorSmallReadOnly", @disabled = "disabled" } })
                     @Html.ValidationMessageFor(model => model.Item1.WS_TEMP_TAX_ID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -243,7 +243,7 @@
                 <div class="col-md-6">
                     <label for="TEMP_FOLDER" class="control-label col-md-2">Folder:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_FOLDER, new { htmlAttributes = new { @class = "form-control TinyEditorSmallReadOnly", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -480,7 +480,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_REMIT_TOACCOUNT">Remit-To Account:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_REMIT_TOACCOUNT, new { htmlAttributes = new { @class = "form-control TinyEditorSmallReadOnly", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -537,7 +537,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_SET">Distribution Set:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_SET, new { htmlAttributes = new { @class = "form-control TinyEditorSmallReadOnly", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
@@ -549,7 +549,7 @@
                 <div class="col-md-6">
                     <label class="control-label col-md-2 OracleText" for="TEMP_DISTRIBUTION_COMBINATION">Distribution Combination:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Item1.WS_TEMP_DISTRIBUTION_COMBINATION, new { htmlAttributes = new { @class = "form-control TinyEditorSmallReadOnly", @disabled = "disabled" } })
                     </div>
                 </div>
             </div>
