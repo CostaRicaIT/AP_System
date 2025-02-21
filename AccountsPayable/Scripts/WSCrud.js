@@ -148,6 +148,15 @@ $(document).ready(function () {
     }
 
     // Call the function on dropdown change and page load
+    $('#WS_FK_TB_EMAIL_BACKUP_ID').on('change', function (e) {
+        var selectedEmail = $(this).val();
+        var templateId = $('#templateId').text();
+        if (selectedEmail !== null && templateId !== null) {
+            getEmailBackupText(selectedEmail, templateId);
+        }
+    }).change(); // Trigger the change event on page load
+
+    // Call the function on dropdown change and page load
     $('#FK_TB_EMAIL_BACKUP_ID').on('change', function (e) {
         var selectedEmail = $(this).val();
         var templateId = $('#templateId').text();
