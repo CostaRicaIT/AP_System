@@ -10,7 +10,7 @@ namespace AccountsPayable.Controllers
 {
     public class WSCrudController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
         // Helper method to strip <p> tags
         public string StripHtmlTags(string input)
