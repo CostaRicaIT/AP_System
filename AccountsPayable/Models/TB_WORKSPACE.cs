@@ -69,6 +69,7 @@ namespace AccountsPayable.Models
         [AllowHtml]
         public string WS_TEMP_FOLDER { get; set; }
         public string WS_TEMP_PAYMENT_METHOD { get; set; }
+        [AllowHtml]
         public string WS_TEMP_REMIT_TOACCOUNT { get; set; }
         [AllowHtml]
         public string WS_TEMP_BILLING_PERIOD { get; set; }
