@@ -306,7 +306,7 @@ namespace AccountsPayable.Controllers
         {
             var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
 
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
+            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
             {
                 if (id == null)
                 {
