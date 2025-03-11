@@ -17,12 +17,15 @@ namespace AccountsPayable.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_ORACLE_ORGANIZATION_TYPE()
         {
+            this.TB_WORKSPACE = new HashSet<TB_WORKSPACE>();
             this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
         }
     
         public int ORGANIZATION_TYPE_ID { get; set; }
         public string ORGANIZATION_TYPE_NAME { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_WORKSPACE> TB_WORKSPACE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
     }

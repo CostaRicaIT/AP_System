@@ -11,22 +11,24 @@ namespace AccountsPayable.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class TB_ORACLE_PAY_TERMS
+    using System.Web.Mvc;
+
+    public partial class WS_LAST_ACTIONS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_ORACLE_PAY_TERMS()
+        public WS_LAST_ACTIONS()
         {
-            this.TB_TEMPLATE = new HashSet<TB_TEMPLATE>();
             this.TB_WORKSPACE = new HashSet<TB_WORKSPACE>();
         }
     
-        public int PAY_TERMS_ID { get; set; }
-        public string PAY_TERMS_DESCRIPTION { get; set; }
+        public int LAST_ACTIONS_ID { get; set; }
+        public Nullable<int> FK_WS_WORKSPACE_ID { get; set; }
+        public System.DateTime LAST_ACTIONS_DATE { get; set; }
+        [AllowHtml]
+        public string LAST_ACTIONS_INFO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_TEMPLATE> TB_TEMPLATE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_WORKSPACE> TB_WORKSPACE { get; set; }
+        public virtual TB_WORKSPACE TB_WORKSPACE1 { get; set; }
     }
 }

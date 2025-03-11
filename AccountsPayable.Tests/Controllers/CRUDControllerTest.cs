@@ -230,6 +230,14 @@ namespace AccountsPayable.Tests.Controllers
                     new TB_ALIAS
                  {
                      ALIAS_NAME = "REGIONAL "
+                 },
+                       new TB_ALIAS
+                 {
+                     ALIAS_NAME = "Cloud "
+                 },
+                          new TB_ALIAS
+                 {
+                     ALIAS_NAME = "Cloud Regional "
                  }
             };
                 var emailBackupList = new List<TB_EMAIL_BACKUP>
@@ -237,7 +245,23 @@ namespace AccountsPayable.Tests.Controllers
                 new TB_EMAIL_BACKUP
                 {
                     EMAIL_BACKUP ="EMAIL Test"
-                }
+                },
+                new TB_EMAIL_BACKUP
+                {
+                    EMAIL_BACKUP ="EMAIL"
+                },
+                new TB_EMAIL_BACKUP
+                {
+                    EMAIL_BACKUP ="EMAIL Test1"
+                },
+                new TB_EMAIL_BACKUP
+                {
+                    EMAIL_BACKUP ="EMAIL Test2"
+                },
+                new TB_EMAIL_BACKUP
+                {
+                    EMAIL_BACKUP ="EMAIL Test3"
+                },
             };
 
                 // Act
@@ -300,7 +324,7 @@ namespace AccountsPayable.Tests.Controllers
                 var responseDatanewLegalEntity = jsonResultnewLegalEntity.Data;
                 int newLegalEntityId = (int)responseDatanewLegalEntity.GetType().GetProperty("id")?.GetValue(responseDatanewLegalEntity);
 
-                var newApprover = "Zamora, Fernando";
+                var newApprover = "INVOICES";
                 var newApproverResult = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
                            .Invoke(controllerInstance, new object[] { newApprover });
 
@@ -695,7 +719,7 @@ namespace AccountsPayable.Tests.Controllers
                 }
 
                 // Create necessary entities and data for the Edit method
-                var newApprover = "APPROVER"; // Legal entity that already exists on DB
+                var newApprover = "INVOICES, QM"; // Legal entity that already exists on DB
 
                 // Act
                 var result = controllerType.GetMethod("AddApprover", new[] { typeof(string) })
@@ -836,7 +860,7 @@ namespace AccountsPayable.Tests.Controllers
                     var dbContextMock = new Mock<AccountsPayableTestProdEntities>();
                     dbProperty.SetValue(controllerInstance, dbContextMock.Object);
                 }
-                int templateid = 41; // ID of a template that is disabled
+                int templateid = 1; // ID of a template that is disabled
                 var templateData = new TB_TEMPLATE
                 {
                     TEMP_ID = templateid,
