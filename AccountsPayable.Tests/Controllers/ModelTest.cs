@@ -15,6 +15,8 @@ namespace AccountsPayable.Tests.Controllers
             var modelType = typeof(TB_TEMPLATE);
             var propertiesWithTinyMCE = new[]
             {
+            "TEMP_FOLDER",
+            "TEMP_TAX_ID",
             "TEMP_ORACLE_DESCRIPTION",
             "TEMP_ORACLE_NOTES",
             "TEMP_ORACLE_INSTRUCTIONS",
@@ -22,6 +24,9 @@ namespace AccountsPayable.Tests.Controllers
             "TEMP_VSU",
             "TEMP_W9_W8",
             "TEMP_INVOICE_NOTES",
+            "TEMP_REMIT_TOACCOUNT",
+            "TEMP_DISTRIBUTION_SET",
+            "TEMP_DISTRIBUTION_COMBINATION",
         };
 
             // Act & Assert
@@ -69,7 +74,7 @@ namespace AccountsPayable.Tests.Controllers
             var modelType = typeof(TB_HISTORIC_REMIT);
             var propertiesWithTinyMCE = new[]
             {
-            "HISTORIC_REMIT_INFO",            
+            "HISTORIC_REMIT_INFO",
         };
 
             // Act & Assert

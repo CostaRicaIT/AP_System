@@ -4,17 +4,10 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Transactions;
-using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.UI;
 
 namespace AccountsPayable.Tests.Controllers
 {
@@ -22,6 +15,92 @@ namespace AccountsPayable.Tests.Controllers
     [TestFixture]
     public class CRUDControllerTests
     {
+
+        private TB_TEMPLATE template;
+        private TB_HIGHLIGHTS highlights;
+        private TB_HISTORIC_REMIT historicRemit;
+        private List<TB_ALIAS> aliasList;
+        private List<TB_EMAIL_BACKUP> emailBackupList;
+        [SetUp]
+        public void SetUp()
+        {
+            template = new TB_TEMPLATE
+            {
+                TEMP_FOLDER = "Folder 1",
+                TEMP_TAX_ID = "61-7676",
+                TEMP_SUPPLIER_NAME = "REGIONAL MOUNTAIN",
+                TEMP_SUPPLIER_NUMBER = "2334",
+                TEMP_REMIT_TO = "PO BOX 34343. CALIFORNIA, CA",
+                TEMP_SUPPLIER_SITE = "MAIN",
+                TEMP_VENDOR_ACCOUNT = "NA",
+                FK_TB_ORACLE_SOURCE_ID = 1,
+
+
+                TEMP_INVOICE_FORMAT = "XXXXXX XXXXX/XXXXXXXX/XXXXXXXXXXX XX/XX/XXXX (8. Patient Name/3a. Pat CNTL# (When provided) + 45. Serv.Date)",
+                TEMP_INVOICE_TYPE = "Insurrance Form #1",
+                TEMP_INVOICE_NOTES = "Valid invoice",
+
+                TEMP_W9_W8 = "W9 Info",
+                TEMP_VSU = "VSU info",
+
+                TEMP_PAYMENT_METHOD = "Credit card",
+                TEMP_REMIT_TOACCOUNT = "Account #",
+                FK_TB_ORACLE_PAY_TERMS_ID = 1,
+                TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
+                TEMP_BILLING_PERIOD = "January",
+                TEMP_BILLING_PRERIOD_DATE = "01/12/2025",
+                TEMP_DISTRIBUTION_SET = "101.153.00.000.53101.000",
+                TEMP_DISTRIBUTION_COMBINATION = "Combination 1",
+                TEMP_ACCOUNTING_DATE = "01/12/2025",
+                FK_TB_LEGAL_ENTITY_ID = 4,
+                FK_TB_ORGANIZATION_TYPE_ID = 1,
+                TEMP_TAXPAYER_ID = "27-43635",
+                FK_TB_ORACLE_TYPE_ID = 1,
+                TEMP_ORACLE_DESCRIPTION = "NA",
+                TEMP_ORACLE_NOTES = "NA",
+                TEMP_ORACLE_INSTRUCTIONS = "NA",
+
+                CONTACTS_CURRENT = "Current contact",
+                CONTACTS_PRIOR = "Prior Contact",
+
+                FK_TB_APPROVER_ID = 1,
+                TEMP_APPROVER_COMMENTS = "NA",                              
+            };
+
+            highlights = new TB_HIGHLIGHTS
+            {
+                HIGHLIGHTS = "Remit-to Account: XXX\r\nPayment Terms: Immediate\r\nInvoice Description: Drug & Med Tests \r\nBilling Period: XXX *Please add it in Oracle if invoice is greater than $1K\r\nDistribution Set: Drug & Med Tests-Aya Compliance\r\nDistribution Combination/Description: 101.153.00.000.53101.000.0000. Aya Healthcare, Inc.QM Compliance.Default.Admin.Drug & Med Tests.Default.Default\r\nAccounting Date: XX/XX/XXXX (Will be the invoice date; however if the invoice date is from a month that already closed, the date to be selected will be the first date of the following/current month)",
+                HIGHLIGHTS_COMMENTS = "NA",
+                HIGHLIGHTS_INSTRUCTIONS = "NA",
+                HIGHLIGHTS_EXCEPTIONS = "NA",
+                HIGHLIGHTS_COMMON_ISSUES = "NA",
+                HIGHLIGHTS_SUPPLIER_AGENCY = "NA",
+                HIGHLIGHTS_TEMPLATE_COMMENTS = "Ver histórico/instrucciones en tab: Check list"
+            };
+
+            historicRemit = new TB_HISTORIC_REMIT
+            {
+                HISTORIC_REMIT_INFO = "NA"
+            };
+
+            aliasList = new List<TB_ALIAS>
+            {
+                 new TB_ALIAS
+                 {
+                     ALIAS_NAME = "REGIONAL MOUNTAIN MED CTR"
+                 }
+
+            };
+
+            emailBackupList = new List<TB_EMAIL_BACKUP>
+            {
+                new TB_EMAIL_BACKUP
+                {
+                    EMAIL_BACKUP ="EMAIL Test"
+                }
+
+            };
+        }
 
         [Test]
         public void Create_ValidModelState_Success()
@@ -44,76 +123,10 @@ namespace AccountsPayable.Tests.Controllers
                     // Set the mocked DbContext to the 'db' property
                     dbProperty.SetValue(controllerInstance, dbContextMock.Object);
                 }
-
-                var template = new TB_TEMPLATE
-                {
-                    TEMP_TAX_ID = "61-7676",
-                    TEMP_REMIT_TO = "PO BOX 34343. CALIFORNIA, CA",
-                    TEMP_SUPPLIER_NAME = "REGIONAL MOUNTAIN",
-                    TEMP_VENDOR_ACCOUNT = "NA",
-                    TEMP_SUPPLIER_NUMBER = "2334",
-                    TEMP_SUPPLIER_SITE = "MAIN",
-
-                    FK_TB_LEGAL_ENTITY_ID = 4,
-                    TEMP_TAXPAYER_ID = "27-43635",
-                    FK_TB_ORACLE_TYPE_ID = 1,
-                    TEMP_ORACLE_DESCRIPTION = "NA",
-                    FK_TB_ORACLE_PAY_TERMS_ID = 1,
-                    TEMP_DISTRIBUTION_SET = "101.153.00.000.53101.000",
-                    FK_TB_ORACLE_SOURCE_ID = 1,
-                    TEMP_ORACLE_NOTES = "NA",
-                    TEMP_ORACLE_INSTRUCTIONS = "NA",
-                    FK_TB_APPROVER_ID = 1,
-                    TEMP_APPROVER_COMMENTS = "NA",
-                    TEMP_INVOICE_FORMAT = "XXXXXX XXXXX/XXXXXXXX/XXXXXXXXXXX XX/XX/XXXX (8. Patient Name/3a. Pat CNTL# (When provided) + 45. Serv.Date)",
-                    TEMP_INVOICE_TYPE = "Insurrance Form #1",
-                    TEMP_FOLDER = "Folder 1",
-                    TEMP_PAYMENT_METHOD = "Credit card",
-                    TEMP_REMIT_TOACCOUNT = "Account #",
-                    TEMP_BILLING_PERIOD = "January",
-                    TEMP_DISTRIBUTION_COMBINATION = "Combination 1",
-                    TEMP_ACCOUNTING_DATE = "March 1st",
-                    TEMP_VSU = "VSU info",
-                    TEMP_W9_W8 = "W9 Info",
-                    TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
-                    CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact",
-                    FK_TB_ORGANIZATION_TYPE_ID = 1,
-                };
-                var highlights = new TB_HIGHLIGHTS
-                {
-                    HIGHLIGHTS = "Remit-to Account: XXX\r\nPayment Terms: Immediate\r\nInvoice Description: Drug & Med Tests \r\nBilling Period: XXX *Please add it in Oracle if invoice is greater than $1K\r\nDistribution Set: Drug & Med Tests-Aya Compliance\r\nDistribution Combination/Description: 101.153.00.000.53101.000.0000. Aya Healthcare, Inc.QM Compliance.Default.Admin.Drug & Med Tests.Default.Default\r\nAccounting Date: XX/XX/XXXX (Will be the invoice date; however if the invoice date is from a month that already closed, the date to be selected will be the first date of the following/current month)",
-                    HIGHLIGHTS_COMMENTS = "NA",
-                    HIGHLIGHTS_INSTRUCTIONS = "NA",
-                    HIGHLIGHTS_EXCEPTIONS = "NA",
-                    HIGHLIGHTS_COMMON_ISSUES = "NA",
-                    HIGHLIGHTS_SUPPLIER_AGENCY = "NA",
-                    HIGHLIGHTS_TEMPLATE_COMMENTS = "Ver histórico/instrucciones en tab: Check list"
-                };
-                var historicRemit = new TB_HISTORIC_REMIT
-                {
-                    HISTORIC_REMIT_INFO = "NA"
-                };
-                var aliasList = new List<TB_ALIAS>
-            {
-                 new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL MOUNTAIN MED CTR"
-                 }
-            };
-                var emailBackupList = new List<TB_EMAIL_BACKUP>
-            {
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test"
-                }
-            };
-
                 // Act
 
                 var result = controllerType.GetMethod("Create", new[] { typeof(TB_TEMPLATE), typeof(TB_HIGHLIGHTS), typeof(TB_HISTORIC_REMIT), typeof(List<TB_ALIAS>), typeof(List<TB_EMAIL_BACKUP>) })
-                                 .Invoke(controllerInstance, new object[] { template, highlights, historicRemit, aliasList, emailBackupList });
+                                .Invoke(controllerInstance, new object[] { template, highlights, historicRemit, aliasList, emailBackupList });
 
 
                 // Assert
@@ -168,102 +181,7 @@ namespace AccountsPayable.Tests.Controllers
                     var dbContextMock = new Mock<AccountsPayableTestProdEntities>(); // Replace YourDbContext with the actual type of your DbContext
                     dbProperty.SetValue(controllerInstance, dbContextMock.Object);
                 }
-
-                // Create necessary entities and data for the Edit method
-                var template = new TB_TEMPLATE
-                {
-                    TEMP_ID = 67,
-                    TEMP_TAX_ID = "61-7676",
-                    TEMP_REMIT_TO = "PO BOX 34343. CALIFORNIA, CA",
-                    TEMP_SUPPLIER_NAME = "REGIONAL MOUNTAIN",
-                    TEMP_VENDOR_ACCOUNT = "NA",
-                    TEMP_SUPPLIER_NUMBER = "2334",
-                    TEMP_SUPPLIER_SITE = "MAIN",
-
-                    FK_TB_LEGAL_ENTITY_ID = 4,
-                    TEMP_TAXPAYER_ID = "27-43635",
-                    FK_TB_ORACLE_TYPE_ID = 1,
-                    TEMP_ORACLE_DESCRIPTION = "NA",
-                    FK_TB_ORACLE_PAY_TERMS_ID = 1,
-                    TEMP_DISTRIBUTION_SET = "101.153.00.000.53101.000",
-                    FK_TB_ORACLE_SOURCE_ID = 1,
-                    TEMP_ORACLE_NOTES = "NA",
-                    TEMP_ORACLE_INSTRUCTIONS = "NA",
-                    FK_TB_APPROVER_ID = 1,
-                    TEMP_APPROVER_COMMENTS = "NA",
-                    TEMP_INVOICE_FORMAT = "XXXXXX XXXXX/XXXXXXXX/XXXXXXXXXXX XX/XX/XXXX (8. Patient Name/3a. Pat CNTL# (When provided) + 45. Serv.Date)",
-                    TEMP_INVOICE_TYPE = "Insurrance Form #1",
-                    TEMP_FOLDER = "Folder 1",
-                    TEMP_PAYMENT_METHOD = "Credit card",
-                    TEMP_REMIT_TOACCOUNT = "Account #",
-                    TEMP_BILLING_PERIOD = "January",
-                    TEMP_DISTRIBUTION_COMBINATION = "Combination 1",
-                    TEMP_ACCOUNTING_DATE = "March 1st",
-                    TEMP_VSU = "VSU info",
-                    TEMP_W9_W8 = "W9 Info",
-                    TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
-                    CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact",
-                    FK_TB_ORGANIZATION_TYPE_ID = 1,
-                };
-                var highlights = new TB_HIGHLIGHTS
-                {
-                    HIGHLIGHTS = "Remit-to Account: XXX\r\nPayment Terms: Immediate\r\nInvoice Description: Drug & Med Tests \r\nBilling Period: XXX *Please add it in Oracle if invoice is greater than $1K\r\nDistribution Set: Drug & Med Tests-Aya Compliance\r\nDistribution Combination/Description: 101.153.00.000.53101.000.0000. Aya Healthcare, Inc.QM Compliance.Default.Admin.Drug & Med Tests.Default.Default\r\nAccounting Date: XX/XX/XXXX (Will be the invoice date; however if the invoice date is from a month that already closed, the date to be selected will be the first date of the following/current month)",
-                    HIGHLIGHTS_COMMENTS = "Comment",
-                    HIGHLIGHTS_INSTRUCTIONS = "NA",
-                    HIGHLIGHTS_EXCEPTIONS = "NA",
-                    HIGHLIGHTS_COMMON_ISSUES = "NA",
-                    HIGHLIGHTS_SUPPLIER_AGENCY = "NA",
-                    HIGHLIGHTS_TEMPLATE_COMMENTS = "Ver histórico/instrucciones en tab: Check list"
-                };
-                var historicRemit = new TB_HISTORIC_REMIT
-                {
-                    HISTORIC_REMIT_INFO = "NA1"
-                };
-                var aliasList = new List<TB_ALIAS>
-            {
-                 new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL CLOUD "
-                 },
-                    new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL "
-                 },
-                       new TB_ALIAS
-                 {
-                     ALIAS_NAME = "Cloud "
-                 },
-                          new TB_ALIAS
-                 {
-                     ALIAS_NAME = "Cloud Regional "
-                 }
-            };
-                var emailBackupList = new List<TB_EMAIL_BACKUP>
-            {
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test"
-                },
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL"
-                },
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test1"
-                },
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test2"
-                },
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test3"
-                },
-            };
-
+                template.TEMP_ID = 67;
                 // Act
                 var result = controllerType.GetMethod("Edit", new[] { typeof(TB_TEMPLATE), typeof(TB_HIGHLIGHTS), typeof(TB_HISTORIC_REMIT), typeof(List<TB_ALIAS>), typeof(List<TB_EMAIL_BACKUP>) })
                                   .Invoke(controllerInstance, new object[] { template, highlights, historicRemit, aliasList, emailBackupList });
@@ -339,74 +257,10 @@ namespace AccountsPayable.Tests.Controllers
                 var jsonResultnewOT = newOTResult as JsonResult;
                 var responseDatanewOT = jsonResultnewOT.Data;
                 int newOTId = (int)responseDatanewOT.GetType().GetProperty("id")?.GetValue(responseDatanewOT);
-
-
-                var template = new TB_TEMPLATE
-                {
-                    TEMP_TAX_ID = "61-7676",
-                    TEMP_REMIT_TO = "PO BOX 34343. CALIFORNIA, CA",
-                    TEMP_SUPPLIER_NAME = "REGIONAL MOUNTAIN",
-                    TEMP_VENDOR_ACCOUNT = "NA",
-                    TEMP_SUPPLIER_NUMBER = "2334",
-                    TEMP_SUPPLIER_SITE = "MAIN",
-
-                    FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
-                    TEMP_TAXPAYER_ID = "27-43635",
-                    FK_TB_ORACLE_TYPE_ID = 1,
-                    TEMP_ORACLE_DESCRIPTION = "NA",
-                    FK_TB_ORACLE_PAY_TERMS_ID = 1,
-                    TEMP_DISTRIBUTION_SET = "101.153.00.000.53101.000",
-                    FK_TB_ORACLE_SOURCE_ID = 1,
-                    TEMP_ORACLE_NOTES = "NA",
-                    TEMP_ORACLE_INSTRUCTIONS = "NA",
-                    FK_TB_APPROVER_ID = newApproverId,
-                    TEMP_APPROVER_COMMENTS = "NA",
-                    TEMP_INVOICE_FORMAT = "XXXXXX XXXXX/XXXXXXXX/XXXXXXXXXXX XX/XX/XXXX (8. Patient Name/3a. Pat CNTL# (When provided) + 45. Serv.Date)",
-                    TEMP_INVOICE_TYPE = "Insurrance Form #1",
-                    TEMP_FOLDER = "Folder 1",
-                    TEMP_PAYMENT_METHOD = "Credit card",
-                    TEMP_REMIT_TOACCOUNT = "Account #",
-                    TEMP_BILLING_PERIOD = "January",
-                    TEMP_DISTRIBUTION_COMBINATION = "Combination 1",
-                    TEMP_ACCOUNTING_DATE = "March 1st",
-                    TEMP_VSU = "VSU info",
-                    TEMP_W9_W8 = "W9 Info",
-                    TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
-                    CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact",
-                    FK_TB_ORGANIZATION_TYPE_ID = newOTId
-                };
-                var highlights = new TB_HIGHLIGHTS
-                {
-                    HIGHLIGHTS = "Remit-to Account: XXX\r\nPayment Terms: Immediate\r\nInvoice Description: Drug & Med Tests \r\nBilling Period: XXX *Please add it in Oracle if invoice is greater than $1K\r\nDistribution Set: Drug & Med Tests-Aya Compliance\r\nDistribution Combination/Description: 101.153.00.000.53101.000.0000. Aya Healthcare, Inc.QM Compliance.Default.Admin.Drug & Med Tests.Default.Default\r\nAccounting Date: XX/XX/XXXX (Will be the invoice date; however if the invoice date is from a month that already closed, the date to be selected will be the first date of the following/current month)",
-                    HIGHLIGHTS_COMMENTS = "NA",
-                    HIGHLIGHTS_INSTRUCTIONS = "NA",
-                    HIGHLIGHTS_EXCEPTIONS = "NA",
-                    HIGHLIGHTS_COMMON_ISSUES = "NA",
-                    HIGHLIGHTS_SUPPLIER_AGENCY = "NA",
-                    HIGHLIGHTS_TEMPLATE_COMMENTS = "Ver histórico/instrucciones en tab: Check list"
-                };
-                var historicRemit = new TB_HISTORIC_REMIT
-                {
-                    HISTORIC_REMIT_INFO = "NA"
-                };
-                var aliasList = new List<TB_ALIAS>
-            {
-                 new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL MOUNTAIN MED CTR"
-                 }
-            };
-                var emailBackupList = new List<TB_EMAIL_BACKUP>
-            {
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test"
-                }
-            };
-
                 // Act
+                template.FK_TB_LEGAL_ENTITY_ID = newLegalEntityId;
+                template.FK_TB_APPROVER_ID = newApproverId;
+                template.FK_TB_ORGANIZATION_TYPE_ID = newOTId;
 
                 var result = controllerType.GetMethod("Create", new[] { typeof(TB_TEMPLATE), typeof(TB_HIGHLIGHTS), typeof(TB_HISTORIC_REMIT), typeof(List<TB_ALIAS>), typeof(List<TB_EMAIL_BACKUP>) })
                                  .Invoke(controllerInstance, new object[] { template, highlights, historicRemit, aliasList, emailBackupList });
@@ -492,77 +346,14 @@ namespace AccountsPayable.Tests.Controllers
                 int newOTId = (int)responseDatanewOT.GetType().GetProperty("id")?.GetValue(responseDatanewOT);
 
 
-                // Create necessary entities and data for the Edit method
-                var template = new TB_TEMPLATE
-                {
-                    TEMP_ID = 67,
-                    TEMP_TAX_ID = "61-7676",
-                    TEMP_REMIT_TO = "PO BOX 34343. CALIFORNIA, CA",
-                    TEMP_SUPPLIER_NAME = "REGIONAL MOUNTAIN",
-                    TEMP_VENDOR_ACCOUNT = "NA",
-                    TEMP_SUPPLIER_NUMBER = "2334",
-                    TEMP_SUPPLIER_SITE = "MAIN",
-                    FK_TB_LEGAL_ENTITY_ID = newLegalEntityId,
-                    TEMP_TAXPAYER_ID = "27-43635",
-                    FK_TB_ORACLE_TYPE_ID = 1,
-                    TEMP_ORACLE_DESCRIPTION = "NA",
-                    FK_TB_ORACLE_PAY_TERMS_ID = 1,
-                    TEMP_DISTRIBUTION_SET = "101.153.00.000.53101.000",
-                    FK_TB_ORACLE_SOURCE_ID = 1,
-                    TEMP_ORACLE_NOTES = "NA",
-                    TEMP_ORACLE_INSTRUCTIONS = "NA",
-                    FK_TB_APPROVER_ID = newApproverId,
-                    TEMP_APPROVER_COMMENTS = "NA",
-                    TEMP_INVOICE_FORMAT = "XXXXXX XXXXX/XXXXXXXX/XXXXXXXXXXX XX/XX/XXXX (8. Patient Name/3a. Pat CNTL# (When provided) + 45. Serv.Date)",
-                    TEMP_INVOICE_TYPE = "Insurrance Form #1",
-                    TEMP_FOLDER = "Folder 1",
-                    TEMP_PAYMENT_METHOD = "Credit card",
-                    TEMP_REMIT_TOACCOUNT = "Account #",
-                    TEMP_BILLING_PERIOD = "January",
-                    TEMP_DISTRIBUTION_COMBINATION = "Combination 1",
-                    TEMP_ACCOUNTING_DATE = "March 1st",
-                    TEMP_VSU = "VSU info",
-                    TEMP_W9_W8 = "W9 Info",
-                    TEMP_INVOICE_NOTES = "Valid invoice",
-                    TEMP_INVOICE_DESCRIPTION = "Invoice from provider X",
-                    CONTACTS_CURRENT = "Current contact",
-                    CONTACTS_PRIOR = "Prior Contact",
-                    FK_TB_ORGANIZATION_TYPE_ID = newOTId,
-                };
-                var highlights = new TB_HIGHLIGHTS
-                {
-                    HIGHLIGHTS = "Remit-to Account: XXX\r\nPayment Terms: Immediate\r\nInvoice Description: Drug & Med Tests \r\nBilling Period: XXX *Please add it in Oracle if invoice is greater than $1K\r\nDistribution Set: Drug & Med Tests-Aya Compliance\r\nDistribution Combination/Description: 101.153.00.000.53101.000.0000. Aya Healthcare, Inc.QM Compliance.Default.Admin.Drug & Med Tests.Default.Default\r\nAccounting Date: XX/XX/XXXX (Will be the invoice date; however if the invoice date is from a month that already closed, the date to be selected will be the first date of the following/current month)",
-                    HIGHLIGHTS_COMMENTS = "Comment",
-                    HIGHLIGHTS_INSTRUCTIONS = "NA",
-                    HIGHLIGHTS_EXCEPTIONS = "NA",
-                    HIGHLIGHTS_COMMON_ISSUES = "NA",
-                    HIGHLIGHTS_SUPPLIER_AGENCY = "NA",
-                    HIGHLIGHTS_TEMPLATE_COMMENTS = "Ver histórico/instrucciones en tab: Check list"
-                };
-                var historicRemit = new TB_HISTORIC_REMIT
-                {
-                    HISTORIC_REMIT_INFO = "NA1"
-                };
-                var aliasList = new List<TB_ALIAS>
-            {
-                 new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL CLOUD "
-                 },
-                    new TB_ALIAS
-                 {
-                     ALIAS_NAME = "REGIONAL "
-                 }
-            };
-                var emailBackupList = new List<TB_EMAIL_BACKUP>
-            {
-                new TB_EMAIL_BACKUP
-                {
-                    EMAIL_BACKUP ="EMAIL Test"
-                }
-            };
+
 
                 // Act
+                template.TEMP_ID = 67;
+                template.FK_TB_LEGAL_ENTITY_ID = newLegalEntityId;
+                template.FK_TB_APPROVER_ID = newApproverId;
+                template.FK_TB_ORGANIZATION_TYPE_ID = newOTId;
+
                 var result = controllerType.GetMethod("Edit", new[] { typeof(TB_TEMPLATE), typeof(TB_HIGHLIGHTS), typeof(TB_HISTORIC_REMIT), typeof(List<TB_ALIAS>), typeof(List<TB_EMAIL_BACKUP>) })
                                   .Invoke(controllerInstance, new object[] { template, highlights, historicRemit, aliasList, emailBackupList });
 
