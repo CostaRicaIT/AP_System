@@ -13,7 +13,7 @@ namespace AccountsPayable.Tests.Controllers
 {
 
     [TestFixture]
-    public class CRUDControllerTests
+    public class TemplateCRUDControllerTests
     {
 
         private TB_TEMPLATE template;
