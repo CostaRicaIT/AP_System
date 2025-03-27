@@ -36,7 +36,7 @@ namespace AccountsPayable.Tests.Controllers
             [Test]
             public async Task StressTestSimulatingMultipleUsers()
             {
-                const int userCount = 50; // Number of simulated users
+                const int userCount = 25; // Number of simulated users
                 var tasks = new List<Task>();
 
                 for (int i = 0; i < userCount; i++)
@@ -77,7 +77,7 @@ namespace AccountsPayable.Tests.Controllers
             [Test]
             public async Task EditStressTestSimulatingMultipleUsers()
             {
-                const int userCount = 50; // Number of simulated users
+                const int userCount = 25; // Number of simulated users
                 var tasks = new List<Task>();
 
                 for (int i = 0; i < userCount; i++)

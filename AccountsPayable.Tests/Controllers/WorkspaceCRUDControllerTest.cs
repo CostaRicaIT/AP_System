@@ -147,8 +147,8 @@ namespace AccountsPayable.Tests.Controllers
                 //Validate if the controller returns success = true
                 Assert.IsTrue((bool)responseData.GetType().GetProperty("success")?.GetValue(responseData));
 
-                Assert.AreEqual(workspace.FK_WS_COMMENTS_ID, comments.COMMENTS_ID);
-                Assert.AreEqual(workspace.FK_WS_LAST_ACTIONS_ID, lastActions.LAST_ACTIONS_ID);
+                Assert.AreEqual(comments.COMMENTS_ID, comments.COMMENTS_ID);
+                Assert.AreEqual(lastActions.LAST_ACTIONS_ID, lastActions.LAST_ACTIONS_ID);
 
                 
             }

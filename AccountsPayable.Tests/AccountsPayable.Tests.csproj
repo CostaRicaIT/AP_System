@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccessControllerTest.cs" />
+    <Compile Include="Controllers\ButtonsTest.cs" />
     <Compile Include="Controllers\TemplateCRUDControllerTest.cs" />
     <Compile Include="Controllers\ModelTest.cs" />
     <Compile Include="Controllers\PerformaceTest.cs" />
