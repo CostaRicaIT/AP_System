@@ -6,24 +6,68 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System.Linq.Dynamic.Core;
+using System.Collections.Generic;
+using System.Web.Security;
 namespace AccountsPayable.Controllers
 {
     public class MainController : Controller
     {
-        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
+
+        public static bool AccessToTemplate(System.Web.HttpSessionStateBase session, string validationType, List<int> allowedRoles)
+        {
+            bool checkLogin = validationType.Contains("Login");
+            bool checkRole = validationType.Contains("Role");
+            // You can also put the combination of the two, which would be "LoginRole"
+
+            // Check if the user is logged in
+            if (checkLogin && session["User"] == null)
+            {
+                return false;
+            }
+
+            // Verify if you have one of the allowed roles
+            if (checkRole)
+            {
+                var userPermission = session["Permission"] as TB_VIEW_PERMISSIONS;
+                if (userPermission == null)
+                    return false;
+
+                // Verify if the role are on the list
+                var roles = allowedRoles;
+
+                if (!roles.Contains(userPermission.FK_TB_LOGIN_ROLE_ID))
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        //In case of merge from DevEnv you must change the entity to AccountsPayableTestProdEntities //
+        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
         // GET: Main
         public ActionResult Index()
         {
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
+            var roles = new List<int> { 2, 3, 4, 5 };
+
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
             {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
+            {
+                
                 return View();
             }
             else
             {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
                 return View("Error");
             }
+
+            
         }
         public JsonResult GetTemplateData()
         {
@@ -186,10 +230,16 @@ namespace AccountsPayable.Controllers
         public ActionResult Create()
         {
 
+            var roles = new List<int> { 2, 4 };
+
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
+            {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }
             //Check if user haves access to module
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
                 //Get data for dropdowns
                 ViewBag.FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME");
@@ -200,15 +250,25 @@ namespace AccountsPayable.Controllers
                 ViewBag.FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME");
                 return View();
             }
-            else { return View("Error"); }
+            else
+            {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
+                return View("Error");
+            }
+
 
         }
         public ActionResult Edit(int? id)
         {
+            var roles = new List<int> { 2, 4 };
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
+            {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }
             //Check if user haves access to module
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template update only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4)
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
                 if (id == null)
                 {
@@ -278,14 +338,22 @@ namespace AccountsPayable.Controllers
             }
             else
             {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
                 return View("Error");
             }
         }
         public ActionResult Details(int? id)
         {
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template creation only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 3 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
+            var roles = new List<int> { 2, 3, 4, 5 };
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
+            
+            {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }
+            //Check if user haves access to module
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
                 if (id == null)
                 {
@@ -351,6 +419,7 @@ namespace AccountsPayable.Controllers
 
             else
             {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
                 return View("Error");
             }
         }
