@@ -44,7 +44,7 @@ namespace AccountsPayable.Controllers
 
 
         //In case of merge from DevEnv you must change the entity to AccountsPayableTestProdEntities //
-        private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
+        private Accounts_Payable_Entities db = new Accounts_Payable_Entities();
         // GET: Main
         public ActionResult Index()
         {
