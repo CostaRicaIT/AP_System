@@ -181,6 +181,204 @@ namespace AccountsPayable.Tests.Controllers
                     await page.CloseAsync(); // Close the page to free resources
                 }
             }
+
+            [Test]
+            public async Task ViewTemplate_SimulatingMultipleUsers()
+            {
+                const int userCount = 50; // Number of simulated users
+
+                var tasks = new List<Task>();
+                AvgLoadTime = 0;
+
+                for (int i = 0; i < userCount; i++)
+                {
+                    tasks.Add(ViewTemplate_AverageLoadTime(i));
+                }
+
+
+                await Task.WhenAll(tasks); // Wait for all tasks to complete
+                AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
+                TestContext.WriteLine($" Template view average load time: {AvgLoadTime} ms");
+            }
+
+            private async Task ViewTemplate_AverageLoadTime(int userId)
+            {
+                var page = await _browser.NewPageAsync();
+                try
+                {
+
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.FillAsync("[name='username']", "User.Manager");
+                    await page.FillAsync("#password", "manageradmin");
+                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
+                    var startTime = DateTime.Now;
+                    await page.ClickAsync("button.view-button");
+                    var loadTime = DateTime.Now - startTime;
+                    AvgLoadTime = AvgLoadTime + loadTime.Milliseconds;
+
+                }
+                catch (Exception ex)
+                {
+                    // Log any errors that occur
+                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail(ex.ToString());
+                }
+                finally
+                {
+
+                    await page.CloseAsync(); // Close the page to free resources
+                }
+            }
+
+            [Test]
+            public async Task CreateWorkspace_SimulatingMultipleUsers()
+            {
+                const int userCount = 50; // Number of simulated users
+
+                var tasks = new List<Task>();
+                AvgLoadTime = 0;
+
+                for (int i = 0; i < userCount; i++)
+                {
+                    tasks.Add(CreateWorkspace_AverageLoadTime(i));
+                }
+
+
+                await Task.WhenAll(tasks); // Wait for all tasks to complete
+                AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
+                TestContext.WriteLine($" Workspace create view average load time: {AvgLoadTime} ms");
+            }
+
+            private async Task CreateWorkspace_AverageLoadTime(int userId)
+            {
+                var page = await _browser.NewPageAsync();
+                try
+                {
+
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.FillAsync("[name='username']", "User.Manager");
+                    await page.FillAsync("#password", "manageradmin");
+                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
+                    var startTime = DateTime.Now;
+                    await page.ClickAsync("button.Workspace-button");
+                    var loadTime = DateTime.Now - startTime;
+                    AvgLoadTime = AvgLoadTime + loadTime.Milliseconds;
+
+                }
+                catch (Exception ex)
+                {
+                    // Log any errors that occur
+                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail(ex.ToString());
+                }
+                finally
+                {
+
+                    await page.CloseAsync(); // Close the page to free resources
+                }
+            }
+
+            [Test]
+            public async Task ViewWorkspace_SimulatingMultipleUsers()
+            {
+                const int userCount = 50; // Number of simulated users
+
+                var tasks = new List<Task>();
+                AvgLoadTime = 0;
+
+                for (int i = 0; i < userCount; i++)
+                {
+                    tasks.Add(ViewWorkspace_AverageLoadTime(i));
+                }
+
+
+                await Task.WhenAll(tasks); // Wait for all tasks to complete
+                AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
+                TestContext.WriteLine($" Workspace view average load time: {AvgLoadTime} ms");
+            }
+
+            private async Task ViewWorkspace_AverageLoadTime(int userId)
+            {
+                var page = await _browser.NewPageAsync();
+                try
+                {
+
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.FillAsync("[name='username']", "User.Manager");
+                    await page.FillAsync("#password", "manageradmin");
+                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Workspace/Index");
+                    var startTime = DateTime.Now;
+                    await page.ClickAsync("button.view-button");
+                    var loadTime = DateTime.Now - startTime;
+                    AvgLoadTime = AvgLoadTime + loadTime.Milliseconds;
+
+                }
+                catch (Exception ex)
+                {
+                    // Log any errors that occur
+                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail(ex.ToString());
+                }
+                finally
+                {
+
+                    await page.CloseAsync(); // Close the page to free resources
+                }
+            }
+
+            [Test]
+            public async Task EditWorkspace_SimulatingMultipleUsers()
+            {
+                const int userCount = 50; // Number of simulated users
+
+                var tasks = new List<Task>();
+                AvgLoadTime = 0;
+
+                for (int i = 0; i < userCount; i++)
+                {
+                    tasks.Add(EditWorkspace_AverageLoadTime(i));
+                }
+
+
+                await Task.WhenAll(tasks); // Wait for all tasks to complete
+                AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
+                TestContext.WriteLine($" Workspace Edit view average load time: {AvgLoadTime} ms");
+            }
+
+            private async Task EditWorkspace_AverageLoadTime(int userId)
+            {
+                var page = await _browser.NewPageAsync();
+                try
+                {
+
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
+                    await page.FillAsync("[name='username']", "User.Manager");
+                    await page.FillAsync("#password", "manageradmin");
+                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button
+                    await page.WaitForURLAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Index");
+                    await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Workspace/Index");
+                    var startTime = DateTime.Now;
+                    await page.ClickAsync("button.edit-button");
+                    var loadTime = DateTime.Now - startTime;
+                    AvgLoadTime = AvgLoadTime + loadTime.Milliseconds;
+
+                }
+                catch (Exception ex)
+                {
+                    // Log any errors that occur
+                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    Assert.Fail(ex.ToString());
+                }
+                finally
+                {
+
+                    await page.CloseAsync(); // Close the page to free resources
+                }
+            }
         }
     }
 }
