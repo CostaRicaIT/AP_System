@@ -870,6 +870,179 @@ namespace AccountsPayable.Tests.Controllers
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName)); // Check if the returned view name is empty or null
         }
 
+
+        //No User tests
+        [Test]
+        public void Index_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new MainController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        [Test]
+        public void Create_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new MainController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        [Test]
+        public void Edit_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new MainController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Edit(1) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+
+        [Test]
+        public void Details_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new MainController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Details(1) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        [Test]
+        public void WorkSpace_Create_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new WorkSpaceController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Create(1) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+
+        [Test]
+        public void WorkSpace_Edit_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new WorkSpaceController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Edit(21) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        [Test]
+        public void WorkSpace_View_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new WorkSpaceController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Details(21) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+
         //User management view test
 
         [Test]
@@ -978,6 +1151,30 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate Only user permission
+
+            mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
+
+            controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        [Test]
+        public void UserManagement_NoUserPermission_ReturnsViewResult()
+        {
+            // Arrange
+            var controller = new UserController();
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
