@@ -23,6 +23,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -47,6 +49,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -71,6 +75,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -96,6 +102,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -120,6 +128,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -145,6 +155,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -169,6 +181,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -194,6 +208,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -218,6 +234,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -242,6 +260,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -267,6 +287,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -293,6 +315,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read Only User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -317,6 +341,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read Only User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -341,6 +367,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read Only User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -366,6 +394,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -390,8 +420,12 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin user permission
+            var user = new object(); // Simulate a logged-in user
+
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
+
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
 
             controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
@@ -414,6 +448,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -439,6 +475,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -464,6 +502,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -488,6 +528,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; //Admin User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -512,6 +554,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -524,6 +568,7 @@ namespace AccountsPayable.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("Error", result.ViewName);
+
         }
 
 
@@ -537,9 +582,12 @@ namespace AccountsPayable.Tests.Controllers
             var mockHttpContext = new Mock<HttpContextBase>();
             var mockSession = new Mock<HttpSessionStateBase>();
 
-            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User role (valid)
+            var user = new object(); // Simulate a logged-in user
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
+
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
 
             controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new System.Web.Routing.RouteData(), controller);
@@ -549,7 +597,7 @@ namespace AccountsPayable.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName)); // Check if the returned view name is empty or null
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName)); // default view
         }
 
         [Test]
@@ -562,6 +610,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -586,6 +636,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -611,7 +663,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
-
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
 
@@ -635,7 +688,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
-
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
 
@@ -660,6 +714,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -684,6 +740,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -710,6 +768,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -734,6 +794,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -758,6 +820,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -783,6 +847,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -807,6 +873,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5}; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -832,6 +900,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -856,6 +926,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -882,6 +954,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -906,6 +980,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -930,6 +1006,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -955,6 +1033,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -979,6 +1059,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1004,6 +1086,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1027,7 +1111,9 @@ namespace AccountsPayable.Tests.Controllers
             var mockHttpContext = new Mock<HttpContextBase>();
             var mockSession = new Mock<HttpSessionStateBase>();
 
-            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; // Manager User permission
+            var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1055,6 +1141,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 1 }; // Admin user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1079,6 +1167,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 2 }; // Lead User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1103,6 +1193,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 3 }; // Read Only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1127,6 +1219,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 4 }; //Manager user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1151,6 +1245,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 5 }; // Associate Only user permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);
@@ -1175,6 +1271,8 @@ namespace AccountsPayable.Tests.Controllers
             var mockSession = new Mock<HttpSessionStateBase>();
 
             var permission = new TB_VIEW_PERMISSIONS { FK_TB_LOGIN_ROLE_ID = 0 }; // No User permission
+            var user = new object(); // Simulate a logged-in user
+            mockSession.SetupGet(s => s["User"]).Returns(user); // This is key for the "Login" check
 
             mockSession.SetupGet(s => s["Permission"]).Returns(permission);
             mockHttpContext.SetupGet(c => c.Session).Returns(mockSession.Object);

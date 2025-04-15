@@ -289,7 +289,7 @@ namespace AccountsPayable.Tests.Controllers
                     await page.ClickAsync("button.erase-button");
 
                     // Wait for dialog message
-                    var alertMessageWS = await dialogCompletion.Task;
+                    var alertMessageWS = await dialogCompletionWS.Task;
 
                     Assert.AreEqual("Are you sure you want to delete this Workspace?", alertMessageWS);
 
