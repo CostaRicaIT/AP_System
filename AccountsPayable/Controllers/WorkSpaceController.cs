@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using AccountsPayable.Models;
 using System.Linq.Dynamic.Core;
 using System.Data.Entity.Core.Metadata.Edm;
+using static System.Collections.Specialized.BitVector32;
+using System.Xml;
+using System.Web.Security;
 
 namespace AccountsPayable.Controllers
 {
@@ -16,21 +19,59 @@ namespace AccountsPayable.Controllers
     {
         private AccountsPayableTestProdEntities db = new AccountsPayableTestProdEntities();
 
+        public static bool AccessToWorkspace(System.Web.HttpSessionStateBase session, string validationType, List<int> allowedRoles )
+        {
+            bool checkLogin = validationType.Contains("Login");
+            bool checkRole = validationType.Contains("Role");
+            // You can also put the combination of the two, which would be "LoginRole"
+
+            // Check if the user is logged in
+            if (checkLogin && session["User"] == null)
+            {
+                return false;
+            }
+
+            // Verify if you have one of the allowed roles
+            if (checkRole)
+            {
+                var userPermission = session["Permission"] as TB_VIEW_PERMISSIONS;
+                if (userPermission == null)
+                    return false;
+
+                // Verify if the role are on the list
+                var roles = allowedRoles;
+
+                if (!roles.Contains(userPermission.FK_TB_LOGIN_ROLE_ID))
+                    return false;
+            }
+
+            return true;
+        }
+
+
+
         // GET: WorkSpace
+
         public ActionResult Index()
         {
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permission to access Template creation only Standard user should be able to access this view
-            if (userPermission == null || (userPermission.FK_TB_LOGIN_ROLE_ID != 2 && userPermission.FK_TB_LOGIN_ROLE_ID != 3 && userPermission.FK_TB_LOGIN_ROLE_ID != 5 && userPermission.FK_TB_LOGIN_ROLE_ID != 4))
+            // All roles allowed for index view
+            var roles = new List<int> { 2,3,4,5 };
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
             {
-                // Close session and redirect to login page
                 Session.Abandon();
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Access");
+
             }
-            else
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
+
                 return View();
             }
+            else {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
+                return View("Error");
+            }
+
         }
         public JsonResult GetWorkspaceData()
         {
@@ -203,110 +244,136 @@ namespace AccountsPayable.Controllers
         // GET: WorkSpace/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            // All roles allowed for index view
+            var roles = new List<int> { 2,3, 4, 5 };
+
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
 
-            TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
-            if (tB_WORKSPACE == null)
+            }
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                TB_WORKSPACE tB_WORKSPACE = db.TB_WORKSPACE.Find(id);
+                if (tB_WORKSPACE == null)
+                {
+                    return HttpNotFound();
+                }
+                var TempID = tB_WORKSPACE.TEMP_ID;
+                // Retrieve the associated TB_TEMPLATE object
+                TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.FirstOrDefault(t => t.TEMP_ID == tB_WORKSPACE.TEMP_ID);
+                if (tB_TEMPLATE == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Pass the data as a tuple to the view
+                var model = new Tuple<TB_WORKSPACE, TB_TEMPLATE>(tB_WORKSPACE, tB_TEMPLATE);
+
+                // Prepare viewbags as before
+                var emailBackupList = db.TB_EMAIL_BACKUP
+                    .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
+                    .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
+                        EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+
+                var historicRemitToList = db.TB_HISTORIC_REMIT
+                    .Where(x => x.FK_TB_TEMPLATE_ID == TempID)
+                    .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
+                        HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+
+                var HighLightsToList = db.TB_HIGHLIGHTS
+                    .Where(e => e.FK_TB_TEMPLATE_ID == TempID)
+                    .OrderByDescending(e => e.HIGHLIGHTS_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
+                        HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+
+                var aliasesForTemplate = db.TB_ALIAS
+                    .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
+                    .OrderByDescending(a => a.ALIAS_NAME)
+                    .AsEnumerable()
+                    .Select(a => new
+                    {
+                        ALIAS_ID = a.ALIAS_ID,
+                        ALIAS_NAME = a.ALIAS_NAME
+                    }).ToList();
+                //Get data for Comments
+                var commentsToList = db.WS_COMMENTS
+                    .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                    .OrderByDescending(e => e.WORKSPACE_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        COMMENTS_ID = e.COMMENTS_ID,
+                        WORKSPACE_DATE = e.WORKSPACE_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+                //Get data for LastActions
+                var lastActionsToList = db.WS_LAST_ACTIONS
+                    .Where(x => x.FK_WS_WORKSPACE_ID == id)
+                    .OrderByDescending(e => e.LAST_ACTIONS_DATE)
+                    .AsEnumerable()
+                    .Select(e => new
+                    {
+                        LAST_ACTIONS_ID = e.LAST_ACTIONS_ID,
+                        LAST_ACTIONS_DATE = e.LAST_ACTIONS_DATE.ToString("MM/dd/yyyy hh:mm tt")
+                    }).ToList();
+                ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
+                ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
+                ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
+                ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
+                ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
+                //ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
+                ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
+                ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
+                ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
+                ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORGANIZATION_TYPE_ID);
+                ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
+                ViewBag.FK_WS_COMMENTS_ID = new SelectList(commentsToList, "COMMENTS_ID", "WORKSPACE_DATE");
+                ViewBag.FK_WS_LAST_ACTIONS_ID = new SelectList(lastActionsToList, "LAST_ACTIONS_ID", "LAST_ACTIONS_DATE");
+                return View(model);
             }
-            var TempID = tB_WORKSPACE.TEMP_ID;
-            // Retrieve the associated TB_TEMPLATE object
-            TB_TEMPLATE tB_TEMPLATE = db.TB_TEMPLATE.FirstOrDefault(t => t.TEMP_ID == tB_WORKSPACE.TEMP_ID);
-            if (tB_TEMPLATE == null)
-            {
-                return HttpNotFound();
+            else {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
+                return View("Error");
             }
-
-            // Pass the data as a tuple to the view
-            var model = new Tuple<TB_WORKSPACE, TB_TEMPLATE>(tB_WORKSPACE, tB_TEMPLATE);
-
-            // Prepare viewbags as before
-            var emailBackupList = db.TB_EMAIL_BACKUP
-                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
-                .OrderByDescending(e => e.EMAIL_BACKUP_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    EMAIL_BACKUP_ID = e.EMAIL_BACKUP_ID,
-                    EMAIL_BACKUP_DATE = e.EMAIL_BACKUP_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-
-            var historicRemitToList = db.TB_HISTORIC_REMIT
-                .Where(x => x.FK_TB_TEMPLATE_ID == TempID)
-                .OrderByDescending(e => e.HISTORIC_REMIT_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    HISTORIC_REMIT_ID = e.HISTORIC_REMIT_ID,
-                    HISTORIC_REMIT_DATE = e.HISTORIC_REMIT_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-
-            var HighLightsToList = db.TB_HIGHLIGHTS
-                .Where(e => e.FK_TB_TEMPLATE_ID == TempID)
-                .OrderByDescending(e => e.HIGHLIGHTS_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    HIGHLIGHTS_ID = e.HIGHLIGHTS_ID,
-                    HIGHLIGHTS_DATE = e.HIGHLIGHTS_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-
-            var aliasesForTemplate = db.TB_ALIAS
-                .Where(a => a.FK_TB_TEMPLATE_ID == TempID)
-                .OrderByDescending(a => a.ALIAS_NAME)
-                .AsEnumerable()
-                .Select(a => new
-                {
-                    ALIAS_ID = a.ALIAS_ID,
-                    ALIAS_NAME = a.ALIAS_NAME
-                }).ToList();
-            //Get data for Comments
-            var commentsToList = db.WS_COMMENTS
-                .Where(x => x.FK_WS_WORKSPACE_ID == id)
-                .OrderByDescending(e => e.WORKSPACE_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    COMMENTS_ID = e.COMMENTS_ID,
-                    WORKSPACE_DATE = e.WORKSPACE_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-            //Get data for LastActions
-            var lastActionsToList = db.WS_LAST_ACTIONS
-                .Where(x => x.FK_WS_WORKSPACE_ID == id)
-                .OrderByDescending(e => e.LAST_ACTIONS_DATE)
-                .AsEnumerable()
-                .Select(e => new
-                {
-                    LAST_ACTIONS_ID = e.LAST_ACTIONS_ID,
-                    LAST_ACTIONS_DATE = e.LAST_ACTIONS_DATE.ToString("MM/dd/yyyy hh:mm tt")
-                }).ToList();
-            ViewBag.WS_FK_TB_APPROVER_ID = new SelectList(db.TB_APPROVER, "APPROVER_ID", "APPROVER_NAME", tB_WORKSPACE.WS_FK_TB_APPROVER_ID);
-            ViewBag.WS_FK_TB_TEMPLATE_ALIAS_ID = new SelectList(aliasesForTemplate, "ALIAS_ID", "ALIAS_NAME");
-            ViewBag.FK_TB_TEMPLATE_HISTORIC_REMIT_ID = new SelectList(historicRemitToList, "HISTORIC_REMIT_ID", "HISTORIC_REMIT_DATE", tB_WORKSPACE.WS_FK_TB_TEMPLATE_HISTORIC_REMIT_ID);
-            ViewBag.WS_FK_TB_EMAIL_BACKUP_ID = new SelectList(emailBackupList, "EMAIL_BACKUP_ID", "EMAIL_BACKUP_DATE");
-            ViewBag.FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE", tB_WORKSPACE.WS_FK_TB_HIGHLIGHTS_ID);
-            //ViewBag.WS_FK_TB_HIGHLIGHTS = new SelectList(HighLightsToList, "HIGHLIGHTS_ID", "HIGHLIGHTS_DATE");
-            ViewBag.WS_FK_TB_ORACLE_SOURCE_ID = new SelectList(db.TB_ORACLE_SOURCE, "ORACLE_SOURCE_ID", "ORACLE_SOURCE_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_SOURCE_ID);
-            ViewBag.WS_FK_TB_ORACLE_PAY_TERMS_ID = new SelectList(db.TB_ORACLE_PAY_TERMS, "PAY_TERMS_ID", "PAY_TERMS_DESCRIPTION", tB_WORKSPACE.WS_FK_TB_ORACLE_PAY_TERMS_ID);
-            ViewBag.WS_FK_TB_LEGAL_ENTITY_ID = new SelectList(db.TB_ORACLE_LEGAL_ENTITIES, "LEGAL_ENTITY_ID", "LEGAL_ENTITY_NAME", tB_WORKSPACE.WS_FK_TB_LEGAL_ENTITY_ID);
-            ViewBag.WS_FK_TB_ORGANIZATION_TYPE_ID = new SelectList(db.TB_ORACLE_ORGANIZATION_TYPE, "ORGANIZATION_TYPE_ID", "ORGANIZATION_TYPE_NAME", tB_WORKSPACE.WS_FK_TB_ORGANIZATION_TYPE_ID);
-            ViewBag.WS_FK_TB_ORACLE_TYPE_ID = new SelectList(db.TB_ORACLE_TYPE, "ORACLE_TYPE_ID", "ORACLE_TYPE_NAME");
-            ViewBag.FK_WS_COMMENTS_ID = new SelectList(commentsToList, "COMMENTS_ID", "WORKSPACE_DATE");
-            ViewBag.FK_WS_LAST_ACTIONS_ID = new SelectList(lastActionsToList, "LAST_ACTIONS_ID", "LAST_ACTIONS_DATE");
-            return View(model);
         }
 
 
         // GET: WorkSpace/Create
         public ActionResult Create(int? id)
-        {
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
 
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
+        {
+
+            // All roles allowed for index view
+            var roles = new List<int> { 2, 4, 5 };
+
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
+            {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }
+            else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles))
             {
                 if (id == null)
                 {
@@ -389,6 +456,7 @@ namespace AccountsPayable.Controllers
             }
             else
             {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
                 return View("Error");
             }
 
@@ -398,11 +466,15 @@ namespace AccountsPayable.Controllers
         // GET: WorkSpace/Edit/5
         public ActionResult Edit(int? id)
         {
-            //Check if user haves access to module
-            var userPermission = Session["Permission"] as TB_VIEW_PERMISSIONS;
-            // Check user permision to access Template update only Standard user should be able to access this view
-            if (userPermission != null && userPermission.FK_TB_LOGIN_ROLE_ID == 2 || userPermission.FK_TB_LOGIN_ROLE_ID == 4 || userPermission.FK_TB_LOGIN_ROLE_ID == 5)
+            // All roles allowed for index view
+            var roles = new List<int> { 2, 4, 5 };
+
+            if (!WorkSpaceController.AccessToWorkspace(Session, "Login", roles))
             {
+                Session.Abandon();
+                return RedirectToAction("Login", "Access");
+
+            }else if (WorkSpaceController.AccessToWorkspace(Session, "Role", roles)){
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -490,11 +562,16 @@ namespace AccountsPayable.Controllers
                 ViewBag.FK_WS_COMMENTS_ID = new SelectList(commentsToList, "COMMENTS_ID", "WORKSPACE_DATE");
                 ViewBag.FK_WS_LAST_ACTIONS_ID = new SelectList(lastActionsToList, "LAST_ACTIONS_ID", "LAST_ACTIONS_DATE");
                 return View(tB_WORKSPACE);
+
             }
             else
             {
+                ViewBag.ErrorMessage = "You don't have the necessary permissions to enter to this view.";
                 return View("Error");
             }
+
+            
+            
         }
 
     }

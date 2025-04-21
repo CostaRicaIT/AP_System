@@ -17,8 +17,8 @@ namespace AccountsPayable.Tests.Controllers
             // Arrange
             var controller = new AccessController();
             var expectedContent = "1";
-            var username = "User.Test";
-            var password = "testadmin"; // Replace with actual valid credentials in your database
+            var username = "User.Lead";
+            var password = "password"; // Replace with actual valid credentials in your database
 
             var mockHttpContext = new Mock<HttpContextBase>();// Mock HttpContext setup
             var mockSession = new Mock<HttpSessionStateBase>();

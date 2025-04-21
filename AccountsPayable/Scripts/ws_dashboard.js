@@ -250,7 +250,7 @@ function DrawTable() {
     // Click event handler for the "Erase" button
     $('#wsdataTable').on('click', '.erase-button', function () {
         var rowId = $(this).data('id');
-        var confirmDelete = confirm("Are you sure you want to delete this Template?");
+        var confirmDelete = confirm("Are you sure you want to delete this Workspace?");
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',

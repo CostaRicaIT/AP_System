@@ -3,11 +3,24 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Error</title>
+    <link rel="stylesheet" href="~/Content/Error.css">
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    <div class="error-container">
+        <hgroup>
+            <h1>Oops! Something went wrong.</h1>
+            <h2>@ViewBag.ErrorMessage</h2>
+            <p class="contact-info">Please contact CR IT <a href="mailto:crit@ayahealthcare.com">crit@ayahealthcare.com</a> if you believe this is an error.</p>
+        </hgroup>
+    </div>
+
+    @section scripts {
+        <script src="~/Scripts/WSCrud.js"></script>
+        <script src="~/Scripts/templateModal.js"></script>
+        <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="//code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+        <script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="~/Scripts/TinyEditorConfig.js"></script>
+    }
 </body>
 </html>
