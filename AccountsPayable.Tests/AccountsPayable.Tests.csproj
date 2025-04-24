@@ -182,6 +182,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccessControllerTest.cs" />
     <Compile Include="Controllers\ButtonsTest.cs" />
+    <Compile Include="Controllers\CRUDPerformanceTests.cs" />
     <Compile Include="Controllers\SessionTest.cs" />
     <Compile Include="Controllers\TemplateCRUDControllerTest.cs" />
     <Compile Include="Controllers\ModelTest.cs" />
