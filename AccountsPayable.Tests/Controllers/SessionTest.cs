@@ -10,33 +10,18 @@ namespace AccountsPayable.Tests.Controllers
     {
         [TestFixture]
         [Category("Long Tests")]
-        public class SessionLogOutTest
+        public class SessionLogOutTest : BaseTest
         {
-            private IPlaywright _playwright;
-            private IBrowser _browser;
-
-
-
-
-            [OneTimeSetUp]
-            public async Task Setup()
+            [SetUp]
+            public void SetUp()
             {
-                _playwright = await Playwright.CreateAsync();
-                _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-
+                ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
             }
-
-            [OneTimeTearDown]
-            public async Task TearDown()
-            {
-                await _browser.CloseAsync();
-                _playwright.Dispose();
-            }
-
             [Test]
 
             public async Task SessionTimeOut60Min()
             {
+                ExtentReportManager.LogInfo("session TimeOut test 60 minutes started");
                 var page = await _browser.NewPageAsync();
                 await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
                 await page.FillAsync("[name='username']", "User.Manager");
@@ -54,12 +39,14 @@ namespace AccountsPayable.Tests.Controllers
                 var isOnLoginPage = page.Url.Contains("/LogIn");
 
                 Assert.IsTrue(isOnLoginPage);
+                ExtentReportManager.LogPass("session TimeOut test 60 minutes success");
             }
 
             [Test]
 
             public async Task SessionTimeOut20Min()
             {
+                ExtentReportManager.LogInfo("session TimeOut test 20 minutes started");
                 var page = await _browser.NewPageAsync();
                 await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Access/LogIn");
                 await page.FillAsync("[name='username']", "User.Manager");
@@ -77,6 +64,7 @@ namespace AccountsPayable.Tests.Controllers
                 var isOnLoginPage = page.Url.Contains("/LogIn");
 
                 Assert.IsFalse(isOnLoginPage);
+                ExtentReportManager.LogPass("session TimeOut test 20 minutes success");
 
             }
         }

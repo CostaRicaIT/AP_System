@@ -8,9 +8,16 @@ namespace AccountsPayable.Tests.Controllers
 {
     public class ModelTest
     {
+        [SetUp]
+        public void SetUp()
+        {
+            ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
+        }
+
         [Test]
         public void AllowHTML_Attribute_TB_TEMPLATE()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Template");
             // Arrange
             var modelType = typeof(TB_TEMPLATE);
             var propertiesWithTinyMCE = new[]
@@ -38,11 +45,13 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Template pass");
         }
 
         [Test]
         public void AllowHTML_Attribute_TB_HIGHLIGHTS()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Highlights");
             // Arrange
             var modelType = typeof(TB_HIGHLIGHTS);
             var propertiesWithTinyMCE = new[]
@@ -65,11 +74,13 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Highlights pass");
         }
 
         [Test]
         public void AllowHTML_Attribute_TB_HISTORIC_REMIT()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Historic_Remit");
             // Arrange
             var modelType = typeof(TB_HISTORIC_REMIT);
             var propertiesWithTinyMCE = new[]
@@ -86,12 +97,14 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Histoic_Remit pass");
         }
 
 
         [Test]
         public void AllowHTML_Attribute_TB_WORKSPACE()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Workspace");
             // Arrange
             var modelType = typeof(TB_WORKSPACE);
             var propertiesWithTinyMCE = new[]
@@ -119,11 +132,13 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Workspace pass");
         }
 
         [Test]
         public void AllowHTML_Attribute_WS_COMMENTS()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Comments");
             // Arrange
             var modelType = typeof(WS_COMMENTS);
             var propertiesWithTinyMCE = new[]
@@ -140,11 +155,13 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Comments pass");
         }
 
         [Test]
         public void AllowHTML_Attribute_WS_LAST_ACTIONS()
         {
+            ExtentReportManager.LogInfo("Start Model validation test Last Actions");
             // Arrange
             var modelType = typeof(WS_LAST_ACTIONS);
             var propertiesWithTinyMCE = new[]
@@ -161,6 +178,7 @@ namespace AccountsPayable.Tests.Controllers
                 var hasAllowHtmlAttribute = propertyInfo.GetCustomAttributes(typeof(AllowHtmlAttribute), false).Any();
                 Assert.IsTrue(hasAllowHtmlAttribute, $"{propertyName} property on {modelType.Name} model does not have the [AllowHtml] attribute.");
             }
+            ExtentReportManager.LogPass("Model validation test Last Actions pass");
         }
     }
 }

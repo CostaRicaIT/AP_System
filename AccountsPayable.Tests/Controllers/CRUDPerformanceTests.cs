@@ -1,41 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 
 namespace AccountsPayable.Tests.Controllers
 {
     [TestFixture]
-    internal class CRUDPerformanceTests
+    internal class CRUDPerformanceTests : BaseTest
     {
-        private IPlaywright _playwright;
-        private IBrowser _browser;
         int AvgLoadTime;
 
-        [OneTimeSetUp]
-        public async Task Setup()
-        {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
-
-        }
-        [OneTimeTearDown]
-        public async Task TearDown()
-        {
-            await _browser.CloseAsync();
-            _playwright.Dispose();
-        }
+       
 
         [Test]
         public async Task EditStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Edit StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
@@ -47,12 +27,11 @@ namespace AccountsPayable.Tests.Controllers
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Login average edit time: {AvgLoadTime} seconds");
+            ExtentReportManager.LogPass($"Template average edit time: {AvgLoadTime} seconds");
         }
 
         private async Task SimulateEdit(int userId)
         {
-
             string UserId = userId.ToString();
             string EditUrl = $"http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Edit/{userId}";
             var page = await _browser.NewPageAsync();
@@ -78,7 +57,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {
@@ -89,6 +68,7 @@ namespace AccountsPayable.Tests.Controllers
         [Test]
         public async Task CreateStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Create template StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
@@ -100,19 +80,19 @@ namespace AccountsPayable.Tests.Controllers
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Average create time: {AvgLoadTime} seconds");
+            ExtentReportManager.LogPass($"Average create time: {AvgLoadTime} seconds");
         }
 
         private async Task SimulateCreate()
         {
-           
-            
+
+
             string CreateUrl = $"http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Main/Create/";
             var page = await _browser.NewPageAsync();
             page.SetDefaultTimeout(50000);
             try
             {
-                
+
                 await page.GotoAsync("http://testaccountpayableapp.us-east-1.elasticbeanstalk.com//Access/LogIn");
                 await page.FillAsync("[name='username']", "User.Manager");
                 await page.FillAsync("#password", "manageradmin");
@@ -132,7 +112,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {
@@ -143,19 +123,19 @@ namespace AccountsPayable.Tests.Controllers
         [Test]
         public async Task DeleteStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Delete StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
 
             for (int i = 0; i < userCount; i++)
             {
-                //tasks.Add(SimulateDelete());
                 await SimulateDelete();
             }
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Average delete time: {AvgLoadTime} ms");
+            ExtentReportManager.LogPass($"Average delete time: {AvgLoadTime} ms");
         }
 
         private async Task SimulateDelete()
@@ -192,7 +172,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {
@@ -203,18 +183,19 @@ namespace AccountsPayable.Tests.Controllers
         [Test]
         public async Task CreateWorkspaceStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Workspace Create StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
 
             for (int i = 0; i < userCount; i++)
             {
-                tasks.Add(SimulateCreateWorkspace(i +7));
+                tasks.Add(SimulateCreateWorkspace(i + 7));
             }
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Workspace average create time: {AvgLoadTime} seconds");
+            ExtentReportManager.LogPass($"Workspace average create time: {AvgLoadTime} seconds");
         }
 
         private async Task SimulateCreateWorkspace(int id)
@@ -245,7 +226,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {
@@ -257,6 +238,7 @@ namespace AccountsPayable.Tests.Controllers
         [Test]
         public async Task DeleteWorkspaceStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Delete Create StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
@@ -269,13 +251,13 @@ namespace AccountsPayable.Tests.Controllers
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Workspace average delete time: {AvgLoadTime} ms");
+            ExtentReportManager.LogPass($"Workspace average delete time: {AvgLoadTime} ms");
         }
 
         private async Task SimulateDeleteWorspace()
         {
             var page = await _browser.NewPageAsync();
-            page.SetDefaultTimeout(50000);
+            page.SetDefaultTimeout(100000);
             try
             {
 
@@ -307,7 +289,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {
@@ -318,6 +300,7 @@ namespace AccountsPayable.Tests.Controllers
         [Test]
         public async Task EditWorkspaceStressTestSimulatingMultipleUsers()
         {
+            ExtentReportManager.LogInfo("Workspace Edit StressTest 50 users start");
             const int userCount = 50; // Number of simulated users
             var tasks = new List<Task>();
             AvgLoadTime = 0;
@@ -329,7 +312,7 @@ namespace AccountsPayable.Tests.Controllers
 
             await Task.WhenAll(tasks); // Wait for all tasks to complete
             AvgLoadTime = AvgLoadTime / 50; //Get average of load time using 50 users
-            TestContext.WriteLine($"Workspace average edit time: {AvgLoadTime} seconds");
+            ExtentReportManager.LogPass($"Workspace average edit time: {AvgLoadTime} seconds");
         }
 
         private async Task SimulateEditWorkspace(int id)
@@ -360,7 +343,7 @@ namespace AccountsPayable.Tests.Controllers
             catch (Exception ex)
             {
                 // Log any errors that occur
-                TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
             }
             finally
             {

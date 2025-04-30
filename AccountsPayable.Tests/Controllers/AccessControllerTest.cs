@@ -11,9 +11,15 @@ namespace AccountsPayable.Tests.Controllers
     [TestFixture]
     public class AccessControllerTest
     {
+        [SetUp]
+        public void SetUp()
+        {
+            ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
+        }
         [Test]
         public void LoginAuthorize_CorrectCredentials_ReturnsContent1()
         {
+            ExtentReportManager.LogInfo("Login success start");
             // Arrange
             var controller = new AccessController();
             var expectedContent = "1";
@@ -38,11 +44,13 @@ namespace AccountsPayable.Tests.Controllers
             mockSession.VerifySet(x => x["User"] = It.IsAny<object>(), Times.Once);
             mockSession.VerifySet(x => x["CurrentUserName"] = It.IsAny<string>(), Times.Once);
             mockSession.VerifySet(x => x["Permission"] = It.IsAny<object>(), Times.Once);
+            ExtentReportManager.LogPass("Login success test complete");
         }
 
         [Test]
         public void LoginAuthorize_IncorrectCredentials_ReturnsErrorMessage()
         {
+            ExtentReportManager.LogInfo("Login fail start");
             // Arrange
             var controller = new AccessController();
             var expectedContent = "Incorrect username or password, please try again";
@@ -55,6 +63,7 @@ namespace AccountsPayable.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedContent, result.Content);
+            ExtentReportManager.LogPass("Login fail test complete");
         }
     }
 }
