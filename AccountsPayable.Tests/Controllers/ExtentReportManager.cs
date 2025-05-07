@@ -11,7 +11,9 @@ public static class ExtentReportManager
 
     public static void InitReport()
     {
-        var reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ExtentReports", "TestReport.html");
+        DateTime datime = DateTime.Now;
+        var formatedTime = datime.ToString("MM-dd-yyyy HHmmss");
+        var reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ExtentReports", $"TestReport {formatedTime}.html");
         Directory.CreateDirectory(Path.GetDirectoryName(reportPath));
 
         _htmlReporter = new ExtentSparkReporter(reportPath);
