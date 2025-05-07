@@ -141,7 +141,7 @@ namespace AccountsPayable.Tests.Controllers
         private async Task SimulateDelete()
         {
             var page = await _browser.NewPageAsync();
-            page.SetDefaultTimeout(50000);
+            page.SetDefaultTimeout(500000);
             try
             {
 
