@@ -381,9 +381,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="FK_TB_LEGAL_ENTITY_ID">Legal Entity:</label>
+                    @Html.LabelFor(model => model.FK_TB_LEGAL_ENTITY_ID, "Legal Entity:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control", @id = "legalEntityDropdown" })
+                        @Html.DropDownList("FK_TB_LEGAL_ENTITY_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_LEGAL_ENTITY_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -427,9 +427,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label col-md-2 OracleText" for="FK_TB_ORGANIZATION_TYPE_ID">Organization Type:</label>
+                    @Html.LabelFor(model => model.FK_TB_ORGANIZATION_TYPE_ID, "Organization Type:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_ORGANIZATION_TYPE_ID", null, htmlAttributes: new { @class = "form-control", @id = "organizationTypeDropdown" })
+                        @Html.DropDownList("FK_TB_ORGANIZATION_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_ORGANIZATION_TYPE_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -806,7 +806,7 @@
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.FK_TB_APPROVER_ID, "Approver:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control", @id = "approverDropdown" })
+                        @Html.DropDownList("FK_TB_APPROVER_ID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FK_TB_APPROVER_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
