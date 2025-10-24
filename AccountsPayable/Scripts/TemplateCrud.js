@@ -408,7 +408,7 @@ function update() {
         TEMP_VENDOR_ACCOUNT: $("#TEMP_VENDOR_ACCOUNT").val(),
         TEMP_SUPPLIER_NUMBER: $("#TEMP_SUPPLIER_NUMBER").val(),
         TEMP_SUPPLIER_SITE: $("#TEMP_SUPPLIER_SITE").val(),       
-        FK_TB_LEGAL_ENTITY_ID: $("#legalEntityDropdown").val(),
+        FK_TB_LEGAL_ENTITY_ID: $("#FK_TB_LEGAL_ENTITY_ID").val(),
         TEMP_TAXPAYER_ID: $("#TEMP_TAXPAYER_ID").val(),
         FK_TB_ORACLE_TYPE_ID: $("#FK_TB_ORACLE_TYPE_ID").val(),
         TEMP_ORACLE_DESCRIPTION: tinymce.get("TEMP_ORACLE_DESCRIPTION").getContent(),
@@ -417,7 +417,7 @@ function update() {
         FK_TB_ORACLE_SOURCE_ID: $("#FK_TB_ORACLE_SOURCE_ID").val(),
         TEMP_ORACLE_NOTES: tinymce.get("TEMP_ORACLE_NOTES").getContent(),
         TEMP_ORACLE_INSTRUCTIONS: tinymce.get("TEMP_ORACLE_INSTRUCTIONS").getContent(),
-        FK_TB_APPROVER_ID: $("#approverDropdown").val(),
+        FK_TB_APPROVER_ID: $("#FK_TB_APPROVER_ID").val(),
         TEMP_APPROVER_COMMENTS: $("#TEMP_APPROVER_COMMENTS").val(),
         TEMP_INVOICE_FORMAT: $("#TEMP_INVOICE_FORMAT").val(),
         TEMP_INVOICE_TYPE: $("#TEMP_INVOICE_TYPE").val(),
@@ -434,7 +434,7 @@ function update() {
         TEMP_INVOICE_DESCRIPTION: $("#TEMP_INVOICE_DESCRIPTION").val(),
         CONTACTS_CURRENT: $("#form-Currents").val(),
         CONTACTS_PRIOR: $("#form-Prior").val(),
-        FK_TB_ORGANIZATION_TYPE_ID: $("#organizationTypeDropdown").val(),
+        FK_TB_ORGANIZATION_TYPE_ID: $("#FK_TB_ORGANIZATION_TYPE_ID").val(),
     };
 
     var HistoricRemitToData = { //data to TB_HISTORIC REMIT
