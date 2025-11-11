@@ -94,12 +94,13 @@ namespace AccountsPayable.Tests.Controllers
                 FK_TB_TEMPLATE_ALIAS_ID = 1,
                 FK_TB_TEMPLATE_HISTORIC_REMIT_ID = 1,
             };
-
+            ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void Create_ValidModelState_Success()
         {
+            ExtentReportManager.LogInfo("Started Create test");
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
@@ -149,7 +150,7 @@ namespace AccountsPayable.Tests.Controllers
 
                 Assert.AreEqual(comments.COMMENTS_ID, comments.COMMENTS_ID);
                 Assert.AreEqual(lastActions.LAST_ACTIONS_ID, lastActions.LAST_ACTIONS_ID);
-
+                ExtentReportManager.LogPass("Create test pass");
                 
             }
         }
@@ -160,6 +161,7 @@ namespace AccountsPayable.Tests.Controllers
         {
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
+                ExtentReportManager.LogInfo("Started Edit test");
                 // Arrange
                 var controllerType = typeof(WSCrudController);
                 var controllerInstance = Activator.CreateInstance(controllerType);
@@ -208,14 +210,15 @@ namespace AccountsPayable.Tests.Controllers
 
                 Assert.AreEqual(workspace.FK_WS_COMMENTS_ID, comments.COMMENTS_ID);
                 Assert.AreEqual(workspace.FK_WS_LAST_ACTIONS_ID, lastActions.LAST_ACTIONS_ID);
-
+                ExtentReportManager.LogPass("Edit test pass");
 
             }
         }
 
         [Test]
-        public void Delete_TemplateNotDisabled_Success()
+        public void Delete_WorkspaceNotDisabled_Success()
         {
+            ExtentReportManager.LogInfo("Started Delete test");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -249,12 +252,14 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsTrue((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(workspace.WS_ISDISABLED, 1);
             }
+            ExtentReportManager.LogPass("Delete test pass");
 
         }
 
         [Test]
-        public void Delete_TemplateAlreadyDisabled_Failture()
+        public void Delete_WorkspaceAlreadyDisabled_Failture()
         {
+            ExtentReportManager.LogInfo("Started Delete test");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -270,7 +275,7 @@ namespace AccountsPayable.Tests.Controllers
                     var dbContextMock = new Mock<AccountsPayableTestProdEntities>();
                     dbProperty.SetValue(controllerInstance, dbContextMock.Object);
                 }
-                int workspaceid = 13; // ID of a workspace that is disabled
+                int workspaceid = 90; // ID of a workspace that is disabled
                 var workspace = new TB_WORKSPACE
                 {
                     WS_ID = workspaceid,
@@ -288,6 +293,7 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsFalse((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(workspace.WS_ISDISABLED, 1);
             }
+            ExtentReportManager.LogPass("Delete test pass");
         }
     }
 }

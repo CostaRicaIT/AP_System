@@ -100,11 +100,13 @@ namespace AccountsPayable.Tests.Controllers
                 }
 
             };
+            ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void Create_ValidModelState_Success()
         {
+            ExtentReportManager.LogInfo("Create valid model start");
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
@@ -160,11 +162,13 @@ namespace AccountsPayable.Tests.Controllers
                     Assert.IsTrue(template.TB_EMAIL_BACKUP.Contains(emailEntity), "TB_EMAIL_BACKUP relationship");
                 }
             }
+            ExtentReportManager.LogPass("Create valid model Success");
         }
 
         [Test]
         public void Edit_ValidModelState_Success()
         {
+            ExtentReportManager.LogInfo("Edit valid model start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -208,11 +212,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.AreEqual(template.FK_TB_EMAIL_BACKUP_ID, emailBackupList.LastOrDefault()?.EMAIL_BACKUP_ID, "TB_TEMPLATE_EMAIL_BACKUP relationship");
 
             }
+            ExtentReportManager.LogPass("Edit valid model Success");
         }
 
         [Test]
         public void Create_ValidModelState_newLegalEntity_new_Approver_Success_new_OT()
         {
+            ExtentReportManager.LogInfo("Create valid model with LegalEntity and Approver start");
             using (var scope = new TransactionScope()) // Using transaction scope to undo changes created by test
             {
                 // Arrange
@@ -297,11 +303,13 @@ namespace AccountsPayable.Tests.Controllers
                     Assert.IsTrue(template.TB_EMAIL_BACKUP.Contains(emailEntity), "TB_EMAIL_BACKUP relationship");
                 }
             }
+            ExtentReportManager.LogPass("Create valid model with LegalEntity and Approver success");
         }
 
         [Test]
         public void Edit_ValidModelState_newLegalEntity_new_Approver_Success_new_OT()
         {
+            ExtentReportManager.LogInfo("Edit valid model with LegalEntity and Approver start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -379,11 +387,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.AreEqual(template.FK_TB_EMAIL_BACKUP_ID, emailBackupList.LastOrDefault()?.EMAIL_BACKUP_ID, "TB_TEMPLATE_EMAIL_BACKUP relationship");
 
             }
+            ExtentReportManager.LogPass("Edit valid model with LegalEntity and Approver success");
         }
 
         [Test]
         public void Create_NewLegalEntity_Success()
         {
+            ExtentReportManager.LogInfo("Create Legal Entity start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -415,11 +425,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual(newLegalEntity, responseData.GetType().GetProperty("name")?.GetValue(responseData));
             }
+            ExtentReportManager.LogPass("Create Legal Entity Success");
         }
 
         [Test]
         public void Create_NewLegalEntity_Failture()
         {
+            ExtentReportManager.LogInfo("Create Legal Entity Fail start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -451,11 +463,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual("Entity already exists", responseData.GetType().GetProperty("message")?.GetValue(responseData));
             }
+            ExtentReportManager.LogPass("Create Legal Entity Fail Success");
         }
 
         [Test]
         public void Create_Approver_Success()
         {
+            ExtentReportManager.LogInfo("Create new Approver start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -486,12 +500,15 @@ namespace AccountsPayable.Tests.Controllers
                 var responseData = jsonResult.Data;
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual(newApprover, responseData.GetType().GetProperty("name")?.GetValue(responseData));
+                ExtentReportManager.LogPass("Create new Approver success");
             }
+            
         }
 
         [Test]
         public void Create_NewApprover_Failture()
         {
+            ExtentReportManager.LogInfo("Create new Approver fail start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -523,10 +540,12 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual("Entity already exists", responseData.GetType().GetProperty("message")?.GetValue(responseData));
             }
+            ExtentReportManager.LogPass("Create new Approver fail success");
         }
         [Test]
         public void Create_OT_Success()
         {
+            ExtentReportManager.LogInfo("Create new Organization start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -558,10 +577,12 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual(newOT, responseData.GetType().GetProperty("name")?.GetValue(responseData));
             }
+            ExtentReportManager.LogPass("Create new Organization success");
         }
         [Test]
         public void Create_NewOT_Failture()
         {
+            ExtentReportManager.LogInfo("Create new Organization fail start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -593,10 +614,12 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsNotNull(jsonResult);
                 Assert.AreEqual("Organization Type already exists", responseData.GetType().GetProperty("message")?.GetValue(responseData));
             }
+            ExtentReportManager.LogPass("Create new Organization fail success");
         }
         [Test]
         public void Delete_TemplateNotDisabled_Success()
         {
+            ExtentReportManager.LogInfo("Delete Template start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -630,12 +653,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsTrue((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(templateData.TEMP_ISDISABLED, 1);
             }
-
+            ExtentReportManager.LogPass("Delete Template success");
         }
 
         [Test]
         public void Delete_TemplateAlreadyDisabled_Failture()
         {
+            ExtentReportManager.LogInfo("Delete Template fail start");
             // Arrange
             using (var scope = new TransactionScope())
             {
@@ -669,11 +693,13 @@ namespace AccountsPayable.Tests.Controllers
                 Assert.IsFalse((bool)jsonResult.Data.GetType().GetProperty("success")?.GetValue(jsonResult.Data));
                 Assert.AreEqual(templateData.TEMP_ISDISABLED, 1);
             }
+            ExtentReportManager.LogPass("Delete Template fail success");
         }
 
         [Test]
         public void StripHtmlTags_Returns_Null_For_Null_Inputs()
         {
+            ExtentReportManager.LogInfo("Sanitize HTML start");
             // Arrange
             var controller = new CRUDController();
             string input = null;
@@ -683,11 +709,13 @@ namespace AccountsPayable.Tests.Controllers
 
             // Assert
             Assert.IsNull(result);
+            ExtentReportManager.LogPass("Sanitize HTML success");
         }
 
         [Test]
         public void StripHtmlTags_Removes_P_Tags()
         {
+            ExtentReportManager.LogInfo("Sanitize HTML start");
             // Arrange
             var controller = new CRUDController();
             string input = "<p>This is a <p>test</p>.</p>";
@@ -698,11 +726,13 @@ namespace AccountsPayable.Tests.Controllers
 
             // Assert
             Assert.AreEqual(expectedOutput, result);
+            ExtentReportManager.LogPass("Sanitize HTML success");
         }
 
         [Test]
         public void StripHtmlTags_Uses_Regex_To_Remove_P_Tags()
         {
+            ExtentReportManager.LogInfo("Sanitize HTML start");
             // Arrange
             var controller = new CRUDController(); // No need to mock anything for the controller
             string input = "<p>This is a <p>test</p>.</p>";
@@ -713,6 +743,7 @@ namespace AccountsPayable.Tests.Controllers
 
             // Assert
             Assert.AreEqual(expectedResult, result); // Assert the result based on your expectation
+            ExtentReportManager.LogPass("Sanitize HTML success");
         }
 
     }

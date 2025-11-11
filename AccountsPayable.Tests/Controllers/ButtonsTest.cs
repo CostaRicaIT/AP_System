@@ -10,24 +10,8 @@ namespace AccountsPayable.Tests.Controllers
     internal class ButtonsTest
     {
         [TestFixture]
-        public class ButtonTest
+        public class ButtonTest : BaseTest
         {
-            private IPlaywright _playwright;
-            private IBrowser _browser;
-
-            [OneTimeSetUp]
-            public async Task SetUp()
-            {
-                _playwright = await Playwright.CreateAsync();
-                _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-            }
-            [OneTimeTearDown]
-            public async Task TearDown()
-            {
-                await _browser.CloseAsync();
-                _playwright?.Dispose();
-            }
-
             [Test]
             public async Task ButtonTest_Lead()
             {
@@ -45,48 +29,59 @@ namespace AccountsPayable.Tests.Controllers
 
                 try
                 {
+                    ExtentReportManager.LogInfo("Button test for Lead user start ");
                     await page.GotoAsync(URL);
                     await page.FillAsync("[name='username']", "User.Lead");
                     await page.FillAsync("#password", "password");
-                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button
-                    // Test Edit button
+                    await page.ClickAsync("button[type='submit']"); // Clicks the submit button                                             
                     await page.WaitForURLAsync(IndexURL);
                     await page.ClickAsync("button.edit-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(70), EditURL);
+                    ExtentReportManager.LogPass("Edit button test success");
 
                     // Test View button
+                    ExtentReportManager.LogInfo("View button test Lead user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(73), DetailsURL);
+                    ExtentReportManager.LogPass("View button test success");
 
                     // Test Create
+                    ExtentReportManager.LogInfo("Create button test Lead user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.btn-primary");
                     Assert.AreEqual(page.Url, CreateURL);
+                    ExtentReportManager.LogPass("Create button test success");
 
                     // Test Workspace create
+                    ExtentReportManager.LogInfo("Workspace Create button test Lead user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.Workspace-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(77), WorkSpaceCreateURL);
+                    ExtentReportManager.LogPass("Workspace Create button test success");
 
                     //Test Workspace view
+                    ExtentReportManager.LogInfo("Workspace View button test Lead user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(78), WorkSpaceViewURL);
+                    ExtentReportManager.LogPass("Workspace View button test success");
 
                     //Test Workspace Edit
+                    ExtentReportManager.LogInfo("Workspace Edit button test Lead user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.edit-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(75), WorkSpaceEditURL);
+                    ExtentReportManager.LogPass("Workspace Edit button test success");
                 }
                 catch (Exception ex)
                 {
-                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
                     Assert.Fail(ex.ToString());
                 }
                 finally
@@ -110,6 +105,7 @@ namespace AccountsPayable.Tests.Controllers
 
                 try
                 {
+                    ExtentReportManager.LogInfo("Button test for Associate user start ");
                     await page.GotoAsync(URL);
                     await page.FillAsync("[name='username']", "User.Associate");
                     await page.FillAsync("#password", "associateadmin");
@@ -117,32 +113,40 @@ namespace AccountsPayable.Tests.Controllers
                     await page.WaitForURLAsync(IndexURL);
 
                     // Test View button
+                    ExtentReportManager.LogInfo("View button test Associate user");
                     await page.ClickAsync("button.view-button");
                     Assert.AreEqual(page.Url.Remove(73), DetailsURL);
+                    ExtentReportManager.LogPass("View button test success");
 
-                    // Test Workspace
+                    // Test Workspace Create
+                    ExtentReportManager.LogInfo("Workspace Create button test Associate user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.Workspace-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(77), WorkSpaceCreateURL);
+                    ExtentReportManager.LogPass("Workspace Create button test success");
 
 
                     //Test Workspace view
+                    ExtentReportManager.LogInfo("Workspace View button test Associate user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(78), WorkSpaceViewURL);
+                    ExtentReportManager.LogPass("Workspace View button test success");
 
                     //Test Workspace Edit
+                    ExtentReportManager.LogInfo("Workspace Edit button test Associate user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.edit-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(75), WorkSpaceEditURL);
+                    ExtentReportManager.LogPass("Workspace Edit button test success");
 
                 }
                 catch (Exception ex)
                 {
-                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
                     Assert.Fail(ex.ToString());
                 }
                 finally
@@ -163,6 +167,7 @@ namespace AccountsPayable.Tests.Controllers
 
                 try
                 {
+                    ExtentReportManager.LogInfo("Button test for Read user start ");
                     await page.GotoAsync(URL);
                     await page.FillAsync("[name='username']", "User.Read");
                     await page.FillAsync("#password", "readadmin");
@@ -170,21 +175,24 @@ namespace AccountsPayable.Tests.Controllers
 
 
                     // Test View button
+                    ExtentReportManager.LogInfo("View button test Read user");
                     await page.WaitForURLAsync(IndexURL);
                     await page.ClickAsync("button.view-button");
                     Assert.AreEqual(page.Url.Remove(73), DetailsURL);
-
+                    ExtentReportManager.LogPass("View button test success");
 
 
                     //Test Workspace view
+                    ExtentReportManager.LogInfo("Workspace View button test Read user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(78), WorkSpaceViewURL);
+                    ExtentReportManager.LogPass("Workspace View button test success");
                 }
                 catch (Exception ex)
                 {
-                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
                     Assert.Fail(ex.ToString());
                 }
                 finally
@@ -207,28 +215,35 @@ namespace AccountsPayable.Tests.Controllers
                 var WorkSpaceEditURL = "http://testaccountpayableapp.us-east-1.elasticbeanstalk.com/Workspace/Edit/";
                 try
                 {
+                    ExtentReportManager.LogInfo("Button test for Manager user start ");
                     await page.GotoAsync(URL);
                     await page.FillAsync("[name='username']", "User.Manager");
                     await page.FillAsync("#password", "manageradmin");
                     await page.ClickAsync("button[type='submit']"); // Clicks the submit button
-                    // Test Edit button
+
+                    ExtentReportManager.LogInfo("Edit button test Manager user");
                     await page.WaitForURLAsync(IndexURL);
                     await page.ClickAsync("button.edit-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(70), EditURL);
-
+                    ExtentReportManager.LogPass("Edit button test success");
                     // Test View button
+                    ExtentReportManager.LogInfo("View button test Manager user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(73), DetailsURL);
+                    ExtentReportManager.LogPass("View button test success");
 
                     // Test Create
+                    ExtentReportManager.LogInfo("Create button test Manager user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.btn-primary");
                     Assert.AreEqual(page.Url, CreateURL);
+                    ExtentReportManager.LogPass("Create button test success");
 
                     // Test Delete button
+                    ExtentReportManager.LogInfo("Delete button test Manager user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.erase-button");
 
@@ -251,29 +266,37 @@ namespace AccountsPayable.Tests.Controllers
                     var alertMessage = await dialogCompletion.Task;
 
                     Assert.AreEqual("Are you sure you want to delete this Template?", alertMessage);
+                    ExtentReportManager.LogPass("Delete button test success");
 
 
                     // Test Workspace
+                    ExtentReportManager.LogInfo("Workspace Create button test Manager user");
                     await page.GotoAsync(IndexURL);
                     await page.ClickAsync("button.Workspace-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(77), WorkSpaceCreateURL);
+                    ExtentReportManager.LogPass("Workspace Create button test success");
 
                     //Test Workspace view
+                    ExtentReportManager.LogInfo("Workspace View button test Manager user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.view-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(78), WorkSpaceViewURL);
+                    ExtentReportManager.LogPass("Workspace View button test success");
 
                     //Test Workspace Edit
+                    ExtentReportManager.LogInfo("Workspace Edit button test Manager user");
                     await page.GotoAsync(WorkSpaceIndexURL);
                     await page.ClickAsync("button.edit-button");
                     //Remove id from current URL to perform validation
                     Assert.AreEqual(page.Url.Remove(75), WorkSpaceEditURL);
+                    ExtentReportManager.LogPass("Workspace Edit button test success");
 
 
 
                     // Test Delete button
+                    ExtentReportManager.LogInfo("Workspace Delete button test Manager user");
                     await page.GotoAsync(WorkSpaceIndexURL);
 
                     // Setup dialog event handling before clicking the button
@@ -292,11 +315,12 @@ namespace AccountsPayable.Tests.Controllers
                     var alertMessageWS = await dialogCompletionWS.Task;
 
                     Assert.AreEqual("Are you sure you want to delete this Workspace?", alertMessageWS);
+                    ExtentReportManager.LogPass("Workspace Delete button test success");
 
                 }
                 catch (Exception ex)
                 {
-                    TestContext.WriteLine($"User encountered an error: {ex.Message}");
+                    ExtentReportManager.LogFail($"User encountered an error: {ex.Message}");
                     Assert.Fail(ex.ToString());
                 }
                 finally
@@ -308,3 +332,4 @@ namespace AccountsPayable.Tests.Controllers
         }
     }
 }
+
